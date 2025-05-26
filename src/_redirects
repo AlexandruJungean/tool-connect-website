@@ -9,6 +9,10 @@
 /services  /#categories  301
 /download  /#download  301
 
+# Legal pages
+/privacy  /privacy-policy.html  301
+/terms  /terms-conditions.html  301
+
 # Handle trailing slashes
 /*  /  301!
 
