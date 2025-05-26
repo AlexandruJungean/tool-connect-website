@@ -1,0 +1,16 @@
+# Redirect rules for Tool Connect website
+
+# Handle form submissions (contact form)
+/contact-form  /  200
+
+# Redirect old paths to new ones (if any)
+/home  /  301
+/about  /#benefits  301
+/services  /#categories  301
+/download  /#download  301
+
+# Handle trailing slashes
+/*  /  301!
+
+# SPA fallback for any unmatched routes
+/*  /index.html  200

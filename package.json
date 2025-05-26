@@ -6,7 +6,9 @@
   "scripts": {
     "start": "live-server src --port=3000 --open",
     "dev": "live-server src --port=3000 --open --watch=src",
-    "build": "echo 'Production build - ready for deployment'",
+    "build": "echo 'Static site - no build step required. Files ready in src/'",
+    "deploy": "netlify deploy --prod --dir=src",
+    "deploy:preview": "netlify deploy --dir=src",
     "test": "echo 'Tests will be added in future versions'"
   },
   "keywords": [
