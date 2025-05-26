@@ -44,9 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
-
-    // Contact form handling
+    });    // Contact form handling
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -54,29 +52,74 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Get form data
             const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const message = this.querySelector('textarea').value;
+            const name = this.querySelector('input[name="name"]').value;
+            const email = this.querySelector('input[name="email"]').value;
+            const message = this.querySelector('textarea[name="message"]').value;
             
             // Basic validation
             if (!name || !email || !message) {
-                alert('Please fill in all fields.');
+                showFormMessage('Please fill in all fields.', 'error');
                 return;
             }
             
-            // Simulate form submission
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            setTimeout(() => {
-                alert('Thank you for your message! We\'ll get back to you soon.');
+            // Submit to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                showFormMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
                 this.reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+            })
+            .finally(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            });
         });
+    }
+    
+    // Form message display function
+    function showFormMessage(message, type) {
+        // Remove any existing message
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+        
+        // Create and show new message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message ${type}`;
+        messageDiv.textContent = message;
+        
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.insertBefore(messageDiv, contactForm.firstChild);
+        
+        // Auto-remove success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                if (messageDiv && messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
     }
 
     // Intersection Observer for animations
@@ -97,9 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         observer.observe(section);
-    });
-
-    // Add counter animation for app rating
+    });    // Add counter animation for app rating
     function animateCounter(element, target, duration = 2000) {
         let start = 0;
         const increment = target / (duration / 16);
@@ -114,6 +155,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         updateCounter();
+    }
+
+    // Animate contact items when section comes into view
+    const contactItems = document.querySelectorAll('.contact-item');
+    if (contactItems.length > 0) {
+        const contactObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = entry.target.querySelectorAll('.contact-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        // Initially hide contact items
+        contactItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        
+        const contactSection = document.querySelector('.contact');
+        if (contactSection) {
+            contactObserver.observe(contactSection);
+        }
     }
 
     // Animate rating when section comes into view
@@ -132,13 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { threshold: 0.5 });
         
         ratingObserver.observe(ratingSection);
-    }
-
-    // Download button click tracking
+    }    // Download button click tracking
     const downloadButtons = document.querySelectorAll('.download-btn, .app-link');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.preventDefault();
             const platform = this.querySelector('i').classList.contains('fa-apple') ? 'iOS' : 'Android';
             console.log(`Download clicked for ${platform}`);
             
@@ -146,8 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
-                alert(`Redirecting to ${platform} app store...`);
             }, 150);
+            
+            // Let the default link behavior proceed (don't prevent it)
         });
     });
 
