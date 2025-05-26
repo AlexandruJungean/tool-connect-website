@@ -47,15 +47,13 @@ body {
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 .nav-logo .logo {
     width: 40px;
     height: 40px;
     margin-right: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 8px;
 }
 
 .nav-menu {
@@ -73,7 +71,7 @@ body {
 }
 
 .nav-menu a:hover {
-    color: #667eea;
+    color: #5B1F80;
 }
 
 .nav-menu a::after {
@@ -83,7 +81,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #667eea;
+    background: #5B1F80;
     transition: width 0.3s ease;
 }
 
@@ -107,7 +105,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     color: white;
     padding: 120px 0 80px;
     min-height: 100vh;
@@ -159,7 +157,7 @@ body {
 
 .btn-primary {
     background: white;
-    color: #667eea;
+    color: #5B1F80;
     border-color: white;
 }
 
@@ -178,7 +176,7 @@ body {
 
 .btn-secondary:hover {
     background: white;
-    color: #667eea;
+    color: #5B1F80;
     transform: translateY(-2px);
 }
 
@@ -216,7 +214,7 @@ section {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 60px;
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 /* Benefits Section */
@@ -247,7 +245,7 @@ section {
 .benefit-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -261,7 +259,7 @@ section {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 .benefit-card p {
@@ -285,7 +283,7 @@ section {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 .features-text p {
@@ -307,7 +305,7 @@ section {
 }
 
 .features-list i {
-    color: #28a745;
+    color: #F4D03F;
     margin-right: 15px;
     font-size: 1.2rem;
 }
@@ -315,7 +313,7 @@ section {
 .feature-mockup {
     width: 100%;
     height: 400px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -351,7 +349,7 @@ section {
     right: -15px;
     width: 40px;
     height: 40px;
-    background: #667eea;
+    background: #5B1F80;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -371,7 +369,7 @@ section {
     justify-content: center;
     margin: 0 auto 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    color: #667eea;
+    color: #5B1F80;
     font-size: 2.5rem;
 }
 
@@ -379,7 +377,7 @@ section {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 .step-card p {
@@ -400,8 +398,8 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 80%, rgba(91, 31, 128, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(47, 35, 81, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -420,7 +418,7 @@ section {
     text-align: center;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    border: 1px solid rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(91, 31, 128, 0.1);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
     position: relative;
     overflow: hidden;
@@ -433,7 +431,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;
@@ -441,8 +439,8 @@ section {
 
 .category-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25);
-    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 20px 40px rgba(91, 31, 128, 0.25);
+    border-color: rgba(91, 31, 128, 0.3);
 }
 
 .category-card:hover::before {
@@ -456,7 +454,7 @@ section {
 .category-card i {
     font-size: 3rem;
     margin-bottom: 20px;
-    color: #667eea;
+    color: #5B1F80;
     transition: all 0.4s ease;
     display: block;
     height: 60px;
@@ -484,7 +482,7 @@ section {
 
 /* Download Section */
 .download {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    background: linear-gradient(135deg, #2F2351 0%, #1a1a2e 100%);
     color: white;
 }
 
@@ -518,7 +516,7 @@ section {
     align-items: center;
     gap: 15px;
     background: white;
-    color: #2c3e50;
+    color: #2F2351;
     padding: 15px 25px;
     border-radius: 12px;
     text-decoration: none;
@@ -596,7 +594,7 @@ section {
 }
 
 .stars i {
-    color: #ffc107;
+    color: #F4D03F;
     font-size: 1.3rem;
     margin: 0 2px;
 }
@@ -610,7 +608,7 @@ section {
 }
 
 .reviewer strong {
-    color: #2c3e50;
+    color: #2F2351;
     font-size: 1.1rem;
 }
 
@@ -634,11 +632,11 @@ section {
 .rating-number {
     font-size: 3rem;
     font-weight: bold;
-    color: #667eea;
+    color: #5B1F80;
 }
 
 .rating-stars i {
-    color: #ffc107;
+    color: #F4D03F;
     font-size: 1.5rem;
 }
 
@@ -657,12 +655,12 @@ section {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(91, 31, 128, 0.05) 0%, transparent 70%);
     animation: float 20s ease-in-out infinite;
 }
 
 .contact .section-title {
-    color: #2c3e50;
+    color: #2F2351;
     text-align: center;
     margin-bottom: 60px;
     font-size: 2.5rem;
@@ -678,7 +676,7 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: #667eea;
+    background: #5B1F80;
     border-radius: 2px;
 }
 
@@ -703,7 +701,7 @@ section {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 40px;
-    color: #2c3e50;
+    color: #2F2351;
     text-align: center;
 }
 
@@ -721,13 +719,13 @@ section {
 .contact-item:hover {
     background: #f8f9fa;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 10px 25px rgba(91, 31, 128, 0.15);
 }
 
 .contact-item i {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -735,24 +733,24 @@ section {
     justify-content: center;
     margin-right: 25px;
     font-size: 1.4rem;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 8px 20px rgba(91, 31, 128, 0.2);
     transition: all 0.3s ease;
 }
 
 .contact-item:hover i {
     transform: scale(1.1);
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    background: linear-gradient(135deg, #4a1a6b 0%, #241d41 100%);
 }
 
 .contact-item span {
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: #2F2351;
     font-weight: 500;
     letter-spacing: 0.5px;
 }
 
 .contact-form {
-    background: #f8f9fa;
+    background: #FAFAFA;
     padding: 50px 40px;
     border-radius: 20px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
@@ -769,21 +767,21 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 18px 20px;
-    border: 2px solid rgba(102, 126, 234, 0.2);
+    border: 2px solid rgba(91, 31, 128, 0.2);
     border-radius: 12px;
     font-size: 1.05rem;
     transition: all 0.3s ease;
     font-family: inherit;
     background: rgba(255, 255, 255, 0.9);
-    color: #2c3e50;
+    color: #2F2351;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #5B1F80;
     background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 3px rgba(91, 31, 128, 0.1);
     transform: translateY(-2px);
 }
 
@@ -805,25 +803,25 @@ section {
     font-size: 1.1rem;
     font-weight: 600;
     border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     border: none;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(91, 31, 128, 0.3);
 }
 
 .contact-form .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    box-shadow: 0 12px 35px rgba(91, 31, 128, 0.4);
+    background: linear-gradient(135deg, #4a1a6b 0%, #241d41 100%);
 }
 
 .contact-form .btn:active {
     transform: translateY(0);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 6px 20px rgba(91, 31, 128, 0.3);
 }
 
 .contact-form .btn:disabled {
@@ -893,7 +891,7 @@ section {
 
 /* Footer */
 .footer {
-    background: #2c3e50;
+    background: #2F2351;
     color: white;
     padding: 60px 0 20px;
 }
@@ -917,8 +915,6 @@ section {
     width: 40px;
     height: 40px;
     margin-right: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 8px;
 }
 
 .footer-section h4 {
@@ -954,7 +950,7 @@ section {
 .social-links a {
     width: 40px;
     height: 40px;
-    background: #34495e;
+    background: #241d41;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -965,7 +961,7 @@ section {
 }
 
 .social-links a:hover {
-    background: #667eea;
+    background: #5B1F80;
 }
 
 .app-links {
@@ -976,7 +972,7 @@ section {
 .app-link {
     width: 40px;
     height: 40px;
-    background: #34495e;
+    background: #241d41;
     color: white;
     border-radius: 8px;
     display: flex;
@@ -987,20 +983,20 @@ section {
 }
 
 .app-link:hover {
-    background: #667eea;
+    background: #5B1F80;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 40px;
-    border-top: 1px solid #34495e;
+    border-top: 1px solid #241d41;
     color: #bdc3c7;
 }
 
 /* Legal Pages Styles */
 .legal-page {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
     min-height: 100vh;
 }
 
@@ -1017,10 +1013,10 @@ section {
 
 .legal-content h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #2F2351;
     margin-bottom: 20px;
     text-align: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1037,10 +1033,10 @@ section {
 
 .legal-content h2 {
     font-size: 1.5rem;
-    color: #2c3e50;
+    color: #2F2351;
     margin: 40px 0 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #5B1F80;
     position: relative;
 }
 
@@ -1051,12 +1047,12 @@ section {
     left: 0;
     width: 50px;
     height: 2px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
 }
 
 .legal-content h3 {
     font-size: 1.2rem;
-    color: #34495e;
+    color: #2F2351;
     margin: 25px 0 15px;
     font-weight: 600;
 }
@@ -1081,18 +1077,18 @@ section {
 }
 
 .legal-content li::marker {
-    color: #667eea;
+    color: #5B1F80;
 }
 
 .legal-content a {
-    color: #667eea;
+    color: #5B1F80;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .legal-content a:hover {
-    color: #764ba2;
+    color: #2F2351;
     text-decoration: underline;
 }
 
@@ -1115,7 +1111,7 @@ section {
 
 .back-to-home .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 20px rgba(91, 31, 128, 0.3);
 }
 
 /* Responsive Design */
