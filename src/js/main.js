@@ -218,15 +218,27 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Let the default link behavior proceed (don't prevent it)
         });
-    });
-
-    // Category card hover effects
+    });    // Category card click redirect to download section
     const categoryCards = document.querySelectorAll('.category-card');
     categoryCards.forEach(card => {
         card.addEventListener('click', function() {
             const categoryName = this.querySelector('span').textContent;
             console.log(`Category selected: ${categoryName}`);
-            alert(`Showing specialists for: ${categoryName}`);
+            
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Redirect to download section
+            const downloadSection = document.querySelector('#download');
+            if (downloadSection) {
+                downloadSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
     });
 
