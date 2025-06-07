@@ -207,9 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const downloadButtons = document.querySelectorAll('.download-btn, .app-link');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            const platform = this.querySelector('i').classList.contains('fa-apple') ? 'iOS' : 'Android';
-            console.log(`Download clicked for ${platform}`);
-            
             // Add a visual feedback
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -218,13 +215,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Let the default link behavior proceed (don't prevent it)
         });
-    });    // Category card click redirect to download section
+    });// Category card click redirect to download section
     const categoryCards = document.querySelectorAll('.category-card');
     categoryCards.forEach(card => {
         card.addEventListener('click', function() {
-            const categoryName = this.querySelector('span').textContent;
-            console.log(`Category selected: ${categoryName}`);
-            
             // Add visual feedback
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
