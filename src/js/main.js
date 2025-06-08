@@ -48,13 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[name="name"]').value;
-            const email = this.querySelector('input[name="email"]').value;
-            const message = this.querySelector('textarea[name="message"]').value;
+            // Get form inputs
+            const name = this.querySelector('input[name="name"]').value.trim();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const message = this.querySelector('textarea[name="message"]').value.trim();
             
             // Basic validation
             if (!name || !email || !message) {
@@ -75,50 +74,55 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
+            // Prepare form data for Netlify
+            const formData = new FormData(this);
+            
             // Submit to Netlify
             fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(formData).toString()
             })
             .then(() => {
-                showFormMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
+                // Show success message
+                showFormMessage('Thank you! Your message has been sent successfully.', 'success');
+                // Reset form
                 this.reset();
             })
             .catch((error) => {
-                console.error('Error:', error);
+                // Show error message
                 showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                console.error('Form submission error:', error);
             })
             .finally(() => {
+                // Restore button state
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             });
         });
     }
-    
-    // Form message display function
+      // Form message display function
     function showFormMessage(message, type) {
-        // Remove any existing message
-        const existingMessage = document.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        // Create and show new message
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message ${type}`;
-        messageDiv.textContent = message;
-        
-        const contactForm = document.querySelector('.contact-form');
-        contactForm.insertBefore(messageDiv, contactForm.firstChild);
-        
-        // Auto-remove success messages after 5 seconds
-        if (type === 'success') {
-            setTimeout(() => {
-                if (messageDiv && messageDiv.parentNode) {
-                    messageDiv.remove();
-                }
-            }, 5000);
+        const messagesContainer = document.querySelector('#form-messages');
+        if (messagesContainer) {
+            // Clear existing messages
+            messagesContainer.innerHTML = '';
+            
+            // Create and show new message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `form-message ${type}`;
+            messageDiv.textContent = message;
+            
+            messagesContainer.appendChild(messageDiv);
+            
+            // Auto-remove success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    if (messageDiv && messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 5000);
+            }
         }
     }
 
