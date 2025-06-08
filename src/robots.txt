@@ -3,8 +3,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://tool-connect.netlify.app/sitemap.xml
-
-# Disallow access to assets that shouldn't be indexed
-Disallow: /assets/
-Disallow: /_redirects
-Disallow: /netlify.toml
