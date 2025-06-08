@@ -45,62 +45,63 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
         }
     });    // Contact form handling
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+    // DISABLED custom JS handler for contact form to allow native Formspree POST
+    // const contactForm = document.querySelector('.contact-form');
+    // if (contactForm) {
+    //     contactForm.addEventListener('submit', function(e) {
+    //         e.preventDefault(); // Prevent default form submission
             
-            // Get form inputs
-            const name = this.querySelector('input[name="name"]').value.trim();
-            const email = this.querySelector('input[name="email"]').value.trim();
-            const message = this.querySelector('textarea[name="message"]').value.trim();
+    //         // Get form inputs
+    //         const name = this.querySelector('input[name="name"]').value.trim();
+    //         const email = this.querySelector('input[name="email"]').value.trim();
+    //         const message = this.querySelector('textarea[name="message"]').value.trim();
             
-            // Basic validation
-            if (!name || !email || !message) {
-                showFormMessage('Please fill in all fields.', 'error');
-                return;
-            }
+    //         // Basic validation
+    //         if (!name || !email || !message) {
+    //             showFormMessage('Please fill in all fields.', 'error');
+    //             return;
+    //         }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showFormMessage('Please enter a valid email address.', 'error');
-                return;
-            }
+    //         // Email validation
+    //         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //         if (!emailRegex.test(email)) {
+    //             showFormMessage('Please enter a valid email address.', 'error');
+    //             return;
+    //         }
             
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
+    //         // Show loading state
+    //         const submitBtn = this.querySelector('button[type="submit"]');
+    //         const originalText = submitBtn.textContent;
+    //         submitBtn.textContent = 'Sending...';
+    //         submitBtn.disabled = true;
             
-            // Prepare form data for Netlify
-            const formData = new FormData(this);
+    //         // Prepare form data for Netlify
+    //         const formData = new FormData(this);
             
-            // Submit to Netlify
-            fetch('/', {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(() => {
-                // Show success message
-                showFormMessage('Thank you! Your message has been sent successfully.', 'success');
-                // Reset form
-                this.reset();
-            })
-            .catch((error) => {
-                // Show error message
-                showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
-                console.error('Form submission error:', error);
-            })
-            .finally(() => {
-                // Restore button state
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-    }
+    //         // Submit to Netlify
+    //         fetch('/', {
+    //             method: 'POST',
+    //             headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    //             body: new URLSearchParams(formData).toString()
+    //         })
+    //         .then(() => {
+    //             // Show success message
+    //             showFormMessage('Thank you! Your message has been sent successfully.', 'success');
+    //             // Reset form
+    //             this.reset();
+    //         })
+    //         .catch((error) => {
+    //             // Show error message
+    //             showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+    //             console.error('Form submission error:', error);
+    //         })
+    //         .finally(() => {
+    //             // Restore button state
+    //             submitBtn.textContent = originalText;
+    //             submitBtn.disabled = false;
+    //         });
+    //     });
+    // }
       // Form message display function
     function showFormMessage(message, type) {
         const messagesContainer = document.querySelector('#form-messages');
