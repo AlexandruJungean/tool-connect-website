@@ -186,22 +186,14 @@ body {
     align-items: center;
 }
 
-.app-mockup {
-    width: 300px;
-    height: 400px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.hero-app-screenshot {
+    width: 280px;
+    height: auto;
+    transition: transform 0.3s ease;
 }
 
-.app-mockup i {
-    font-size: 4rem;
-    margin-bottom: 20px;
+.hero-app-screenshot:hover {
+    transform: scale(1.05);
 }
 
 /* Section Styles */
@@ -215,6 +207,16 @@ section {
     font-weight: 700;
     margin-bottom: 60px;
     color: #2F2351;
+}
+
+.section-description {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6c757d;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: -40px auto 40px;
+    padding: 0 20px;
 }
 
 /* Benefits Section */
@@ -329,26 +331,7 @@ section {
 
 /* How It Works Section */
 .how-it-works {
-    background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.how-it-works::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 40%, rgba(91, 31, 128, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(47, 35, 81, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.how-it-works .container {
-    position: relative;
-    z-index: 1;
+    background: #f8f9fa;
 }
 
 .steps-grid {
@@ -1428,9 +1411,11 @@ section {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
-    .hero-title {
+      .hero-title {
         font-size: 2.5rem;
+    }    .hero-app-screenshot {
+        width: 240px;
+        height: auto;
     }
     
     .features-content {
@@ -1526,13 +1511,15 @@ section {
     .container {
         padding: 0 15px;
     }
-    
-    .hero-title {
+      .hero-title {
         font-size: 2rem;
     }
     
     .hero-subtitle {
         font-size: 1.1rem;
+    }    .hero-app-screenshot {
+        width: 200px;
+        height: auto;
     }
     
     .section-title {
