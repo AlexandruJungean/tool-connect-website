@@ -353,21 +353,62 @@ section {
     margin-bottom: 20px;
 }
 
-/* Clickable Feature Mockup */
-.feature-mockup-link {
+/* Feature Preview Image */
+.feature-image-link {
     text-decoration: none;
     color: inherit;
     display: block;
+    position: relative;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.feature-image-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(91, 31, 128, 0.25);
+}
+
+.feature-preview-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
     transition: transform 0.3s ease;
 }
 
-.feature-mockup-link:hover {
-    transform: translateY(-5px);
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(91, 31, 128, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 10px;
 }
 
-.feature-mockup-link:hover .feature-mockup {
-    box-shadow: 0 10px 30px rgba(91, 31, 128, 0.3);
-    cursor: pointer;
+.feature-image-link:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.image-overlay span {
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 /* How It Works Section */
@@ -1584,6 +1625,10 @@ section {
     
     .features-content {
         grid-template-columns: 1fr;
+    }
+    
+    .feature-preview-image {
+        max-height: 300px;
     }
       /* Mobile layout optimization - 2 benefit cards per row */
     .benefits-grid {
