@@ -54,16 +54,49 @@
     <nav class="navbar" aria-label="Main Navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/logo.png" alt="Tool Connect Logo" class="logo">
-                <span>Tool Connect</span>
-            </div>            <ul class="nav-menu">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#benefits">Benefits</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#categories">Services</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo.png" alt="Tool Connect Logo" class="logo">
+                    <span>Tool Connect</span>
+                </a>
+            </div>
+            <div class="nav-flex-group">
+                <div class="language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" aria-label="Select language">
+                            <i class="fas fa-globe"></i>
+                            <span class="current-lang">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="language-menu">
+                            <li><a href="#" data-lang="en" class="active">English</a></li>
+                            <li><a href="#" data-lang="cs">Čeština</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#hero" data-translate="nav.home">Home</a></li>
+                    <li><a href="#benefits" data-translate="nav.benefits">Benefits</a></li>
+                    <li><a href="#how-it-works" data-translate="nav.howItWorks">How It Works</a></li>
+                    <li><a href="#categories" data-translate="nav.services">Services</a></li>
+                    <li><a href="#download" data-translate="nav.download">Download</a></li>
+                    <li><a href="#contact" data-translate="nav.contact">Contact</a></li>
+                    <li class="nav-language-item">
+                        <div class="language-switcher">
+                            <div class="language-dropdown">
+                                <button class="language-btn" aria-label="Select language">
+                                    <i class="fas fa-globe"></i>
+                                    <span class="current-lang">EN</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <ul class="language-menu">
+                                    <li><a href="#" data-lang="en" class="active">English</a></li>
+                                    <li><a href="#" data-lang="cs">Čeština</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="hamburger" aria-label="Open navigation menu" tabindex="0">
                 <span></span>
                 <span></span>
@@ -72,15 +105,16 @@
         </div>
     </nav>
 
+
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Quickly find the help you need. Anytime. Anywhere.</h1>
-                <p class="hero-subtitle">Tool Connect links people with trusted professionals in any field – from repairs to translations.</p>
+                <h1 class="hero-title" data-translate="hero.title">Quickly find the help you need. Anytime. Anywhere.</h1>
+                <p class="hero-subtitle" data-translate="hero.subtitle">Tool Connect links people with trusted professionals in any field – from repairs to translations.</p>
                 <div class="hero-buttons">
-                    <a href="#categories" class="btn btn-primary">Find a Specialist</a>
-                    <a href="#download" class="btn btn-secondary">Become a Service Provider</a>
+                    <a href="#categories" class="btn btn-primary" data-translate="hero.findSpecialist">Find a Specialist</a>
+                    <a href="#download" class="btn btn-secondary" data-translate="hero.becomeProvider">Become a Service Provider</a>
                 </div>
             </div>            <div class="hero-image">
                 <img src="assets/pictures/picture 3.png" alt="Tool Connect App Registration Screen" class="hero-app-screenshot">
@@ -91,35 +125,35 @@
     <!-- Platform Benefits -->
     <section id="benefits" class="benefits">
         <div class="container">
-            <h2 class="section-title">Why Choose Tool Connect?</h2>
+            <h2 class="section-title" data-translate="benefits.title">Why Choose Tool Connect?</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3>Location & Language Search</h3>
-                    <p>Quickly find specialists by location and language preferences</p>
+                    <h3 data-translate="benefits.locationSearch.title">Location & Language Search</h3>
+                    <p data-translate="benefits.locationSearch.description">Quickly find specialists by location and language preferences</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <h3>Direct Messaging</h3>
-                    <p>Communicate directly with specialists through integrated chat</p>
+                    <h3 data-translate="benefits.directMessaging.title">Direct Messaging</h3>
+                    <p data-translate="benefits.directMessaging.description">Communicate directly with specialists through integrated chat</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-star"></i>
                     </div>
-                    <h3>Genuine Reviews</h3>
-                    <p>Read authentic user reviews and ratings from real customers</p>
+                    <h3 data-translate="benefits.genuineReviews.title">Genuine Reviews</h3>
+                    <p data-translate="benefits.genuineReviews.description">Read authentic user reviews and ratings from real customers</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Mobile & Desktop</h3>
-                    <p>Easy to use on any device - mobile, tablet, or desktop</p>
+                    <h3 data-translate="benefits.mobileDesktop.title">Mobile & Desktop</h3>
+                    <p data-translate="benefits.mobileDesktop.description">Easy to use on any device - mobile, tablet, or desktop</p>
                 </div>
             </div>
         </div>
@@ -129,18 +163,18 @@
     <section id="features" class="features">
         <div class="container">
             <div class="features-content">                <div class="features-text">
-                    <h2>Powerful Features for Everyone</h2>
-                    <p>Our platform is designed to make finding and connecting with professionals as simple as possible.</p>
+                    <h2 data-translate="features.title">Powerful Features for Everyone</h2>
+                    <p data-translate="features.subtitle">Our platform is designed to make finding and connecting with professionals as simple as possible.</p>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Integrated chat and messaging system</li>
-                        <li><i class="fas fa-check"></i> Advanced search by location and skills</li>
-                        <li><i class="fas fa-check"></i> Multi-language support</li>
-                        <li><i class="fas fa-check"></i> Comprehensive rating and review system</li>
-                        <li><i class="fas fa-check"></i> Visual portfolios for each professional</li>
-                        <li><i class="fas fa-check"></i> Real-time notification system</li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.0">Integrated chat and messaging system</span></li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.1">Advanced search by location and skills</span></li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.2">Multi-language support</span></li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.3">Comprehensive rating and review system</span></li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.4">Visual portfolios for each professional</span></li>
+                        <li><i class="fas fa-check"></i> <span data-translate="features.features.5">Real-time notification system</span></li>
                     </ul>
                     <a href="https://toolappconnect.bubbleapps.io/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-external-link-alt"></i> Try Web App Now
+                        <i class="fas fa-external-link-alt"></i> <span data-translate="features.tryWebApp">Try Web App Now</span>
                     </a>
                 </div>
                 <div class="features-image">
@@ -159,14 +193,14 @@
     <!-- How It Works -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>            <div class="steps-grid">
+            <h2 class="section-title" data-translate="howItWorks.title">How It Works</h2>            <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <div class="step-icon">
                         <i class="fas fa-user-plus"></i>
                     </div>
-                    <h3>Create an Account</h3>
-                    <p>Sign up quickly and easily to get started</p>
+                    <h3 data-translate="howItWorks.steps.0.title">Create an Account</h3>
+                    <p data-translate="howItWorks.steps.0.description">Sign up quickly and easily to get started</p>
                 </div>
                 <div class="step-arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -176,8 +210,8 @@
                     <div class="step-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3>Find a Provider</h3>
-                    <p>Search and browse suitable service providers</p>
+                    <h3 data-translate="howItWorks.steps.1.title">Find a Provider</h3>
+                    <p data-translate="howItWorks.steps.1.description">Search and browse suitable service providers</p>
                 </div>
                 <div class="step-arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -187,8 +221,8 @@
                     <div class="step-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <h3>Connect & Discuss</h3>
-                    <p>Send messages and discuss project details</p>
+                    <h3 data-translate="howItWorks.steps.2.title">Connect & Discuss</h3>
+                    <p data-translate="howItWorks.steps.2.description">Send messages and discuss project details</p>
                 </div>
                 <div class="step-arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -198,56 +232,56 @@
                     <div class="step-icon">
                         <i class="fas fa-star"></i>
                     </div>
-                    <h3>Leave a Review</h3>
-                    <p>Rate your experience and help others</p>
+                    <h3 data-translate="howItWorks.steps.3.title">Leave a Review</h3>
+                    <p data-translate="howItWorks.steps.3.description">Rate your experience and help others</p>
                 </div>
             </div>
         </div>
     </section>    <!-- Service Categories -->
     <section id="categories" class="categories">
         <div class="container">
-            <h2 class="section-title">Service Categories</h2>
-            <p class="section-description">From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories. Each specialist is vetted, reviewed, and ready to help you with your specific needs. Browse our comprehensive service categories to find exactly what you're looking for.</p>
+            <h2 class="section-title" data-translate="categories.title">Service Categories</h2>
+            <p class="section-description" data-translate="categories.description">From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories. Each specialist is vetted, reviewed, and ready to help you with your specific needs. Browse our comprehensive service categories to find exactly what you're looking for.</p>
             <div class="categories-grid">
                 <div class="category-card">
                     <i class="fas fa-home"></i>
-                    <span>Home & Maintenance</span>
+                    <span data-translate="categories.categories.0">Home & Maintenance</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-laptop-code"></i>
-                    <span>Tech & Digital</span>
+                    <span data-translate="categories.categories.1">Tech & Digital</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-spa"></i>
-                    <span>Beauty & Wellness</span>
+                    <span data-translate="categories.categories.2">Beauty & Wellness</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-baby"></i>
-                    <span>Family & Childcare</span>
+                    <span data-translate="categories.categories.3">Family & Childcare</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-paw"></i>
-                    <span>Pet Care</span>
+                    <span data-translate="categories.categories.4">Pet Care</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span>Education & Coaching</span>
+                    <span data-translate="categories.categories.5">Education & Coaching</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-palette"></i>
-                    <span>Creative & Events</span>
+                    <span data-translate="categories.categories.6">Creative & Events</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-car"></i>
-                    <span>Automotive</span>
+                    <span data-translate="categories.categories.7">Automotive</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-briefcase"></i>
-                    <span>Business & Admin</span>
+                    <span data-translate="categories.categories.8">Business & Admin</span>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-concierge-bell"></i>
-                    <span>Lifestyle & Personal Services</span>
+                    <span data-translate="categories.categories.9">Lifestyle & Personal Services</span>
                 </div>
             </div>
         </div>
@@ -258,27 +292,27 @@
         <div class="container">
             <div class="download-content">
                 <div class="download-text">
-                    <h2>Download Tool Connect</h2>
-                    <p>Get the app and start connecting with professionals today!</p>                    <div class="download-buttons">
+                    <h2 data-translate="download.title">Download Tool Connect</h2>
+                    <p data-translate="download.subtitle">Get the app and start connecting with professionals today!</p>                    <div class="download-buttons">
                         <a href="https://apps.apple.com/us/app/tool/id6739626276" class="download-btn" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-apple"></i>
                             <div>
-                                <span>Download on the</span>
-                                <strong>App Store</strong>
+                                <span data-translate="download.downloadOnAppStore">Download on the</span>
+                                <strong data-translate="download.appStore">App Store</strong>
                             </div>
                         </a>
                         <a href="https://play.google.com/store/apps/details?id=com.tool.toolappconnect" class="download-btn" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-google-play"></i>
                             <div>
-                                <span>Get it on</span>
-                                <strong>Google Play</strong>
+                                <span data-translate="download.getItOn">Get it on</span>
+                                <strong data-translate="download.googlePlay">Google Play</strong>
                             </div>
                         </a>
                         <a href="https://toolappconnect.bubbleapps.io/" class="download-btn web-app-btn" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-globe"></i>
                             <div>
-                                <span>Try it on the</span>
-                                <strong>Web Browser</strong>
+                                <span data-translate="download.tryItOn">Try it on the</span>
+                                <strong data-translate="download.webBrowser">Web Browser</strong>
                             </div>
                         </a>
                     </div>
@@ -286,13 +320,13 @@
                     <div class="qr-codes-container">
                         <div class="qr-code-item">
                             <img src="assets/QR codes/iOS.png" alt="QR Code for iOS App Store download" class="qr-image">
-                            <p>iOS App Store</p>
-                            <span class="qr-subtitle">Scan with your iPhone camera</span>
+                            <p data-translate="download.iosAppStore">iOS App Store</p>
+                            <span class="qr-subtitle" data-translate="download.scanWithiPhone">Scan with your iPhone camera</span>
                         </div>
                         <div class="qr-code-item">
                             <img src="assets/QR codes/Android.png" alt="QR Code for Google Play Store download" class="qr-image">
-                            <p>Google Play Store</p>
-                            <span class="qr-subtitle">Scan with your Android camera</span>
+                            <p data-translate="download.googlePlayStore">Google Play Store</p>
+                            <span class="qr-subtitle" data-translate="download.scanWithAndroid">Scan with your Android camera</span>
                         </div>
                     </div>
                 </div>
@@ -303,27 +337,27 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
+            <h2 class="section-title" data-translate="contact.title">Get in Touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Contact Details</h3>
+                    <h3 data-translate="contact.contactDetails">Contact Details</h3>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>toolappconnect@gmail.com</span>
+                        <span data-translate="contact.email">toolappconnect@gmail.com</span>
                     </div>
                 </div>
                 <form class="contact-form" name="contact" method="POST" action="https://formspree.io/f/mjkrgnwk">
                     <div id="form-messages"></div>
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="text" name="name" data-translate-placeholder="contact.namePlaceholder" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="email" name="email" data-translate-placeholder="contact.emailPlaceholder" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <textarea name="message" data-translate-placeholder="contact.messagePlaceholder" placeholder="Your Message" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary" data-translate="contact.sendMessage">Send Message</button>
                 </form>
             </div>
         </div>
@@ -338,28 +372,28 @@
                         <img src="assets/logo.png" alt="Tool Connect" class="logo">
                         <span>Tool Connect</span>
                     </div>
-                    <p>Connecting people with trusted professionals worldwide.</p>
+                    <p data-translate="footer.tagline">Connecting people with trusted professionals worldwide.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-translate="footer.quickLinks">Quick Links</h4>
                     <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#benefits">Benefits</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#categories">Services</a></li>
+                        <li><a href="#hero" data-translate="nav.home">Home</a></li>
+                        <li><a href="#benefits" data-translate="nav.benefits">Benefits</a></li>
+                        <li><a href="#how-it-works" data-translate="nav.howItWorks">How It Works</a></li>
+                        <li><a href="#categories" data-translate="nav.services">Services</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Support</h4>
+                    <h4 data-translate="footer.support">Support</h4>
                     <ul>
-                        <li><a href="#contact">Contact Support</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-conditions.html">Terms and Conditions</a></li>
+                        <li><a href="#contact" data-translate="footer.contactSupport">Contact Support</a></li>
+                        <li><a href="#" data-translate="footer.helpCenter">Help Center</a></li>
+                        <li><a href="privacy-policy.html" data-translate="footer.privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html" data-translate="footer.termsConditions">Terms and Conditions</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Follow Us</h4>
+                    <h4 data-translate="footer.followUs">Follow Us</h4>
                     <div class="social-links">
                         <a href="https://www.facebook.com/profile.php?id=61572803991796" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/toolappconnect/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
@@ -378,11 +412,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Tool Connect. All rights reserved.</p>
+                <p data-translate="footer.copyright">&copy; 2025 Tool Connect. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

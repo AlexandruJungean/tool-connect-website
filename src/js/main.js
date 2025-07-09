@@ -1,6 +1,147 @@
 // Tool Connect - Interactive JavaScript
 
+// Translation functionality
+let currentLanguage = 'en';
+
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((current, key) => {
+        return current && current[key] !== undefined ? current[key] : null;
+    }, obj);
+}
+
+function translatePage(lang) {
+    currentLanguage = lang;
+    
+    // Update all elements with data-translate attribute
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        const translation = getNestedValue(translations[lang], key);
+        if (translation) {
+            // Check if translation contains HTML tags
+            if (translation.includes('<') && translation.includes('>')) {
+                element.innerHTML = translation;
+            } else {
+                element.textContent = translation;
+            }
+        }
+    });
+    
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-translate-placeholder');
+        const translation = getNestedValue(translations[lang], key);
+        if (translation) {
+            element.placeholder = translation;
+        }
+    });
+    
+    // Update current language display
+    const currentLangElement = document.querySelector('.current-lang');
+    if (currentLangElement) {
+        currentLangElement.textContent = lang.toUpperCase();
+    }
+    
+    // Update active state in language menu
+    const languageLinks = document.querySelectorAll('.language-menu a');
+    languageLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-lang') === lang) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Update meta tags
+    const metaTitle = document.querySelector('title');
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    
+    if (metaTitle && translations[lang].meta.title) {
+        metaTitle.textContent = translations[lang].meta.title;
+    }
+    if (metaDescription && translations[lang].meta.description) {
+        metaDescription.setAttribute('content', translations[lang].meta.description);
+    }
+    if (metaKeywords && translations[lang].meta.keywords) {
+        metaKeywords.setAttribute('content', translations[lang].meta.keywords);
+    }
+    
+    // Save language preference to localStorage
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+function initializeLanguage() {
+    // Check for saved language preference
+    const savedLanguage = localStorage.getItem('preferredLanguage');
+    if (savedLanguage && translations[savedLanguage]) {
+        currentLanguage = savedLanguage;
+    } else {
+        // Check browser language
+        const browserLang = navigator.language.split('-')[0];
+        if (translations[browserLang]) {
+            currentLanguage = browserLang;
+        }
+    }
+    
+    // Apply initial translation
+    translatePage(currentLanguage);
+    
+    // Set up language switcher event listeners
+    const languageLinks = document.querySelectorAll('.language-menu a');
+    languageLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lang = this.getAttribute('data-lang');
+            if (translations[lang]) {
+                translatePage(lang);
+            }
+        });
+    });
+}
+
+// Language dropdown toggle
+function setupLanguageDropdownToggle() {
+    // Remove any previous listeners
+    document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.onclick = null;
+    });
+    
+    // Add click event for all language buttons
+    document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.language-dropdown.open').forEach(dd => {
+                if (dd !== btn.closest('.language-dropdown')) dd.classList.remove('open');
+            });
+            
+            // Toggle this dropdown
+            btn.closest('.language-dropdown').classList.toggle('open');
+        });
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        document.querySelectorAll('.language-dropdown.open').forEach(dd => {
+            if (!dd.contains(e.target)) dd.classList.remove('open');
+        });
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.language-dropdown.open').forEach(dd => dd.classList.remove('open'));
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize language system
+    initializeLanguage();
+    setupLanguageDropdownToggle();
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     navLinks.forEach(link => {

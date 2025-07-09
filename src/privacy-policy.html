@@ -31,21 +31,53 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main Navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/logo.png" alt="Tool Connect" class="logo">
-                <span>Tool Connect</span>
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo.png" alt="Tool Connect Logo" class="logo">
+                    <span>Tool Connect</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#hero">Home</a></li>
-                <li><a href="index.html#benefits">Benefits</a></li>
-                <li><a href="index.html#how-it-works">How It Works</a></li>
-                <li><a href="index.html#categories">Services</a></li>
-                <li><a href="index.html#download">Download</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
+            <div class="nav-flex-group">
+                <div class="language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" aria-label="Select language">
+                            <i class="fas fa-globe"></i>
+                            <span class="current-lang">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="language-menu">
+                            <li><a href="#" data-lang="en" class="active">English</a></li>
+                            <li><a href="#" data-lang="cs">Čeština</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#hero" data-translate="nav.home">Home</a></li>
+                    <li><a href="index.html#benefits" data-translate="nav.benefits">Benefits</a></li>
+                    <li><a href="index.html#how-it-works" data-translate="nav.howItWorks">How It Works</a></li>
+                    <li><a href="index.html#categories" data-translate="nav.services">Services</a></li>
+                    <li><a href="index.html#download" data-translate="nav.download">Download</a></li>
+                    <li><a href="index.html#contact" data-translate="nav.contact">Contact</a></li>
+                    <li class="nav-language-item">
+                        <div class="language-switcher">
+                            <div class="language-dropdown">
+                                <button class="language-btn" aria-label="Select language">
+                                    <i class="fas fa-globe"></i>
+                                    <span class="current-lang">EN</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <ul class="language-menu">
+                                    <li><a href="#" data-lang="en" class="active">English</a></li>
+                                    <li><a href="#" data-lang="cs">Čeština</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="hamburger" aria-label="Open navigation menu" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -57,78 +89,78 @@
     <section class="legal-page">
         <div class="container">
             <div class="legal-content">
-                <h1>Privacy Policy</h1>
-                <p class="last-updated"><strong>Last Updated: April 2025</strong></p>
+                <h1 data-translate="legal.privacyPolicy.title">Privacy Policy</h1>
+                <p class="last-updated"><strong data-translate="legal.privacyPolicy.lastUpdated">Last Updated: April 2025</strong></p>
                 
-                <p>Tool is committed to protecting your privacy in compliance with the General Data Protection Regulation (GDPR). This Privacy Policy explains how we collect, use, and protect your personal data.</p>
+                <p data-translate="legal.privacyPolicy.intro">Tool is committed to protecting your privacy in compliance with the General Data Protection Regulation (GDPR). This Privacy Policy explains how we collect, use, and protect your personal data.</p>
 
-                <h2>1. Data We Collect</h2>
+                <h2>1. <span data-translate="legal.privacyPolicy.dataWeCollect">Data We Collect</span></h2>
                 
-                <h3>For Clients:</h3>
+                <h3 data-translate="legal.privacyPolicy.forClients">For Clients:</h3>
                 <ul>
-                    <li>Name, email, password (Passwords are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).</li>
+                    <li data-translate="legal.privacyPolicy.forClients_li1">Name, email, password (Passwords are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).</li>
                 </ul>
 
-                <h3>For Service Providers:</h3>
+                <h3 data-translate="legal.privacyPolicy.forServiceProviders">For Service Providers:</h3>
                 <ul>
-                    <li>Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).</li>
-                    <li>The business details, services offered, and any other details the service provider chooses to disclose in their profile.</li>
+                    <li data-translate="legal.privacyPolicy.forServiceProviders_li1">Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).</li>
+                    <li data-translate="legal.privacyPolicy.forServiceProviders_li2">The business details, services offered, and any other details the service provider chooses to disclose in their profile.</li>
                 </ul>
 
-                <h2>2. How We Use Your Data</h2>
-                <p>We process your data for the following purposes:</p>
+                <h2>2. <span data-translate="legal.privacyPolicy.howWeUseData">How We Use Your Data</span></h2>
+                <p data-translate="legal.privacyPolicy.howWeUseData_p1">We process your data for the following purposes:</p>
                 <ul>
-                    <li>Connecting Clients with Service Providers.</li>
-                    <li>Ensuring platform security.</li>
-                    <li>Improving user experience.</li>
-                    <li>Analytics: We collect anonymous data on user activity (such as app usage, number of visits, and interactions) to optimize the platform and improve our services.</li>
-                    <li>Marketing and promotional communications (only with user consent).</li>
-                    <li>We commit to never selling your data.</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li1">Connecting Clients with Service Providers.</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li2">Ensuring platform security.</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li3">Improving user experience.</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li4">Analytics: We collect anonymous data on user activity (such as app usage, number of visits, and interactions) to optimize the platform and improve our services.</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li5">Marketing and promotional communications (only with user consent).</li>
+                    <li data-translate="legal.privacyPolicy.howWeUseData_li6">We commit to never selling your data.</li>
                 </ul>
 
-                <h2>3. Data Security Measures</h2>
+                <h2>3. <span data-translate="legal.privacyPolicy.dataSecurity">Data Security Measures</span></h2>
                 <ul>
-                    <li>All user data is securely stored on Bubble.io, which implements industry-standard encryption and security protocols.</li>
-                    <li>Access to personal data is restricted to authorized personnel only.</li>
+                    <li data-translate="legal.privacyPolicy.dataSecurity_li1">All user data is securely stored on Bubble.io, which implements industry-standard encryption and security protocols.</li>
+                    <li data-translate="legal.privacyPolicy.dataSecurity_li2">Access to personal data is restricted to authorized personnel only.</li>
                 </ul>
 
-                <h2>4. Sharing of Data</h2>
+                <h2>4. <span data-translate="legal.privacyPolicy.sharingData">Sharing of Data</span></h2>
                 <ul>
-                    <li>We do not sell user data.</li>
-                    <li>Data may be shared with legal authorities when required by law.</li>
+                    <li data-translate="legal.privacyPolicy.sharingData_li1">We do not sell user data.</li>
+                    <li data-translate="legal.privacyPolicy.sharingData_li2">Data may be shared with legal authorities when required by law.</li>
                 </ul>
 
-                <h2>5. User Rights (GDPR Compliance)</h2>
-                <p>Under GDPR, users have the right to:</p>
+                <h2>5. <span data-translate="legal.privacyPolicy.userRights">User Rights (GDPR Compliance)</span></h2>
+                <p data-translate="legal.privacyPolicy.userRights_p1">Under GDPR, users have the right to:</p>
                 <ul>
-                    <li>Access their data.</li>
-                    <li>Request deletion of their account and personal data.</li>
-                    <li>Update or correct their personal information.</li>
-                    <li>Object to data processing for specific purposes.</li>
+                    <li data-translate="legal.privacyPolicy.userRights_li1">Access their data.</li>
+                    <li data-translate="legal.privacyPolicy.userRights_li2">Request deletion of their account and personal data.</li>
+                    <li data-translate="legal.privacyPolicy.userRights_li3">Update or correct their personal information.</li>
+                    <li data-translate="legal.privacyPolicy.userRights_li4">Object to data processing for specific purposes.</li>
                 </ul>
-                <p>To exercise these rights, contact us at <a href="mailto:toolappconnect@gmail.com">toolappconnect@gmail.com</a>.</p>
+                <p data-translate="legal.privacyPolicy.userRights_p2">To exercise these rights, contact us at <a href="mailto:toolappconnect@gmail.com">toolappconnect@gmail.com</a>.</p>
 
-                <h2>6. Data Retention</h2>
+                <h2>6. <span data-translate="legal.privacyPolicy.dataRetention">Data Retention</span></h2>
                 <ul>
-                    <li>Personal data (such as email and profile information) is stored as long as the account remains active.</li>
-                    <li>Deleted or inactive accounts will have their personal data erased within 365 days, except where legally required.</li>
-                    <li>Message data retention: Messages between Clients and Service Providers will be stored even if deleted by the user but will not be accessible to users after deletion. These records are retained for security and compliance purposes for 365 days.</li>
-                </ul>
-
-                <h2>7. Cookies and Tracking Technologies</h2>
-                <ul>
-                    <li>Cookies. We may use tracking technologies, such as local storage and app analytics tools, to enhance user experience.</li>
-                    <li>Users can manage tracking preferences in their device settings.</li>
+                    <li data-translate="legal.privacyPolicy.dataRetention_li1">Personal data (such as email and profile information) is stored as long as the account remains active.</li>
+                    <li data-translate="legal.privacyPolicy.dataRetention_li2">Deleted or inactive accounts will have their personal data erased within 365 days, except where legally required.</li>
+                    <li data-translate="legal.privacyPolicy.dataRetention_li3">Message data retention: Messages between Clients and Service Providers will be stored even if deleted by the user but will not be accessible to users after deletion. These records are retained for security and compliance purposes for 365 days.</li>
                 </ul>
 
-                <h2>8. Updates to This Privacy Policy</h2>
-                <p>We reserve the right to update this Privacy Policy. Users will be notified of significant changes.</p>
-                <p>For any questions, contact us at <a href="mailto:toolappconnect@gmail.com">toolappconnect@gmail.com</a></p>
+                <h2>7. <span data-translate="legal.privacyPolicy.cookies">Cookies and Tracking Technologies</span></h2>
+                <ul>
+                    <li data-translate="legal.privacyPolicy.cookies_li1">Cookies. We may use tracking technologies, such as local storage and app analytics tools, to enhance user experience.</li>
+                    <li data-translate="legal.privacyPolicy.cookies_li2">Users can manage tracking preferences in their device settings.</li>
+                </ul>
+
+                <h2>8. <span data-translate="legal.privacyPolicy.updates">Updates to This Privacy Policy</span></h2>
+                <p data-translate="legal.privacyPolicy.updates_p1">We reserve the right to update this Privacy Policy. Users will be notified of significant changes.</p>
+                <p data-translate="legal.privacyPolicy.updates_p2">For any questions, contact us at <a href="mailto:toolappconnect@gmail.com">toolappconnect@gmail.com</a></p>
 
                 <div class="back-to-home">
                     <a href="index.html" class="btn btn-primary">
                         <i class="fas fa-arrow-left"></i>
-                        Back to Home
+                        <span data-translate="legal.privacyPolicy.backToHome">Back to Home</span>
                     </a>
                 </div>
             </div>
@@ -144,28 +176,28 @@
                         <img src="assets/logo.png" alt="Tool Connect" class="logo">
                         <span>Tool Connect</span>
                     </div>
-                    <p>Connecting people with trusted professionals worldwide.</p>
+                    <p data-translate="footer.tagline">Connecting people with trusted professionals worldwide.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-translate="footer.quickLinks">Quick Links</h4>
                     <ul>
-                        <li><a href="index.html#hero">Home</a></li>
-                        <li><a href="index.html#benefits">Benefits</a></li>
-                        <li><a href="index.html#how-it-works">How It Works</a></li>
-                        <li><a href="index.html#categories">Services</a></li>
+                        <li><a href="index.html#hero" data-translate="nav.home">Home</a></li>
+                        <li><a href="index.html#benefits" data-translate="nav.benefits">Benefits</a></li>
+                        <li><a href="index.html#how-it-works" data-translate="nav.howItWorks">How It Works</a></li>
+                        <li><a href="index.html#categories" data-translate="nav.services">Services</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Support</h4>
+                    <h4 data-translate="footer.support">Support</h4>
                     <ul>
-                        <li><a href="index.html#contact">Contact Support</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-conditions.html">Terms of Service</a></li>
+                        <li><a href="index.html#contact" data-translate="footer.contactSupport">Contact Support</a></li>
+                        <li><a href="#" data-translate="footer.helpCenter">Help Center</a></li>
+                        <li><a href="privacy-policy.html" data-translate="footer.privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html" data-translate="footer.termsConditions">Terms and Conditions</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Follow Us</h4>
+                    <h4 data-translate="footer.followUs">Follow Us</h4>
                     <div class="social-links">
                         <a href="https://www.facebook.com/profile.php?id=61572803991796" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/toolappconnect/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
@@ -182,11 +214,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Tool Connect. All rights reserved.</p>
+                <p data-translate="footer.copyright">&copy; 2025 Tool Connect. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

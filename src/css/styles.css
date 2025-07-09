@@ -45,6 +45,11 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.nav-logo span {
+    white-space: nowrap;
     font-size: 1.5rem;
     font-weight: bold;
     color: #2F2351;
@@ -120,6 +125,122 @@ body {
     background: #333;
     margin: 3px 0;
     transition: 0.3s;
+}
+
+/* Logo Link */
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+/* Language Switcher */
+.language-switcher {
+    position: relative;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.language-dropdown {
+    position: relative;
+}
+
+.language-btn {
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+    border: 2px solid transparent;
+    color: white;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 10px rgba(91, 31, 128, 0.2);
+    min-width: 80px;
+    justify-content: center;
+    user-select: none;
+}
+
+.language-btn:hover {
+    background: linear-gradient(135deg, #2F2351 0%, #5B1F80 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(91, 31, 128, 0.3);
+}
+
+.language-btn:active {
+    transform: translateY(0);
+}
+
+.language-btn i {
+    font-size: 0.8rem;
+}
+
+.current-lang {
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.language-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    margin-top: 8px;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-dropdown.open .language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-menu li {
+    list-style: none;
+}
+
+.language-menu a {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+.language-menu a:hover {
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.1) 0%, rgba(47, 35, 81, 0.1) 100%);
+    color: #5B1F80;
+    transform: translateX(5px);
+}
+
+.language-menu a.active {
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(91, 31, 128, 0.3);
 }
 
 /* Hero Section */
@@ -1611,6 +1732,55 @@ section {
         margin-top: 20px;
         padding: 12px 24px;
     }
+
+    /* Position language switcher in nav bar, to the left of hamburger menu */
+    .nav-flex-group > .language-switcher {
+        position: absolute !important;
+        top: 50%;
+        right: 70px; /* Position to the left of hamburger menu with spacing */
+        transform: translateY(-50%);
+        margin: 0;
+        order: 0;
+    }
+
+    .language-btn {
+        background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        min-width: 80px;
+        font-size: 0.85rem;
+    }
+
+    .language-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        padding: 8px;
+        margin-top: 8px;
+        min-width: 140px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .language-dropdown.open .language-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .language-menu a {
+        padding: 10px 16px;
+        text-align: center;
+        margin: 2px 0;
+        border-radius: 8px;
+    }
     
     .hero-container {
         grid-template-columns: 1fr;
@@ -1628,7 +1798,7 @@ section {
     }
     
     .feature-preview-image {
-        max-height: 300px;
+        max-height: 800px;
     }
       /* Mobile layout optimization - 2 benefit cards per row */
     .benefits-grid {
@@ -1838,6 +2008,57 @@ section {
     }
 }
 
+/* Hide mobile language switcher on all screen sizes by default */
+.nav-language-item {
+    display: none !important;
+    list-style: none;
+    border: none;
+    padding: 0;
+}
+
+@media (max-width: 400px) {
+    /* Hide desktop language switcher from nav bar */
+    .nav-flex-group > .language-switcher {
+        display: none !important;
+    }
+    
+    /* Show language switcher inside mobile menu at bottom of navigation links */
+    .nav-menu.active .nav-language-item {
+        display: block !important;
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .nav-menu.active .nav-language-item .language-switcher {
+        display: block !important;
+        position: static;
+        transform: none;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .nav-menu.active .nav-language-item .language-btn {
+        width: auto;
+        min-width: 120px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .nav-menu.active .nav-language-item .language-menu {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        margin-top: 8px;
+    }
+    
+    .nav-menu.active .nav-language-item .language-dropdown.open .language-menu {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+}
+
 /* Hamburger Menu Animation */
 .hamburger.active span:nth-child(1) {
     transform: rotate(-45deg) translate(-5px, 6px);
@@ -1850,3 +2071,19 @@ section {
 .hamburger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
 }
+
+/* Flex group for language switcher and nav menu */
+.nav-flex-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+}
+
+/* Place language switcher immediately before nav-menu */
+.language-switcher {
+    position: relative;
+    margin: 0;
+    order: 0;
+}
+
