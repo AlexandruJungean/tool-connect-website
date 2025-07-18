@@ -133,7 +133,137 @@ const translations = {
             privacyPolicy: "Privacy Policy",
             termsConditions: "Terms and Conditions",
             followUs: "Follow Us",
+            serviceProvidersGuide: "Service Providers Guide",
             copyright: "© 2025 Tool Connect. All rights reserved."
+        },
+        
+        // Service Providers Page
+        serviceProviders: {
+            hero: {
+                title: "Grow Your Business with Tool",
+                subtitle: "Join thousands of professionals who trust Tool to expand their reach, connect with new clients, and build their reputation.",
+                getStarted: "Get Started Today",
+                learnMore: "Learn More"
+            },
+            benefits: {
+                title: "Why Service Providers Choose Tool",
+                expandClientBase: {
+                    title: "Expand Your Client Base",
+                    description: "Reach thousands of potential customers actively searching for your services in your area and beyond."
+                },
+                buildReputation: {
+                    title: "Build Your Reputation",
+                    description: "Showcase your work through portfolios and collect genuine reviews that build trust with future clients."
+                },
+                manageSchedule: {
+                    title: "Manage Your Schedule",
+                    description: "Take control of your availability and manage bookings efficiently with our integrated scheduling tools."
+                },
+                securePayments: {
+                    title: "Secure Payments",
+                    description: "Get paid safely and on time with our secure payment system that protects both you and your clients."
+                },
+                mobileExperience: {
+                    title: "Mobile-First Experience",
+                    description: "Manage your business on the go with our mobile app, responding to clients anytime, anywhere."
+                },
+                directCommunication: {
+                    title: "Direct Communication",
+                    description: "Connect directly with clients through our integrated messaging system without sharing personal contact information."
+                }
+            },
+            gettingStarted: {
+                title: "How to Get Started as a Service Provider",
+                step1: {
+                    title: "Create Your Professional Profile",
+                    description: "Sign up and complete your profile with your skills, experience, and service areas. Add professional photos and certifications to stand out.",
+                    items: [
+                        "Upload high-quality photos of your work",
+                        "List your skills and specializations",
+                        "Set your service areas and availability",
+                        "Add professional certifications"
+                    ]
+                },
+                step2: {
+                    title: "Set Up Your Services & Pricing",
+                    description: "Define what services you offer and set competitive pricing. Be clear about what's included in each service package.",
+                    items: [
+                        "Create detailed service descriptions",
+                        "Set transparent pricing structures",
+                        "Define service packages and add-ons",
+                        "Specify materials and equipment policies"
+                    ]
+                },
+                step3: {
+                    title: "Start Receiving Requests",
+                    description: "Once your profile is approved, you'll start receiving client requests. Respond promptly to build your reputation.",
+                    items: [
+                        "Respond to requests within 24 hours",
+                        "Ask clarifying questions about the project",
+                        "Provide accurate time estimates",
+                        "Maintain professional communication"
+                    ]
+                },
+                step4: {
+                    title: "Deliver Excellence & Build Reviews",
+                    description: "Focus on delivering quality work and exceptional customer service to earn positive reviews and repeat business.",
+                    items: [
+                        "Arrive on time and prepared",
+                        "Communicate throughout the project",
+                        "Clean up after completing work",
+                        "Follow up to ensure satisfaction"
+                    ]
+                }
+            },
+            successTips: {
+                title: "Tips for Success on Tool",
+                professionalPhotos: {
+                    title: "Professional Photos",
+                    description: "Use high-quality before/after photos to showcase your work. Visual proof builds trust and attracts more clients."
+                },
+                quickResponse: {
+                    title: "Quick Response Time",
+                    description: "Respond to client messages within a few hours. Fast responses show professionalism and increase booking rates."
+                },
+                competitivePricing: {
+                    title: "Competitive Pricing",
+                    description: "Research local market rates and price competitively. Offer different service levels to attract various client budgets."
+                },
+                excellentService: {
+                    title: "Excellent Service",
+                    description: "Go above and beyond for your clients. Exceptional service leads to positive reviews and word-of-mouth referrals."
+                }
+            },
+            support: {
+                title: "We're Here to Help You Succeed",
+                dedicatedTeam: {
+                    title: "Dedicated Support Team",
+                    description: "Our team is committed to helping you succeed on Tool. We provide ongoing support, guidance, and resources to help you grow your business."
+                },
+                supportFeatures: [
+                    "24/7 customer support",
+                    "Business growth tips and resources",
+                    "Marketing and promotional support",
+                    "Technical assistance and training"
+                ],
+                contactCard: {
+                    title: "Need Help Getting Started?",
+                    description: "Contact our support team for personalized assistance with setting up your service provider profile.",
+                    button: "Contact Support"
+                }
+            },
+            documentation: {
+                title: "Complete Service Provider Guide",
+                description: "Download our comprehensive guide that covers everything you need to know about succeeding as a service provider on Tool. This detailed documentation includes best practices, policies, and advanced strategies.",
+                features: [
+                    "Complete setup guide",
+                    "Business growth strategies",
+                    "Safety and compliance guidelines",
+                    "Marketing and promotion tips"
+                ],
+                downloadButton: "Download Service Provider Documentation",
+                downloadNote: "PDF format • Updated regularly with latest information"
+            }
         },
         
         // Meta content
@@ -472,9 +602,139 @@ const translations = {
             privacyPolicy: "Zásady ochrany osobních údajů",
             termsConditions: "Podmínky použití",
             followUs: "Sledujte nás",
+            serviceProvidersGuide: "Průvodce pro poskytovatele služeb",
             copyright: "© 2025 Tool Connect. Všechna práva vyhrazena."
         },
         
+         // Service Providers Page
+         serviceProviders: {
+            hero: {
+                title: "Rozviňte své podnikání s Tool",
+                subtitle: "Připojte se k tisícům profesionálů, kteří důvěřují Tool při rozšiřování svého dosahu, propojování s novými klienty a budování své pověsti.",
+                getStarted: "Začněte ještě dnes",
+                learnMore: "Zjistit více"
+            },
+            benefits: {
+                title: "Proč si poskytovatelé služeb vybírají Tool",
+                expandClientBase: {
+                    title: "Rozšiřte svou klientelu",
+                    description: "Dostaňte se k tisícům potenciálních zákazníků, kteří aktivně hledají vaše služby ve vaší oblasti a mimo ni."
+                },
+                buildReputation: {
+                    title: "Budujte svou pověst",
+                    description: "Prezentujte svou práci prostřednictvím portfolií a sbírejte skutečné recenze, které budují důvěru s budoucími klienty."
+                },
+                manageSchedule: {
+                    title: "Spravujte svůj rozvrh",
+                    description: "Převzít kontrolu nad svou dostupností a efektivně spravovat rezervace pomocí našich integrovaných nástrojů pro plánování."
+                },
+                securePayments: {
+                    title: "Bezpečné platby",
+                    description: "Dostávejte platby bezpečně a včas pomocí našeho bezpečného platebního systému, který chrání vás i vaše klienty."
+                },
+                mobileExperience: {
+                    title: "Mobilní zkušenost",
+                    description: "Spravujte své podnikání za pochodu s naší mobilní aplikací, odpovídejte klientům kdykoliv a kdekoliv."
+                },
+                directCommunication: {
+                    title: "Přímá komunikace",
+                    description: "Propojte se přímo s klienty prostřednictvím našeho integrovaného systému zpráv bez sdílení osobních kontaktních údajů."
+                }
+            },
+            gettingStarted: {
+                title: "Jak začít jako poskytovatel služeb",
+                step1: {
+                    title: "Vytvořte svůj profesionální profil",
+                    description: "Zaregistrujte se a dokončete svůj profil se svými dovednostmi, zkušenostmi a oblastmi služeb. Přidejte profesionální fotografie a certifikace, abyste vynikli.",
+                    items: [
+                        "Nahrajte kvalitní fotografie své práce",
+                        "Uveďte své dovednosti a specializace",
+                        "Nastavte své oblasti služeb a dostupnost",
+                        "Přidejte profesionální certifikace"
+                    ]
+                },
+                step2: {
+                    title: "Nastavte své služby a ceny",
+                    description: "Definujte, jaké služby nabízíte, a nastavte konkurenční ceny. Buďte jasní ohledně toho, co je zahrnuto v každém balíčku služeb.",
+                    items: [
+                        "Vytvořte podrobné popisy služeb",
+                        "Nastavte transparentní cenové struktury",
+                        "Definujte balíčky služeb a doplňky",
+                        "Specifikujte politiky materiálů a vybavení"
+                    ]
+                },
+                step3: {
+                    title: "Začněte přijímat žádosti",
+                    description: "Jakmile bude váš profil schválen, začnete dostávat žádosti od klientů. Reagujte rychle, abyste budovali svou pověst.",
+                    items: [
+                        "Reagujte na žádosti do 24 hodin",
+                        "Ptejte se na objasňující otázky ohledně projektu",
+                        "Poskytujte přesné časové odhady",
+                        "Udržujte profesionální komunikaci"
+                    ]
+                },
+                step4: {
+                    title: "Dodávejte excelentní služby a budujte recenze",
+                    description: "Zaměřte se na dodávání kvalitní práce a výjimečného zákaznického servisu, abyste získali pozitivní recenze a opakované zakázky.",
+                    items: [
+                        "Přijďte včas a připraveni",
+                        "Komunikujte během celého projektu",
+                        "Uklízejte po dokončení práce",
+                        "Následně kontaktujte, abyste zajistili spokojenost"
+                    ]
+                }
+            },
+            successTips: {
+                title: "Tipy pro úspěch na Tool",
+                professionalPhotos: {
+                    title: "Profesionální fotografie",
+                    description: "Používejte kvalitní fotografie před/po pro prezentaci své práce. Vizuální důkaz buduje důvěru a přitahuje více klientů."
+                },
+                quickResponse: {
+                    title: "Rychlá reakce",
+                    description: "Odpovídejte na zprávy klientů během několika hodin. Rychlé odpovědi ukazují profesionalitu a zvyšují míru rezervací."
+                },
+                competitivePricing: {
+                    title: "Konkurenční ceny",
+                    description: "Prozkoumejte místní tržní sazby a cenově konkurenčně. Nabízejte různé úrovně služeb, abyste přilákali různé rozpočty klientů."
+                },
+                excellentService: {
+                    title: "Výjimečný servis",
+                    description: "Jděte nad rámec pro své klienty. Výjimečný servis vede k pozitivním recenzím a doporučením od úst k ústům."
+                }
+            },
+            support: {
+                title: "Jsme tu, abychom vám pomohli uspět",
+                dedicatedTeam: {
+                    title: "Dedikovaný tým podpory",
+                    description: "Náš tým je odhodlán pomoci vám uspět na Tool. Poskytujeme průběžnou podporu, vedení a zdroje, které vám pomohou rozvíjet vaše podnikání."
+                },
+                supportFeatures: [
+                    "24/7 zákaznická podpora",
+                    "Tipy a zdroje pro růst podnikání",
+                    "Marketingová a propagační podpora",
+                    "Technická pomoc a školení"
+                ],
+                contactCard: {
+                    title: "Potřebujete pomoc s začátkem?",
+                    description: "Kontaktujte náš tým podpory pro personalizovanou pomoc s nastavením vašeho profilu poskytovatele služeb.",
+                    button: "Kontaktovat podporu"
+                }
+            },
+            documentation: {
+                title: "Kompletní průvodce pro poskytovatele služeb",
+                description: "Stáhněte si náš komplexní průvodce, který pokrývá vše, co potřebujete vědět o úspěchu jako poskytovatel služeb na Tool. Tato podrobná dokumentace zahrnuje nejlepší postupy, politiky a pokročilé strategie.",
+                features: [
+                    "Kompletní průvodce nastavením",
+                    "Strategie růstu podnikání",
+                    "Bezpečnostní a právní pokyny",
+                    "Tipy pro marketing a propagaci"
+                ],
+                downloadButton: "Stáhnout dokumentaci pro poskytovatele služeb",
+                downloadNote: "Formát PDF • Pravidelně aktualizováno s nejnovějšími informacemi"
+            }
+        },
+
         // Meta content
         meta: {
             title: "Tool Connect - Najděte důvěryhodné profesionály kdykoliv a kdekoliv",

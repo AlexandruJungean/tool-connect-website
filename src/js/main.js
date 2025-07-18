@@ -148,6 +148,10 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
+            // Skip if targetId is just "#" or empty
+            if (targetId === '#' || targetId === '') {
+                return;
+            }
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
                 targetSection.scrollIntoView({
