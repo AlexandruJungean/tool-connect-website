@@ -2331,12 +2331,6 @@ section {
     border-right: 5px solid #2F2351;
 }
 
-/* Removed step-number styles - not responsive */
-
-.step-content {
-    /* Content now takes full width */
-}
-
 .step-content h3 {
     font-size: 1.5rem;
     font-weight: 600;
