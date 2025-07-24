@@ -251,6 +251,19 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hero-pattern" width="60" height="60" patternUnits="userSpaceOnUse"><polygon points="30,5 50,20 50,40 30,55 10,40 10,20" stroke="rgba(255,255,255,0.06)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23hero-pattern)"/></svg>');
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 .hero-container {
@@ -375,7 +388,7 @@ section {
 }
 
 .benefit-card {
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, rgba(248, 249, 250, 0.95) 100%);
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
@@ -383,6 +396,26 @@ section {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 0 1 350px;
     max-width: 350px;
+    border: 1px solid rgba(91, 31, 128, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.05) 0%, rgba(47, 35, 81, 0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.benefit-card:hover::before {
+    opacity: 1;
 }
 
 .benefit-card:hover {
@@ -401,6 +434,8 @@ section {
     margin: 0 auto 25px;
     color: white;
     font-size: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .benefit-card h3 {
@@ -408,16 +443,33 @@ section {
     font-weight: 600;
     margin-bottom: 15px;
     color: #2F2351;
+    position: relative;
+    z-index: 1;
 }
 
 .benefit-card p {
     color: #6c757d;
     line-height: 1.6;
+    position: relative;
+    z-index: 1;
 }
 
 /* Features Section */
 .features {
-    background: white;
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.05) 0%, rgba(47, 35, 81, 0.03) 100%);
+    position: relative;
+}
+
+.features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(91,31,128,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .features-content {
@@ -540,7 +592,20 @@ section {
 
 /* How It Works Section */
 .how-it-works {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(244, 208, 63, 0.1) 100%);
+    position: relative;
+}
+
+.how-it-works::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hexagons" width="30" height="30" patternUnits="userSpaceOnUse"><polygon points="15,5 25,10 25,20 15,25 5,20 5,10" stroke="rgba(91,31,128,0.04)" fill="none" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23hexagons)"/></svg>');
+    pointer-events: none;
+    opacity: 0.6;
 }
 
 .steps-grid {
@@ -871,7 +936,8 @@ section {
 
 /* Categories Section */
 .categories {
-    background: white;
+    background: linear-gradient(135deg, #2F2351 0%, #5B1F80 100%);
+    color: white;
     position: relative;
 }
 
@@ -882,9 +948,16 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(91, 31, 128, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(47, 35, 81, 0.04) 0%, transparent 50%);
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     pointer-events: none;
+}
+
+.categories .section-title {
+    color: white;
+}
+
+.categories .section-description {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .categories-grid {
@@ -896,16 +969,18 @@ section {
 }
 
 .category-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.9) 100%);
     padding: 35px 25px 30px;
     border-radius: 20px;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    border: 1px solid rgba(91, 31, 128, 0.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    color: #2F2351;
 }
 
 .category-card::before {
@@ -915,7 +990,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+    background: linear-gradient(135deg, #F4D03F 0%, #f39c12 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;
@@ -923,16 +998,13 @@ section {
 
 .category-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(91, 31, 128, 0.25);
-    border-color: rgba(91, 31, 128, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #2F2351;
 }
 
 .category-card:hover::before {
     opacity: 1;
-}
-
-.category-card:hover {
-    color: white;
 }
 
 .category-card i {
@@ -946,7 +1018,7 @@ section {
 }
 
 .category-card:hover i {
-    color: white;
+    color: #2F2351;
     transform: scale(1.1) rotateY(360deg);
 }
 
@@ -958,10 +1030,12 @@ section {
     margin-top: 5px;
     transition: all 0.3s ease;
     letter-spacing: 0.3px;
+    color: #2F2351;
 }
 
 .category-card:hover span {
     transform: translateY(-2px);
+    color: #2F2351;
 }
 
 /* Download Section */
@@ -1228,7 +1302,7 @@ section {
 
 /* Contact Section */
 .contact {
-    background: white;
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(91, 31, 128, 0.05) 100%);
     color: #333;
     position: relative;
     overflow: hidden;
@@ -2303,8 +2377,21 @@ section {
 }
 
 .getting-started {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.08) 0%, #f8f9fa 50%, rgba(244, 208, 63, 0.08) 100%);
     padding: 80px 0;
+    position: relative;
+}
+
+.getting-started::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" width="100" height="20" patternUnits="userSpaceOnUse"><path d="M0 10 Q25 0 50 10 T100 10" stroke="rgba(91,31,128,0.06)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>');
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 .instructions-container {
@@ -2315,11 +2402,30 @@ section {
 .instruction-step {
     margin-bottom: 50px;
     padding: 30px;
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, rgba(248, 249, 250, 0.8) 100%);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-left: 5px solid #5B1F80;
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.instruction-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.02) 0%, rgba(244, 208, 63, 0.03) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.instruction-step:hover::before {
+    opacity: 1;
 }
 
 .instruction-step:hover {
@@ -2336,6 +2442,8 @@ section {
     font-weight: 600;
     color: #2F2351;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
 }
 
 .step-content p {
@@ -2343,11 +2451,15 @@ section {
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .step-content ul {
     list-style: none;
     padding: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .step-content ul li {
@@ -2366,8 +2478,21 @@ section {
 }
 
 .success-tips {
-    background: white;
+    background: linear-gradient(135deg, rgba(244, 208, 63, 0.06) 0%, #ffffff 50%, rgba(91, 31, 128, 0.04) 100%);
     padding: 80px 0;
+    position: relative;
+}
+
+.success-tips::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="50" height="50" patternUnits="userSpaceOnUse"><polygon points="25,5 30,20 45,20 33,30 38,45 25,35 12,45 17,30 5,20 20,20" stroke="rgba(91,31,128,0.05)" fill="none" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .tips-grid {
@@ -2418,8 +2543,21 @@ section {
 }
 
 .support {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(91, 31, 128, 0.06) 100%);
     padding: 80px 0;
+    position: relative;
+}
+
+.support::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="support" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="8" stroke="rgba(91,31,128,0.04)" fill="none" stroke-width="1"/><circle cx="20" cy="20" r="3" fill="rgba(91,31,128,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23support)"/></svg>');
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .support-content {
