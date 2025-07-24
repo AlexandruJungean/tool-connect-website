@@ -592,7 +592,7 @@ section {
 
 /* How It Works Section */
 .how-it-works {
-    background: linear-gradient(135deg, #f8f9fa 0%, rgba(244, 208, 63, 0.1) 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(91, 31, 128, 0.12) 100%);
     position: relative;
 }
 
@@ -649,12 +649,13 @@ section {
 .step-card {
     text-align: center;
     position: relative;
-    background: white;
+    background: linear-gradient(145deg, #5B1F80 0%, #2F2351 100%);
+    color: white;
     padding: 40px 30px;
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px rgba(91, 31, 128, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(91, 31, 128, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     flex: 0 0 280px;
     max-width: 320px;
@@ -667,15 +668,15 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(91, 31, 128, 0.02) 0%, rgba(47, 35, 81, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .step-card:hover {
     transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(91, 31, 128, 0.2);
-    border-color: rgba(91, 31, 128, 0.2);
+    box-shadow: 0 25px 50px rgba(91, 31, 128, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .step-card:hover::before {
@@ -688,64 +689,66 @@ section {
     right: -10px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #2F2351;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-size: 1.3rem;
-    box-shadow: 0 8px 20px rgba(91, 31, 128, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
     transition: all 0.3s ease;
     z-index: 2;
 }
 
 .step-card:hover .step-number {
     transform: scale(1.1) rotate(360deg);
-    box-shadow: 0 12px 25px rgba(91, 31, 128, 0.4);
+    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.6);
 }
 
 .step-icon {
     width: 120px;
     height: 120px;
-    background: linear-gradient(135deg, rgba(91, 31, 128, 0.1) 0%, rgba(47, 35, 81, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 30px;
-    box-shadow: 0 15px 30px rgba(91, 31, 128, 0.15);
-    color: #5B1F80;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    color: white;
     font-size: 3rem;
     transition: all 0.4s ease;
     position: relative;
     z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .step-card:hover .step-icon {
-    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
-    color: white;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+    color: #2F2351;
     transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(91, 31, 128, 0.3);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .step-card h3 {
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #2F2351;
+    color: white;
     transition: color 0.3s ease;
     position: relative;
     z-index: 1;
 }
 
 .step-card:hover h3 {
-    color: #5B1F80;
+    color: #ffffff;
 }
 
 .step-card p {
-    color: #6c757d;
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.7;
     font-size: 1.1rem;
     position: relative;
@@ -754,7 +757,7 @@ section {
 }
 
 .step-card:hover p {
-    color: #555;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 /* Connection lines between steps */
@@ -936,8 +939,7 @@ section {
 
 /* Categories Section */
 .categories {
-    background: linear-gradient(135deg, #2F2351 0%, #5B1F80 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(248, 249, 250, 0.8) 100%);
     position: relative;
 }
 
@@ -948,16 +950,17 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="categories-pattern" width="80" height="80" patternUnits="userSpaceOnUse"><rect x="10" y="10" width="15" height="15" stroke="rgba(91,31,128,0.08)" fill="none" stroke-width="1" rx="3"/><circle cx="65" cy="65" r="6" stroke="rgba(91,31,128,0.06)" fill="none" stroke-width="1"/><polygon points="65,20 75,30 65,40 55,30" stroke="rgba(91,31,128,0.05)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23categories-pattern)"/></svg>');
     pointer-events: none;
+    opacity: 0.6;
 }
 
 .categories .section-title {
-    color: white;
+    color: #2F2351;
 }
 
 .categories .section-description {
-    color: rgba(255, 255, 255, 0.9);
+    color: #6c757d;
 }
 
 .categories-grid {
@@ -969,17 +972,16 @@ section {
 }
 
 .category-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.9) 100%);
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     padding: 35px 25px 30px;
     border-radius: 20px;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(91, 31, 128, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
     color: #2F2351;
 }
 
@@ -990,7 +992,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #F4D03F 0%, #f39c12 100%);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: -1;
@@ -998,8 +1000,8 @@ section {
 
 .category-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(91, 31, 128, 0.25);
+    border-color: rgba(91, 31, 128, 0.3);
     color: #2F2351;
 }
 
@@ -1018,7 +1020,7 @@ section {
 }
 
 .category-card:hover i {
-    color: #2F2351;
+    color: white;
     transform: scale(1.1) rotateY(360deg);
 }
 
@@ -1035,7 +1037,7 @@ section {
 
 .category-card:hover span {
     transform: translateY(-2px);
-    color: #2F2351;
+    color: white;
 }
 
 /* Download Section */
@@ -2543,7 +2545,8 @@ section {
 }
 
 .support {
-    background: linear-gradient(135deg, #f8f9fa 0%, rgba(91, 31, 128, 0.06) 100%);
+    background: linear-gradient(135deg, #2F2351 0%, #1a1a2e 100%);
+    color: white;
     padding: 80px 0;
     position: relative;
 }
@@ -2555,9 +2558,8 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="support" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="8" stroke="rgba(91,31,128,0.04)" fill="none" stroke-width="1"/><circle cx="20" cy="20" r="3" fill="rgba(91,31,128,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23support)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     pointer-events: none;
-    opacity: 0.5;
 }
 
 .support-content {
@@ -2567,15 +2569,19 @@ section {
     align-items: center;
 }
 
+.support .section-title {
+    color: white;
+}
+
 .support-text h3 {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #2F2351;
+    color: white;
     margin-bottom: 20px;
 }
 
 .support-text p {
-    color: #6c757d;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 30px;
@@ -2590,39 +2596,41 @@ section {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    color: #555;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .support-list i {
-    color: #5B1F80;
+    color: #F4D03F;
     margin-right: 15px;
     font-size: 1.2rem;
 }
 
 .contact-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border: 2px solid #f8f9fa;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
 }
 
 .contact-card:hover {
-    border-color: #5B1F80;
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .contact-card h4 {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #2F2351;
+    color: white;
     margin-bottom: 15px;
 }
 
 .contact-card p {
-    color: #6c757d;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 25px;
     line-height: 1.6;
 }
@@ -2634,43 +2642,57 @@ section {
     gap: 10px;
     margin: 20px 0;
     padding: 15px;
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .contact-email i {
-    color: #5B1F80;
+    color: #F4D03F;
     font-size: 1.1rem;
 }
 
 .contact-email span {
-    color: #2F2351;
+    color: white;
     font-weight: 500;
     font-size: 1rem;
 }
 
 .documentation {
-    background: linear-gradient(135deg, #2F2351 0%, #5B1F80 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(248, 249, 250, 0.9) 100%);
     padding: 80px 0;
+    position: relative;
+}
+
+.documentation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="doc-pattern" width="70" height="70" patternUnits="userSpaceOnUse"><rect x="15" y="15" width="12" height="16" stroke="rgba(91,31,128,0.06)" fill="none" stroke-width="1" rx="2"/><line x1="18" y1="20" x2="24" y2="20" stroke="rgba(91,31,128,0.04)" stroke-width="1"/><line x1="18" y1="23" x2="26" y2="23" stroke="rgba(91,31,128,0.04)" stroke-width="1"/><line x1="18" y1="26" x2="22" y2="26" stroke="rgba(91,31,128,0.04)" stroke-width="1"/><circle cx="55" cy="55" r="4" stroke="rgba(91,31,128,0.05)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23doc-pattern)"/></svg>');
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .documentation-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .documentation .section-title {
-    color: white;
+    color: #2F2351;
 }
 
 .documentation-description {
     font-size: 1.2rem;
     line-height: 1.7;
     margin-bottom: 40px;
-    opacity: 0.9;
+    color: #6c757d;
 }
 
 .documentation-features {
@@ -2715,19 +2737,27 @@ section {
     font-size: 1.2rem;
     font-weight: 600;
     border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 30px rgba(91, 31, 128, 0.3);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-large:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 15px 40px rgba(91, 31, 128, 0.4);
+    background: linear-gradient(135deg, #4a1a6b 0%, #241d41 100%);
 }
 
 .download-note {
     margin-top: 20px;
-    opacity: 0.8;
+    color: #6c757d;
     font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* Mobile Styles for Service Providers Page */
