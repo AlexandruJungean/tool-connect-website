@@ -16,7 +16,7 @@ const translations = {
             title: "Quickly find the help you need. Anytime. Anywhere.",
             subtitle: "Tool Connect links people with trusted professionals in any field – from repairs to translations.",
             findSpecialist: "Find a Specialist",
-            becomeProvider: "Become a Service Provider"
+            becomeProvider: "Offer Your Services"
         },
         
         // Benefits Section
@@ -81,7 +81,7 @@ const translations = {
         // Categories Section
         categories: {
             title: "Service Categories",
-            description: "From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories. Each specialist is vetted, reviewed, and ready to help you with your specific needs. Browse our comprehensive service categories to find exactly what you're looking for.",
+            description: "From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories. Browse our comprehensive service categories to find exactly what you're looking for.",
             categories: [
                 "Home & Maintenance",
                 "Tech & Digital",
@@ -155,10 +155,7 @@ const translations = {
                     title: "Build Your Reputation",
                     description: "Showcase your work through portfolios and collect genuine reviews that build trust with future clients."
                 },
-                manageSchedule: {
-                    title: "Manage Your Schedule",
-                    description: "Take control of your availability and manage bookings efficiently with our integrated scheduling tools."
-                },
+
                 securePayments: {
                     title: "Secure Payments",
                     description: "Get paid safely and on time with our secure payment system that protects both you and your clients."
@@ -235,32 +232,24 @@ const translations = {
                 }
             },
             support: {
-                title: "We're Here to Help You Succeed",
+                title: "We are Here to Assist You",
                 dedicatedTeam: {
-                    title: "Dedicated Support Team",
-                    description: "Our team is committed to helping you succeed on Tool. We provide ongoing support, guidance, and resources to help you grow your business."
+                    title: "Contact Us for Any of Your Needs",
+                    description: "Our team is available to help you with Tool. We provide support, guidance, and resources when you need them."
                 },
                 supportFeatures: [
-                    "24/7 customer support",
                     "Business growth tips and resources",
-                    "Marketing and promotional support",
                     "Technical assistance and training"
                 ],
                 contactCard: {
                     title: "Need Help Getting Started?",
-                    description: "Contact our support team for personalized assistance with setting up your service provider profile.",
+                    description: "Feel free to contact us if you need help with setting up your service provider profile.",
                     button: "Contact Support"
                 }
             },
             documentation: {
                 title: "Complete Service Provider Guide",
                 description: "Download our comprehensive guide that covers everything you need to know about succeeding as a service provider on Tool. This detailed documentation includes best practices, policies, and advanced strategies.",
-                features: [
-                    "Complete setup guide",
-                    "Business growth strategies",
-                    "Safety and compliance guidelines",
-                    "Marketing and promotion tips"
-                ],
                 downloadButton: "Download Service Provider Documentation",
                 downloadNote: "PDF format • Updated regularly with latest information"
             }
@@ -550,7 +539,7 @@ const translations = {
         // Categories Section
         categories: {
             title: "Kategorie služeb",
-            description: "Od domácích oprav po digitální služby, kreativní projekty po osobní péči - objevte důvěryhodné profesionály napříč širokou škálou kategorií. Každý specialista je prověřen, ohodnocen a připraven pomoci vám s vašimi specifickými potřebami. Procházejte naše komplexní kategorie služeb a najděte přesně to, co hledáte.",
+            description: "Od domácích oprav po digitální služby, kreativní projekty po osobní péči - objevte důvěryhodné profesionály napříč širokou škálou kategorií. Procházejte naše komplexní kategorie služeb a najděte přesně to, co hledáte.",
             categories: [
                 "Domov a údržba",
                 "Technologie a digitální",
@@ -624,10 +613,7 @@ const translations = {
                     title: "Budujte svou pověst",
                     description: "Prezentujte svou práci prostřednictvím portfolií a sbírejte skutečné recenze, které budují důvěru s budoucími klienty."
                 },
-                manageSchedule: {
-                    title: "Spravujte svůj rozvrh",
-                    description: "Převzít kontrolu nad svou dostupností a efektivně spravovat rezervace pomocí našich integrovaných nástrojů pro plánování."
-                },
+
                 securePayments: {
                     title: "Bezpečné platby",
                     description: "Dostávejte platby bezpečně a včas pomocí našeho bezpečného platebního systému, který chrání vás i vaše klienty."
@@ -704,32 +690,24 @@ const translations = {
                 }
             },
             support: {
-                title: "Jsme tu, abychom vám pomohli uspět",
+                title: "Jsme tu, abychom vám pomohli",
                 dedicatedTeam: {
-                    title: "Dedikovaný tým podpory",
-                    description: "Náš tým je odhodlán pomoci vám uspět na Tool. Poskytujeme průběžnou podporu, vedení a zdroje, které vám pomohou rozvíjet vaše podnikání."
+                    title: "Kontaktujte nás pro jakékoliv vaše potřeby",
+                    description: "Náš tým je k dispozici, aby vám pomohl s Tool. Poskytujeme podporu, vedení a zdroje, když je potřebujete."
                 },
                 supportFeatures: [
-                    "24/7 zákaznická podpora",
                     "Tipy a zdroje pro růst podnikání",
-                    "Marketingová a propagační podpora",
                     "Technická pomoc a školení"
                 ],
                 contactCard: {
                     title: "Potřebujete pomoc s začátkem?",
-                    description: "Kontaktujte náš tým podpory pro personalizovanou pomoc s nastavením vašeho profilu poskytovatele služeb.",
+                    description: "Neváhejte nás kontaktovat, pokud potřebujete pomoc s nastavením vašeho profilu poskytovatele služeb.",
                     button: "Kontaktovat podporu"
                 }
             },
             documentation: {
                 title: "Kompletní průvodce pro poskytovatele služeb",
                 description: "Stáhněte si náš komplexní průvodce, který pokrývá vše, co potřebujete vědět o úspěchu jako poskytovatel služeb na Tool. Tato podrobná dokumentace zahrnuje nejlepší postupy, politiky a pokročilé strategie.",
-                features: [
-                    "Kompletní průvodce nastavením",
-                    "Strategie růstu podnikání",
-                    "Bezpečnostní a právní pokyny",
-                    "Tipy pro marketing a propagaci"
-                ],
                 downloadButton: "Stáhnout dokumentaci pro poskytovatele služeb",
                 downloadNote: "Formát PDF • Pravidelně aktualizováno s nejnovějšími informacemi"
             }
