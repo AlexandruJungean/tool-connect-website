@@ -233,17 +233,9 @@ const translations = {
             },
             support: {
                 title: "We are Here to Assist You",
-                dedicatedTeam: {
-                    title: "Contact Us for Any of Your Needs",
-                    description: "Our team is available to help you with Tool. We provide support, guidance, and resources when you need them."
-                },
-                supportFeatures: [
-                    "Business growth tips and resources",
-                    "Technical assistance and training"
-                ],
                 contactCard: {
                     title: "Need Help Getting Started?",
-                    description: "Feel free to contact us if you need help with setting up your service provider profile.",
+                    description: "Feel free to contact us if you need help with setting up your service provider profile or have any questions/suggestions.",
                     button: "Contact Support"
                 }
             },
@@ -691,17 +683,9 @@ const translations = {
             },
             support: {
                 title: "Jsme tu, abychom vám pomohli",
-                dedicatedTeam: {
-                    title: "Kontaktujte nás pro jakékoliv vaše potřeby",
-                    description: "Náš tým je k dispozici, aby vám pomohl s Tool. Poskytujeme podporu, vedení a zdroje, když je potřebujete."
-                },
-                supportFeatures: [
-                    "Tipy a zdroje pro růst podnikání",
-                    "Technická pomoc a školení"
-                ],
                 contactCard: {
                     title: "Potřebujete pomoc s začátkem?",
-                    description: "Neváhejte nás kontaktovat, pokud potřebujete pomoc s nastavením vašeho profilu poskytovatele služeb.",
+                    description: "Neváhejte nás kontaktovat, pokud potřebujete pomoc s nastavením vašeho profilu poskytovatele služeb nebo máte jakékoliv dotazy/návrhy.",
                     button: "Kontaktovat podporu"
                 }
             },
