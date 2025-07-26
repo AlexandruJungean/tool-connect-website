@@ -454,6 +454,173 @@ section {
     z-index: 1;
 }
 
+/* About Section */
+.about {
+    background: linear-gradient(135deg, #2F2351 0%, #5B1F80 50%, #6A2F91 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23about-dots)"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.about .section-title {
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.about-text h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: white;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.8);
+    padding-bottom: 10px;
+    display: inline-block;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+.about-visual {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.team-highlight {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.team-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(91, 31, 128, 0.05) 0%, rgba(47, 35, 81, 0.03) 100%);
+    z-index: 0;
+}
+
+.team-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #5B1F80 0%, #2F2351 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 2.2rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(91, 31, 128, 0.5);
+}
+
+.team-highlight h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2F2351;
+    position: relative;
+    z-index: 1;
+}
+
+.team-highlight p {
+    font-size: 1.1rem;
+    color: #5B1F80;
+    font-weight: 500;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+    color: #2F2351;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    border: 2px solid rgba(91, 31, 128, 0.3);
+}
+
+.location-badge i {
+    font-size: 1rem;
+}
+
+/* Responsive Design for About Section */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-text h3 {
+        font-size: 1.6rem;
+    }
+    
+    .about-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    .team-highlight {
+        max-width: 100%;
+    }
+}
+
 /* Features Section */
 .features {
     background: linear-gradient(135deg, rgba(91, 31, 128, 0.05) 0%, rgba(47, 35, 81, 0.03) 100%);
@@ -505,7 +672,7 @@ section {
 }
 
 .features-list i {
-    color: #F4D03F;
+    color: #5B1F80;
     margin-right: 15px;
     font-size: 1.2rem;
 }

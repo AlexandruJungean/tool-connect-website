@@ -5,6 +5,8 @@ const translations = {
         nav: {
             home: "Home",
             benefits: "Benefits",
+            features: "Features",
+            about: "About",
             howItWorks: "How It Works",
             services: "Services",
             download: "Download",
@@ -38,6 +40,21 @@ const translations = {
                 title: "Mobile & Desktop",
                 description: "Easy to use on any device - mobile, tablet, or desktop"
             }
+        },
+        
+        // About Section
+        about: {
+            title: "About",
+            whyWeBuilt: "Why We Built Tool‑Connect",
+            paragraph1: "Tool‑Connect was created to solve a simple everyday frustration: finding the right service provider nearby — easily, quickly, and with confidence.",
+            paragraph2: "Whether you're looking for a gardener, babysitter, cleaner, or translator, it can be hard to know where to start. Many websites only cover a few services, and often you're left with just a phone number or email — never sure if the person will reply or is even still available.",
+            paragraph3: "We wanted to change that.",
+            paragraph4: "Tool‑Connect is a Czech platform, created and developed right here — with the idea that there should be one simple place where people can find help, offer their skills, and connect with each other locally.",
+            paragraph5: "With features like built‑in messaging, location-based search, and a wide variety of services, Tool‑Connect is made to work across villages and cities, and across languages and categories.",
+            paragraph6: "We're a small team — just Laura, Adéla, and Milan — but we believe in building something useful, simple, and community-focused. We're just getting started, and we're excited to grow it with your help.",
+            teamTitle: "Our Team",
+            teamMembers: "Laura, Adéla & Milan",
+            location: "Made in Czech Republic"
         },
         
         // Features Section
@@ -455,6 +472,8 @@ const translations = {
         nav: {
             home: "Domů",
             benefits: "Výhody",
+            features: "Funkce",
+            about: "O nás",
             howItWorks: "Jak to funguje",
             services: "Služby",
             download: "Stáhnout",
@@ -488,6 +507,21 @@ const translations = {
                 title: "Mobilní a desktop",
                 description: "Snadné použití na jakémkoliv zařízení - mobil, tablet nebo desktop"
             }
+        },
+        
+        // About Section
+        about: {
+            title: "O nás",
+            whyWeBuilt: "Proč jsme vytvořili Tool‑Connect",
+            paragraph1: "Tool‑Connect vznikl, aby vyřešil jednoduchou každodenní frustraci: najít správného poskytovatele služeb v okolí — snadno, rychle a s jistotou.",
+            paragraph2: "Ať už hledáte zahradníka, chůvu, uklízečku nebo překladatele, může být těžké vědět, kde začít. Mnoho webových stránek pokrývá jen několik služeb a často vás nechá jen s telefonním číslem nebo e-mailem — nikdy si nejste jisti, zda daná osoba odpoví nebo je vůbec dostupná.",
+            paragraph3: "To jsme chtěli změnit.",
+            paragraph4: "Tool‑Connect je česká platforma, vytvořená a vyvíjená přímo zde — s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.",
+            paragraph5: "S funkcemi jako je vestavěné zasílání zpráv, vyhledávání podle lokace a široká škála služeb je Tool‑Connect vytvořen pro práci napříč vesnicemi a městy, napříč jazyky a kategoriemi.",
+            paragraph6: "Jsme malý tým — jen Laura, Adéla a Milan — ale věříme v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu. Teprve začínáme a jsme nadšeni, že to můžeme rozvíjet s vaší pomocí.",
+            teamTitle: "Náš tým",
+            teamMembers: "Laura, Adéla a Milan",
+            location: "Vytvořeno v České republice"
         },
         
         // Features Section
