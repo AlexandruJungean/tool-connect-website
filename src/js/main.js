@@ -77,11 +77,8 @@ function initializeLanguage() {
     if (savedLanguage && translations[savedLanguage]) {
         currentLanguage = savedLanguage;
     } else {
-        // Check browser language
-        const browserLang = navigator.language.split('-')[0];
-        if (translations[browserLang]) {
-            currentLanguage = browserLang;
-        }
+        // Set Czech as default language
+        currentLanguage = 'cs';
     }
     
     // Apply initial translation
