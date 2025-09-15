@@ -51,9 +51,9 @@ const translations = {
             paragraph3: "We wanted to change that.",
             paragraph4: "Tool‑Connect is a Czech platform, created and developed right here — with the idea that there should be one simple place where people can find help, offer their skills, and connect with each other locally.",
             paragraph5: "With features like built‑in messaging, location-based search, and a wide variety of services, Tool‑Connect is made to work across villages and cities, and across languages and categories.",
-            paragraph6: "We're a small team — just Laura, Adéla, and Milan — but we believe in building something useful, simple, and community-focused. We're just getting started, and we're excited to grow it with your help.",
+            paragraph6: "We're a small team — just Laura and Adela — but we believe in building something useful, simple, and community-focused. We're just getting started, and we're excited to grow it with your help.",
             teamTitle: "Our Team",
-            teamMembers: "Laura, Adéla & Milan",
+            teamMembers: "Laura & Adela",
             location: "Made in Czech Republic"
         },
         
@@ -518,9 +518,9 @@ const translations = {
             paragraph3: "To jsme chtěli změnit.",
             paragraph4: "Tool‑Connect je česká platforma, vytvořená a vyvíjená přímo zde — s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.",
             paragraph5: "S funkcemi jako je vestavěné zasílání zpráv, vyhledávání podle lokace a široká škála služeb je Tool‑Connect vytvořen pro práci napříč vesnicemi a městy, napříč jazyky a kategoriemi.",
-            paragraph6: "Jsme malý tým — jen Laura, Adéla a Milan — ale věříme v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu. Teprve začínáme a jsme nadšeni, že to můžeme rozvíjet s vaší pomocí.",
+            paragraph6: "Jsme malý tým — jen Laura a Adéla — ale věříme v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu. Teprve začínáme a jsme nadšeni, že to můžeme rozvíjet s vaší pomocí.",
             teamTitle: "Náš tým",
-            teamMembers: "Laura, Adéla a Milan",
+            teamMembers: "Laura a Adéla",
             location: "Vytvořeno v České republice"
         },
         
