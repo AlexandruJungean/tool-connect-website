@@ -15,7 +15,7 @@ const translations = {
         
         // Hero Section
         hero: {
-            title: "Quickly find the help you need. Anytime. Anywhere.",
+            title: "Your Complete Service Marketplace. One App for all services.",
             subtitle: "Tool Connect links people with trusted professionals in any field – from repairs to translations.",
             findSpecialist: "Find a Specialist",
             becomeProvider: "Offer Your Services"
@@ -482,7 +482,7 @@ const translations = {
         
         // Hero Section
         hero: {
-            title: "Rychle najděte pomoc, kterou potřebujete. Kdykoliv. Kdekoliv.",
+            title: "Váš kompletní trh služeb. Jedna aplikace pro všechny služby.",
             subtitle: "Tool Connect propojuje lidi s důvěryhodnými profesionály v jakémkoliv oboru – od oprav po překlady.",
             findSpecialist: "Najít specialistu",
             becomeProvider: "Stát se poskytovatelem služeb"
