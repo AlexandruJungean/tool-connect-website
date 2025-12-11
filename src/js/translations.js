@@ -133,7 +133,7 @@ const translations = {
         contact: {
             title: "Get in Touch",
             contactDetails: "Contact Details",
-            email: "toolappconnect@gmail.com",
+            email: "info@tool-connect.com",
             namePlaceholder: "Your Name",
             emailPlaceholder: "Your Email",
             messagePlaceholder: "Your Message",
@@ -303,7 +303,7 @@ const translations = {
                 userRights_li2: "Request deletion of their account and personal data.",
                 userRights_li3: "Update or correct their personal information.",
                 userRights_li4: "Object to data processing for specific purposes.",
-                userRights_p2: "To exercise these rights, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>.",
+                userRights_p2: "To exercise these rights, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>.",
                 dataRetention: "Data Retention",
                 dataRetention_li1: "Personal data (such as email and profile information) is stored as long as the account remains active.",
                 dataRetention_li2: "Deleted or inactive accounts will have their personal data erased within 365 days, except where legally required.",
@@ -313,7 +313,7 @@ const translations = {
                 cookies_li2: "Users can manage tracking preferences in their device settings.",
                 updates: "Updates to This Privacy Policy",
                 updates_p1: "We reserve the right to update this Privacy Policy. Users will be notified of significant changes.",
-                updates_p2: "For any questions, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>",
+                updates_p2: "For any questions, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>",
                 backToHome: "Back to Home"
             },
             termsConditions: {
@@ -365,7 +365,7 @@ const translations = {
                 governingLaw_li2: "Disputes shall be resolved through arbitration in Prague, Czech Republic.",
                 updates_p: "We reserve the right to update these Terms, and continued use of the app implies acceptance of any modifications.",
                 agreement_p: "By using Tool, you acknowledge that you have read and understood these Terms and Conditions and agree to abide by them.",
-                contactInfo_p: "For questions about these Terms and Conditions, please contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>"
+                contactInfo_p: "For questions about these Terms and Conditions, please contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>"
             },
             privacy: {
                 title: { en: "Privacy Policy", cs: "Zásady ochrany osobních údajů" },
@@ -428,8 +428,8 @@ const translations = {
                 section5_li3: { en: "Update or correct their personal information.", cs: "Aktualizovat nebo opravit své osobní údaje." },
                 section5_li4: { en: "Object to data processing for specific purposes.", cs: "Vznést námitku proti zpracování údajů pro konkrétní účely." },
                 section5_p2: {
-                    en: "To exercise these rights, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>.",
-                    cs: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>."
+                    en: "To exercise these rights, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>.",
+                    cs: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>."
                 },
                 section6_title: { en: "Data Retention", cs: "Uchovávání údajů" },
                 section6_li1: {
@@ -459,8 +459,8 @@ const translations = {
                     cs: "Vyhrazujeme si právo tyto zásady aktualizovat. O významných změnách budou uživatelé informováni."
                 },
                 section8_p2: {
-                    en: "For any questions, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>",
-                    cs: "V případě dotazů nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>"
+                    en: "For any questions, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>",
+                    cs: "V případě dotazů nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>"
                 },
                 back_to_home: { en: "Back to Home", cs: "Zpět na hlavní stránku" }
             }
@@ -600,7 +600,7 @@ const translations = {
         contact: {
             title: "Kontaktujte nás",
             contactDetails: "Kontaktní údaje",
-            email: "toolappconnect@gmail.com",
+            email: "info@tool-connect.com",
             namePlaceholder: "Vaše jméno",
             emailPlaceholder: "Váš email",
             messagePlaceholder: "Vaše zpráva",
@@ -770,7 +770,7 @@ const translations = {
                 userRights_li2: "Požádat o smazání svého účtu a osobních údajů.",
                 userRights_li3: "Aktualizovat nebo opravit své osobní údaje.",
                 userRights_li4: "Vznést námitku proti zpracování údajů pro konkrétní účely.",
-                userRights_p2: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>.",
+                userRights_p2: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>.",
                 dataRetention: "Uchovávání údajů",
                 dataRetention_li1: "Osobní údaje (například e-mail a profilové informace) jsou uchovávány po dobu aktivního účtu.",
                 dataRetention_li2: "Smazané nebo neaktivní účty budou mít osobní údaje vymazány do 365 dnů, pokud to nevyžaduje zákon jinak.",
@@ -780,7 +780,7 @@ const translations = {
                 cookies_li2: "Uživatelé mohou spravovat nastavení sledování ve svém zařízení.",
                 updates: "Aktualizace těchto zásad ochrany osobních údajů",
                 updates_p1: "Vyhrazujeme si právo tyto zásady aktualizovat. O významných změnách budou uživatelé informováni.",
-                updates_p2: "V případě dotazů nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>",
+                updates_p2: "V případě dotazů nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>",
                 backToHome: "Zpět na hlavní stránku"
             },
             termsConditions: {
@@ -833,7 +833,7 @@ const translations = {
                 governingLaw_li2: "Sporové záležitosti budou řešeny arbitráží v Praze, Česká republika.",
                 updates_p: "Vyhrazujeme si právo aktualizovat tyto podmínky a pokračující používání aplikace znamená přijetí jakýchkoliv úprav.",
                 agreement_p: "Používáním Tool potvrzujete, že jste si přečetli a pochopili tyto podmínky použití a souhlasíte s jejich dodržováním.",
-                contactInfo_p: "V případě dotazů ohledně těchto podmínek použití nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>"
+                contactInfo_p: "V případě dotazů ohledně těchto podmínek použití nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>"
             },
             privacy: {
                 title: { en: "Privacy Policy", cs: "Zásady ochrany osobních údajů" },
@@ -896,8 +896,8 @@ const translations = {
                 section5_li3: { en: "Update or correct their personal information.", cs: "Aktualizovat nebo opravit své osobní údaje." },
                 section5_li4: { en: "Object to data processing for specific purposes.", cs: "Vznést námitku proti zpracování údajů pro konkrétní účely." },
                 section5_p2: {
-                    en: "To exercise these rights, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>.",
-                    cs: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>."
+                    en: "To exercise these rights, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>.",
+                    cs: "Pro uplatnění těchto práv nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>."
                 },
                 section6_title: { en: "Data Retention", cs: "Uchovávání údajů" },
                 section6_li1: {
@@ -927,8 +927,8 @@ const translations = {
                     cs: "Vyhrazujeme si právo tyto zásady aktualizovat. O významných změnách budou uživatelé informováni."
                 },
                 section8_p2: {
-                    en: "For any questions, contact us at <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>",
-                    cs: "V případě dotazů nás kontaktujte na <a href=\"mailto:toolappconnect@gmail.com\">toolappconnect@gmail.com</a>"
+                    en: "For any questions, contact us at <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>",
+                    cs: "V případě dotazů nás kontaktujte na <a href=\"mailto:info@tool-connect.com\">info@tool-connect.com</a>"
                 },
                 back_to_home: { en: "Back to Home", cs: "Zpět na hlavní stránku" }
             }
