@@ -6,7 +6,7 @@ const translations = {
             home: "Home",
             benefits: "Benefits",
             features: "Features",
-            about: "About",
+            about: "Why Tool",
             howItWorks: "How It Works",
             services: "Services",
             download: "Download",
@@ -15,7 +15,7 @@ const translations = {
         
         // Hero Section
         hero: {
-            title: "Your Complete Service Marketplace.<br><span style=\"color: black;\">One App for all services.</span>",
+            title: "Tool - <span style=\"color: black;\">One app for all services.</span> Anytime. Anywhere in the Czech Republic.",
             subtitle: "Tool Connect links people with trusted professionals in any field – from repairs to translations.",
             findSpecialist: "Find a Specialist",
             becomeProvider: "Offer Your Services"
@@ -24,34 +24,47 @@ const translations = {
         // Benefits Section
         benefits: {
             title: "Why Choose Tool Connect?",
-            locationSearch: {
-                title: "Location & Language Search",
-                description: "Quickly find specialists by location and language preferences"
+            builtInMessaging: {
+                title: "Built-In Messaging",
+                description: "Chat directly in the app to discuss details, share photos, and confirm arrangements."
             },
-            directMessaging: {
-                title: "Direct Messaging",
-                description: "Communicate directly with specialists through integrated chat"
+            boostVisibility: {
+                title: "Boost Your Visibility",
+                description: "Service providers can promote their offerings and reach more clients easily."
             },
-            genuineReviews: {
-                title: "Genuine Reviews",
-                description: "Read authentic user reviews and ratings from real customers"
+            searchByLocation: {
+                title: "Search by Location",
+                description: "Quickly find nearby providers for faster, more convenient service."
             },
-            mobileDesktop: {
-                title: "Mobile & Desktop",
-                description: "Easy to use on any device - mobile, tablet, or desktop"
+            searchByLanguage: {
+                title: "Search by Language",
+                description: "Connect with providers who speak your preferred language."
+            },
+            dualRoles: {
+                title: "Dual Roles",
+                description: "Switch seamlessly between being a client and a service provider."
+            },
+            bilingualInterface: {
+                title: "Bilingual Interface",
+                description: "Available in Czech and English—ideal for locals and expats as well."
+            },
+            ratingsTrust: {
+                title: "Ratings & Trust",
+                description: "Clients rate providers to build credibility and confidence."
+            },
+            accessibleAnywhere: {
+                title: "Accessible Anywhere",
+                description: "Use the tool on mobile or web for maximum flexibility"
             }
         },
         
         // About Section
         about: {
-            title: "About",
-            whyWeBuilt: "Why We Built Tool‑Connect",
-            paragraph1: "Tool‑Connect was created to solve a simple everyday frustration: finding the right service provider nearby — easily, quickly, and with confidence.",
-            paragraph2: "Whether you're looking for a gardener, babysitter, cleaner, or translator, it can be hard to know where to start. Many websites only cover a few services, and often you're left with just a phone number or email — never sure if the person will reply or is even still available.",
-            paragraph3: "We wanted to change that.",
-            paragraph4: "Tool‑Connect is a Czech platform, created and developed right here — with the idea that there should be one simple place where people can find help, offer their skills, and connect with each other locally.",
-            paragraph5: "With features like built‑in messaging, location-based search, and a wide variety of services, Tool‑Connect is made to work across villages and cities, and across languages and categories.",
-            paragraph6: "We're a small team — just Laura and Adela — but we believe in building something useful, simple, and community-focused. We're just getting started, and we're excited to grow it with your help.",
+            title: "Why Tool",
+            paragraph1: "Tool‑Connect is created and developed in Czech Republic — with the idea that there should be one simple place where people can find help, offer their skills, and connect with each other locally.",
+            paragraph2: "With features like built‑in messaging, location-based search, and a wide variety of services, Tool‑Connect is made to work across villages and cities, and across languages and categories.",
+            paragraph3: "Our team believes in building something useful, simple, and community focused.",
+            paragraph4: "We're just getting started, and we're excited to grow it with your help.",
             teamTitle: "Our Team",
             teamMembers: "Laura & Adela",
             location: "Made in Czech Republic"
@@ -100,17 +113,30 @@ const translations = {
             title: "Service Categories",
             description: "From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories. Browse our comprehensive service categories to find exactly what you're looking for.",
             categories: [
-                "Home & Maintenance",
-                "Tech & Digital",
-                "Beauty & Wellness",
-                "Family & Childcare",
-                "Pet Care",
-                "Education & Coaching",
-                "Creative & Events",
-                "Automotive",
-                "Business & Admin",
-                "Lifestyle & Personal Services"
-            ]
+                "Family and Pet Care",
+                "Home",
+                "Craftsmen",
+                "Pests Management",
+                "Outdoors",
+                "Locksmith",
+                "Personal Items Repairs",
+                "New House Building",
+                "Beauty",
+                "Computer & Phone",
+                "Digital World",
+                "Financial or Legal",
+                "Auto",
+                "Events",
+                "School Tutoring",
+                "Languages Lessons",
+                "Music Lessons",
+                "Hobby Classes",
+                "Dance, Sports & Fitness",
+                "Wellbeing",
+                "Spiritual Guidance"
+            ],
+            showMore: "Show More Categories",
+            showLess: "Show Less"
         },
         
         // Download Section
@@ -127,6 +153,16 @@ const translations = {
             scanWithiPhone: "Scan with your iPhone camera",
             googlePlayStore: "Google Play Store",
             scanWithAndroid: "Scan with your Android camera"
+        },
+        
+        // Legal Section
+        legal: {
+            title: "Terms & Conditions and Privacy Policy",
+            description: "Please review our Terms & Conditions and Privacy Policy to understand how we protect your data and govern the use of our platform.",
+            termsTitle: "Terms & Conditions",
+            termsDescription: "Read our terms of service and user agreement",
+            privacyTitle: "Privacy Policy",
+            privacyDescription: "Learn how we collect, use, and protect your personal data"
         },
         
         // Contact Section
@@ -473,7 +509,7 @@ const translations = {
             home: "Domů",
             benefits: "Výhody",
             features: "Funkce",
-            about: "O nás",
+            about: "Proč Tool",
             howItWorks: "Jak to funguje",
             services: "Služby",
             download: "Stáhnout",
@@ -482,7 +518,7 @@ const translations = {
         
         // Hero Section
         hero: {
-            title: "Váš kompletní trh služeb. Jedna aplikace pro všechny služby.",
+            title: "Tool - <span style=\"color: black;\">Jedna aplikace pro všechny služby.</span> Kdykoliv. Kdekoli v České republice.",
             subtitle: "Tool Connect propojuje lidi s důvěryhodnými profesionály v jakémkoliv oboru – od oprav po překlady.",
             findSpecialist: "Najít specialistu",
             becomeProvider: "Stát se poskytovatelem služeb"
@@ -491,34 +527,47 @@ const translations = {
         // Benefits Section
         benefits: {
             title: "Proč si vybrat Tool Connect?",
-            locationSearch: {
-                title: "Vyhledávání podle lokace a jazyka",
-                description: "Rychle najděte specialisty podle lokace a jazykových preferencí"
+            builtInMessaging: {
+                title: "Vestavěné zasílání zpráv",
+                description: "Chatujte přímo v aplikaci, abyste prodiskutovali detaily, sdíleli fotografie a potvrdili dohody."
             },
-            directMessaging: {
-                title: "Přímé zprávy",
-                description: "Komunikujte přímo se specialisty prostřednictvím integrovaného chatu"
+            boostVisibility: {
+                title: "Zvyšte svou viditelnost",
+                description: "Poskytovatelé služeb mohou propagovat své nabídky a snadněji oslovit více klientů."
             },
-            genuineReviews: {
-                title: "Skutečné recenze",
-                description: "Čtěte autentické recenze a hodnocení od skutečných zákazníků"
+            searchByLocation: {
+                title: "Vyhledávání podle lokace",
+                description: "Rychle najděte poskytovatele v okolí pro rychlejší a pohodlnější službu."
             },
-            mobileDesktop: {
-                title: "Mobilní a desktop",
-                description: "Snadné použití na jakémkoliv zařízení - mobil, tablet nebo desktop"
+            searchByLanguage: {
+                title: "Vyhledávání podle jazyka",
+                description: "Spojte se s poskytovateli, kteří mluví vaším preferovaným jazykem."
+            },
+            dualRoles: {
+                title: "Dvojí role",
+                description: "Plynule přepínejte mezi rolí klienta a poskytovatele služeb."
+            },
+            bilingualInterface: {
+                title: "Dvojjazyčné rozhraní",
+                description: "Dostupné v češtině a angličtině—ideální pro místní i expaty."
+            },
+            ratingsTrust: {
+                title: "Hodnocení a důvěra",
+                description: "Klienti hodnotí poskytovatele, aby budovali důvěryhodnost a důvěru."
+            },
+            accessibleAnywhere: {
+                title: "Přístupné kdekoli",
+                description: "Používejte nástroj na mobilu nebo na webu pro maximální flexibilitu"
             }
         },
         
         // About Section
         about: {
-            title: "O nás",
-            whyWeBuilt: "Proč jsme vytvořili Tool‑Connect",
-            paragraph1: "Tool‑Connect vznikl, aby vyřešil jednoduchou každodenní frustraci: najít správného poskytovatele služeb v okolí — snadno, rychle a s jistotou.",
-            paragraph2: "Ať už hledáte zahradníka, chůvu, uklízečku nebo překladatele, může být těžké vědět, kde začít. Mnoho webových stránek pokrývá jen několik služeb a často vás nechá jen s telefonním číslem nebo e-mailem — nikdy si nejste jisti, zda daná osoba odpoví nebo je vůbec dostupná.",
-            paragraph3: "To jsme chtěli změnit.",
-            paragraph4: "Tool‑Connect je česká platforma, vytvořená a vyvíjená přímo zde — s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.",
-            paragraph5: "S funkcemi jako je vestavěné zasílání zpráv, vyhledávání podle lokace a široká škála služeb je Tool‑Connect vytvořen pro práci napříč vesnicemi a městy, napříč jazyky a kategoriemi.",
-            paragraph6: "Jsme malý tým — jen Laura a Adéla — ale věříme v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu. Teprve začínáme a jsme nadšeni, že to můžeme rozvíjet s vaší pomocí.",
+            title: "Proč Tool",
+            paragraph1: "Tool‑Connect je vytvořen a vyvíjen v České republice — s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.",
+            paragraph2: "S funkcemi jako je vestavěné zasílání zpráv, vyhledávání podle lokace a široká škála služeb je Tool‑Connect vytvořen pro práci napříč vesnicemi a městy, napříč jazyky a kategoriemi.",
+            paragraph3: "Náš tým věří v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu.",
+            paragraph4: "Teprve začínáme a jsme nadšeni, že to můžeme rozvíjet s vaší pomocí.",
             teamTitle: "Náš tým",
             teamMembers: "Laura a Adéla",
             location: "Vytvořeno v České republice"
@@ -567,17 +616,30 @@ const translations = {
             title: "Kategorie služeb",
             description: "Od domácích oprav po digitální služby, kreativní projekty po osobní péči - objevte důvěryhodné profesionály napříč širokou škálou kategorií. Procházejte naše komplexní kategorie služeb a najděte přesně to, co hledáte.",
             categories: [
-                "Domov a údržba",
-                "Technologie a digitální",
-                "Krása a wellness",
-                "Rodina a péče o děti",
-                "Péče o domácí mazlíčky",
-                "Vzdělávání a koučování",
-                "Kreativní a události",
-                "Automobilový průmysl",
-                "Podnikání a administrativa",
-                "Životní styl a osobní služby"
-            ]
+                "Rodina a péče o domácí mazlíčky",
+                "Domov",
+                "Řemeslníci",
+                "Hubení škůdců",
+                "Venkovní prostory",
+                "Zámečnictví",
+                "Opravy osobních věcí",
+                "Stavba nových domů",
+                "Krása",
+                "Počítače a telefony",
+                "Digitální svět",
+                "Finanční nebo právní",
+                "Auto",
+                "Události",
+                "Školní doučování",
+                "Jazykové lekce",
+                "Hudební lekce",
+                "Zájmové kurzy",
+                "Tanec, sport a fitness",
+                "Zdraví a pohoda",
+                "Duchovní vedení"
+            ],
+            showMore: "Zobrazit více kategorií",
+            showLess: "Zobrazit méně"
         },
         
         // Download Section
@@ -594,6 +656,16 @@ const translations = {
             scanWithiPhone: "Naskenujte kamerou iPhone",
             googlePlayStore: "Google Play Store",
             scanWithAndroid: "Naskenujte kamerou Android"
+        },
+        
+        // Legal Section
+        legal: {
+            title: "Podmínky použití a zásady ochrany osobních údajů",
+            description: "Přečtěte si naše podmínky použití a zásady ochrany osobních údajů, abyste pochopili, jak chráníme vaše údaje a řídíme používání naší platformy.",
+            termsTitle: "Podmínky použití",
+            termsDescription: "Přečtěte si naše podmínky služby a uživatelskou smlouvu",
+            privacyTitle: "Zásady ochrany osobních údajů",
+            privacyDescription: "Zjistěte, jak shromažďujeme, používáme a chráníme vaše osobní údaje"
         },
         
         // Contact Section

@@ -69,6 +69,9 @@ function translatePage(lang) {
     
     // Save language preference to localStorage
     localStorage.setItem('preferredLanguage', lang);
+    
+    // Dispatch custom event for language change
+    document.dispatchEvent(new CustomEvent('languageChanged'));
 }
 
 function initializeLanguage() {
@@ -383,6 +386,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Categories Show More functionality
+    const categoriesShowMoreBtn = document.getElementById('categoriesShowMoreBtn');
+    const categoriesGrid = document.querySelector('.categories-grid');
+    const showMoreText = document.querySelector('.show-more-text');
+    
+    if (categoriesShowMoreBtn && categoriesGrid && showMoreText) {
+        let updateButtonText = function() {
+            const isExpanded = categoriesGrid.classList.contains('show-all');
+            const hiddenCards = document.querySelectorAll('.category-card-hidden');
+            const hiddenCount = hiddenCards.length;
+            
+            if (isExpanded) {
+                const translation = getNestedValue(translations[currentLanguage], 'categories.showLess');
+                showMoreText.textContent = translation || 'Show Less';
+            } else {
+                // Show "+X more categories" format
+                if (currentLanguage === 'cs') {
+                    showMoreText.textContent = `+${hiddenCount} dalších kategorií`;
+                } else {
+                    showMoreText.textContent = `+${hiddenCount} More Categories`;
+                }
+            }
+        };
+        
+        categoriesShowMoreBtn.addEventListener('click', function() {
+            categoriesGrid.classList.toggle('show-all');
+            categoriesShowMoreBtn.classList.toggle('expanded');
+            updateButtonText();
+        });
+        
+        // Initialize button text on load
+        updateButtonText();
+        
+        // Update text when language changes - listen for custom event
+        document.addEventListener('languageChanged', function() {
+            updateButtonText();
+        });
+    }
+
     // Add parallax effect to hero section
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -394,15 +436,81 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add typing effect to hero title
-    function typeWriter(element, text, speed = 100) {
+    function typeWriter(element, htmlContent, speed = 100) {
+        // Parse the HTML structure to understand its parts
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+        
+        // Get all text nodes in order
+        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+        
+        // Find where the span starts in the text
+        const spanElement = tempDiv.querySelector('span');
+        let spanStartIndex = -1;
+        let spanText = '';
+        let beforeSpanText = '';
+        
+        if (spanElement) {
+            spanText = spanElement.textContent.trim();
+            // Find the span text in the full text (accounting for whitespace)
+            spanStartIndex = textContent.indexOf(spanText);
+            beforeSpanText = textContent.substring(0, spanStartIndex);
+        }
+        
+        // Check if there's a <br> tag
+        const hasBr = htmlContent.includes('<br>');
+        const brPosition = hasBr ? beforeSpanText.indexOf('.') + 1 : -1;
+        
         let i = 0;
-        element.textContent = '';
+        element.innerHTML = '';
         
         function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
+            if (i < textContent.length) {
+                let currentPos = i + 1;
+                let htmlToSet = '';
+                
+                if (spanStartIndex >= 0) {
+                    // We have a span to preserve
+                    const spanEndIndex = spanStartIndex + spanText.length;
+                    
+                    if (currentPos <= spanStartIndex) {
+                        // Typing before the span
+                        let text = textContent.substring(0, currentPos);
+                        // Insert <br> if we've passed the period
+                        if (hasBr && brPosition >= 0 && currentPos > brPosition) {
+                            text = text.substring(0, brPosition) + '<br>' + text.substring(brPosition);
+                        }
+                        htmlToSet = text;
+                    } else if (currentPos <= spanEndIndex) {
+                        // Typing inside the span - wrap in black span
+                        let before = beforeSpanText;
+                        // Insert <br> in before text if needed
+                        if (hasBr && brPosition >= 0) {
+                            before = before.substring(0, brPosition) + '<br>' + before.substring(brPosition);
+                        }
+                        const spanProgress = textContent.substring(spanStartIndex, currentPos);
+                        htmlToSet = before + '<span style="color: black !important;">' + spanProgress + '</span>';
+                    } else {
+                        // Finished typing the span, continue with text after span
+                        let before = beforeSpanText;
+                        if (hasBr && brPosition >= 0) {
+                            before = before.substring(0, brPosition) + '<br>' + before.substring(brPosition);
+                        }
+                        const spanComplete = spanText;
+                        const afterSpan = textContent.substring(spanEndIndex, currentPos);
+                        htmlToSet = before + '<span style="color: black !important;">' + spanComplete + '</span>' + afterSpan;
+                    }
+                } else {
+                    // No span, just regular text
+                    htmlToSet = textContent.substring(0, currentPos);
+                }
+                
+                element.innerHTML = htmlToSet;
                 i++;
                 setTimeout(type, speed);
+            } else {
+                // Ensure final HTML is set correctly
+                element.innerHTML = htmlContent;
             }
         }
         type();
@@ -411,9 +519,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start typing effect after a short delay
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const originalText = heroTitle.textContent;
+        const originalHTML = heroTitle.innerHTML;
         setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
+            typeWriter(heroTitle, originalHTML, 50);
         }, 1000);
     }
 });
