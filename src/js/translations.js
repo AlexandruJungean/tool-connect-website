@@ -15,7 +15,7 @@ const translations = {
         
         // Hero Section
         hero: {
-            title: "Your Complete Service Marketplace. One App for all services.",
+            title: "Your Complete Service Marketplace.<br><span style=\"color: black;\">One App for all services.</span>",
             subtitle: "Tool Connect links people with trusted professionals in any field – from repairs to translations.",
             findSpecialist: "Find a Specialist",
             becomeProvider: "Offer Your Services"
