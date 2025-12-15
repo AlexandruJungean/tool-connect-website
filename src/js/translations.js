@@ -316,8 +316,8 @@ const translations = {
                 dataWeCollect: "Data We Collect",
                 forClients: "For Clients:",
                 forServiceProviders: "For Service Providers:",
-                forClients_li1: "Name, email, password (Passwords are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
-                forServiceProviders_li1: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
+                forClients_li1: "Name, email, password, phone number (Passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
+                forServiceProviders_li1: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
                 forServiceProviders_li2: "The business details, services offered, and any other details the service provider chooses to disclose in their profile.",
                 howWeUseData: "How We Use Your Data",
                 howWeUseData_p1: "We process your data for the following purposes:",
@@ -328,7 +328,7 @@ const translations = {
                 howWeUseData_li5: "Marketing and promotional communications (only with user consent).",
                 howWeUseData_li6: "We commit to never selling your data.",
                 dataSecurity: "Data Security Measures",
-                dataSecurity_li1: "All user data is securely stored on Bubble.io, which implements industry-standard encryption and security protocols.",
+                dataSecurity_li1: "All user data is securely stored using React Native Expo infrastructure, which implements industry-standard encryption and security protocols.",
                 dataSecurity_li2: "Access to personal data is restricted to authorized personnel only.",
                 sharingData: "Sharing of Data",
                 sharingData_li1: "We do not sell user data.",
@@ -385,7 +385,7 @@ const translations = {
                 useOfPlatform_li6: "Users agree not to copy, distribute, or misuse any content found on the platform.",
                 paymentsFees_li1: "No payments are processed through the platform; transactions must be handled directly between Users.",
                 paymentsFees_li2: "Tool may introduce subscription fees for Service Providers in the future.",
-                dataProtection_li1: "We store user data securely on Bubble.io's infrastructure, which employs industry-standard encryption and security protocols.",
+                dataProtection_li1: "We store user data securely using React Native Expo infrastructure, which employs industry-standard encryption and security protocols.",
                 dataProtection_li2: "Messages between users remain stored in our database even if deleted by users.",
                 dataProtection_li3: "Users are responsible for maintaining the confidentiality of their account details.",
                 dataProtection_li4: "According to Czech law, data retention periods for personal information, such as profile details, email addresses, and passwords, will comply with applicable regulations. We will delete or anonymize data when it is no longer necessary.",
@@ -413,13 +413,13 @@ const translations = {
                 section1_title: { en: "Data We Collect", cs: "Údaje, které shromažďujeme" },
                 section1_clients: { en: "For Clients:", cs: "Pro klienty:" },
                 section1_clients_li1: {
-                    en: "Name, email, password (Passwords are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
-                    cs: "Jméno, e-mail, heslo (Hesla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná)."
+                    en: "Name, email, password, phone number (Passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
+                    cs: "Jméno, e-mail, heslo, telefonní číslo (Hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná)."
                 },
                 section1_providers: { en: "For Service Providers:", cs: "Pro poskytovatele služeb:" },
                 section1_providers_li1: {
-                    en: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
-                    cs: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná)."
+                    en: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
+                    cs: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná)."
                 },
                 section1_providers_li2: {
                     en: "The business details, services offered, and any other details the service provider chooses to disclose in their profile.",
@@ -444,8 +444,8 @@ const translations = {
                 section2_li6: { en: "We commit to never selling your data.", cs: "Zavazujeme se nikdy neprodávat vaše údaje." },
                 section3_title: { en: "Data Security Measures", cs: "Bezpečnostní opatření pro údaje" },
                 section3_li1: {
-                    en: "All user data is securely stored on Bubble.io, which implements industry-standard encryption and security protocols.",
-                    cs: "Všechna uživatelská data jsou bezpečně uložena na Bubble.io, které používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu."
+                    en: "All user data is securely stored using React Native Expo infrastructure, which implements industry-standard encryption and security protocols.",
+                    cs: "Všechna uživatelská data jsou bezpečně uložena pomocí infrastruktury React Native Expo, která používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu."
                 },
                 section3_li2: {
                     en: "Access to personal data is restricted to authorized personnel only.",
@@ -819,8 +819,8 @@ const translations = {
                 dataWeCollect: "Údaje, které shromažďujeme",
                 forClients: "Pro klienty:",
                 forServiceProviders: "Pro poskytovatele služeb:",
-                forClients_li1: "Jméno, e-mail, heslo (Hesla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná).",
-                forServiceProviders_li1: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná).",
+                forClients_li1: "Jméno, e-mail, heslo, telefonní číslo (Hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná).",
+                forServiceProviders_li1: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná).",
                 forServiceProviders_li2: "Podrobnosti o firmě, nabízené služby a další údaje, které poskytovatel služeb zvolí zveřejnit ve svém profilu.",
                 howWeUseData: "Jak používáme vaše údaje",
                 howWeUseData_p1: "Vaše údaje zpracováváme pro následující účely:",
@@ -831,7 +831,7 @@ const translations = {
                 howWeUseData_li5: "Marketingová a propagační komunikace (pouze se souhlasem uživatele).",
                 howWeUseData_li6: "Zavazujeme se nikdy neprodávat vaše údaje.",
                 dataSecurity: "Bezpečnostní opatření pro údaje",
-                dataSecurity_li1: "Všechna uživatelská data jsou bezpečně uložena na Bubble.io, které používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu.",
+                dataSecurity_li1: "Všechna uživatelská data jsou bezpečně uložena pomocí infrastruktury React Native Expo, která používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu.",
                 dataSecurity_li2: "Přístup k osobním údajům mají pouze oprávněné osoby.",
                 sharingData: "Sdílení údajů",
                 sharingData_li1: "Neprodáváme uživatelská data.",
@@ -889,7 +889,7 @@ const translations = {
                 useOfPlatform_li6: "Uživatelé souhlasí s tím, že nebudou kopírovat, distribuovat nebo zneužívat jakýkoliv obsah nalezený na platformě.",
                 paymentsFees_li1: "Žádné platby nejsou zpracovávány přes platformu; transakce musí být řešeny přímo mezi uživateli.",
                 paymentsFees_li2: "Tool může v budoucnu zavést poplatky za předplatné pro poskytovatele služeb.",
-                dataProtection_li1: "Ukládáme uživatelská data bezpečně na infrastruktuře Bubble.io, která používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu.",
+                dataProtection_li1: "Ukládáme uživatelská data bezpečně pomocí infrastruktury React Native Expo, která používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu.",
                 dataProtection_li2: "Zprávy mezi uživateli zůstávají uloženy v naší databázi i po jejich smazání uživateli.",
                 dataProtection_li3: "Uživatelé jsou odpovědní za zachování důvěrnosti svých údajů o účtu.",
                 dataProtection_li4: "Podle českého práva budou doby uchovávání osobních údajů, jako jsou údaje o profilu, e-mailové adresy a hesla, v souladu s platnými předpisy. Údaje smažeme nebo anonymizujeme, když již nebudou nutné.",
@@ -917,13 +917,13 @@ const translations = {
                 section1_title: { en: "Data We Collect", cs: "Údaje, které shromažďujeme" },
                 section1_clients: { en: "For Clients:", cs: "Pro klienty:" },
                 section1_clients_li1: {
-                    en: "Name, email, password (Passwords are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
-                    cs: "Jméno, e-mail, heslo (Hesla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná)."
+                    en: "Name, email, password, phone number (Passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
+                    cs: "Jméno, e-mail, heslo, telefonní číslo (Hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná)."
                 },
                 section1_providers: { en: "For Service Providers:", cs: "Pro poskytovatele služeb:" },
                 section1_providers_li1: {
-                    en: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using Bubble.io's security measures, meaning they are not visible to anyone).",
-                    cs: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření Bubble.io, takže nejsou nikomu viditelná)."
+                    en: "Name, email, password, phone number (emails, passwords and phone numbers are securely hashed and stored using industry-standard security measures, meaning they are not visible to anyone).",
+                    cs: "Jméno, e-mail, heslo, telefonní číslo (e-maily, hesla a telefonní čísla jsou bezpečně hashována a ukládána pomocí bezpečnostních opatření na úrovni průmyslového standardu, takže nejsou nikomu viditelná)."
                 },
                 section1_providers_li2: {
                     en: "The business details, services offered, and any other details the service provider chooses to disclose in their profile.",
@@ -948,8 +948,8 @@ const translations = {
                 section2_li6: { en: "We commit to never selling your data.", cs: "Zavazujeme se nikdy neprodávat vaše údaje." },
                 section3_title: { en: "Data Security Measures", cs: "Bezpečnostní opatření pro údaje" },
                 section3_li1: {
-                    en: "All user data is securely stored on Bubble.io, which implements industry-standard encryption and security protocols.",
-                    cs: "Všechna uživatelská data jsou bezpečně uložena na Bubble.io, které používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu."
+                    en: "All user data is securely stored using React Native Expo infrastructure, which implements industry-standard encryption and security protocols.",
+                    cs: "Všechna uživatelská data jsou bezpečně uložena pomocí infrastruktury React Native Expo, která používá šifrování a bezpečnostní protokoly na úrovni průmyslového standardu."
                 },
                 section3_li2: {
                     en: "Access to personal data is restricted to authorized personnel only.",
