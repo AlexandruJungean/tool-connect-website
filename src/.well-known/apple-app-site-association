@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "S74K3DG3QB.com.rFiFKruYQbOd.Tool",
+        "paths": [
+          "/app/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "S74K3DG3QB.com.rFiFKruYQbOd.Tool"
+    ]
+  }
+}
+

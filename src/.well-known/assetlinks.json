@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tool.toolappconnect",
+      "sha256_cert_fingerprints": [
+        "1E:02:08:69:22:23:1A:9E:38:1F:30:BD:14:95:E2:F1:D2:A8:A7:1B:C5:50:68:A5:B4:C3:DC:AC:60:1D:6A:DE",
+        "F0:7F:CD:A6:C4:60:CC:47:05:FB:10:8C:78:EB:14:2E:C2:24:32:27:7A:47:90:D3:2B:00:31:C6:B8:48:58:12"
+      ]
+    }
+  }
+]
+
