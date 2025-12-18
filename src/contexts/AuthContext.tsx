@@ -48,6 +48,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Track initialization state
   const initializingRef = useRef(false)
   const initializedRef = useRef(false)
+  // Track if we have a session (to avoid stale closure issues)
+  const hasSessionRef = useRef(false)
 
   // Load pending profile type from localStorage
   useEffect(() => {
@@ -228,6 +230,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (initializingRef.current || initializedRef.current) return
       initializingRef.current = true
       
+      // Safety timeout - ensure loading never gets stuck for more than 10 seconds
+      const safetyTimeout = setTimeout(() => {
+        if (isMounted && initializingRef.current) {
+          console.warn('Auth initialization timeout - forcing loading to false')
+          initializingRef.current = false
+          initializedRef.current = true
+          setIsLoading(false)
+        }
+      }, 10000)
+      
       try {
         // First, try to get the session
         const { data: { session: currentSession }, error } = await supabase.auth.getSession()
@@ -239,18 +251,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!isMounted) return
         
         if (currentSession?.user) {
+          hasSessionRef.current = true
           setSession(currentSession)
           setUser(currentSession.user)
           
           // Wait for profiles to be fetched before setting isLoading to false
           await fetchProfiles(currentSession.user.id)
         } else {
+          hasSessionRef.current = false
           setSession(null)
           setUser(null)
         }
       } catch (error) {
         console.error('Error initializing auth:', error)
       } finally {
+        clearTimeout(safetyTimeout)
         if (isMounted) {
           initializingRef.current = false
           initializedRef.current = true
@@ -266,36 +281,63 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async (event, newSession) => {
         if (!isMounted) return
         
-        // Skip if we're still initializing
+        // Skip if we're still initializing - let initializeAuth handle it
         if (initializingRef.current) return
+        
+        console.log('Auth state change:', event, 'hasSession:', hasSessionRef.current, 'initialized:', initializedRef.current)
         
         // Handle sign out
         if (!newSession) {
+          hasSessionRef.current = false
           setSession(null)
           setUser(null)
           setAppUser(null)
           setClientProfile(null)
           setServiceProviderProfile(null)
           setCurrentUserType(null)
+          setIsLoading(false)
           return
         }
         
-        // For SIGNED_IN events, fetch all data
+        // IMPORTANT: After initialization, NEVER set isLoading to true
+        // This prevents the app from getting stuck on loading when tab regains focus
+        
         if (event === 'SIGNED_IN') {
-          setIsLoading(true)
+          // Use ref to check if this is truly a new sign-in (not just tab regaining focus)
+          const isNewSignIn = !hasSessionRef.current
+          hasSessionRef.current = true
           setSession(newSession)
           setUser(newSession.user)
-          await fetchProfiles(newSession.user.id)
-          setIsLoading(false)
+          
+          // Only show loading for truly new sign-ins during the initial auth flow
+          // After initialization, fetch profiles in background without loading spinner
+          if (isNewSignIn && !initializedRef.current) {
+            setIsLoading(true)
+            try {
+              await fetchProfiles(newSession.user.id)
+            } finally {
+              if (isMounted) setIsLoading(false)
+            }
+          } else {
+            // Already have session or already initialized - just refresh in background
+            fetchProfiles(newSession.user.id)
+          }
         } else if (event === 'TOKEN_REFRESHED') {
-          // For token refresh, just update session, don't refetch profiles
+          // Token refresh - just update session, no loading
           setSession(newSession)
           setUser(newSession.user)
         } else if (event === 'USER_UPDATED') {
-          // For user updates, refresh profiles
+          // User updates - refresh profiles in background
           setSession(newSession)
           setUser(newSession.user)
-          await fetchProfiles(newSession.user.id, true)
+          fetchProfiles(newSession.user.id, true)
+        } else if (event === 'INITIAL_SESSION') {
+          // Initial session event
+          if (newSession) {
+            hasSessionRef.current = true
+            setSession(newSession)
+            setUser(newSession.user)
+          }
         }
       }
     )
@@ -307,6 +349,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [fetchProfiles])
 
   const signOut = useCallback(async () => {
+    hasSessionRef.current = false
     await supabase.auth.signOut()
     setUser(null)
     setSession(null)
