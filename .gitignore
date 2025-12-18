@@ -86,3 +86,6 @@ build/
 # Temporary files
 *.tmp
 *.temp
+
+# Mobile app (separate repository)
+app-tool/
