@@ -89,7 +89,3 @@ build/
 
 # Mobile app (separate repository)
 app-tool/
-
-# Next.js build output (copied to root during Netlify build)
-/.next/
-/next.config.ts

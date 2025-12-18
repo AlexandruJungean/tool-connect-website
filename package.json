@@ -3,19 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:static && npm run build:webapp && npm run copy:nextjs",
-    "build:static": "node scripts/build-static.js",
-    "build:webapp": "cd web-app && npm install && npm run build",
-    "copy:nextjs": "node scripts/copy-nextjs.js",
     "dev": "cd web-app && npm run dev",
-    "postinstall": "cd web-app && npm install || true"
-  },
-  "dependencies": {
-    "next": "16.0.10",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.8.1"
+    "build": "cd web-app && npm run build"
   }
 }

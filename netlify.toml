@@ -1,6 +1,7 @@
 [build]
-  # Base directory containing all files
-  publish = "public"
+  # Build from web-app directory where Next.js lives
+  base = "web-app"
+  publish = ".next"
   command = "npm run build"
   
 [build.environment]
