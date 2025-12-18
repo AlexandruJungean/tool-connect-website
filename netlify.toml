@@ -6,11 +6,9 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Next.js plugin for the web app (located in web-app subdirectory)
+# Next.js plugin for the web app
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    packagePath = "web-app"
 
 # Headers for security
 [[headers]]
