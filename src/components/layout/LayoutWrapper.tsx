@@ -13,6 +13,7 @@ const MINIMAL_LAYOUT_PATHS = [
   '/onboarding',
   '/onboarding/client',
   '/onboarding/service-provider',
+  '/admin',
 ]
 
 // Marketing/landing pages with their own header/footer
@@ -27,7 +28,7 @@ const MARKETING_PATHS = [
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const pathname = usePathname()
   
-  const isMinimalLayout = MINIMAL_LAYOUT_PATHS.some(path => pathname === path)
+  const isMinimalLayout = MINIMAL_LAYOUT_PATHS.some(path => pathname === path || pathname.startsWith(path + '/'))
   const isMarketingPage = MARKETING_PATHS.includes(pathname)
 
   if (isMinimalLayout || isMarketingPage) {

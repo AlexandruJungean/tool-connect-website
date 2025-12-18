@@ -25,6 +25,9 @@ const PUBLIC_PATHS = [
   '/welcome',
 ]
 
+// Admin paths have their own authentication handling
+const ADMIN_PATHS = ['/admin']
+
 // Onboarding paths - always accessible for authenticated users needing setup
 const ONBOARDING_PATHS = [
   '/onboarding',
@@ -35,6 +38,11 @@ const ONBOARDING_PATHS = [
 // Check if path is a public path (no auth required)
 const isPublicPath = (pathname: string) => {
   return PUBLIC_PATHS.some(path => pathname === path || pathname.startsWith(path + '/'))
+}
+
+// Check if path is an admin path (has own auth handling)
+const isAdminPath = (pathname: string) => {
+  return ADMIN_PATHS.some(path => pathname === path || pathname.startsWith(path + '/'))
 }
 
 // Check if path is an onboarding path
@@ -59,6 +67,9 @@ export function RequireProfile({ children }: RequireProfileProps) {
     
     // Public paths don't require any checks
     if (isPublicPath(pathname)) return
+    
+    // Admin paths have their own auth handling
+    if (isAdminPath(pathname)) return
     
     // If on onboarding path, don't redirect
     if (isOnboardingPath(pathname)) return
@@ -90,7 +101,7 @@ export function RequireProfile({ children }: RequireProfileProps) {
   }
 
   // If authenticated, needs profile setup, and NOT on an allowed path, show loading while redirecting
-  if (isAuthenticated && needsProfileSetup && !isPublicPath(pathname) && !isOnboardingPath(pathname)) {
+  if (isAuthenticated && needsProfileSetup && !isPublicPath(pathname) && !isAdminPath(pathname) && !isOnboardingPath(pathname)) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <LoadingSpinner size="lg" />
