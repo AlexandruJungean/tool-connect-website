@@ -1,29 +1,15 @@
 {
   "name": "tool-connect-website",
   "version": "1.0.0",
-  "description": "Tool Connect - Professional one-page website for connecting people with trusted professionals",
-  "main": "src/index.html",
+  "private": true,
   "scripts": {
-    "start": "live-server src --port=3000 --open",
-    "dev": "live-server src --port=3000 --open --watch=src",
-    "build": "echo 'Static site - no build step required. Files ready in src/'",
-    "deploy": "netlify deploy --prod --dir=src",
-    "deploy:preview": "netlify deploy --dir=src",
-    "test": "echo 'Tests will be added in future versions'"
+    "build": "npm run build:static && npm run build:webapp",
+    "build:static": "node scripts/build-static.js",
+    "build:webapp": "cd web-app && npm install && npm run build",
+    "dev": "cd web-app && npm run dev",
+    "postinstall": "cd web-app && npm install || true"
   },
-  "keywords": [
-    "tool-connect",
-    "professionals",
-    "services",
-    "one-page-website",
-    "responsive"
-  ],
-  "author": "Tool Connect Team",
-  "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.0"
-  },
-  "engines": {
-    "node": ">=14.0.0"
+    "@netlify/plugin-nextjs": "^5.8.1"
   }
 }

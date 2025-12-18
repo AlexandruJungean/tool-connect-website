@@ -1,18 +1,16 @@
 [build]
-  # Directory to serve the site from
-  publish = "src"
+  # Base directory containing all files
+  publish = "public"
+  command = "npm run build"
   
-  # Build command (not needed for static site, but good to have)
-  command = "echo 'No build step required for static site'"
-
-# Form handling - Enable Netlify Forms
 [build.environment]
-  # Node.js version
-  NODE_VERSION = "18"
-  # Enable Netlify Forms
-  NETLIFY_FORM_HANDLER = "true"
+  NODE_VERSION = "20"
 
-# Headers for better performance and security
+# Next.js plugin for the web app
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Headers for security
 [[headers]]
   for = "/*"
   [headers.values]
@@ -21,7 +19,7 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Cache static assets with shorter duration for development
+# Cache static assets
 [[headers]]
   for = "/css/*"
   [headers.values]
@@ -43,28 +41,57 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Redirect rules for better SEO
+# Deep linking - Apple App Site Association (iOS Universal Links)
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+
+# Deep linking - Android Asset Links
+[[headers]]
+  for = "/.well-known/assetlinks.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+
+# .well-known files for deep linking - must be at root
+[[redirects]]
+  from = "/.well-known/*"
+  to = "/.well-known/:splat"
+  status = 200
+
+# App deep links - serve the app landing page
+[[redirects]]
+  from = "/app/*"
+  to = "/app/index.html"
+  status = 200
+
+# Platform (Next.js web app)
+[[redirects]]
+  from = "/platform"
+  to = "/platform/"
+  status = 301
+
+[[redirects]]
+  from = "/platform/*"
+  to = "/.netlify/functions/___netlify-handler"
+  status = 200
+
+# Redirect old paths
 [[redirects]]
   from = "/home"
   to = "/"
   status = 301
 
-# Form handling (for your contact form)
-[build.processing]
-  skip_processing = false
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy-policy.html"
+  status = 301
 
-[build.processing.css]
-  bundle = false
-  minify = true
-
-[build.processing.js]
-  bundle = false
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# Form spam protection and security headers
+[[redirects]]
+  from = "/terms"
+  to = "/terms-conditions.html"
+  status = 301

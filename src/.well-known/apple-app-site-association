@@ -3,9 +3,37 @@
     "apps": [],
     "details": [
       {
-        "appID": "S74K3DG3QB.com.rFiFKruYQbOd.Tool",
+        "appIDs": [
+          "S74K3DG3QB.com.rFiFKruYQbOd.Tool"
+        ],
         "paths": [
-          "/app/*"
+          "/app/*",
+          "/app/provider/*",
+          "/app/request/*",
+          "/app/chat/*",
+          "/app/review/*"
+        ],
+        "components": [
+          {
+            "/": "/app/*",
+            "comment": "Matches all app deep links"
+          },
+          {
+            "/": "/app/provider/*",
+            "comment": "Service provider profiles"
+          },
+          {
+            "/": "/app/request/*",
+            "comment": "Work requests"
+          },
+          {
+            "/": "/app/chat/*",
+            "comment": "Chat conversations"
+          },
+          {
+            "/": "/app/review/*",
+            "comment": "Review writing"
+          }
         ]
       }
     ]
@@ -16,4 +44,3 @@
     ]
   }
 }
-

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open in Tool Connect App</title>
+    <meta name="description" content="Open this link in the Tool Connect app">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tool Connect">
+    <meta property="og:description" content="Open this link in the Tool Connect app to view the content.">
+    <meta property="og:image" content="https://tool-connect.com/share.png">
+    
+    <!-- App Store Smart Banners -->
+    <meta name="apple-itunes-app" content="app-id=6739626276">
+    
+    <!-- Android App Link -->
+    <link rel="alternate" href="android-app://com.tool.toolappconnect/https/tool-connect.com/app">
+    
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    
+    <style>
+        :root {
+            --primary: #5B21B6;
+            --primary-dark: #4C1D95;
+            --primary-light: #7C3AED;
+            --bg-gradient-start: #F5F3FF;
+            --bg-gradient-end: #EDE9FE;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 420px;
+            background: white;
+            padding: 48px 32px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(91, 33, 182, 0.15);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(91, 33, 182, 0.2);
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            color: #1F2937;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #6B7280;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--primary);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--bg-gradient-end);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(91, 33, 182, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 33, 182, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 2px solid #E5E7EB;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .store-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .store-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 16px;
+            background: #1F2937;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .store-btn:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
+        
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .store-btn span {
+            text-align: left;
+            line-height: 1.2;
+        }
+        
+        .store-btn .small {
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+        
+        .store-btn .big {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: #9CA3AF;
+            font-size: 0.875rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .content-info {
+            background: var(--bg-gradient-start);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .content-type {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .content-id {
+            font-size: 0.75rem;
+            color: #6B7280;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 24px;
+            }
+            
+            .store-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/assets/logo.png" alt="Tool Connect" class="logo">
+        <h1>Tool Connect</h1>
+        <p class="subtitle">This link opens content in the Tool Connect app.</p>
+        
+        <div class="content-info" id="contentInfo" style="display: none;">
+            <div class="content-type" id="contentType"></div>
+            <div class="content-id" id="contentId"></div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span>Opening app...</span>
+        </div>
+        
+        <div class="buttons">
+            <a href="#" class="btn btn-primary" id="openAppBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Open in App
+            </a>
+        </div>
+        
+        <div class="divider">or download the app</div>
+        
+        <div class="store-buttons">
+            <a href="https://apps.apple.com/us/app/tool/id6739626276" class="store-btn" id="iosBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <span>
+                    <span class="small">Download on the</span><br>
+                    <span class="big">App Store</span>
+                </span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.tool.toolappconnect" class="store-btn" id="androidBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.18 23.04c.19.13.41.2.64.2.17 0 .34-.04.49-.12L21 14.55c.66-.36.84-1.22.41-1.81-.12-.16-.28-.29-.46-.38L4.26.79C3.56.34 2.64.59 2.26 1.35c-.11.23-.17.49-.17.75v19.8c0 .46.22.88.58 1.14h.51zm1.4-19.9l11.31 6.97-2.52 2.44-8.79-8.51v-.9zm0 17.72v-.89l8.79-8.52 2.52 2.44-11.31 6.97z"/>
+                </svg>
+                <span>
+                    <span class="small">Get it on</span><br>
+                    <span class="big">Google Play</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Parse the URL path to determine content type
+            const path = window.location.pathname;
+            const pathParts = path.split('/').filter(Boolean);
+            
+            // Expected format: /app/{type}/{id}
+            // e.g., /app/provider/123, /app/request/456
+            const contentType = pathParts[1] || null;
+            const contentId = pathParts[2] || null;
+            
+            // Content type labels
+            const contentLabels = {
+                'provider': 'Service Provider Profile',
+                'request': 'Work Request',
+                'chat': 'Chat Conversation',
+                'review': 'Write a Review'
+            };
+            
+            // Show content info if we have a valid type
+            if (contentType && contentLabels[contentType]) {
+                const infoDiv = document.getElementById('contentInfo');
+                document.getElementById('contentType').textContent = contentLabels[contentType];
+                if (contentId) {
+                    document.getElementById('contentId').textContent = 'ID: ' + contentId;
+                }
+                infoDiv.style.display = 'block';
+            }
+            
+            // Construct deep link URLs
+            const customSchemeUrl = 'tool://' + pathParts.slice(1).join('/') + window.location.search;
+            const universalLink = window.location.href;
+            
+            // Detect platform
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
+            // Update button to open app
+            const openAppBtn = document.getElementById('openAppBtn');
+            openAppBtn.href = customSchemeUrl;
+            
+            // Try to open the app automatically
+            function tryOpenApp() {
+                const startTime = Date.now();
+                
+                // Create a hidden iframe to try the custom scheme
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = customSchemeUrl;
+                document.body.appendChild(iframe);
+                
+                // Fallback timeout - if we're still here after 2 seconds, app probably isn't installed
+                setTimeout(function() {
+                    document.body.removeChild(iframe);
+                    document.getElementById('loading').innerHTML = 
+                        '<span style="color: #6B7280;">App not detected. Download below.</span>';
+                }, 2000);
+                
+                // Also try window.location for some browsers
+                setTimeout(function() {
+                    window.location.href = customSchemeUrl;
+                }, 100);
+            }
+            
+            // Try opening app on page load (only on mobile)
+            if (isIOS || isAndroid) {
+                setTimeout(tryOpenApp, 500);
+            } else {
+                // On desktop, just show the info
+                document.getElementById('loading').innerHTML = 
+                    '<span style="color: #6B7280;">Scan the QR code or open on mobile</span>';
+            }
+            
+            // Handle manual button click
+            openAppBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = customSchemeUrl;
+                
+                // If still here after 1.5 seconds, redirect to appropriate store
+                setTimeout(function() {
+                    if (isIOS) {
+                        window.location.href = 'https://apps.apple.com/us/app/tool/id6739626276';
+                    } else if (isAndroid) {
+                        window.location.href = 'https://play.google.com/store/apps/details?id=com.tool.toolappconnect';
+                    }
+                }, 1500);
+            });
+            
+            // Highlight the correct store button based on platform
+            if (isIOS) {
+                document.getElementById('iosBtn').style.background = '#5B21B6';
+            } else if (isAndroid) {
+                document.getElementById('androidBtn').style.background = '#5B21B6';
+            }
+        })();
+    </script>
+</body>
+</html>
+
