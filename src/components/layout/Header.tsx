@@ -18,12 +18,13 @@ import {
   FileText,
   ChevronDown,
   Globe,
-  ArrowLeftRight
+  ArrowLeftRight,
+  Shield
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function Header() {
-  const { isAuthenticated, isLoading, user, clientProfile, serviceProviderProfile, currentUserType, switchUserType, signOut } = useAuth()
+  const { isAuthenticated, isLoading, user, appUser, clientProfile, serviceProviderProfile, currentUserType, switchUserType, signOut } = useAuth()
   const { language, setLanguage, t } = useLanguage()
   const { unreadMessagesCount, unreadNotificationsCount } = useNotifications()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -215,6 +216,18 @@ export function Header() {
                           <Settings className="w-5 h-5" />
                           {t('nav.settings')}
                         </Link>
+                        {/* Admin Dashboard - only show for admins */}
+                        {appUser?.is_admin && (
+                          <Link
+                            href="/admin"
+                            prefetch={false}
+                            onClick={() => setIsProfileOpen(false)}
+                            className="flex items-center gap-3 px-4 py-2 text-purple-600 hover:bg-purple-50"
+                          >
+                            <Shield className="w-5 h-5" />
+                            {language === 'cs' ? 'Admin Panel' : 'Admin Dashboard'}
+                          </Link>
+                        )}
                         {/* Switch profile - only show if user has both profiles */}
                         {clientProfile && serviceProviderProfile && (
                           <button
