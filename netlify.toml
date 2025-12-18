@@ -1,7 +1,4 @@
 [build]
-  # Build from web-app directory where Next.js lives
-  base = "web-app"
-  publish = ".next"
   command = "npm run build"
   
 [build.environment]
@@ -22,25 +19,9 @@
 
 # Cache static assets
 [[headers]]
-  for = "/css/*"
-  [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
-
-[[headers]]
-  for = "/js/*"
-  [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
-
-[[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=86400, must-revalidate"
-
-# HTML files should not be cached aggressively
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Deep linking - Apple App Site Association (iOS Universal Links)
 [[headers]]
@@ -58,30 +39,33 @@
     Cache-Control = "public, max-age=3600"
     Access-Control-Allow-Origin = "*"
 
-# .well-known files for deep linking - must be at root
+# Redirects for old HTML paths to new Next.js routes
 [[redirects]]
-  from = "/.well-known/*"
-  to = "/.well-known/:splat"
-  status = 200
-
-# App deep links - serve the app landing page
-[[redirects]]
-  from = "/app/*"
-  to = "/app/index.html"
-  status = 200
-
-# Platform (Next.js web app)
-[[redirects]]
-  from = "/platform"
-  to = "/platform/"
+  from = "/index.html"
+  to = "/"
   status = 301
 
 [[redirects]]
-  from = "/platform/*"
-  to = "/.netlify/functions/___netlify-handler"
-  status = 200
+  from = "/privacy-policy.html"
+  to = "/privacy-policy"
+  status = 301
 
-# Redirect old paths
+[[redirects]]
+  from = "/terms-conditions.html"
+  to = "/terms-conditions"
+  status = 301
+
+[[redirects]]
+  from = "/service-providers.html"
+  to = "/service-providers"
+  status = 301
+
+[[redirects]]
+  from = "/download.html"
+  to = "/download"
+  status = 301
+
+# Old path redirects
 [[redirects]]
   from = "/home"
   to = "/"
@@ -89,10 +73,21 @@
 
 [[redirects]]
   from = "/privacy"
-  to = "/privacy-policy.html"
+  to = "/privacy-policy"
   status = 301
 
 [[redirects]]
   from = "/terms"
-  to = "/terms-conditions.html"
+  to = "/terms-conditions"
+  status = 301
+
+# Platform redirect (for backward compatibility)
+[[redirects]]
+  from = "/platform"
+  to = "/search"
+  status = 301
+
+[[redirects]]
+  from = "/platform/*"
+  to = "/:splat"
   status = 301
