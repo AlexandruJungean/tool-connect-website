@@ -49,7 +49,7 @@ export interface ServiceProviderProfile {
   user_id: string;
   name: string;
   surname?: string | null;
-  specialty: string;
+  // specialty removed - using category instead
   avatar_url?: string | null;
   background_image_url?: string | null;
   location?: string | null;

@@ -31,7 +31,7 @@ interface Review {
     name: string
     surname: string | null
     avatar_url: string | null
-    specialty: string
+    category: string | null
   }
 }
 
@@ -55,7 +55,7 @@ export default function AdminReviewsPage() {
         .select(`
           *,
           client:client_profiles!client_id(name, surname, avatar_url),
-          provider:service_provider_profiles!service_provider_id(name, surname, avatar_url, specialty)
+          provider:service_provider_profiles!service_provider_id(name, surname, avatar_url, category)
         `, { count: 'exact' })
 
       if (ratingFilter !== null) {
@@ -219,7 +219,9 @@ export default function AdminReviewsPage() {
                         </div>
                         <div>
                           <p className="text-white font-medium">{review.provider?.name} {review.provider?.surname}</p>
-                          <p className="text-gray-500 text-xs">{review.provider?.specialty}</p>
+                          {review.provider?.category && (
+                            <p className="text-gray-500 text-xs">{review.provider.category}</p>
+                          )}
                         </div>
                       </div>
                     </td>

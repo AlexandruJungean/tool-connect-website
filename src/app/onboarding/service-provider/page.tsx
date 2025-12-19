@@ -73,7 +73,8 @@ export default function ServiceProviderProfileSetupPage() {
   const [otherLanguages, setOtherLanguages] = useState<string[]>([])
   const [aboutMe, setAboutMe] = useState('')
   const [priceFrom, setPriceFrom] = useState('')
-  const [priceCurrency, setPriceCurrency] = useState('CZK')
+  // Currency is now fixed to CZK
+  const priceCurrency = 'CZK'
   const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'project'>('hour')
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
@@ -298,11 +299,7 @@ export default function ServiceProviderProfileSetupPage() {
       // Avatar URL is now set directly by ImageUpload component
       const finalAvatarUrl = avatarUrl || undefined
 
-      // Get specialty from selected category
-      const selectedCategoryData = getSelectedCategoryData()
-      const specialty = selectedCategoryData 
-        ? (language === 'cs' ? selectedCategoryData.labelCS : selectedCategoryData.label)
-        : ''
+      // Specialty removed - using category instead
 
       // Get languages array
       const languages: string[] = []
@@ -326,7 +323,7 @@ export default function ServiceProviderProfileSetupPage() {
           .update({
             name: name.trim(),
             surname: surname.trim() || null,
-            specialty,
+            // specialty removed - using category instead
             type: accountType || 'self-employed',
             ico: ico.trim() || null,
             location: location.trim() || null,
@@ -358,7 +355,7 @@ export default function ServiceProviderProfileSetupPage() {
             user_id: user.id,
             name: name.trim(),
             surname: surname.trim() || null,
-            specialty,
+            // specialty removed - using category instead
             type: accountType || 'self-employed',
             ico: ico.trim() || null,
             location: location.trim() || null,
@@ -831,15 +828,9 @@ export default function ServiceProviderProfileSetupPage() {
                       onChange={(e) => setPriceFrom(e.target.value)}
                       className="flex-1"
                     />
-                    <select
-                      value={priceCurrency}
-                      onChange={(e) => setPriceCurrency(e.target.value)}
-                      className="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    >
-                      <option value="CZK">CZK</option>
-                      <option value="EUR">EUR</option>
-                      <option value="USD">USD</option>
-                    </select>
+                    <div className="px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-600">
+                      CZK
+                    </div>
                   </div>
                 </div>
                 

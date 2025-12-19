@@ -179,7 +179,9 @@ export default function AdminReportsPage() {
                           <p className="text-white font-medium">
                             {report.reported_provider?.name} {report.reported_provider?.surname}
                           </p>
-                          <p className="text-gray-500 text-xs">{report.reported_provider?.specialty}</p>
+                          {report.reported_provider?.category && (
+                            <p className="text-gray-500 text-xs">{report.reported_provider.category}</p>
+                          )}
                         </div>
                       </div>
                     </td>
@@ -329,7 +331,9 @@ export default function AdminReportsPage() {
                       <p className="text-white font-medium">
                         {selectedReport.reported_provider?.name} {selectedReport.reported_provider?.surname}
                       </p>
-                      <p className="text-gray-400 text-sm">{selectedReport.reported_provider?.specialty}</p>
+                      {selectedReport.reported_provider?.category && (
+                        <p className="text-gray-400 text-sm">{selectedReport.reported_provider.category}</p>
+                      )}
                     </div>
                     <a
                       href={`/providers/${selectedReport.reported_service_provider_id}`}

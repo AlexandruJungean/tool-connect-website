@@ -59,7 +59,7 @@ export interface UserWithProfiles {
     name: string
     surname: string | null
     avatar_url: string | null
-    specialty: string
+    // specialty removed - using category instead
     category: string | null
     profile_completed: boolean
     is_visible: boolean
@@ -86,7 +86,7 @@ export interface Report {
     name: string
     surname: string | null
     avatar_url: string | null
-    specialty: string
+    category: string | null
   }
 }
 
@@ -249,7 +249,7 @@ export async function getUsers(
     .select(`
       *,
       client_profiles (id, name, surname, avatar_url, profile_completed),
-      service_provider_profiles (id, name, surname, avatar_url, specialty, category, profile_completed, is_visible, is_active)
+      service_provider_profiles (id, name, surname, avatar_url, category, profile_completed, is_visible, is_active)
     `, { count: 'exact' })
 
   if (search) {
@@ -347,7 +347,7 @@ export async function getServiceProviders(
     .select('*, users!inner(phone_number, email, is_banned, is_admin)', { count: 'exact' })
 
   if (search) {
-    query = query.or(`name.ilike.%${search}%,specialty.ilike.%${search}%,city.ilike.%${search}%`)
+    query = query.or(`name.ilike.%${search}%,category.ilike.%${search}%,city.ilike.%${search}%`)
   }
 
   if (category) {
@@ -445,7 +445,7 @@ export async function getReports(
   // Fetch provider info
   const { data: providers } = await supabase
     .from('service_provider_profiles')
-    .select('id, name, surname, avatar_url, specialty')
+    .select('id, name, surname, avatar_url, category')
     .in('id', providerIds)
 
   // Map reporters and providers to reports

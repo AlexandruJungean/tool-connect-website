@@ -66,7 +66,8 @@ export default function ProviderDetailPage() {
 
   // Dynamic translation hooks - must be called unconditionally before any early returns
   const descriptionRaw = provider?.bio || provider?.about_me
-  const { text: translatedSpecialty } = useDynamicTranslation(provider?.specialty)
+  // Specialty removed - using category instead
+  const categoryLabel = provider?.category ? getCategoryLabel(provider.category, language) : null
 
   useEffect(() => {
     const fetchProvider = async () => {
@@ -292,8 +293,8 @@ export default function ProviderDetailPage() {
                   <h1 className="text-2xl font-bold text-gray-900">
                     {provider.name} {provider.surname}
                   </h1>
-                  {provider.specialty && (
-                    <p className="text-primary-700 font-medium">{translatedSpecialty || provider.specialty}</p>
+                  {categoryLabel && (
+                    <p className="text-primary-700 font-medium">{categoryLabel}</p>
                   )}
                 </div>
                 <span className={cn(
@@ -402,7 +403,7 @@ export default function ProviderDetailPage() {
                       {provider.hourly_rate_min && provider.hourly_rate_max
                         ? `${provider.hourly_rate_min} - ${provider.hourly_rate_max}`
                         : provider.hourly_rate_min || provider.hourly_rate_max}
-                      {' '}{provider.price_currency || provider.currency || 'CZK'}
+                      {' CZK'}
                     </span>
                     <span className="text-gray-500">/ {t('provider.perHour')}</span>
                   </div>

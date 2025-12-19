@@ -44,7 +44,7 @@ export const getProviderStatistics = async (providerId: string): Promise<Provide
   ] = await Promise.all([
     supabase
       .from('service_provider_profiles')
-      .select('profile_views_count, average_rating, total_reviews, created_at, profile_completed, name, surname, specialty, avatar_url, background_image_url, about_me, location, category, services, languages, hourly_rate_min')
+      .select('profile_views_count, average_rating, total_reviews, created_at, profile_completed, name, surname, avatar_url, background_image_url, about_me, location, category, services, languages, hourly_rate_min')
       .eq('id', providerId)
       .single(),
     supabase
@@ -92,7 +92,7 @@ export const getProviderStatistics = async (providerId: string): Promise<Provide
     profile_completed: boolean
     name: string | null
     surname: string | null
-    specialty: string | null
+    // specialty removed - using category instead
     avatar_url: string | null
     background_image_url: string | null
     about_me: string | null
@@ -109,7 +109,7 @@ export const getProviderStatistics = async (providerId: string): Promise<Provide
     const fields = [
       profile.name,
       profile.surname,
-      profile.specialty,
+      // specialty removed
       profile.avatar_url,
       profile.background_image_url,
       profile.about_me,

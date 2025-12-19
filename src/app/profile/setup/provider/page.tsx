@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabase'
 import { SERVICE_CATEGORIES, LANGUAGES, getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
 import { ACCOUNT_TYPES, CURRENCIES } from '@/constants/optionSets'
 
-const STEPS = ['basics', 'specialty', 'details', 'pricing'] as const
+const STEPS = ['basics', 'category', 'details', 'pricing'] as const
 type Step = typeof STEPS[number]
 
 export default function ProviderProfileSetupPage() {
@@ -31,19 +31,20 @@ export default function ProviderProfileSetupPage() {
   const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null)
   const [category, setCategory] = useState('')
   const [subcategories, setSubcategories] = useState<string[]>([])
-  const [specialty, setSpecialty] = useState('')
+  // Specialty field removed - using category instead
   const [aboutMe, setAboutMe] = useState('')
   const [location, setLocation] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['english'])
   const [accountType, setAccountType] = useState('self-employed')
   const [hourlyRateMin, setHourlyRateMin] = useState('')
   const [hourlyRateMax, setHourlyRateMax] = useState('')
-  const [currency, setCurrency] = useState('EUR')
+  // Currency is now fixed to CZK
+  const currency = 'CZK'
 
   const t = {
     title: language === 'cs' ? 'Vytvořit profil poskytovatele' : 'Create Provider Profile',
     step1: language === 'cs' ? 'Základní informace' : 'Basic Info',
-    step2: language === 'cs' ? 'Specializace' : 'Specialty',
+    step2: language === 'cs' ? 'Kategorie' : 'Category',
     step3: language === 'cs' ? 'Podrobnosti' : 'Details',
     step4: language === 'cs' ? 'Ceník' : 'Pricing',
     name: language === 'cs' ? 'Jméno' : 'First Name',
@@ -52,10 +53,7 @@ export default function ProviderProfileSetupPage() {
     background: language === 'cs' ? 'Úvodní obrázek' : 'Cover Image',
     category: language === 'cs' ? 'Kategorie' : 'Category',
     subcategories: language === 'cs' ? 'Služby' : 'Services',
-    specialty: language === 'cs' ? 'Nadpis profilu' : 'Profile Headline',
-    specialtyPlaceholder: language === 'cs' 
-      ? 'Např. Zkušený elektrikář s 10+ lety praxe'
-      : 'E.g. Experienced electrician with 10+ years of practice',
+    // Specialty field removed
     aboutMe: language === 'cs' ? 'O mně' : 'About Me',
     aboutMePlaceholder: language === 'cs' 
       ? 'Popište své zkušenosti, dovednosti a co vás odlišuje...'
@@ -109,7 +107,7 @@ export default function ProviderProfileSetupPage() {
           return false
         }
         break
-      case 'specialty':
+      case 'category':
         if (!category) {
           setError(language === 'cs' ? 'Vyberte kategorii' : 'Please select a category')
           return false
@@ -160,7 +158,7 @@ export default function ProviderProfileSetupPage() {
           background_image_url: backgroundUrl,
           category,
           services: subcategories.join(','),
-          specialty: specialty.trim(),
+          // specialty removed - using category instead
           about_me: aboutMe.trim(),
           location: location.trim(),
           languages: selectedLanguages,
@@ -221,7 +219,7 @@ export default function ProviderProfileSetupPage() {
           </div>
         )
 
-      case 'specialty':
+      case 'category':
         return (
           <div className="space-y-6">
             <Select
@@ -265,12 +263,7 @@ export default function ProviderProfileSetupPage() {
               </div>
             )}
 
-            <Input
-              label={t.specialty}
-              value={specialty}
-              onChange={(e) => setSpecialty(e.target.value)}
-              placeholder={t.specialtyPlaceholder}
-            />
+            {/* Specialty field removed - category is used instead */}
           </div>
         )
 
@@ -345,15 +338,14 @@ export default function ProviderProfileSetupPage() {
               />
             </div>
 
-            <Select
-              label={t.currency}
-              value={currency}
-              onChange={(value) => setCurrency(value)}
-              options={CURRENCIES.map((cur) => ({
-                value: cur.value,
-                label: `${cur.symbol} ${cur.value}`,
-              }))}
-            />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t.currency}
+              </label>
+              <div className="px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-600">
+                Kč CZK
+              </div>
+            </div>
           </div>
         )
     }

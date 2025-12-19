@@ -79,7 +79,7 @@ export default function RequestDetailPage() {
             .from('applications')
             .select(`
               *,
-              service_provider:service_provider_profiles(id, name, surname, avatar_url, average_rating, total_reviews, specialty)
+              service_provider:service_provider_profiles(id, name, surname, avatar_url, average_rating, total_reviews, category)
             `)
             .eq('work_request_id', requestId)
             .order('created_at', { ascending: false })
@@ -440,9 +440,11 @@ export default function RequestDetailPage() {
                             <p className="font-medium text-gray-900">
                               {(app.service_provider as any)?.name} {(app.service_provider as any)?.surname}
                             </p>
-                            <p className="text-sm text-gray-500">
-                              {(app.service_provider as any)?.specialty}
-                            </p>
+                            {(app.service_provider as any)?.category && (
+                              <p className="text-sm text-gray-500">
+                                {getCategoryLabel((app.service_provider as any)?.category, language)}
+                              </p>
+                            )}
                           </div>
                           {(app.service_provider as any)?.average_rating && (
                             <div className="flex items-center gap-1 text-primary-600">

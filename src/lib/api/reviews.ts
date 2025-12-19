@@ -158,7 +158,7 @@ export interface ReviewWithProvider extends Review {
     name: string
     surname?: string | null
     avatar_url?: string | null
-    specialty?: string | null
+    category?: string | null
   }
 }
 
@@ -167,7 +167,7 @@ export const getReviewsByClientId = async (clientId: string): Promise<ReviewWith
     .from('reviews')
     .select(`
       *,
-      provider:service_provider_profiles(id, name, surname, avatar_url, specialty)
+      provider:service_provider_profiles(id, name, surname, avatar_url, category)
     `)
     .eq('client_id', clientId)
     .order('created_at', { ascending: false })

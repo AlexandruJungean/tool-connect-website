@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 
     const budgetText = request.budget_min && request.budget_max
-      ? `Budget: ${request.budget_min}-${request.budget_max} ${request.currency || 'CZK'}`
+      ? `Budget: ${request.budget_min}-${request.budget_max} CZK`
       : ''
 
     const description = `${request.description?.slice(0, 150) || request.title}${

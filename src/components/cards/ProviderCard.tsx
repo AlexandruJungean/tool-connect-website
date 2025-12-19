@@ -16,7 +16,7 @@ interface ProviderCardProps {
 
 export function ProviderCard({ provider, className }: ProviderCardProps) {
   const { language, t } = useLanguage()
-  const { text: translatedSpecialty } = useDynamicTranslation(provider.specialty)
+  // Specialty removed - using category instead
   
   const rating = provider.average_rating ? Math.round(provider.average_rating * 10) / 10 : null
   const reviewCount = provider.total_reviews || 0
@@ -92,9 +92,9 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
               {provider.name} {provider.surname}
             </h3>
             
-            {provider.specialty && (
+            {categoryLabel && (
               <p className="text-sm text-primary-700 font-medium truncate mt-0.5">
-                {translatedSpecialty || provider.specialty}
+                {categoryLabel}
               </p>
             )}
 
@@ -158,7 +158,7 @@ export function ProviderCard({ provider, className }: ProviderCardProps) {
                   {provider.hourly_rate_min && provider.hourly_rate_max
                     ? `${provider.hourly_rate_min} - ${provider.hourly_rate_max}`
                     : provider.hourly_rate_min || provider.hourly_rate_max}
-                  {' '}{provider.price_currency || provider.currency || 'CZK'}
+                  {' CZK'}
                 </span>
                 <span className="text-gray-500"> / {t('provider.perHour')}</span>
               </div>

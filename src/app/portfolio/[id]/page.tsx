@@ -9,6 +9,7 @@ import { LoadingSpinner, ImageViewer, Avatar } from '@/components/ui'
 import { AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
 import { formatTimeAgo } from '@/lib/utils'
+import { getCategoryLabel } from '@/constants/categories'
 
 interface PortfolioProject {
   id: string
@@ -23,7 +24,7 @@ interface PortfolioProject {
     name: string
     surname: string
     avatar_url?: string
-    specialty?: string
+    category?: string | null
   }
 }
 
@@ -63,7 +64,7 @@ export default function PortfolioDetailPage({ params }: Props) {
               name,
               surname,
               avatar_url,
-              specialty
+              category
             )
           `)
           .eq('id', projectId)
@@ -232,9 +233,9 @@ export default function PortfolioDetailPage({ params }: Props) {
                 <p className="font-semibold text-gray-900">
                   {project.service_provider.name} {project.service_provider.surname}
                 </p>
-                {project.service_provider.specialty && (
+                {project.service_provider.category && (
                   <p className="text-sm text-gray-500 truncate">
-                    {project.service_provider.specialty}
+                    {getCategoryLabel(project.service_provider.category, language)}
                   </p>
                 )}
               </div>

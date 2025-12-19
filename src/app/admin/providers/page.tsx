@@ -115,7 +115,7 @@ export default function AdminProvidersPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by name, specialty, or city..."
+            placeholder="Search by name, category, or city..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500"
@@ -194,7 +194,9 @@ export default function AdminProvidersPage() {
                               </span>
                             )}
                           </div>
-                          <p className="text-gray-400 text-sm">{provider.specialty}</p>
+                          {provider.category && (
+                            <p className="text-gray-400 text-sm">{provider.category}</p>
+                          )}
                           {provider.type && (
                             <span className="text-xs text-gray-500 capitalize">{provider.type}</span>
                           )}

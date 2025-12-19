@@ -32,12 +32,13 @@ export default function EditProfilePage() {
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
   const [location, setLocation] = useState('')
-  const [specialty, setSpecialty] = useState('')
+  // Specialty field removed - using category instead
   const [category, setCategory] = useState('')
   const [aboutMe, setAboutMe] = useState('')
   const [priceMin, setPriceMin] = useState('')
   const [priceMax, setPriceMax] = useState('')
-  const [currency, setCurrency] = useState('CZK')
+  // Currency is now fixed to CZK
+  const currency = 'CZK'
   const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'week' | 'project'>('hour')
   const [priceInfo, setPriceInfo] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
@@ -65,12 +66,12 @@ export default function EditProfilePage() {
       
       if (isProvider && serviceProviderProfile) {
         setLocation(serviceProviderProfile.location || '')
-        setSpecialty(serviceProviderProfile.specialty || '')
+        // Specialty field removed
         setCategory(serviceProviderProfile.category || '')
         setAboutMe(serviceProviderProfile.about_me || serviceProviderProfile.bio || '')
         setPriceMin(serviceProviderProfile.hourly_rate_min?.toString() || '')
         setPriceMax(serviceProviderProfile.hourly_rate_max?.toString() || '')
-        setCurrency(serviceProviderProfile.price_currency || serviceProviderProfile.currency || 'CZK')
+        // Currency is fixed to CZK
         setPricePeriod(serviceProviderProfile.price_period || 'hour')
         setPriceInfo(serviceProviderProfile.price_info || '')
         setSelectedLanguages(serviceProviderProfile.languages || [])
@@ -105,7 +106,7 @@ export default function EditProfilePage() {
             name,
             surname,
             location,
-            specialty,
+            // specialty removed - using category instead
             category,
             about_me: aboutMe,
             hourly_rate_min: priceMin ? parseFloat(priceMin) : null,
@@ -181,11 +182,7 @@ export default function EditProfilePage() {
     label: getCategoryLabel(cat.value, language)
   }))
 
-  const currencyOptions = [
-    { value: 'CZK', label: 'CZK (Kč)' },
-    { value: 'EUR', label: 'EUR (€)' },
-    { value: 'USD', label: 'USD ($)' },
-  ]
+  // Currency is fixed to CZK, no options needed
 
   const periodOptions = [
     { value: 'hour', label: language === 'cs' ? 'Za hodinu' : 'Per hour' },
@@ -280,12 +277,7 @@ export default function EditProfilePage() {
             {/* Provider-specific fields */}
             {isProvider && (
               <>
-                <Input
-                  label={language === 'cs' ? 'Specializace' : 'Specialty'}
-                  value={specialty}
-                  onChange={(e) => setSpecialty(e.target.value)}
-                  placeholder={language === 'cs' ? 'např. Elektrikář, Grafický designér' : 'e.g. Electrician, Graphic Designer'}
-                />
+                {/* Specialty field removed - category is used instead */}
 
                 <Select
                   label={t('search.category')}
@@ -366,12 +358,14 @@ export default function EditProfilePage() {
                       value={priceMax}
                       onChange={(e) => setPriceMax(e.target.value)}
                     />
-                    <Select
-                      label={language === 'cs' ? 'Měna' : 'Currency'}
-                      options={currencyOptions}
-                      value={currency}
-                      onChange={setCurrency}
-                    />
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                        {language === 'cs' ? 'Měna' : 'Currency'}
+                      </label>
+                      <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600">
+                        CZK (Kč)
+                      </div>
+                    </div>
                     <Select
                       label={language === 'cs' ? 'Za' : 'Per'}
                       options={periodOptions}

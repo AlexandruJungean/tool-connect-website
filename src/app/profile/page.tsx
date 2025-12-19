@@ -106,7 +106,7 @@ export default function ProfilePage() {
               </h1>
               <p className="text-primary-700 font-medium">
                 {isProvider 
-                  ? (serviceProviderProfile?.specialty || t('search.selfEmployed'))
+                  ? (serviceProviderProfile?.category ? getCategoryLabel(serviceProviderProfile.category, language) : t('search.selfEmployed'))
                   : (language === 'cs' ? 'Klient' : 'Client')
                 }
               </p>

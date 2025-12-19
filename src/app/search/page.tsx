@@ -113,7 +113,7 @@ function SearchContent() {
         query = query.or(`city.ilike.%${location}%,country.ilike.%${location}%,location.ilike.%${location}%`)
       }
       if (keywords) {
-        query = query.or(`name.ilike.%${keywords}%,specialty.ilike.%${keywords}%,about_me.ilike.%${keywords}%`)
+        query = query.or(`name.ilike.%${keywords}%,category.ilike.%${keywords}%,about_me.ilike.%${keywords}%`)
       }
       if (selectedLanguages.length > 0) {
         query = query.overlaps('languages', selectedLanguages)
