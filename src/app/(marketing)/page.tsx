@@ -117,7 +117,7 @@ export default function LandingPage() {
       tryWebApp: language === 'cs' ? 'Vyzkoušet webovou aplikaci' : 'Try Web App Now',
     },
     about: {
-      title: language === 'cs' ? 'Proč Tool' : 'Why Tool',
+      title: language === 'cs' ? 'O nás' : 'About us',
       paragraphs: language === 'cs'
         ? [
             'Tool-Connect je vytvořen a vyvíjen v České republice – s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.',
@@ -391,8 +391,6 @@ export default function LandingPage() {
                 <div className="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Users className="w-10 h-10 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{t.about.teamTitle}</h4>
-                <p className="text-primary-600 font-medium text-lg mb-4">{t.about.teamMembers}</p>
                 <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 text-gray-600">
                   <MapPin className="w-4 h-4 text-primary-600" />
                   <span>{t.about.location}</span>
