@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Tool Connect - Find Trusted Professionals',
+    default: 'Tool Connect - Trusted Professionals',
     template: '%s | Tool Connect',
   },
   description: 'Tool Connect links people with trusted professionals in any field – from repairs to translations. Find specialists by location and language in Czech Republic.',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     siteName: 'Tool Connect',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Tool Connect - Find Trusted Professionals',
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Tool Connect - Find Trusted Professionals',
     description: 'Connect with verified professionals for any service. Find the right expert near you.',
-    images: ['/og-image.png'],
+    images: ['/og-image.webp'],
     creator: '@toolconnect',
   },
   robots: {
@@ -139,6 +139,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preconnect to external resources */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://formspree.io" />
+        
+        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -74,7 +74,7 @@ export function Header() {
             />
             {/* Desktop: Full logo */}
             <img
-              src="/logo-header.png"
+              src="/logo-header.webp"
               alt="Tool Connect"
               className="hidden sm:block h-10 w-auto"
             />

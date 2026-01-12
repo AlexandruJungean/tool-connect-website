@@ -226,7 +226,7 @@ export default function ServiceProvidersPage() {
           {/* QR Code */}
           <div className="inline-block bg-white rounded-2xl p-6">
             <Image
-              src="/assets/QR codes/smartlink.png"
+              src="/assets/QR codes/smartlink.webp"
               alt="Download QR Code"
               width={150}
               height={150}

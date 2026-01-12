@@ -58,7 +58,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
           {/* Logo - swap between light/dark versions based on scroll */}
           <Link href="/">
             <Image
-              src={isScrolled || !transparent ? '/logo-header.png' : '/logo-footer.png'}
+              src={isScrolled || !transparent ? '/logo-header.webp' : '/logo-footer.webp'}
               alt="Tool Connect"
               width={160}
               height={40}

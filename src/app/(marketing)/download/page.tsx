@@ -84,7 +84,7 @@ export default function DownloadPage() {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Image
-            src="/logo-header.png"
+            src="/logo-header.webp"
             alt="Tool Connect"
             width={80}
             height={80}

@@ -10,7 +10,11 @@ import {
   Gavel, Car, Calendar, GraduationCap, Music, Palette, Dumbbell, Heart, Hand,
   FileText, Shield
 } from 'lucide-react'
-import { MarketingHeader, MarketingFooter } from '@/components/marketing'
+import dynamic from 'next/dynamic'
+
+// Lazy load marketing components to reduce initial bundle size
+const MarketingHeader = dynamic(() => import('@/components/marketing').then(mod => ({ default: mod.MarketingHeader })), { ssr: true })
+const MarketingFooter = dynamic(() => import('@/components/marketing').then(mod => ({ default: mod.MarketingFooter })), { ssr: true })
 import { Button } from '@/components/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
@@ -281,12 +285,14 @@ export default function LandingPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-primary-700/20 rounded-3xl blur-3xl" />
                 <Image
-                  src="/assets/pictures/picture 3.png"
+                  src="/assets/pictures/mockup.webp"
                   alt="Tool App Preview"
                   width={400}
                   height={600}
                   className="relative rounded-3xl shadow-2xl"
                   priority
+                  loading="eager"
+                  sizes="(max-width: 768px) 100vw, 400px"
                 />
               </div>
             </div>
@@ -353,11 +359,13 @@ export default function LandingPage() {
               <Link href="/search" className="block group">
                 <div className="relative overflow-hidden rounded-2xl shadow-xl">
                   <Image
-                    src="/assets/pictures/web-preview.png"
+                    src="/assets/pictures/web-preview.webp"
                     alt="Tool Web Platform Preview"
                     width={600}
                     height={400}
                     className="w-full transition-transform group-hover:scale-105"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 600px"
                   />
                   <div className="absolute inset-0 bg-primary-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="text-white font-semibold text-lg flex items-center gap-2">
@@ -528,11 +536,13 @@ export default function LandingPage() {
             <div className="flex justify-center">
               <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
                 <Image
-                  src="/assets/QR codes/smartlink.png"
+                  src="/assets/QR codes/smartlink.webp"
                   alt="Download QR Code"
                   width={200}
                   height={200}
                   className="mx-auto mb-4"
+                  loading="lazy"
+                  sizes="200px"
                 />
                 <p className="font-medium text-gray-900">{t.download.title}</p>
                 <p className="text-sm text-gray-500">{t.download.scanQR}</p>

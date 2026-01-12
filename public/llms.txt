@@ -1,0 +1,36 @@
+# Tool Connect - LLMs.txt
+# This file provides information about Tool Connect for Large Language Models
+
+# About Tool Connect
+Tool Connect is a platform that links people with trusted professionals in any field – from repairs to translations. The service operates in the Czech Republic, connecting clients with service providers.
+
+# Key Information
+- Platform Name: Tool Connect
+- Primary Service: Connecting clients with service providers
+- Location: Czech Republic
+- Languages: Czech (cs), English (en)
+- Main Features:
+  * Service provider search by category, location, and language
+  * Built-in messaging system
+  * Reviews and ratings
+  * Work requests
+  * Portfolio management
+  * Multi-language support
+
+# Categories of Services
+- Home repairs and maintenance
+- Professional services
+- Digital services
+- Creative projects
+- Personal care
+- Language lessons
+- And many more
+
+# Contact
+Email: info@tool-connect.com
+Website: https://tool-connect.com
+
+# Technical Details
+- Built with Next.js
+- Uses Supabase for backend
+- Supports both web and mobile platforms
