@@ -4,11 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
-  MessageCircle, Megaphone, MapPin, Languages, Users, Globe, Star, Smartphone,
-  Check, UserPlus, Search, Handshake, ArrowRight, ChevronDown, Mail,
-  Home, Wrench, Bug, TreePine, Key, Briefcase, HardHat, Sparkles, Laptop,
-  Gavel, Car, Calendar, GraduationCap, Music, Palette, Dumbbell, Heart, Hand,
-  FileText, Shield
+  MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -21,7 +17,6 @@ import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
   const { language } = useLanguage()
-  const [showAllCategories, setShowAllCategories] = useState(false)
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
@@ -63,67 +58,6 @@ export default function LandingPage() {
       installApp: language === 'cs' ? 'Nainstalujte si Tool na telefon' : 'Install Tool on your phone',
       findSpecialist: language === 'cs' ? 'Najít specialistu' : 'Find a Specialist',
       becomeProvider: language === 'cs' ? 'Nabídnout služby' : 'Offer Your Services',
-    },
-    benefits: {
-      title: language === 'cs' ? 'Proč si vybrat Tool Connect?' : 'Why Choose Tool Connect?',
-      items: [
-        {
-          icon: MessageCircle,
-          title: language === 'cs' ? 'Vestavěné zprávy' : 'Built-In Messaging',
-          description: language === 'cs' 
-            ? 'Komunikujte přímo v aplikaci, sdílejte fotky a potvrzujte dohody.' 
-            : 'Chat directly in the app to discuss details, share photos, and confirm arrangements.',
-        },
-        {
-          icon: Megaphone,
-          title: language === 'cs' ? 'Zvyšte svou viditelnost' : 'Boost Your Visibility',
-          description: language === 'cs'
-            ? 'Poskytovatelé služeb mohou propagovat své nabídky a snadno oslovit více klientů.'
-            : 'Service providers can promote their offerings and reach more clients easily.',
-        },
-        {
-          icon: MapPin,
-          title: language === 'cs' ? 'Hledání podle lokality' : 'Search by Location',
-          description: language === 'cs'
-            ? 'Rychle najděte poskytovatele ve vašem okolí pro pohodlnější služby.'
-            : 'Quickly find nearby providers for faster, more convenient service.',
-        },
-        {
-          icon: Languages,
-          title: language === 'cs' ? 'Hledání podle jazyka' : 'Search by Language',
-          description: language === 'cs'
-            ? 'Spojte se s poskytovateli, kteří mluví vaším preferovaným jazykem.'
-            : 'Connect with providers who speak your preferred language.',
-        },
-        {
-          icon: Users,
-          title: language === 'cs' ? 'Dvojí role' : 'Dual Roles',
-          description: language === 'cs'
-            ? 'Plynule přepínejte mezi rolí klienta a poskytovatele služeb.'
-            : 'Switch seamlessly between being a client and a service provider.',
-        },
-        {
-          icon: Globe,
-          title: language === 'cs' ? 'Dvojjazyčné rozhraní' : 'Bilingual Interface',
-          description: language === 'cs'
-            ? 'K dispozici v češtině a angličtině – ideální pro místní i expaty.'
-            : 'Available in Czech and English—ideal for locals and expats as well.',
-        },
-        {
-          icon: Star,
-          title: language === 'cs' ? 'Hodnocení a důvěra' : 'Ratings & Trust',
-          description: language === 'cs'
-            ? 'Klienti hodnotí poskytovatele pro budování důvěryhodnosti.'
-            : 'Clients rate providers to build credibility and confidence.',
-        },
-        {
-          icon: Smartphone,
-          title: language === 'cs' ? 'Dostupné kdekoliv' : 'Accessible Anywhere',
-          description: language === 'cs'
-            ? 'Používejte Tool na mobilu nebo webu pro maximální flexibilitu.'
-            : 'Use the tool on mobile or web for maximum flexibility.',
-        },
-      ],
     },
     features: {
       title: language === 'cs' ? 'Výkonné funkce pro každého' : 'Powerful Features for Everyone',
@@ -167,62 +101,6 @@ export default function LandingPage() {
       teamTitle: language === 'cs' ? 'Náš tým' : 'Our Team',
       teamMembers: 'Laura & Adela',
       location: language === 'cs' ? 'Vytvořeno v České republice' : 'Made in Czech Republic',
-    },
-    howItWorks: {
-      title: language === 'cs' ? 'Jak to funguje' : 'How It Works',
-      steps: [
-        {
-          icon: UserPlus,
-          title: language === 'cs' ? 'Vytvořte účet' : 'Create an Account',
-          description: language === 'cs' ? 'Zaregistrujte se rychle a jednoduše' : 'Sign up quickly and easily to get started',
-        },
-        {
-          icon: Search,
-          title: language === 'cs' ? 'Najděte poskytovatele' : 'Find a Provider',
-          description: language === 'cs' ? 'Vyhledejte vhodné poskytovatele služeb' : 'Search and browse suitable service providers',
-        },
-        {
-          icon: Handshake,
-          title: language === 'cs' ? 'Spojte se a domluvte' : 'Connect & Discuss',
-          description: language === 'cs' ? 'Pošlete zprávy a proberte detaily' : 'Send messages and discuss project details',
-        },
-        {
-          icon: Star,
-          title: language === 'cs' ? 'Zanechte recenzi' : 'Leave a Review',
-          description: language === 'cs' ? 'Ohodnoťte zkušenost a pomozte ostatním' : 'Rate your experience and help others',
-        },
-      ],
-    },
-    categories: {
-      title: language === 'cs' ? 'Kategorie služeb' : 'Service Categories',
-      description: language === 'cs'
-        ? 'Od domácích oprav po digitální služby, kreativní projekty po osobní péči - objevte spolehlivé profesionály v široké škále kategorií.'
-        : 'From home repairs to digital services, creative projects to personal care - discover trusted professionals across a wide range of categories.',
-      showMore: language === 'cs' ? 'Zobrazit více kategorií' : 'Show More Categories',
-      showLess: language === 'cs' ? 'Zobrazit méně' : 'Show Less',
-      items: [
-        { icon: Users, label: language === 'cs' ? 'Rodina a péče o mazlíčky' : 'Family and Pet Care' },
-        { icon: Home, label: language === 'cs' ? 'Domácnost' : 'Home' },
-        { icon: Wrench, label: language === 'cs' ? 'Řemeslníci' : 'Craftsmen' },
-        { icon: Bug, label: language === 'cs' ? 'Deratizace' : 'Pests Management' },
-        { icon: TreePine, label: language === 'cs' ? 'Venkovní práce' : 'Outdoors' },
-        { icon: Key, label: language === 'cs' ? 'Zámečník' : 'Locksmith' },
-        { icon: Briefcase, label: language === 'cs' ? 'Opravy osobních věcí' : 'Personal Items Repairs', hidden: true },
-        { icon: HardHat, label: language === 'cs' ? 'Stavba domu' : 'New House Building', hidden: true },
-        { icon: Sparkles, label: language === 'cs' ? 'Krása' : 'Beauty', hidden: true },
-        { icon: Laptop, label: language === 'cs' ? 'Počítač a telefon' : 'Computer & Phone', hidden: true },
-        { icon: Globe, label: language === 'cs' ? 'Digitální svět' : 'Digital World', hidden: true },
-        { icon: Gavel, label: language === 'cs' ? 'Finance a právo' : 'Financial or Legal', hidden: true },
-        { icon: Car, label: language === 'cs' ? 'Auto' : 'Auto', hidden: true },
-        { icon: Calendar, label: language === 'cs' ? 'Události' : 'Events', hidden: true },
-        { icon: GraduationCap, label: language === 'cs' ? 'Školní doučování' : 'School Tutoring', hidden: true },
-        { icon: Languages, label: language === 'cs' ? 'Jazykové lekce' : 'Languages Lessons', hidden: true },
-        { icon: Music, label: language === 'cs' ? 'Hudební lekce' : 'Music Lessons', hidden: true },
-        { icon: Palette, label: language === 'cs' ? 'Hobby kurzy' : 'Hobby Classes', hidden: true },
-        { icon: Dumbbell, label: language === 'cs' ? 'Tanec, sport a fitness' : 'Dance, Sports & Fitness', hidden: true },
-        { icon: Heart, label: language === 'cs' ? 'Wellness' : 'Wellbeing', hidden: true },
-        { icon: Hand, label: language === 'cs' ? 'Duchovní vedení' : 'Spiritual Guidance', hidden: true },
-      ],
     },
     download: {
       title: language === 'cs' ? 'Stáhněte si Tool Connect' : 'Download Tool Connect',
@@ -305,7 +183,7 @@ export default function LandingPage() {
                 {t.hero.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <Link href="#how-it-works">
+                <Link href="/search">
                   <Button size="lg" className="w-full sm:w-auto bg-white text-primary-700 hover:bg-gray-100">
                     {t.hero.findSpecialist}
                   </Button>
@@ -456,32 +334,6 @@ export default function LandingPage() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
       </section>
 
-      {/* Benefits Section */}
-      <section id="benefits" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            {t.benefits.title}
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.benefits.items.map((benefit, index) => {
-              const Icon = benefit.icon
-              return (
-                <div
-                  key={index}
-                  className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-primary-200 transition-all group"
-                >
-                  <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-600 transition-colors">
-                    <Icon className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <h3 className="font-semibold text-lg text-gray-900 mb-2">{benefit.title}</h3>
-                  <p className="text-gray-600 text-sm">{benefit.description}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -558,149 +410,6 @@ export default function LandingPage() {
                   <MapPin className="w-4 h-4 text-primary-600" />
                   <span>{t.about.location}</span>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-gradient-to-br from-primary-600 to-primary-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-            {t.howItWorks.title}
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.howItWorks.steps.map((step, index) => {
-              const Icon = step.icon
-              return (
-                <div key={index} className="relative">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center h-full">
-                    <div className="w-8 h-8 bg-white text-primary-600 rounded-full flex items-center justify-center font-bold text-sm mb-4 mx-auto">
-                      {index + 1}
-                    </div>
-                    <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-lg text-white mb-2">{step.title}</h3>
-                    <p className="text-white/70 text-sm">{step.description}</p>
-                  </div>
-                  {index < 3 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                      <ArrowRight className="w-6 h-6 text-white/40" />
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section id="categories" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
-            {t.categories.title}
-          </h2>
-          <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            {t.categories.description}
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {t.categories.items.map((category, index) => {
-              const Icon = category.icon
-              const isHidden = category.hidden && !showAllCategories
-              return (
-                <div
-                  key={index}
-                  className={cn(
-                    'bg-gray-50 hover:bg-primary-50 border border-gray-200 hover:border-primary-200 rounded-xl p-4 text-center transition-all cursor-pointer group',
-                    isHidden && 'hidden'
-                  )}
-                >
-                  <Icon className="w-8 h-8 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium text-gray-700">{category.label}</span>
-                </div>
-              )
-            })}
-          </div>
-          <div className="text-center mt-8">
-            <button
-              onClick={() => setShowAllCategories(!showAllCategories)}
-              className="inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700 transition-colors"
-            >
-              {showAllCategories ? t.categories.showLess : t.categories.showMore}
-              <ChevronDown className={cn('w-5 h-5 transition-transform', showAllCategories && 'rotate-180')} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Download Section */}
-      <section id="download" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {t.download.title}
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                {t.download.subtitle}
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="https://apps.apple.com/us/app/tool/id6739626276"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                >
-                  <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-xs opacity-80">Download on the</div>
-                    <div className="font-semibold">{t.download.appStore}</div>
-                  </div>
-                </a>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.tool.toolappconnect"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                >
-                  <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.22.87-.52 1.14l-2.27 1.29-2.5-2.5 2.5-2.5 2.2 1.38zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-xs opacity-80">Get it on</div>
-                    <div className="font-semibold">{t.download.googlePlay}</div>
-                  </div>
-                </a>
-                <Link
-                  href="/search"
-                  className="inline-flex items-center gap-3 bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition-colors"
-                >
-                  <Globe className="w-8 h-8" />
-                  <div className="text-left">
-                    <div className="text-xs opacity-80">Try it on the</div>
-                    <div className="font-semibold">{t.download.webBrowser}</div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
-                <Image
-                  src="/assets/QR codes/smartlink.webp"
-                  alt="Download QR Code"
-                  width={200}
-                  height={200}
-                  className="mx-auto mb-4"
-                  loading="lazy"
-                  sizes="200px"
-                />
-                <p className="font-medium text-gray-900">{t.download.title}</p>
-                <p className="text-sm text-gray-500">{t.download.scanQR}</p>
               </div>
             </div>
           </div>
