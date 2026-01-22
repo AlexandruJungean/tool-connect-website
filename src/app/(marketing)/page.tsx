@@ -99,8 +99,8 @@ export default function LandingPage() {
     features: {
       title: language === 'cs' ? 'Výkonné funkce pro každého' : 'Powerful Features for Everyone',
       subtitle: language === 'cs'
-        ? 'Naše platforma je navržena tak, aby bylo hledání a spojování s profesionály co nejjednodušší.'
-        : 'Our platform is designed to make finding and connecting with professionals as simple as possible.',
+        ? 'Spojujeme klienty s profesionály — jednoduše.'
+        : 'Connecting clients with professionals — made simple.',
       list: language === 'cs' 
         ? [
             'Integrovaný chat a systém zpráv',
@@ -127,13 +127,13 @@ export default function LandingPage() {
             'Tool-Connect je vytvořen a vyvíjen v České republice – s myšlenkou, že by mělo existovat jedno jednoduché místo, kde lidé mohou najít pomoc, nabídnout své dovednosti a spojit se místně.',
             'S funkcemi jako vestavěné zprávy, vyhledávání podle lokality a širokou škálou služeb je Tool-Connect vytvořen pro práci ve vesnicích i městech, napříč jazyky a kategoriemi.',
             'Náš tým věří v budování něčeho užitečného, jednoduchého a zaměřeného na komunitu.',
-            'Teprve začínáme a těšíme se na růst s vaší pomocí.',
+            'Tool Team',
           ]
         : [
             'Tool‑Connect is created and developed in Czech Republic — with the idea that there should be one simple place where people can find help, offer their skills, and connect with each other locally.',
             'With features like built‑in messaging, location-based search, and a wide variety of services, Tool‑Connect is made to work across villages and cities, and across languages and categories.',
             'Our team believes in building something useful, simple, and community focused.',
-            "We're just getting started, and we're excited to grow it with your help.",
+            'Tool Team',
           ],
       teamTitle: language === 'cs' ? 'Náš tým' : 'Our Team',
       teamMembers: 'Laura & Adela',
