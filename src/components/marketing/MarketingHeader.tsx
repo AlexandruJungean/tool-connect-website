@@ -32,14 +32,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
   }, [])
 
   const defaultNavItems: NavItem[] = [
-    { label: language === 'cs' ? 'Domů' : 'Home', href: '/' },
-    { label: language === 'cs' ? 'Výhody' : 'Benefits', href: '/#benefits' },
-    { label: language === 'cs' ? 'Funkce' : 'Features', href: '/#features' },
-    { label: language === 'cs' ? 'O nás' : 'About', href: '/#about' },
-    { label: language === 'cs' ? 'Jak to funguje' : 'How It Works', href: '/#how-it-works' },
-    { label: language === 'cs' ? 'Služby' : 'Services', href: '/#categories' },
-    { label: language === 'cs' ? 'Stáhnout' : 'Download', href: '/#download' },
-    { label: language === 'cs' ? 'Kontakt' : 'Contact', href: '/#contact' },
+    { label: language === 'cs' ? 'Tool na webu' : 'Tool on web', href: '/search' },
   ]
 
   const items = navItems || defaultNavItems
@@ -66,22 +59,26 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden lg:flex items-center justify-center flex-1">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-primary-600',
-                  isScrolled || !transparent ? 'text-gray-700' : 'text-white/90 hover:text-white'
+                  'text-sm font-medium transition-colors hover:text-primary-600 px-4 py-2 rounded-lg',
+                  isScrolled || !transparent 
+                    ? 'text-gray-700 hover:bg-gray-100' 
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
                 )}
               >
                 {item.label}
               </Link>
             ))}
+          </div>
 
-            {/* Language Switcher */}
+          {/* Language Switcher */}
+          <div className="hidden lg:flex items-center">
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
