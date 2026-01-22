@@ -1,13 +1,10 @@
 /**
  * Google Cloud Translation API Service
- * Translates dynamic user-generated content
- * https://cloud.google.com/translate/docs/reference/rest/v2/translate
+ * Translates dynamic user-generated content via server-side API route
+ * This keeps the API key secure on the server
  */
 
-const TRANSLATE_API_URL = 'https://translation.googleapis.com/language/translate/v2'
-const DETECT_API_URL = 'https://translation.googleapis.com/language/translate/v2/detect'
-
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_TRANSLATE_API_KEY
+const TRANSLATE_API_ROUTE = '/api/translate'
 
 export type LanguageCode = 'en' | 'cs'
 
@@ -16,25 +13,6 @@ const CACHE_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
 
 // In-memory cache for translations
 const memoryCache: Map<string, { text: string; timestamp: number; sourceLang?: string }> = new Map()
-
-interface TranslateResponse {
-  data: {
-    translations: Array<{
-      translatedText: string
-      detectedSourceLanguage?: string
-    }>
-  }
-}
-
-interface DetectResponse {
-  data: {
-    detections: Array<Array<{
-      language: string
-      confidence: number
-      isReliable: boolean
-    }>>
-  }
-}
 
 /**
  * Generate a cache key for a translation
@@ -107,29 +85,23 @@ function cacheTranslation(
  * Detect the language of a text
  */
 export async function detectLanguage(text: string): Promise<string | null> {
-  if (!API_KEY) {
-    return null
-  }
-
   if (!text || text.trim().length < 3) {
     return null
   }
 
   try {
-    const response = await fetch(`${DETECT_API_URL}?key=${API_KEY}`, {
+    const response = await fetch(TRANSLATE_API_ROUTE, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ q: text }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'detect', text }),
     })
 
     if (!response.ok) {
       throw new Error(`Detection failed: ${response.status}`)
     }
 
-    const data: DetectResponse = await response.json()
-    return data.data.detections?.[0]?.[0]?.language || null
+    const data = await response.json()
+    return data.language || null
   } catch (error) {
     console.error('Language detection failed:', error)
     return null
@@ -144,11 +116,6 @@ export async function translateText(
   targetLang: LanguageCode,
   sourceLang?: string
 ): Promise<string> {
-  if (!API_KEY) {
-    console.warn('Google Translate API key not configured')
-    return text
-  }
-
   if (!text || text.trim().length === 0) {
     return text
   }
@@ -160,41 +127,31 @@ export async function translateText(
   }
 
   try {
-    // Use POST with body for better security (API key not in URL)
-    const response = await fetch(`${TRANSLATE_API_URL}?key=${API_KEY}`, {
+    const response = await fetch(TRANSLATE_API_ROUTE, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        q: text,
-        target: targetLang,
-        format: 'text',
-        ...(sourceLang && { source: sourceLang }),
+        action: 'translate',
+        text,
+        targetLang,
+        sourceLang,
       }),
     })
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
-      console.error('Translation API error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorData?.error?.message || 'Unknown error',
-      })
-      throw new Error(`Translation failed: ${errorData?.error?.message || response.status}`)
+      console.error('Translation API error:', errorData)
+      throw new Error(errorData?.error || `Translation failed: ${response.status}`)
     }
 
-    const data: TranslateResponse = await response.json()
-    const translatedText = data.data.translations?.[0]?.translatedText || text
+    const data = await response.json()
+    const translatedText = data.translatedText || text
 
     // Decode HTML entities
     const decodedText = decodeHtmlEntities(translatedText)
 
-    // Get detected source language
-    const detectedSourceLang = sourceLang || data.data.translations?.[0]?.detectedSourceLanguage
-
     // Cache the result
-    cacheTranslation(text, decodedText, targetLang, detectedSourceLang)
+    cacheTranslation(text, decodedText, targetLang, data.detectedSourceLanguage || sourceLang)
 
     return decodedText
   } catch (error) {
@@ -210,10 +167,6 @@ export async function translateBatch(
   texts: string[],
   targetLang: LanguageCode
 ): Promise<string[]> {
-  if (!API_KEY) {
-    return texts
-  }
-
   if (texts.length === 0) {
     return texts
   }
@@ -243,28 +196,26 @@ export async function translateBatch(
   }
 
   try {
-    const params = new URLSearchParams({
-      key: API_KEY,
-      target: targetLang,
-      format: 'text',
-    })
-
-    uncachedTexts.forEach(text => params.append('q', text))
-
-    const response = await fetch(`${TRANSLATE_API_URL}?${params.toString()}`, {
+    const response = await fetch(TRANSLATE_API_ROUTE, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'batch',
+        texts: uncachedTexts,
+        targetLang,
+      }),
     })
 
     if (!response.ok) {
       throw new Error(`Batch translation failed: ${response.status}`)
     }
 
-    const data: TranslateResponse = await response.json()
-    const translations = data.data.translations
+    const data = await response.json()
+    const translations = data.translations || []
 
     for (let i = 0; i < uncachedIndices.length; i++) {
       const originalIndex = uncachedIndices[i]
-      const translatedText = decodeHtmlEntities(translations[i]?.translatedText || uncachedTexts[i])
+      const translatedText = decodeHtmlEntities(translations[i] || uncachedTexts[i])
       results[originalIndex] = translatedText
 
       cacheTranslation(uncachedTexts[i], translatedText, targetLang)
