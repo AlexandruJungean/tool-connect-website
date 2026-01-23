@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { formatDate, formatTimeAgo } from '@/lib/utils'
 import { TranslatedText } from '@/components/ui/TranslatedText'
+import { VideoPlayer } from '@/components/ui/VideoPlayer'
 import Link from 'next/link'
 import { 
   ArrowLeft,
@@ -23,7 +24,8 @@ import {
   Loader2,
   CheckCircle,
   XCircle,
-  Star
+  Star,
+  Video
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -247,6 +249,20 @@ export default function RequestDetailPage() {
               className="text-gray-900 text-lg leading-relaxed"
             />
           </div>
+
+          {/* Video */}
+          {(request as any).video_url && (
+            <div className="mb-6">
+              <p className="text-sm font-medium text-gray-500 mb-2 flex items-center gap-2">
+                <Video className="w-4 h-4" />
+                {language === 'cs' ? 'Video' : 'Video'}
+              </p>
+              <VideoPlayer 
+                src={(request as any).video_url}
+                className="rounded-xl overflow-hidden"
+              />
+            </div>
+          )}
 
           {/* Meta Info */}
           <div className="flex flex-wrap gap-4 text-gray-600 mb-6">

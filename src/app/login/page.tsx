@@ -9,7 +9,9 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { CountryCodePicker } from '@/components/ui/CountryCodePicker'
 import { DEFAULT_COUNTRY, CountryCode } from '@/constants/countryCodes'
-import { ArrowRight, CheckCircle, Loader2 } from 'lucide-react'
+import { ArrowRight, CheckCircle, Loader2, Search, Briefcase, Eye } from 'lucide-react'
+
+type UserRole = 'client' | 'service-provider' | null
 
 function LoginContent() {
   const router = useRouter()
@@ -17,12 +19,29 @@ function LoginContent() {
   const { language, t } = useLanguage()
   const { isAuthenticated, isLoading: authLoading } = useAuth()
   
-  const [step, setStep] = useState<'phone' | 'verify'>('phone')
+  const [step, setStep] = useState<'role' | 'phone' | 'verify'>('role')
+  const [userRole, setUserRole] = useState<UserRole>(null)
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY)
   const [phoneNumber, setPhoneNumber] = useState('')
   const [verificationCode, setVerificationCode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Role-specific content
+  const roleContent = {
+    client: {
+      title: language === 'cs' ? 'Najděte svého specialistu' : 'Find Your Specialist',
+      subtitle: language === 'cs' 
+        ? 'Zadejte své telefonní číslo a začněte se spojovat s ověřenými profesionály.'
+        : 'Enter your phone number to start connecting with trusted professionals.',
+    },
+    'service-provider': {
+      title: language === 'cs' ? 'Rozšiřte své podnikání' : 'Grow Your Business',
+      subtitle: language === 'cs' 
+        ? 'Zadejte své telefonní číslo a začněte oslovovat nové klienty.'
+        : 'Enter your phone number to start reaching new clients.',
+    },
+  }
 
   // Redirect authenticated users away from login
   useEffect(() => {
@@ -122,6 +141,15 @@ function LoginContent() {
   
   const displayPhoneNumber = `${selectedCountry.dialCode} ${phoneNumber}`
 
+  const handleSelectRole = (role: UserRole) => {
+    setUserRole(role)
+    setStep('phone')
+  }
+
+  const handleBrowseAsGuest = () => {
+    router.push('/search')
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4 py-12">
       <div className="w-full max-w-md">
@@ -134,20 +162,87 @@ function LoginContent() {
           />
           <h1 className="text-2xl font-bold text-gray-900">Tool Connect</h1>
           <p className="text-gray-600 mt-2">
-            {language === 'cs' 
-              ? 'Přihlaste se ke svému účtu'
-              : 'Sign in to your account'
+            {step === 'role' 
+              ? (language === 'cs' ? 'Jak chcete používat Tool Connect?' : 'How would you like to use Tool Connect?')
+              : userRole 
+                ? roleContent[userRole].subtitle
+                : (language === 'cs' ? 'Přihlaste se ke svému účtu' : 'Sign in to your account')
             }
           </p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-card p-8">
-          {step === 'phone' ? (
-            <form onSubmit={handleSendCode}>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {t('auth.signIn')}
+          {step === 'role' ? (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6 text-center">
+                {language === 'cs' ? 'Přihlásit se jako' : 'Sign in as'}
               </h2>
+
+              {/* Sign in as Client */}
+              <button
+                type="button"
+                onClick={() => handleSelectRole('client')}
+                className="w-full flex items-center gap-4 p-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl"
+              >
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Search className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-lg">
+                    {language === 'cs' ? 'Hledám specialistu' : 'Sign in as Client'}
+                  </p>
+                  <p className="text-white/80 text-sm">
+                    {language === 'cs' ? 'Najděte ověřené profesionály' : 'Find trusted professionals'}
+                  </p>
+                </div>
+              </button>
+
+              {/* Sign in as Service Provider */}
+              <button
+                type="button"
+                onClick={() => handleSelectRole('service-provider')}
+                className="w-full flex items-center gap-4 p-4 bg-gradient-to-r from-violet-600 to-purple-700 text-white rounded-xl hover:from-violet-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl"
+              >
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Briefcase className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-lg">
+                    {language === 'cs' ? 'Nabízím služby' : 'Sign in as Service Provider'}
+                  </p>
+                  <p className="text-white/80 text-sm">
+                    {language === 'cs' ? 'Oslovte nové klienty' : 'Reach new clients'}
+                  </p>
+                </div>
+              </button>
+
+              {/* Browse as guest */}
+              <button
+                type="button"
+                onClick={handleBrowseAsGuest}
+                className="w-full flex items-center gap-4 p-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all"
+              >
+                <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <p className="font-semibold text-lg">
+                    {language === 'cs' ? 'Jen se rozhlédnout' : 'Just browse'}
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    {language === 'cs' ? 'Prozkoumat bez přihlášení' : 'Explore without signing in'}
+                  </p>
+                </div>
+              </button>
+            </div>
+          ) : step === 'phone' ? (
+            <form onSubmit={handleSendCode}>
+              <div className="text-center mb-6">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {userRole ? roleContent[userRole].title : t('auth.signIn')}
+                </h2>
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -188,6 +283,17 @@ function LoginContent() {
                   : "We'll send you an SMS with a verification code"
                 }
               </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setStep('role')
+                  setUserRole(null)
+                }}
+                className="w-full mt-4 text-center text-sm text-primary-700 hover:text-primary-800"
+              >
+                {language === 'cs' ? 'Změnit typ účtu' : 'Change account type'}
+              </button>
             </form>
           ) : (
             <form onSubmit={handleVerify}>

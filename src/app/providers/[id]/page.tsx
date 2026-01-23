@@ -392,6 +392,35 @@ export default function ProviderDetailPage() {
               </div>
             )}
 
+            {/* Availability */}
+            {(provider as any).availability ? (
+              <div className="bg-white rounded-2xl shadow-card p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-primary-700" />
+                    {language === 'cs' ? 'Dostupnost' : 'Availability'}
+                  </h2>
+                  {isOwnProfile && (
+                    <Link href="/profile/edit" prefetch={false} className="text-primary-700 hover:text-primary-800 text-sm font-medium">
+                      {language === 'cs' ? 'Upravit' : 'Edit'}
+                    </Link>
+                  )}
+                </div>
+                <p className="text-gray-600 leading-relaxed">{(provider as any).availability}</p>
+              </div>
+            ) : isOwnProfile && (
+              <div className="bg-white rounded-2xl shadow-card p-6">
+                <h2 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-primary-700" />
+                  {language === 'cs' ? 'Dostupnost' : 'Availability'}
+                </h2>
+                <Link href="/profile/edit" prefetch={false} className="flex items-center gap-2 text-primary-700 hover:text-primary-800">
+                  <Plus className="w-5 h-5" />
+                  <span>{language === 'cs' ? 'Přidat dostupnost' : 'Add availability'}</span>
+                </Link>
+              </div>
+            )}
+
             {/* Pricing */}
             {(provider.hourly_rate_min || provider.hourly_rate_max || provider.price_info) ? (
               <div className="bg-white rounded-2xl shadow-card p-6">

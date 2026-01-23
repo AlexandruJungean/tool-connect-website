@@ -33,6 +33,7 @@ export default function ProviderProfileSetupPage() {
   const [subcategories, setSubcategories] = useState<string[]>([])
   // Specialty field removed - using category instead
   const [aboutMe, setAboutMe] = useState('')
+  const [availability, setAvailability] = useState('')
   const [location, setLocation] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['english'])
   const [accountType, setAccountType] = useState('self-employed')
@@ -58,6 +59,13 @@ export default function ProviderProfileSetupPage() {
     aboutMePlaceholder: language === 'cs' 
       ? 'Popište své zkušenosti, dovednosti a co vás odlišuje...'
       : 'Describe your experience, skills, and what makes you stand out...',
+    availability: language === 'cs' ? 'Dostupnost' : 'Availability',
+    availabilityHint: language === 'cs' 
+      ? 'Dejte klientům vědět, kdy jste k dispozici'
+      : 'Let clients know when you are available',
+    availabilityPlaceholder: language === 'cs'
+      ? 'např. Jsem k dispozici pouze mezi 17:00 a 19:00'
+      : 'e.g. I am available only in between 5 and 7 PM',
     location: language === 'cs' ? 'Lokalita' : 'Location',
     languages: language === 'cs' ? 'Jazyky' : 'Languages',
     accountType: language === 'cs' ? 'Typ účtu' : 'Account Type',
@@ -160,6 +168,7 @@ export default function ProviderProfileSetupPage() {
           services: subcategories.join(','),
           // specialty removed - using category instead
           about_me: aboutMe.trim(),
+          availability: availability.trim() || null,
           location: location.trim(),
           languages: selectedLanguages,
           account_type: accountType,
@@ -277,6 +286,23 @@ export default function ProviderProfileSetupPage() {
               placeholder={t.aboutMePlaceholder}
               rows={5}
             />
+
+            {/* Availability Section */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t.availability}
+              </label>
+              <p className="text-xs text-gray-500 mb-2">{t.availabilityHint}</p>
+              <textarea
+                value={availability}
+                onChange={(e) => setAvailability(e.target.value.slice(0, 200))}
+                placeholder={t.availabilityPlaceholder}
+                rows={3}
+                maxLength={200}
+                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+              />
+              <p className="text-xs text-gray-500 text-right mt-1">{availability.length}/200</p>
+            </div>
 
             <LocationInput
               label={t.location}

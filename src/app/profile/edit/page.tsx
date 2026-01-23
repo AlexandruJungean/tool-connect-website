@@ -35,6 +35,7 @@ export default function EditProfilePage() {
   // Specialty field removed - using category instead
   const [category, setCategory] = useState('')
   const [aboutMe, setAboutMe] = useState('')
+  const [availability, setAvailability] = useState('')
   const [priceMin, setPriceMin] = useState('')
   const [priceMax, setPriceMax] = useState('')
   // Currency is now fixed to CZK
@@ -69,6 +70,7 @@ export default function EditProfilePage() {
         // Specialty field removed
         setCategory(serviceProviderProfile.category || '')
         setAboutMe(serviceProviderProfile.about_me || serviceProviderProfile.bio || '')
+        setAvailability((serviceProviderProfile as any).availability || '')
         setPriceMin(serviceProviderProfile.hourly_rate_min?.toString() || '')
         setPriceMax(serviceProviderProfile.hourly_rate_max?.toString() || '')
         // Currency is fixed to CZK
@@ -109,6 +111,7 @@ export default function EditProfilePage() {
             // specialty removed - using category instead
             category,
             about_me: aboutMe,
+            availability: availability.trim() || null,
             hourly_rate_min: priceMin ? parseFloat(priceMin) : null,
             hourly_rate_max: priceMax ? parseFloat(priceMax) : null,
             price_currency: currency,
@@ -336,6 +339,29 @@ export default function EditProfilePage() {
                     className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                     placeholder={language === 'cs' ? 'Řekněte něco o sobě a svých službách...' : 'Tell us about yourself and your services...'}
                   />
+                </div>
+
+                {/* Availability Section */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {language === 'cs' ? 'Dostupnost' : 'Availability'}
+                  </label>
+                  <p className="text-xs text-gray-500 mb-2">
+                    {language === 'cs' 
+                      ? 'Dejte klientům vědět, kdy jste k dispozici'
+                      : 'Let clients know when you are available'}
+                  </p>
+                  <textarea
+                    value={availability}
+                    onChange={(e) => setAvailability(e.target.value.slice(0, 200))}
+                    placeholder={language === 'cs'
+                      ? 'např. Jsem k dispozici pouze mezi 17:00 a 19:00'
+                      : 'e.g. I am available only in between 5 and 7 PM'}
+                    rows={3}
+                    maxLength={200}
+                    className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                  />
+                  <p className="text-xs text-gray-500 text-right mt-1">{availability.length}/200</p>
                 </div>
 
                 {/* Pricing */}

@@ -91,6 +91,7 @@ export interface ServiceProviderProfile {
   profile_views_count: number;
   average_rating?: number | null;
   total_reviews?: number | null;
+  availability?: string | null; // Free text for availability information
 }
 
 export interface PortfolioProject {
@@ -145,6 +146,7 @@ export interface WorkRequest {
   location_coordinates?: { lat: number; lng: number };
   status: 'active' | 'paused' | 'closed' | 'completed';
   attachments?: string[];
+  video_url?: string | null; // Video to explain the request
   created_at: string;
   updated_at: string;
   expires_at?: string;

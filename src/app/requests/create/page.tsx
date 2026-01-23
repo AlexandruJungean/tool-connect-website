@@ -9,8 +9,8 @@ import { SERVICE_CATEGORIES, getCategoryLabel, getSubcategoryLabel } from '@/con
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
-import { LocationInput } from '@/components/forms'
-import { ArrowLeft, Check } from 'lucide-react'
+import { LocationInput, VideoUpload } from '@/components/forms'
+import { ArrowLeft, Check, Video } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export default function CreateRequestPage() {
@@ -23,6 +23,7 @@ export default function CreateRequestPage() {
   const [subcategories, setSubcategories] = useState<string[]>([])
   const [budget, setBudget] = useState('')
   const [location, setLocation] = useState('')
+  const [videoUrl, setVideoUrl] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
 
@@ -78,12 +79,51 @@ export default function CreateRequestPage() {
           subcategory: subcategories.join(','), // Store as comma-separated string
           budget: budget || null,
           location: location || null,
+          video_url: videoUrl || null,
           status: 'active',
         })
         .select()
         .single()
 
       if (insertError) throw insertError
+
+      // Notify service providers with matching category
+      try {
+        const clientName = clientProfile.name || (language === 'cs' ? 'Klient' : 'A client')
+        const shortDescription = description.trim().length > 50 
+          ? description.trim().substring(0, 47) + '...' 
+          : description.trim()
+
+        // Find service providers with matching category who are active
+        const { data: providers } = await supabase
+          .from('service_provider_profiles')
+          .select('user_id')
+          .eq('category', category)
+          .eq('is_visible', true)
+          .eq('is_active', true)
+          .eq('profile_completed', true)
+
+        if (providers && providers.length > 0) {
+          const notifications = providers.map(provider => ({
+            user_id: provider.user_id,
+            type: 'new_work_request',
+            title: language === 'cs' ? 'Nová poptávka' : 'New Request',
+            message: language === 'cs' 
+              ? `${clientName} hledá pomoc: ${shortDescription}`
+              : `${clientName} needs help: ${shortDescription}`,
+            data: { 
+              request_id: data.id,
+              category,
+            },
+          }))
+
+          await supabase.from('notifications').insert(notifications)
+        }
+      } catch (notifError) {
+        // Silently fail - don't break the request creation flow
+        console.error('Failed to send notifications:', notifError)
+      }
+
       router.push(`/requests/${data.id}`)
     } catch (err: any) {
       console.error('Error creating request:', err)
@@ -198,6 +238,26 @@ export default function CreateRequestPage() {
               onChange={(value) => setLocation(value)}
               placeholder={language === 'cs' ? 'Město nebo oblast' : 'City or area'}
             />
+
+            {/* Video Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {language === 'cs' ? 'Video (volitelné)' : 'Video (optional)'}
+              </label>
+              <p className="text-xs text-gray-500 mb-2">
+                {language === 'cs' 
+                  ? 'Vytvořte krátké video, které vysvětlí, s čím potřebujete pomoci'
+                  : 'Create a short video to explain what you need help with'}
+              </p>
+              <VideoUpload
+                value={videoUrl}
+                onChange={setVideoUrl}
+                bucket="request-videos"
+                folder={clientProfile?.id}
+                maxSizeMB={50}
+                maxDurationSeconds={90}
+              />
+            </div>
 
             {/* Error */}
             {error && (

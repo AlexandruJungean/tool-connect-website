@@ -11,8 +11,36 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { LocationInput } from '@/components/forms'
-import { Search, Filter, X, Loader2, SlidersHorizontal } from 'lucide-react'
+import { Search, Filter, X, Loader2, SlidersHorizontal, ArrowLeft, Check, Users, Home, Hammer, Bug, TreePine, Key, Wrench, Building, Sparkles, Laptop, Globe, Scale, Car, Calendar, GraduationCap, Languages, Music, Palette, Dumbbell, Heart, Sparkle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
+// Map category values to icons
+const getCategoryIcon = (categoryValue: string) => {
+  const iconMap: Record<string, React.ReactNode> = {
+    'family_pet_care': <Users className="w-7 h-7" />,
+    'home': <Home className="w-7 h-7" />,
+    'craftsmen': <Hammer className="w-7 h-7" />,
+    'pests_management': <Bug className="w-7 h-7" />,
+    'outdoors': <TreePine className="w-7 h-7" />,
+    'locksmith': <Key className="w-7 h-7" />,
+    'personal_items_repairs': <Wrench className="w-7 h-7" />,
+    'new_house_building': <Building className="w-7 h-7" />,
+    'beauty': <Sparkles className="w-7 h-7" />,
+    'computer_phone': <Laptop className="w-7 h-7" />,
+    'digital_world': <Globe className="w-7 h-7" />,
+    'financial_legal': <Scale className="w-7 h-7" />,
+    'auto': <Car className="w-7 h-7" />,
+    'events': <Calendar className="w-7 h-7" />,
+    'school_tutoring': <GraduationCap className="w-7 h-7" />,
+    'languages_lessons': <Languages className="w-7 h-7" />,
+    'music_lessons': <Music className="w-7 h-7" />,
+    'hobby_classes': <Palette className="w-7 h-7" />,
+    'dance_sports_fitness': <Dumbbell className="w-7 h-7" />,
+    'wellbeing': <Heart className="w-7 h-7" />,
+    'spiritual_guidance': <Sparkle className="w-7 h-7" />,
+  }
+  return iconMap[categoryValue] || <Search className="w-7 h-7" />
+}
 
 function SearchContent() {
   const searchParams = useSearchParams()
@@ -22,7 +50,13 @@ function SearchContent() {
   const [providers, setProviders] = useState<ServiceProviderProfile[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
-  const [showFilters, setShowFilters] = useState(false)
+  const [showFilters, setShowFilters] = useState(true) // Show filters by default
+  
+  // Category picker state - show first if no category in URL
+  const hasFiltersFromURL = !!searchParams.get('category')
+  const [showCategoryPicker, setShowCategoryPicker] = useState(!hasFiltersFromURL)
+  const [pickerCategory, setPickerCategory] = useState<string | null>(null)
+  const [pickerSubcategories, setPickerSubcategories] = useState<string[]>([])
   
   // Available categories/subcategories based on actual providers
   const [availableCategories, setAvailableCategories] = useState<string[]>([])
@@ -41,6 +75,46 @@ function SearchContent() {
 
   const selectedCategory = SERVICE_CATEGORIES.find(cat => cat.value === category)
   const subcategoriesForCategory = selectedCategory?.subcategories || []
+  
+  // Get picker category data
+  const getPickerCategoryData = () => {
+    return SERVICE_CATEGORIES.find(cat => cat.value === pickerCategory)
+  }
+  
+  // Category picker handlers
+  const handlePickerCategorySelect = (categoryValue: string) => {
+    if (pickerCategory === categoryValue) {
+      setPickerCategory(null)
+      setPickerSubcategories([])
+    } else {
+      setPickerCategory(categoryValue)
+      setPickerSubcategories([])
+    }
+  }
+  
+  const handlePickerSubcategoryToggle = (subcategoryValue: string) => {
+    setPickerSubcategories(prev => {
+      if (prev.includes(subcategoryValue)) {
+        return prev.filter(s => s !== subcategoryValue)
+      } else {
+        return [...prev, subcategoryValue]
+      }
+    })
+  }
+  
+  const handlePickerConfirm = () => {
+    if (pickerCategory) {
+      setCategory(pickerCategory)
+      setSelectedSubcategories(pickerSubcategories)
+      setShowCategoryPicker(false)
+    }
+  }
+  
+  const handleShowAllProviders = () => {
+    setCategory('')
+    setSelectedSubcategories([])
+    setShowCategoryPicker(false)
+  }
 
   // Fetch available categories on mount
   useEffect(() => {
@@ -113,7 +187,29 @@ function SearchContent() {
         query = query.or(`city.ilike.%${location}%,country.ilike.%${location}%,location.ilike.%${location}%`)
       }
       if (keywords) {
-        query = query.or(`name.ilike.%${keywords}%,category.ilike.%${keywords}%,about_me.ilike.%${keywords}%`)
+        // First, find subcategory values that match the keywords
+        const matchingSubcategoryValues: string[] = []
+        const keywordsLower = keywords.toLowerCase()
+        
+        SERVICE_CATEGORIES.forEach(cat => {
+          cat.subcategories.forEach(sub => {
+            if (
+              sub.label.toLowerCase().includes(keywordsLower) ||
+              sub.labelCS.toLowerCase().includes(keywordsLower) ||
+              sub.value.toLowerCase().includes(keywordsLower)
+            ) {
+              matchingSubcategoryValues.push(sub.value)
+            }
+          })
+        })
+
+        // Build search query - search in name, category, about_me, and matching subcategories
+        if (matchingSubcategoryValues.length > 0) {
+          // If keywords match subcategories, we need to combine text search with service overlap
+          query = query.or(`name.ilike.%${keywords}%,category.ilike.%${keywords}%,about_me.ilike.%${keywords}%,services.ov.{${matchingSubcategoryValues.join(',')}}`)
+        } else {
+          query = query.or(`name.ilike.%${keywords}%,category.ilike.%${keywords}%,about_me.ilike.%${keywords}%`)
+        }
       }
       if (selectedLanguages.length > 0) {
         query = query.overlaps('languages', selectedLanguages)
@@ -182,6 +278,124 @@ function SearchContent() {
     { value: 'self-employed', label: t('search.selfEmployed') },
   ]
 
+  // Show category picker view
+  if (showCategoryPicker) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Search Header */}
+        <div className="bg-white border-b border-gray-100 sticky top-16 z-40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <form onSubmit={handleSearch} className="flex gap-3">
+              <Input
+                placeholder={t('search.placeholder')}
+                value={keywords}
+                onChange={(e) => setKeywords(e.target.value)}
+                leftIcon={<Search className="w-5 h-5" />}
+                className="flex-1"
+              />
+              <Button type="submit" leftIcon={<Search className="w-5 h-5" />}>
+                {t('common.search')}
+              </Button>
+            </form>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Title */}
+          <div className="text-center mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              {language === 'cs' ? 'Vyberte kategorii' : 'Select a Category'}
+            </h1>
+            <p className="text-gray-600">
+              {language === 'cs' 
+                ? 'Vyberte kategorii a služby, které hledáte'
+                : 'Choose a category and services you are looking for'
+              }
+            </p>
+          </div>
+
+          {!pickerCategory ? (
+            // Show main categories grid
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+                {SERVICE_CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.value}
+                    onClick={() => handlePickerCategorySelect(cat.value)}
+                    className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group"
+                  >
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-100 flex items-center justify-center mb-3 text-primary-700 group-hover:bg-primary-200 transition-colors">
+                      {getCategoryIcon(cat.value)}
+                    </div>
+                    <span className="text-sm sm:text-base font-medium text-gray-900 text-center">
+                      {language === 'cs' ? cat.labelCS : cat.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Show all providers button */}
+              <div className="text-center">
+                <Button 
+                  variant="outline" 
+                  onClick={handleShowAllProviders}
+                  leftIcon={<Search className="w-5 h-5" />}
+                >
+                  {language === 'cs' ? 'Zobrazit všechny poskytovatele' : 'Show All Providers'}
+                </Button>
+              </div>
+            </>
+          ) : (
+            // Show subcategories for selected category
+            <div className="bg-white rounded-2xl p-6 shadow-card">
+              {/* Back button */}
+              <button
+                onClick={() => setPickerCategory(null)}
+                className="flex items-center gap-2 text-primary-700 hover:text-primary-800 mb-6 px-4 py-2 bg-primary-50 rounded-full"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span className="font-medium">
+                  {language === 'cs' ? getPickerCategoryData()?.labelCS : getPickerCategoryData()?.label}
+                </span>
+              </button>
+
+              {/* Subcategories grid */}
+              <div className="flex flex-wrap gap-3 mb-8">
+                {getPickerCategoryData()?.subcategories.map((subcategory) => (
+                  <button
+                    key={subcategory.value}
+                    onClick={() => handlePickerSubcategoryToggle(subcategory.value)}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all border-2",
+                      pickerSubcategories.includes(subcategory.value)
+                        ? "bg-primary-700 text-white border-primary-700"
+                        : "bg-white text-gray-700 border-gray-200 hover:border-primary-400"
+                    )}
+                  >
+                    {language === 'cs' ? subcategory.labelCS : subcategory.label}
+                    {pickerSubcategories.includes(subcategory.value) && (
+                      <Check className="w-4 h-4" />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Confirm button */}
+              <Button 
+                onClick={handlePickerConfirm}
+                size="lg"
+                className="w-full"
+                leftIcon={<Search className="w-5 h-5" />}
+              >
+                {language === 'cs' ? 'Zobrazit poskytovatele' : 'Show Providers'}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Search Header */}
@@ -212,11 +426,24 @@ function SearchContent() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Back to categories button */}
+        <button
+          onClick={() => {
+            setShowCategoryPicker(true)
+            setPickerCategory(null)
+            setPickerSubcategories([])
+          }}
+          className="flex items-center gap-2 text-primary-700 hover:text-primary-800 mb-4"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          {language === 'cs' ? 'Zpět na kategorie' : 'Back to categories'}
+        </button>
+
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Filters Sidebar */}
           <aside className={cn(
             "lg:w-72 flex-shrink-0",
-            showFilters ? "block" : "hidden lg:block"
+            showFilters ? "block" : "hidden"
           )}>
             <div className="bg-white rounded-2xl p-6 shadow-card sticky top-36">
               <div className="flex items-center justify-between mb-6">

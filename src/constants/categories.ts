@@ -32,6 +32,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'dog_walker', label: 'Dog walker', labelCS: 'Venčitel psů' },
       { value: 'pet_sitter', label: 'Pet sitter', labelCS: 'Hlídání domácích mazlíčků' },
       { value: 'pet_groomer', label: 'Pet groomer', labelCS: 'Péče o zvířata' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -50,6 +51,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'windows_installer', label: 'Windows installer', labelCS: 'Instalatér oken' },
       { value: 'appliances_repair', label: 'Appliances repair', labelCS: 'Oprava spotřebičů' },
       { value: 'interior_designer', label: 'Interior designer', labelCS: 'Interiérový designér' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -62,6 +64,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'blacksmith', label: 'Blacksmith', labelCS: 'Kovář' },
       { value: 'leatherworker', label: 'Leatherworker', labelCS: 'Kožedělník' },
       { value: 'stone_mason', label: 'Stone mason', labelCS: 'Kameník' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -73,6 +76,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'pest_control', label: 'Pest control specialist', labelCS: 'Specialista na hubení škůdců' },
       { value: 'disinfection', label: 'Disinfection specialist', labelCS: 'Specialista na dezinfekci' },
       { value: 'deratization', label: 'Deratization specialist', labelCS: 'Specialista na deratizaci' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -83,6 +87,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     subcategories: [
       { value: 'gardening', label: 'Gardening Specialist', labelCS: 'Zahradník' },
       { value: 'landscape', label: 'Landscape specialist', labelCS: 'Krajinář' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -94,6 +99,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'emergency_lockout', label: 'Emergency lockout service', labelCS: 'Nouzové odemykání' },
       { value: 'lock_installation', label: 'Lock installation & replacement', labelCS: 'Instalace a výměna zámků' },
       { value: 'car_locksmith', label: 'Car locksmith', labelCS: 'Automobilový zámečník' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -106,6 +112,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'watches_repairs', label: 'Watches repairs', labelCS: 'Opravy hodinek' },
       { value: 'shoes_repair', label: 'Shoes repair', labelCS: 'Opravy obuvi' },
       { value: 'tailor', label: 'Tailor / Seamstress', labelCS: 'Krejčí / Švadlena' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -121,6 +128,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'hydrogeological_surveyor', label: 'Hydrogeological surveyor', labelCS: 'Hydrogeolog' },
       { value: 'property_inspector', label: 'Property inspector', labelCS: 'Inspektor nemovitostí' },
       { value: 'excavation_operator', label: 'Excavation / Groundwork operator', labelCS: 'Operátor výkopů' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -136,6 +144,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'brow_lash', label: 'Brow & Lash technician', labelCS: 'Technik obočí a řas' },
       { value: 'makeup_artist', label: 'Makeup artist', labelCS: 'Vizážista' },
       { value: 'massage_therapist', label: 'Massage therapist', labelCS: 'Masér' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -146,6 +155,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     subcategories: [
       { value: 'computer_repair', label: 'Computer repair', labelCS: 'Oprava počítačů' },
       { value: 'phone_repair', label: 'Phone repair', labelCS: 'Oprava telefonů' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -158,6 +168,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'graphic_designer', label: 'Graphic designer', labelCS: 'Grafický designér' },
       { value: 'digital_marketing', label: 'Digital marketing specialist', labelCS: 'Specialista digitálního marketingu' },
       { value: 'virtual_assistant', label: 'Virtual assistant', labelCS: 'Virtuální asistent' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -169,6 +180,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'accountant', label: 'Accountant / Tax consultant', labelCS: 'Účetní / Daňový poradce' },
       { value: 'lawyer', label: 'Lawyer / Attorney', labelCS: 'Právník / Advokát' },
       { value: 'notary', label: 'Notary public', labelCS: 'Notář' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -182,6 +194,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'bike_repair', label: 'Bike /E-bike repair', labelCS: 'Oprava kol /E-kol' },
       { value: 'driving_instructor', label: 'Driving instructor', labelCS: 'Instruktor řízení' },
       { value: 'personal_driver', label: 'Personal driver', labelCS: 'Osobní řidič' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -197,6 +210,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'dj', label: 'DJ', labelCS: 'DJ' },
       { value: 'chef', label: 'Chef', labelCS: 'Šéfkuchař' },
       { value: 'caterer_events', label: 'Caterer', labelCS: 'Catering' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -211,6 +225,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'english_language', label: 'English language', labelCS: 'Anglický jazyk' },
       { value: 'other_foreign_languages', label: 'Other foreign languages', labelCS: 'Další cizí jazyky' },
       { value: 'geography_history', label: 'Geography & History', labelCS: 'Zeměpis & Historie' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -224,6 +239,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'german', label: 'German', labelCS: 'Němčina' },
       { value: 'other_languages', label: 'Other foreign languages', labelCS: 'Další cizí jazyky' },
       { value: 'sign_language', label: 'Sign language', labelCS: 'Znakový jazyk' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -237,6 +253,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'violin', label: 'Violin', labelCS: 'Housle' },
       { value: 'vocal', label: 'Vocal / Singing', labelCS: 'Zpěv' },
       { value: 'drums', label: 'Drums', labelCS: 'Bicí' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -252,6 +269,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'acting', label: 'Acting', labelCS: 'Herectví' },
       { value: 'pottery', label: 'Pottery', labelCS: 'Hrnčířství' },
       { value: 'cooking', label: 'Cooking', labelCS: 'Vaření' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -264,6 +282,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'sport_classes', label: 'Sport classes', labelCS: 'Sportovní lekce' },
       { value: 'martial_arts', label: 'Martial arts', labelCS: 'Bojová umění' },
       { value: 'personal_trainer', label: 'Personal Trainer', labelCS: 'Osobní trenér' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -279,6 +298,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'physiotherapist', label: 'Physiotherapist', labelCS: 'Fyzioterapeut' },
       { value: 'speech_therapy', label: 'Speech therapy', labelCS: 'Logoped' },
       { value: 'psychologist', label: 'Psychologist', labelCS: 'Psycholog' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
   {
@@ -291,6 +311,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'energy_healer', label: 'Energy healer / Reiki practitioner', labelCS: 'Energetický léčitel' },
       { value: 'astrologist', label: 'Astrologist', labelCS: 'Astrolog' },
       { value: 'tarot_reader', label: 'Tarot reader', labelCS: 'Čtení tarot' },
+      { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
 ]
