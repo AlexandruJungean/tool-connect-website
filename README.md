@@ -190,41 +190,8 @@ For questions or support regarding this website:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the package.json file for details.
+This project is proprietary software. Copyright (c) 2026 Jungean-Herman Marius-Alexandru. All rights reserved. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 **Built with ❤️ for connecting people with trusted professionals worldwide.**
-│   │   └── styles.css    # CSS styles for the website
-│   ├── js
-│   │   └── main.js       # JavaScript for interactivity
-│   └── assets
-│       └── fonts
-│           └── .gitkeep  # Keeps the fonts directory in version control
-├── package.json          # npm configuration file
-└── README.md             # Project documentation
-```
-
-## Getting Started
-
-To get started with this project, follow these steps:
-
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Install the necessary dependencies using npm:
-   ```
-   npm install
-   ```
-4. Open `src/index.html` in your web browser to view the website.
-
-## Usage
-
-Feel free to modify the content in `src/index.html`, update styles in `src/css/styles.css`, and add interactivity in `src/js/main.js` as needed.
-
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
