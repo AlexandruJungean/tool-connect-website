@@ -19,7 +19,7 @@ export interface ServiceCategory {
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     value: 'family_pet_care',
-    label: 'Family and Pet Care',
+    label: 'Family & Pet',
     labelCS: 'Rodina a péče o domácí mazlíčky',
     icon: 'users',
     subcategories: [
@@ -29,6 +29,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'personal_chef', label: 'Personal chef /Cook', labelCS: 'Osobní kuchař' },
       { value: 'house_cleaner', label: 'House Cleaner', labelCS: 'Uklízeč' },
       { value: 'caterer', label: 'Caterer', labelCS: 'Catering' },
+      { value: 'baker', label: 'Baker', labelCS: 'Pekař' },
       { value: 'dog_walker', label: 'Dog walker', labelCS: 'Venčitel psů' },
       { value: 'pet_sitter', label: 'Pet sitter', labelCS: 'Hlídání domácích mazlíčků' },
       { value: 'pet_groomer', label: 'Pet groomer', labelCS: 'Péče o zvířata' },
@@ -51,6 +52,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'windows_installer', label: 'Windows installer', labelCS: 'Instalatér oken' },
       { value: 'appliances_repair', label: 'Appliances repair', labelCS: 'Oprava spotřebičů' },
       { value: 'interior_designer', label: 'Interior designer', labelCS: 'Interiérový designér' },
+      { value: 'mover', label: 'Mover', labelCS: 'Stěhovák' },
       { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
@@ -194,6 +196,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'bike_repair', label: 'Bike /E-bike repair', labelCS: 'Oprava kol /E-kol' },
       { value: 'driving_instructor', label: 'Driving instructor', labelCS: 'Instruktor řízení' },
       { value: 'personal_driver', label: 'Personal driver', labelCS: 'Osobní řidič' },
+      { value: 'mover', label: 'Mover', labelCS: 'Stěhovák' },
       { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },
