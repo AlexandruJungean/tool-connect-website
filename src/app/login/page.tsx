@@ -212,7 +212,7 @@ function LoginContent() {
                     {language === 'cs' ? 'Nabízím služby' : 'Sign in as Service Provider'}
                   </p>
                   <p className="text-white/80 text-sm">
-                    {language === 'cs' ? 'Oslovte nové klienty' : 'Reach new clients'}
+                    {language === 'cs' ? 'Ať vás klienti osloví' : 'Let clients reach you'}
                   </p>
                 </div>
               </button>
