@@ -616,25 +616,37 @@ function MessagesContent() {
 
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                  {/* Show prompt for new conversations */}
-                  {newConversationProvider && messages.length === 0 && (
+                  {/* Start-of-conversation placeholder */}
+                  {messages.length === 0 && (
                     <div className="flex flex-col items-center justify-center h-full text-center py-8">
                       <div className="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-4">
-                        {newConversationProvider.avatar_url ? (
-                          <img src={newConversationProvider.avatar_url} alt="" className="w-full h-full rounded-full object-cover" />
+                        {otherUser?.avatar_url ? (
+                          <img src={otherUser.avatar_url} alt="" className="w-full h-full rounded-full object-cover" />
                         ) : (
                           <User className="w-8 h-8 text-primary-700" />
                         )}
                       </div>
                       <h3 className="font-semibold text-gray-900 mb-1">
-                        {newConversationProvider.name} {newConversationProvider.surname}
+                        {otherUser?.name} {otherUser?.surname}
                       </h3>
                       <p className="text-sm text-gray-500">
-                        {language === 'cs' 
+                        {language === 'cs'
                           ? 'Napište zprávu pro zahájení konverzace'
                           : 'Send a message to start the conversation'
                         }
                       </p>
+
+                      <div className="mt-6 max-w-md rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-left">
+                        <p className="text-sm text-gray-700">
+                          <span className="font-semibold text-gray-900">
+                            {language === 'cs' ? 'Tip:' : 'Tip:'}
+                          </span>{' '}
+                          {language === 'cs'
+                            ? 'Platby si domlouváte přímo mezi sebou, ne přes aplikaci.'
+                            : 'Payments are arranged directly between each other, not through the app.'
+                          }
+                        </p>
+                      </div>
                     </div>
                   )}
                   {messages.map((message) => {
