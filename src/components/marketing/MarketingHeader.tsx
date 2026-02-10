@@ -62,14 +62,27 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex items-center justify-center flex-1">
             {items.map((item) => (
+              // Make the primary CTA ("Tool on web") more visible
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-primary-600 px-4 py-2 rounded-lg',
-                  isScrolled || !transparent 
-                    ? 'text-gray-700 hover:bg-gray-100' 
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  item.href === '/search'
+                    ? cn(
+                        'font-semibold tracking-wide transition-all duration-300',
+                        'px-5 py-2.5 rounded-full',
+                        // Dynamic sizing/visibility: larger at top, tighter after scroll
+                        isScrolled || !transparent ? 'text-base' : 'text-lg',
+                        isScrolled || !transparent
+                          ? 'text-primary-700 bg-primary-50 hover:bg-primary-100 ring-1 ring-primary-100 shadow-sm'
+                          : 'text-white bg-white/15 hover:bg-white/25 border border-white/25 backdrop-blur-sm shadow-md drop-shadow'
+                      )
+                    : cn(
+                        'text-sm font-medium transition-colors px-4 py-2 rounded-lg',
+                        isScrolled || !transparent
+                          ? 'text-gray-700 hover:bg-gray-100 hover:text-primary-600'
+                          : 'text-white/90 hover:text-white hover:bg-white/10'
+                      )
                 )}
               >
                 {item.label}

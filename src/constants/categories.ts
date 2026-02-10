@@ -196,7 +196,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { value: 'bike_repair', label: 'Bike /E-bike repair', labelCS: 'Oprava kol /E-kol' },
       { value: 'driving_instructor', label: 'Driving instructor', labelCS: 'Instruktor řízení' },
       { value: 'personal_driver', label: 'Personal driver', labelCS: 'Osobní řidič' },
-      { value: 'mover', label: 'Mover', labelCS: 'Stěhovák' },
       { value: 'any', label: 'Others', labelCS: 'Ostatní' },
     ],
   },

@@ -105,16 +105,31 @@ export function TranslatedText({
           </Component>
           
           {showToggle && wasTranslated && sourceLanguageLabel && (
-            <button
-              onClick={() => setShowOriginal(!showOriginal)}
-              className="inline-flex items-center gap-1 mt-2 text-xs text-gray-500 hover:text-primary-600 transition-colors"
-            >
-              <Languages className="w-3 h-3" />
-              {showOriginal 
-                ? (language === 'cs' ? 'Zobrazit překlad' : 'Show translation')
-                : (language === 'cs' ? `Zobrazit originál (${sourceLanguageLabel})` : `Show original (${sourceLanguageLabel})`)
-              }
-            </button>
+            <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-primary-200 bg-primary-50/60 px-4 py-2.5">
+              <div className="flex items-center gap-2 min-w-0">
+                <Languages className="w-4 h-4 text-primary-700 flex-shrink-0" />
+                <p className="text-sm text-gray-800 truncate">
+                  {language === 'cs'
+                    ? `Automaticky přeloženo z ${sourceLanguageLabel}`
+                    : `Auto-translated from ${sourceLanguageLabel}`}
+                </p>
+              </div>
+
+              <button
+                onClick={() => setShowOriginal(!showOriginal)}
+                className={cn(
+                  'flex-shrink-0 inline-flex items-center justify-center',
+                  'px-3.5 py-2 rounded-lg text-sm font-semibold',
+                  'bg-primary-700 text-white shadow-sm',
+                  'hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
+                  'transition-colors'
+                )}
+              >
+                {showOriginal
+                  ? (language === 'cs' ? 'Zobrazit překlad' : 'Show translation')
+                  : (language === 'cs' ? 'Zobrazit originál' : 'Show original')}
+              </button>
+            </div>
           )}
         </>
       )}
