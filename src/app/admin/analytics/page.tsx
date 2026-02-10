@@ -46,12 +46,13 @@ import {
   CityStats,
 } from '@/lib/api/admin'
 import { LoadingSpinner } from '@/components/ui'
-import { getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
 const COLORS = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#84cc16', '#f97316']
 
 export default function AdminAnalyticsPage() {
+  const { getCategoryLabel } = useCategories()
   const [stats, setStats] = useState<AdminStats | null>(null)
   const [dailyStats, setDailyStats] = useState<DailyStats[]>([])
   const [categoryDist, setCategoryDist] = useState<CategoryStats[]>([])

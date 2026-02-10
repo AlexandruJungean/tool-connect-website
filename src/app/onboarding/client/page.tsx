@@ -9,7 +9,7 @@ import { LoadingSpinner } from '@/components/ui'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { LocationInput } from '@/components/forms'
-import { SERVICE_CATEGORIES } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -30,6 +30,7 @@ import { cn } from '@/lib/utils'
 export default function ClientProfileSetupPage() {
   const router = useRouter()
   const { language } = useLanguage()
+  const { categories } = useCategories()
   const { 
     user,
     isAuthenticated, 
@@ -245,7 +246,7 @@ export default function ClientProfileSetupPage() {
   }
 
   const getSelectedCategoryData = () => {
-    return SERVICE_CATEGORIES.find(cat => cat.value === selectedCategory)
+    return categories.find(cat => cat.value === selectedCategory)
   }
 
   // Save profile (not complete yet - will be completed after categories/help options)
@@ -695,7 +696,7 @@ export default function ClientProfileSetupPage() {
               {!selectedCategory ? (
                 // Show main categories
                 <div className="grid grid-cols-2 gap-3">
-                  {SERVICE_CATEGORIES.map((category) => (
+                  {categories.map((category) => (
                     <button
                       key={category.value}
                       onClick={() => handleCategorySelect(category.value)}

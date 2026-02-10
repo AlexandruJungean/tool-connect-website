@@ -362,27 +362,6 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </div>
-            <div className="relative">
-              <Link href="/search" className="block group">
-                <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                  <Image
-                    src="/assets/pictures/web-preview.webp"
-                    alt="Tool Web Platform Preview"
-                    width={600}
-                    height={400}
-                    className="w-full transition-transform group-hover:scale-105"
-                    loading="lazy"
-                    sizes="(max-width: 768px) 100vw, 600px"
-                  />
-                  <div className="absolute inset-0 bg-primary-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white font-semibold text-lg flex items-center gap-2">
-                      <ArrowRight className="w-5 h-5" />
-                      {t.features.tryWebApp}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </div>
           </div>
         </div>
       </section>

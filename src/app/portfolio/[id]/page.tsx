@@ -9,7 +9,7 @@ import { LoadingSpinner, ImageViewer, Avatar } from '@/components/ui'
 import { AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
 import { formatTimeAgo } from '@/lib/utils'
-import { getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 
 interface PortfolioProject {
   id: string
@@ -36,6 +36,7 @@ export default function PortfolioDetailPage({ params }: Props) {
   const { id: projectId } = use(params)
   const router = useRouter()
   const { language } = useLanguage()
+  const { getCategoryLabel } = useCategories()
 
   const [project, setProject] = useState<PortfolioProject | null>(null)
   const [isLoading, setIsLoading] = useState(true)

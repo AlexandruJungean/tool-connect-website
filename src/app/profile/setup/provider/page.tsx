@@ -9,7 +9,8 @@ import { Button, Input, TextArea, Select, LoadingSpinner } from '@/components/ui
 import { ImageUpload, LocationInput } from '@/components/forms'
 import { AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
-import { SERVICE_CATEGORIES, LANGUAGES, getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { LANGUAGES } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { ACCOUNT_TYPES, CURRENCIES } from '@/constants/optionSets'
 
 const STEPS = ['basics', 'category', 'details', 'pricing'] as const
@@ -19,6 +20,7 @@ export default function ProviderProfileSetupPage() {
   const router = useRouter()
   const { language } = useLanguage()
   const { user, refreshProfile } = useAuth()
+  const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
 
   const [currentStep, setCurrentStep] = useState<Step>('basics')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -82,12 +84,12 @@ export default function ProviderProfileSetupPage() {
 
   const stepIndex = STEPS.indexOf(currentStep)
 
-  const categoryOptions = SERVICE_CATEGORIES.map((cat) => ({
+  const categoryOptions = categories.map((cat) => ({
     value: cat.value,
     label: getCategoryLabel(cat.value, language as 'en' | 'cs'),
   }))
 
-  const selectedCategoryData = SERVICE_CATEGORIES.find((c) => c.value === category)
+  const selectedCategoryData = categories.find((c) => c.value === category)
   const subcategoryOptions = selectedCategoryData?.subcategories || []
 
   const toggleSubcategory = (value: string) => {

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MapPin, Calendar, Clock, ChevronRight } from 'lucide-react'
 import { formatTimeAgo } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
-import { getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 
 interface RequestCardProps {
   id: string
@@ -38,6 +38,7 @@ export function RequestCard({
   language = 'en',
   onClick,
 }: RequestCardProps) {
+  const { getCategoryLabel, getSubcategoryLabel } = useCategories()
   const statusVariants: Record<string, 'success' | 'warning' | 'info' | 'default'> = {
     // Work request statuses
     active: 'success',

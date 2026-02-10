@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
-import { SERVICE_CATEGORIES, LANGUAGES, getCategoryLabel, getLanguageLabel } from '@/constants/categories'
+import { LANGUAGES, getLanguageLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
@@ -51,6 +52,7 @@ export default function EditProfilePage() {
   const [profileVideoUrl, setProfileVideoUrl] = useState<string | null>(null)
   const [workPhotoUrls, setWorkPhotoUrls] = useState<string[]>([])
 
+  const { categories, getCategoryLabel } = useCategories()
   const isProvider = currentUserType === 'service_provider'
   const profile = isProvider ? serviceProviderProfile : clientProfile
 
@@ -91,7 +93,7 @@ export default function EditProfilePage() {
     }
   }, [isAuthenticated, profile, isProvider])
 
-  const selectedCategory = SERVICE_CATEGORIES.find(cat => cat.value === category)
+  const selectedCategory = categories.find(cat => cat.value === category)
   const subcategories = selectedCategory?.subcategories || []
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -180,7 +182,7 @@ export default function EditProfilePage() {
     return null
   }
 
-  const categoryOptions = SERVICE_CATEGORIES.map(cat => ({
+  const categoryOptions = categories.map(cat => ({
     value: cat.value,
     label: getCategoryLabel(cat.value, language)
   }))

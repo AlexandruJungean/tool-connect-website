@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
-import { getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { Button } from '@/components/ui/Button'
 import { 
   User, 
@@ -25,6 +25,7 @@ import { cn } from '@/lib/utils'
 export default function ProfilePage() {
   const router = useRouter()
   const { language, t } = useLanguage()
+  const { getCategoryLabel } = useCategories()
   const { 
     isAuthenticated,
     isLoading,

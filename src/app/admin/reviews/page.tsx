@@ -205,7 +205,9 @@ export default function AdminReviewsPage() {
                             <User className="w-5 h-5 text-gray-400" />
                           )}
                         </div>
-                        <p className="text-white font-medium">{review.client?.name} {review.client?.surname}</p>
+                        <p className="text-white font-medium">
+                          {[review.client?.name, review.client?.surname].filter(Boolean).join(' ') || 'Anonymous'}
+                        </p>
                       </div>
                     </td>
                     <td className="px-4 py-3">

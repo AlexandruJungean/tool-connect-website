@@ -9,7 +9,7 @@ import { Button, Input, TextArea, Select, LoadingSpinner } from '@/components/ui
 import { LocationInput } from '@/components/forms'
 import { AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
-import { SERVICE_CATEGORIES, getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -21,6 +21,7 @@ export default function EditRequestPage({ params }: Props) {
   const router = useRouter()
   const { language } = useLanguage()
   const { clientProfile, isLoading: authLoading, isAuthenticated } = useAuth()
+  const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
 
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -172,12 +173,12 @@ export default function EditRequestPage({ params }: Props) {
     }
   }
 
-  const categoryOptions = SERVICE_CATEGORIES.map((cat) => ({
+  const categoryOptions = categories.map((cat) => ({
     value: cat.value,
     label: getCategoryLabel(cat.value, language as 'en' | 'cs'),
   }))
 
-  const selectedCategoryData = SERVICE_CATEGORIES.find((c) => c.value === category)
+  const selectedCategoryData = categories.find((c) => c.value === category)
   const subcategoryOptions = selectedCategoryData?.subcategories || []
 
   // Show loading while auth is loading OR while fetching request data

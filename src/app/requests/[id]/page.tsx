@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { WorkRequest, Application } from '@/types/database'
-import { getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { formatDate, formatTimeAgo } from '@/lib/utils'
@@ -35,6 +35,7 @@ export default function RequestDetailPage() {
   const requestId = params.id as string
   const { language, t } = useLanguage()
   const { isAuthenticated, currentUserType, clientProfile, serviceProviderProfile } = useAuth()
+  const { getCategoryLabel, getSubcategoryLabel } = useCategories()
 
   const [request, setRequest] = useState<WorkRequest | null>(null)
   const [applications, setApplications] = useState<Application[]>([])

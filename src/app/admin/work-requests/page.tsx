@@ -18,10 +18,11 @@ import {
 } from 'lucide-react'
 import { getWorkRequests } from '@/lib/api/admin'
 import { LoadingSpinner } from '@/components/ui'
-import { getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
 export default function AdminWorkRequestsPage() {
+  const { getCategoryLabel } = useCategories()
   const [requests, setRequests] = useState<any[]>([])
   const [total, setTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(true)

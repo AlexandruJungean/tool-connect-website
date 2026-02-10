@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useNotifications } from '@/contexts/NotificationContext'
@@ -27,9 +28,23 @@ export function Header() {
   const { isAuthenticated, isLoading, user, appUser, clientProfile, serviceProviderProfile, currentUserType, switchUserType, signOut } = useAuth()
   const { language, setLanguage, t } = useLanguage()
   const { unreadMessagesCount, unreadNotificationsCount } = useNotifications()
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
+
+  // Check if a nav link is active based on current path
+  const isLinkActive = (href: string) => {
+    if (href === '/search') return pathname === '/search'
+    if (href === '/messages') return pathname === '/messages'
+    if (href === '/requests') return pathname === '/requests' || pathname?.startsWith('/requests/')
+    if (href === '/favorites') return pathname === '/favorites'
+    if (href === '/apply') return pathname === '/apply' || pathname?.startsWith('/apply/')
+    // Provider profile link
+    if (href.startsWith('/providers/')) return pathname === href
+    if (href === '/profile') return pathname === '/profile'
+    return pathname === href
+  }
 
   // Get profile data based on current user type (fallback to client if type not set)
   const currentProfile = currentUserType === 'service_provider' 
@@ -86,12 +101,18 @@ export function Header() {
               if (link.auth && !isAuthenticated) return null
               const isMessages = link.href === '/messages'
               const badgeCount = isMessages ? unreadMessagesCount : 0
+              const active = isLinkActive(link.href)
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   prefetch={false}
-                  className="relative flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors"
+                  className={cn(
+                    "relative flex items-center gap-2 px-4 py-2 rounded-lg transition-colors",
+                    active
+                      ? "text-primary-700 bg-primary-50 font-semibold"
+                      : "text-gray-600 hover:text-primary-700 hover:bg-primary-50"
+                  )}
                 >
                   <link.icon className="w-5 h-5" />
                   <span>{link.label}</span>
@@ -287,13 +308,19 @@ export function Header() {
               if (link.auth && !isAuthenticated) return null
               const isMessages = link.href === '/messages'
               const badgeCount = isMessages ? unreadMessagesCount : 0
+              const active = isLinkActive(link.href)
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   prefetch={false}
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg"
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-lg",
+                    active
+                      ? "text-primary-700 bg-primary-50 font-semibold"
+                      : "text-gray-700 hover:bg-primary-50"
+                  )}
                 >
                   <link.icon className="w-5 h-5" />
                   <span className="flex-1">{link.label}</span>

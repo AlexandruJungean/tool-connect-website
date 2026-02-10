@@ -255,49 +255,72 @@ export default function ProviderReviewsPage() {
 
           {/* Other Reviews */}
           {otherReviews.length > 0 ? (
-            otherReviews.map((review) => (
-              <div key={review.id} className="bg-white rounded-xl shadow-card p-5">
-                <div className="flex items-start gap-4">
-                  <Link 
-                    href={review.client?.id ? `/clients/${review.client.id}` : '#'}
-                    className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden hover:ring-2 hover:ring-primary-300 transition-all"
-                  >
-                    {review.client?.avatar_url ? (
-                      <img 
-                        src={review.client.avatar_url} 
-                        alt="" 
-                        className="w-full h-full rounded-full object-cover" 
-                      />
-                    ) : (
-                      <span className="text-primary-700 font-semibold">
-                        {review.client?.name?.charAt(0) || '?'}
-                      </span>
-                    )}
-                  </Link>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <Link 
-                        href={review.client?.id ? `/clients/${review.client.id}` : '#'}
-                        className="font-medium text-gray-900 hover:text-primary-700 transition-colors"
+            otherReviews.map((review) => {
+              const anonymousName = language === 'cs' ? 'Anonymní uživatel' : 'Anonymous'
+              const clientHref = review.client?.id ? `/clients/${review.client.id}` : null
+              const reviewerNameRaw = [review.client?.name, review.client?.surname].filter(Boolean).join(' ').trim()
+              const reviewerName = reviewerNameRaw || anonymousName
+              const reviewerInitial = (review.client?.name?.trim()?.charAt(0) || reviewerName.charAt(0) || 'A').toUpperCase()
+
+              return (
+                <div key={review.id} className="bg-white rounded-xl shadow-card p-5">
+                  <div className="flex items-start gap-4">
+                    {clientHref ? (
+                      <Link
+                        href={clientHref}
+                        className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden hover:ring-2 hover:ring-primary-300 transition-all"
                       >
-                        {review.client?.name} {review.client?.surname}
+                        {review.client?.avatar_url ? (
+                          <img
+                            src={review.client.avatar_url}
+                            alt=""
+                            className="w-full h-full rounded-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-primary-700 font-semibold">
+                            {reviewerInitial}
+                          </span>
+                        )}
                       </Link>
-                      <span className="text-sm text-gray-500">
-                        {formatTimeAgo(review.created_at, language)}
-                      </span>
-                    </div>
-                    <div className="mt-1">
-                      <Rating value={review.rating} size="sm" readonly />
-                    </div>
-                    {review.comment && (
-                      <p className="text-gray-600 mt-3 leading-relaxed">
-                        {review.comment}
-                      </p>
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <span className="text-primary-700 font-semibold">
+                          {reviewerInitial}
+                        </span>
+                      </div>
                     )}
+
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        {clientHref ? (
+                          <Link
+                            href={clientHref}
+                            className="font-medium text-gray-900 hover:text-primary-700 transition-colors"
+                          >
+                            {reviewerName}
+                          </Link>
+                        ) : (
+                          <span className="font-medium text-gray-900">
+                            {reviewerName}
+                          </span>
+                        )}
+                        <span className="text-sm text-gray-500">
+                          {formatTimeAgo(review.created_at, language)}
+                        </span>
+                      </div>
+                      <div className="mt-1">
+                        <Rating value={review.rating} size="sm" readonly />
+                      </div>
+                      {review.comment && (
+                        <p className="text-gray-600 mt-3 leading-relaxed">
+                          {review.comment}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              )
+            })
           ) : !myReview && (
             <div className="text-center py-12">
               <Star className="w-12 h-12 text-gray-300 mx-auto mb-4" />

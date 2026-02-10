@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { LoadingSpinner, EmptyState, SearchBar, Tabs } from '@/components/ui'
 import { RequestCard, AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
-import { SERVICE_CATEGORIES, getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 
 interface WorkRequest {
   id: string
@@ -35,6 +35,7 @@ interface Application {
 export default function ApplyPage() {
   const router = useRouter()
   const { language } = useLanguage()
+  const { categories, getCategoryLabel } = useCategories()
   const { serviceProviderProfile } = useAuth()
 
   const [activeTab, setActiveTab] = useState<'browse' | 'applied'>('browse')
@@ -147,7 +148,7 @@ export default function ApplyPage() {
 
   const categoryOptions = [
     { value: '', label: t.allCategories },
-    ...SERVICE_CATEGORIES.map((cat) => ({
+    ...categories.map((cat) => ({
       value: cat.value,
       label: getCategoryLabel(cat.value, language as 'en' | 'cs'),
     })),

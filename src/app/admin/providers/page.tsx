@@ -20,10 +20,11 @@ import {
 } from 'lucide-react'
 import { getServiceProviders, toggleProviderVisibility, toggleProviderActive, setScamWarning } from '@/lib/api/admin'
 import { LoadingSpinner } from '@/components/ui'
-import { SERVICE_CATEGORIES, getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
 export default function AdminProvidersPage() {
+  const { categories, getCategoryLabel } = useCategories()
   const [providers, setProviders] = useState<any[]>([])
   const [total, setTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
@@ -127,7 +128,7 @@ export default function AdminProvidersPage() {
           className="px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary-500"
         >
           <option value="">All Categories</option>
-          {SERVICE_CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <option key={cat.value} value={cat.value}>{cat.label}</option>
           ))}
         </select>

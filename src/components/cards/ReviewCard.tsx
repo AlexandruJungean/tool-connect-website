@@ -28,7 +28,7 @@ export function ReviewCard({
   language = 'en',
 }: ReviewCardProps) {
   const getInitials = (name?: string) => {
-    if (!name) return 'U'
+    if (!name) return 'A'
     return name.split(' ').map(n => n[0]).join('').slice(0, 2)
   }
 
@@ -43,7 +43,7 @@ export function ReviewCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2 mb-1">
             <span className="font-medium text-gray-900 truncate">
-              {reviewerName || (language === 'cs' ? 'Anonymní uživatel' : 'Anonymous User')}
+              {reviewerName || (language === 'cs' ? 'Anonymní uživatel' : 'Anonymous')}
             </span>
             <span className="text-xs text-gray-400 flex-shrink-0">
               {formatTimeAgo(createdAt)}

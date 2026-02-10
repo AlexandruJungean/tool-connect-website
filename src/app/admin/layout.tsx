@@ -27,6 +27,7 @@ import {
   Shield,
   ChevronDown,
   ChevronRight,
+  LayoutGrid,
 } from 'lucide-react'
 
 interface NavItem {
@@ -50,6 +51,7 @@ const navItems: NavItem[] = [
   { label: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
   { label: 'Search Logs', href: '/admin/search-logs', icon: Search },
   { label: 'Notifications', href: '/admin/notifications', icon: Bell },
+  { label: 'Categories', href: '/admin/categories', icon: LayoutGrid },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

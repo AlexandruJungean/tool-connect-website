@@ -6,8 +6,8 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { WorkRequest } from '@/types/database'
-import { getCategoryLabel } from '@/constants/categories'
-import { Button, LoadingSpinner, EmptyState } from '@/components/ui'
+import { useCategories } from '@/contexts/CategoriesContext'
+import { Button, LoadingSpinner, EmptyState, LoginPromptModal } from '@/components/ui'
 import { formatTimeAgo } from '@/lib/utils'
 import { 
   Plus, 
@@ -31,51 +31,63 @@ interface WorkRequestWithCount extends WorkRequest {
 export default function RequestsPage() {
   const { language, t } = useLanguage()
   const { isAuthenticated, isLoading: authLoading, currentUserType, clientProfile } = useAuth()
+  const { getCategoryLabel } = useCategories()
 
   const [requests, setRequests] = useState<WorkRequestWithCount[]>([])
+  const [publicRequests, setPublicRequests] = useState<WorkRequest[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [deleteRequestId, setDeleteRequestId] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
 
-  // Redirect if not authenticated as client
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      window.location.href = '/login?redirect=/requests'
-    }
-  }, [isAuthenticated, authLoading])
+  // Determine if we're in "my requests" mode (authenticated client) or public browse mode
+  const isMyRequestsMode = isAuthenticated && currentUserType === 'client' && !!clientProfile
 
-  // Fetch client's own requests
+  // Fetch requests — either client's own or all active (public)
   useEffect(() => {
-    if (authLoading || !isAuthenticated || !clientProfile) return
+    if (authLoading) return
 
     const fetchRequests = async () => {
       setIsLoading(true)
       setError(null)
       try {
-        // Fetch only the client's OWN work requests
-        const { data, error: fetchError } = await supabase
-          .from('work_requests')
-          .select('*')
-          .eq('client_id', clientProfile.id)
-          .order('created_at', { ascending: false })
+        if (isMyRequestsMode && clientProfile) {
+          // Authenticated client — fetch their own requests
+          const { data, error: fetchError } = await supabase
+            .from('work_requests')
+            .select('*')
+            .eq('client_id', clientProfile.id)
+            .order('created_at', { ascending: false })
 
-        if (fetchError) throw fetchError
+          if (fetchError) throw fetchError
 
-        // Fetch application counts for each request
-        const requestsWithCounts = await Promise.all(
-          (data || []).map(async (request) => {
-            const { count } = await supabase
-              .from('work_request_applications')
-              .select('*', { count: 'exact', head: true })
-              .eq('work_request_id', request.id)
+          // Fetch application counts for each request
+          const requestsWithCounts = await Promise.all(
+            (data || []).map(async (request) => {
+              const { count } = await supabase
+                .from('work_request_applications')
+                .select('*', { count: 'exact', head: true })
+                .eq('work_request_id', request.id)
 
-            return { ...request, application_count: count || 0 }
-          })
-        )
+              return { ...request, application_count: count || 0 }
+            })
+          )
 
-        setRequests(requestsWithCounts)
+          setRequests(requestsWithCounts)
+        } else {
+          // Guest or SP — fetch all active public requests
+          const { data, error: fetchError } = await supabase
+            .from('work_requests')
+            .select(`*, client:client_profiles(id, name, surname, avatar_url)`)
+            .eq('status', 'active')
+            .order('created_at', { ascending: false })
+            .limit(50)
+
+          if (fetchError) throw fetchError
+          setPublicRequests(data || [])
+        }
       } catch (err: any) {
         console.error('Error fetching requests:', err)
         setError(err.message || 'Failed to load requests')
@@ -85,7 +97,7 @@ export default function RequestsPage() {
     }
 
     fetchRequests()
-  }, [clientProfile, isAuthenticated, authLoading])
+  }, [clientProfile, isAuthenticated, authLoading, isMyRequestsMode])
 
   // Handle delete request
   const handleDelete = async (requestId: string) => {
@@ -161,28 +173,109 @@ export default function RequestsPage() {
     )
   }
 
-  if (!isAuthenticated) {
-    return null
-  }
-
-  // If user is a service provider, redirect to apply/jobs page
-  if (currentUserType === 'service_provider') {
+  // Public browse mode (guest or SP)
+  if (!isMyRequestsMode) {
     return (
       <div className="min-h-screen bg-gray-50">
+        <LoginPromptModal
+          isOpen={showLoginPrompt}
+          onClose={() => setShowLoginPrompt(false)}
+          redirectTo="/requests"
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <EmptyState
-            icon={FileText}
-            title={language === 'cs' ? 'Přejděte na Zakázky' : 'Go to Jobs'}
-            description={language === 'cs' 
-              ? 'Jako poskytovatel služeb můžete procházet a reagovat na zakázky v sekci Zakázky'
-              : 'As a service provider, you can browse and apply to jobs in the Jobs section'
-            }
-            action={
-              <Link href="/apply" prefetch={false}>
-                <Button>{language === 'cs' ? 'Zobrazit zakázky' : 'View Jobs'}</Button>
-              </Link>
-            }
-          />
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                {language === 'cs' ? 'Poptávky' : 'Requests'}
+              </h1>
+              <p className="text-gray-500 mt-1">
+                {language === 'cs'
+                  ? 'Aktivní poptávky od klientů'
+                  : 'Active requests from clients'}
+              </p>
+            </div>
+            <Button
+              leftIcon={<Plus className="w-5 h-5" />}
+              onClick={() => {
+                if (!isAuthenticated) {
+                  setShowLoginPrompt(true)
+                } else {
+                  window.location.href = '/requests/create'
+                }
+              }}
+            >
+              {t('requests.createNew')}
+            </Button>
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-red-700">
+              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <p>{error}</p>
+            </div>
+          )}
+
+          {/* Content */}
+          {isLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <LoadingSpinner size="lg" />
+            </div>
+          ) : publicRequests.length > 0 ? (
+            <div className="flex flex-col gap-3">
+              {publicRequests.map((request) => (
+                <Link key={request.id} href={`/requests/${request.id}`} prefetch={false}>
+                  <div className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md hover:border-primary-200 transition-all p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        {/* Description */}
+                        <p className="text-gray-900 font-medium line-clamp-2 mb-2">
+                          {request.description}
+                        </p>
+
+                        {/* Category */}
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-medium rounded-md">
+                            {getCategoryLabel(request.category, language)}
+                          </span>
+                        </div>
+
+                        {/* Meta info */}
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                          {request.location && (
+                            <div className="flex items-center gap-1">
+                              <MapPin className="w-4 h-4" />
+                              <span>{request.location}</span>
+                            </div>
+                          )}
+                          {request.budget && (
+                            <div className="flex items-center gap-1">
+                              <Wallet className="w-4 h-4" />
+                              <span>{request.budget}</span>
+                            </div>
+                          )}
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            <span>{formatTimeAgo(request.created_at, language)}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              icon={FileText}
+              title={language === 'cs' ? 'Zatím žádné poptávky' : 'No requests yet'}
+              description={language === 'cs'
+                ? 'Momentálně nejsou žádné aktivní poptávky'
+                : 'There are no active requests at the moment'}
+            />
+          )}
         </div>
       </div>
     )

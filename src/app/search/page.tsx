@@ -5,47 +5,22 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { supabase } from '@/lib/supabase'
 import { ServiceProviderProfile } from '@/types/database'
-import { SERVICE_CATEGORIES, LANGUAGES, getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { LANGUAGES } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
+import { renderCategoryIcon } from '@/lib/icons'
 import { ProviderCard } from '@/components/cards/ProviderCard'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { LocationInput } from '@/components/forms'
-import { Search, Filter, X, Loader2, SlidersHorizontal, ArrowLeft, Check, Users, Home, Hammer, Bug, TreePine, Key, Wrench, Building, Sparkles, Laptop, Globe, Scale, Car, Calendar, GraduationCap, Languages, Music, Palette, Dumbbell, Heart, Sparkle } from 'lucide-react'
+import { Search, Filter, X, Loader2, SlidersHorizontal, ArrowLeft, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-// Map category values to icons
-const getCategoryIcon = (categoryValue: string) => {
-  const iconMap: Record<string, React.ReactNode> = {
-    'family_pet_care': <Users className="w-7 h-7" />,
-    'home': <Home className="w-7 h-7" />,
-    'craftsmen': <Hammer className="w-7 h-7" />,
-    'pests_management': <Bug className="w-7 h-7" />,
-    'outdoors': <TreePine className="w-7 h-7" />,
-    'locksmith': <Key className="w-7 h-7" />,
-    'personal_items_repairs': <Wrench className="w-7 h-7" />,
-    'new_house_building': <Building className="w-7 h-7" />,
-    'beauty': <Sparkles className="w-7 h-7" />,
-    'computer_phone': <Laptop className="w-7 h-7" />,
-    'digital_world': <Globe className="w-7 h-7" />,
-    'financial_legal': <Scale className="w-7 h-7" />,
-    'auto': <Car className="w-7 h-7" />,
-    'events': <Calendar className="w-7 h-7" />,
-    'school_tutoring': <GraduationCap className="w-7 h-7" />,
-    'languages_lessons': <Languages className="w-7 h-7" />,
-    'music_lessons': <Music className="w-7 h-7" />,
-    'hobby_classes': <Palette className="w-7 h-7" />,
-    'dance_sports_fitness': <Dumbbell className="w-7 h-7" />,
-    'wellbeing': <Heart className="w-7 h-7" />,
-    'spiritual_guidance': <Sparkle className="w-7 h-7" />,
-  }
-  return iconMap[categoryValue] || <Search className="w-7 h-7" />
-}
 
 function SearchContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { language, t } = useLanguage()
+  const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
   
   const [providers, setProviders] = useState<ServiceProviderProfile[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -73,12 +48,12 @@ function SearchContent() {
   const [location, setLocation] = useState(searchParams.get('location') || '')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
 
-  const selectedCategory = SERVICE_CATEGORIES.find(cat => cat.value === category)
+  const selectedCategory = categories.find(cat => cat.value === category)
   const subcategoriesForCategory = selectedCategory?.subcategories || []
   
   // Get picker category data
   const getPickerCategoryData = () => {
-    return SERVICE_CATEGORIES.find(cat => cat.value === pickerCategory)
+    return categories.find(cat => cat.value === pickerCategory)
   }
   
   // Category picker handlers
@@ -191,7 +166,7 @@ function SearchContent() {
         const matchingSubcategoryValues: string[] = []
         const keywordsLower = keywords.toLowerCase()
         
-        SERVICE_CATEGORIES.forEach(cat => {
+        categories.forEach(cat => {
           cat.subcategories.forEach(sub => {
             if (
               sub.label.toLowerCase().includes(keywordsLower) ||
@@ -256,7 +231,7 @@ function SearchContent() {
   // Only show categories that have at least one provider
   const categoryOptions = [
     { value: '', label: t('search.allCategories') },
-    ...SERVICE_CATEGORIES
+    ...categories
       .filter(cat => availableCategories.includes(cat.value))
       .map(cat => ({
         value: cat.value,
@@ -318,14 +293,14 @@ function SearchContent() {
             // Show main categories grid
             <>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
-                {SERVICE_CATEGORIES.map((cat) => (
+                {categories.map((cat) => (
                   <button
                     key={cat.value}
                     onClick={() => handlePickerCategorySelect(cat.value)}
                     className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group"
                   >
                     <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-100 flex items-center justify-center mb-3 text-primary-700 group-hover:bg-primary-200 transition-colors">
-                      {getCategoryIcon(cat.value)}
+                      {renderCategoryIcon(cat.icon, 'w-7 h-7 text-primary-700 group-hover:text-primary-800')}
                     </div>
                     <span className="text-sm sm:text-base font-medium text-gray-900 text-center">
                       {language === 'cs' ? cat.labelCS : cat.label}

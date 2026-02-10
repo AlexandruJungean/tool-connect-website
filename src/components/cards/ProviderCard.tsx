@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ServiceProviderProfile } from '@/types/database'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { useDynamicTranslation } from '@/hooks/useDynamicTranslation'
 import { Star, MapPin, Building2, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,7 @@ interface ProviderCardProps {
 
 export function ProviderCard({ provider, className }: ProviderCardProps) {
   const { language, t } = useLanguage()
+  const { getCategoryLabel, getSubcategoryLabel } = useCategories()
   // Specialty removed - using category instead
   
   const rating = provider.average_rating ? Math.round(provider.average_rating * 10) / 10 : null

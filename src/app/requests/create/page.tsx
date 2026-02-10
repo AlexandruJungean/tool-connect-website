@@ -5,12 +5,13 @@ import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
-import { SERVICE_CATEGORIES, getCategoryLabel, getSubcategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { LocationInput, VideoUpload } from '@/components/forms'
 import { ArrowLeft, Check, Video } from 'lucide-react'
+import { LoginPromptModal } from '@/components/ui/LoginPromptModal'
 import { cn } from '@/lib/utils'
 
 export default function CreateRequestPage() {
@@ -26,17 +27,19 @@ export default function CreateRequestPage() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
+  const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login')
+      setShowLoginPrompt(true)
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated])
 
-  const selectedCategory = SERVICE_CATEGORIES.find(cat => cat.value === category)
+  const selectedCategory = categories.find(cat => cat.value === category)
   const subcategoryOptions = selectedCategory?.subcategories || []
 
-  const categoryOptions = SERVICE_CATEGORIES.map(cat => ({
+  const categoryOptions = categories.map(cat => ({
     value: cat.value,
     label: getCategoryLabel(cat.value, language)
   }))
@@ -133,12 +136,18 @@ export default function CreateRequestPage() {
     }
   }
 
-  if (!isAuthenticated) {
-    return null
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Login Prompt Modal */}
+      <LoginPromptModal
+        isOpen={showLoginPrompt}
+        onClose={() => {
+          setShowLoginPrompt(false)
+          if (!isAuthenticated) router.back()
+        }}
+        redirectTo="/requests/create"
+      />
+
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <button

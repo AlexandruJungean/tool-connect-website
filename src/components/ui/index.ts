@@ -18,4 +18,5 @@ export { ImageViewer } from './ImageViewer'
 export { VideoPlayer } from './VideoPlayer'
 export { TranslatedText } from './TranslatedText'
 export { CountryCodePicker } from './CountryCodePicker'
+export { LoginPromptModal } from './LoginPromptModal'
 

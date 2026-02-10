@@ -4,6 +4,7 @@ import './globals.css'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { NotificationProvider } from '@/contexts/NotificationContext'
+import { CategoriesProvider } from '@/contexts/CategoriesContext'
 import { RequireProfile } from '@/components/auth/RequireProfile'
 import { LayoutWrapper } from '@/components/layout/LayoutWrapper'
 
@@ -170,11 +171,13 @@ export default function RootLayout({
         <LanguageProvider>
           <AuthProvider>
             <NotificationProvider>
-              <RequireProfile>
-                <LayoutWrapper>
-                  {children}
-                </LayoutWrapper>
-              </RequireProfile>
+              <CategoriesProvider>
+                <RequireProfile>
+                  <LayoutWrapper>
+                    {children}
+                  </LayoutWrapper>
+                </RequireProfile>
+              </CategoriesProvider>
             </NotificationProvider>
           </AuthProvider>
         </LanguageProvider>

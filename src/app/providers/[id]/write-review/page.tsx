@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
-import { Button, TextArea, Rating, LoadingSpinner } from '@/components/ui'
+import { Button, TextArea, Rating, LoadingSpinner, LoginPromptModal } from '@/components/ui'
 import { AlertCard } from '@/components/cards'
 import { createReview, updateReview, getEditableReview, canEditReview, getEditTimeRemaining, Review } from '@/lib/api/reviews'
 import { supabase } from '@/lib/supabase'
@@ -149,18 +149,11 @@ export default function WriteReviewPage({ params }: Props) {
   if (!user || !clientProfile) {
     return (
       <div className="min-h-screen bg-gray-50 p-4">
-        <AlertCard
-          variant="warning"
-          title={t.errorNotLoggedIn}
-          message={language === 'cs' 
-            ? 'Přihlaste se pro napsání recenze'
-            : 'Please log in to write a review'}
+        <LoginPromptModal
+          isOpen={true}
+          onClose={() => router.back()}
+          redirectTo={`/providers/${providerId}/write-review`}
         />
-        <div className="mt-4">
-          <Button onClick={() => router.push('/login')}>
-            {language === 'cs' ? 'Přihlásit se' : 'Log In'}
-          </Button>
-        </div>
       </div>
     )
   }

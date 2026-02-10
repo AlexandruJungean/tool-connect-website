@@ -25,12 +25,13 @@ import {
 } from 'recharts'
 import { getSearchLogs, getPopularSearchCategories, SearchLogEntry, CategoryStats } from '@/lib/api/admin'
 import { LoadingSpinner } from '@/components/ui'
-import { getCategoryLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
 const COLORS = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6']
 
 export default function AdminSearchLogsPage() {
+  const { getCategoryLabel } = useCategories()
   const [logs, setLogs] = useState<SearchLogEntry[]>([])
   const [total, setTotal] = useState(0)
   const [popularCategories, setPopularCategories] = useState<CategoryStats[]>([])

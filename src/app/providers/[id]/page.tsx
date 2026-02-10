@@ -7,7 +7,8 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { ServiceProviderProfile, Review } from '@/types/database'
-import { getCategoryLabel, getSubcategoryLabel, getLanguageLabel } from '@/constants/categories'
+import { getLanguageLabel } from '@/constants/categories'
+import { useCategories } from '@/contexts/CategoriesContext'
 import { Button } from '@/components/ui/Button'
 import { ImageViewer } from '@/components/ui/ImageViewer'
 import { VideoPlayer } from '@/components/ui/VideoPlayer'
@@ -39,6 +40,7 @@ import {
   Trash2
 } from 'lucide-react'
 import { getMyReviewForProvider, deleteReview as deleteReviewApi } from '@/lib/api/reviews'
+import { LoginPromptModal } from '@/components/ui/LoginPromptModal'
 import { cn } from '@/lib/utils'
 
 export default function ProviderDetailPage() {
@@ -46,6 +48,7 @@ export default function ProviderDetailPage() {
   const router = useRouter()
   const providerId = params.id as string
   const { language, t } = useLanguage()
+  const { getCategoryLabel, getSubcategoryLabel } = useCategories()
   const { isAuthenticated, clientProfile, serviceProviderProfile, currentUserType } = useAuth()
 
   // Check if viewing own profile
@@ -63,6 +66,7 @@ export default function ProviderDetailPage() {
   const [showShareToast, setShowShareToast] = useState(false)
   const [imageViewerOpen, setImageViewerOpen] = useState(false)
   const [imageViewerIndex, setImageViewerIndex] = useState(0)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
 
   // Dynamic translation hooks - must be called unconditionally before any early returns
   const descriptionRaw = provider?.bio || provider?.about_me
@@ -142,7 +146,7 @@ export default function ProviderDetailPage() {
 
   const handleFavorite = async () => {
     if (!isAuthenticated || !clientProfile) {
-      router.push('/login')
+      setShowLoginPrompt(true)
       return
     }
 
@@ -200,7 +204,7 @@ export default function ProviderDetailPage() {
 
   const handleMessage = () => {
     if (!isAuthenticated) {
-      router.push('/login')
+      setShowLoginPrompt(true)
       return
     }
     router.push(`/messages?provider=${providerId}`)
@@ -648,43 +652,66 @@ export default function ProviderDetailPage() {
               {/* Other Reviews */}
               {reviews.filter(r => r.id !== myReview?.id).length > 0 ? (
                 <div className="space-y-4">
-                  {reviews.filter(r => r.id !== myReview?.id).slice(0, myReview ? 2 : 3).map((review) => (
-                    <div key={review.id} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                      <div className="flex items-start gap-3">
-                        <Link 
-                          href={review.client?.id ? `/clients/${review.client.id}` : '#'}
-                          className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden hover:ring-2 hover:ring-primary-300 transition-all"
-                        >
-                          {review.client?.avatar_url ? (
-                            <img src={review.client.avatar_url} alt="" className="w-full h-full rounded-full object-cover" />
-                          ) : (
-                            <span className="text-primary-700 font-medium">
-                              {review.client?.name?.charAt(0) || '?'}
-                            </span>
-                          )}
-                        </Link>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <Link 
-                              href={review.client?.id ? `/clients/${review.client.id}` : '#'}
-                              className="font-medium text-gray-900 hover:text-primary-700 transition-colors"
+                  {reviews.filter(r => r.id !== myReview?.id).slice(0, myReview ? 2 : 3).map((review) => {
+                    const anonymousName = language === 'cs' ? 'Anonymní uživatel' : 'Anonymous'
+                    const clientHref = review.client?.id ? `/clients/${review.client.id}` : null
+                    const reviewerNameRaw = [review.client?.name, review.client?.surname].filter(Boolean).join(' ').trim()
+                    const reviewerName = reviewerNameRaw || anonymousName
+                    const reviewerInitial = (review.client?.name?.trim()?.charAt(0) || reviewerName.charAt(0) || 'A').toUpperCase()
+
+                    return (
+                      <div key={review.id} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+                        <div className="flex items-start gap-3">
+                          {clientHref ? (
+                            <Link
+                              href={clientHref}
+                              className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden hover:ring-2 hover:ring-primary-300 transition-all"
                             >
-                              {review.client?.name} {review.client?.surname}
+                              {review.client?.avatar_url ? (
+                                <img src={review.client.avatar_url} alt="" className="w-full h-full rounded-full object-cover" />
+                              ) : (
+                                <span className="text-primary-700 font-medium">
+                                  {reviewerInitial}
+                                </span>
+                              )}
                             </Link>
-                            <span className="text-sm text-gray-500">
-                              {formatTimeAgo(review.created_at, language)}
-                            </span>
-                          </div>
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                              <span className="text-primary-700 font-medium">
+                                {reviewerInitial}
+                              </span>
+                            </div>
+                          )}
+
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              {clientHref ? (
+                                <Link
+                                  href={clientHref}
+                                  className="font-medium text-gray-900 hover:text-primary-700 transition-colors"
+                                >
+                                  {reviewerName}
+                                </Link>
+                              ) : (
+                                <span className="font-medium text-gray-900">
+                                  {reviewerName}
+                                </span>
+                              )}
+                              <span className="text-sm text-gray-500">
+                                {formatTimeAgo(review.created_at, language)}
+                              </span>
+                            </div>
                             <div className="mt-1">
                               <Rating value={review.rating} size="sm" readonly />
                             </div>
-                          {review.comment && (
-                            <p className="text-gray-600 mt-2">{review.comment}</p>
-                          )}
+                            {review.comment && (
+                              <p className="text-gray-600 mt-2">{review.comment}</p>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               ) : !myReview && (
                 <p className="text-gray-500 italic">{language === 'cs' ? 'Zatím žádné recenze' : 'No reviews yet'}</p>
@@ -795,6 +822,13 @@ export default function ProviderDetailPage() {
           {language === 'cs' ? 'Odkaz zkopírován!' : 'Link copied!'}
         </div>
       )}
+
+      {/* Login Prompt Modal */}
+      <LoginPromptModal
+        isOpen={showLoginPrompt}
+        onClose={() => setShowLoginPrompt(false)}
+        redirectTo={`/providers/${providerId}`}
+      />
 
       {/* Delete Review Confirmation Dialog */}
       {showDeleteReviewDialog && (

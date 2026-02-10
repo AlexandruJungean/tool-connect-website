@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { CountryCodePicker } from '@/components/ui/CountryCodePicker'
 import { DEFAULT_COUNTRY, CountryCode } from '@/constants/countryCodes'
-import { ArrowRight, CheckCircle, Loader2, Search, Briefcase, Eye } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Search, Briefcase, Eye, Pencil } from 'lucide-react'
 
 type UserRole = 'client' | 'service-provider' | null
 
@@ -306,10 +306,23 @@ function LoginContent() {
                 </h2>
                 <p className="text-gray-600 text-sm mt-1">
                   {language === 'cs' 
-                    ? `Kód byl odeslán na ${displayPhoneNumber}`
-                    : `Code sent to ${displayPhoneNumber}`
+                    ? `Kód byl odeslán na`
+                    : `Code sent to`
                   }
                 </p>
+                {/* Phone number + change link — clearly clickable */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('phone')
+                    setVerificationCode('')
+                    setError('')
+                  }}
+                  className="inline-flex items-center gap-1.5 mt-1 text-primary-700 hover:text-primary-800 font-semibold"
+                >
+                  <span>{displayPhoneNumber}</span>
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
               </div>
 
               <Input
@@ -334,9 +347,14 @@ function LoginContent() {
 
               <button
                 type="button"
-                onClick={() => setStep('phone')}
-                className="w-full mt-4 text-center text-sm text-primary-700 hover:text-primary-800"
+                onClick={() => {
+                  setStep('phone')
+                  setVerificationCode('')
+                  setError('')
+                }}
+                className="w-full mt-4 flex items-center justify-center gap-2 text-sm font-medium text-primary-700 hover:text-primary-800 py-2 rounded-lg hover:bg-primary-50 transition-colors"
               >
+                <ArrowLeft className="w-4 h-4" />
                 {language === 'cs' ? 'Změnit telefonní číslo' : 'Change phone number'}
               </button>
             </form>
