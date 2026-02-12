@@ -151,8 +151,17 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4 pb-12">
       <div className="w-full max-w-md">
+        {/* Continue exploring link */}
+        <button
+          onClick={handleBrowseAsGuest}
+          className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-primary-700 transition-colors mb-6"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          {language === 'cs' ? 'Pokračovat v procházení' : 'Continue exploring'}
+        </button>
+
         {/* Logo */}
         <div className="text-center mb-8">
           <img
@@ -217,24 +226,6 @@ function LoginContent() {
                 </div>
               </button>
 
-              {/* Browse as guest */}
-              <button
-                type="button"
-                onClick={handleBrowseAsGuest}
-                className="w-full flex items-center gap-4 p-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all"
-              >
-                <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Eye className="w-6 h-6" />
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-lg">
-                    {language === 'cs' ? 'Jen se rozhlédnout' : 'Just browse'}
-                  </p>
-                  <p className="text-gray-500 text-sm">
-                    {language === 'cs' ? 'Prozkoumat bez přihlášení' : 'Explore without signing in'}
-                  </p>
-                </div>
-              </button>
             </div>
           ) : step === 'phone' ? (
             <form onSubmit={handleSendCode}>
