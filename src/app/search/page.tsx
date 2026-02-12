@@ -259,8 +259,8 @@ function SearchContent() {
       <div className="min-h-screen bg-gray-50">
         {/* Search Header */}
         <div className="bg-white border-b border-gray-100 sticky top-16 z-40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <form onSubmit={handleSearch} className="flex gap-3">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <form onSubmit={(e) => { e.preventDefault(); if (keywords.trim()) { setShowCategoryPicker(false) } }} className="flex gap-3">
               <Input
                 placeholder={t('search.placeholder')}
                 value={keywords}
@@ -375,7 +375,7 @@ function SearchContent() {
     <div className="min-h-screen bg-gray-50">
       {/* Search Header */}
       <div className="bg-white border-b border-gray-100 sticky top-16 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <form onSubmit={handleSearch} className="flex gap-3">
             <Input
               placeholder={t('search.placeholder')}
