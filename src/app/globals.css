@@ -4,10 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Colors sourced from src/constants/colors.ts — keep in sync */
 :root {
-  --primary: #5B21B6;
-  --primary-light: #7C3AED;
-  --primary-dark: #4C1D95;
+  --primary-light: #A78BFA; /* lightPurple */
+  --primary-dark: #4C1D95;  /* darkPurple  */
   --background: #FFFFFF;
   --foreground: #1F2937;
 }
@@ -42,17 +42,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c4b5fd;
+  background: var(--primary-light);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a78bfa;
+  background: var(--primary-dark);
 }
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--primary-dark);
   outline-offset: 2px;
 }
 
@@ -77,7 +77,7 @@ button {
   }
   
   .gradient-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
   }
   
   .shadow-card {
@@ -85,7 +85,7 @@ button {
   }
   
   .shadow-elevated {
-    box-shadow: 0 10px 25px -5px rgba(91, 33, 182, 0.15), 0 8px 10px -6px rgba(91, 33, 182, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(76, 29, 149, 0.15), 0 8px 10px -6px rgba(76, 29, 149, 0.1);
   }
 }
 

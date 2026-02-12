@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { SEMANTIC } from '@/constants/colors'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -7,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Find trusted professionals in any field – from repairs to translations.',
     start_url: '/platform',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#5B21B6',
+    background_color: SEMANTIC.background,
+    theme_color: SEMANTIC.themeColor,
     orientation: 'portrait-primary',
     icons: [
       {

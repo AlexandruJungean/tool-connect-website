@@ -48,8 +48,9 @@ import {
 import { LoadingSpinner } from '@/components/ui'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
+import { PRIMARY } from '@/constants/colors'
 
-const COLORS = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#84cc16', '#f97316']
+const COLORS = [PRIMARY[500], '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#84cc16', '#f97316']
 
 export default function AdminAnalyticsPage() {
   const { getCategoryLabel } = useCategories()
@@ -132,7 +133,7 @@ export default function AdminAnalyticsPage() {
 
   // Engagement metrics for radial chart
   const engagementData = [
-    { name: 'Messages', value: Math.min(100, (stats.totalMessages / (stats.totalUsers || 1)) * 10), fill: '#8b5cf6' },
+    { name: 'Messages', value: Math.min(100, (stats.totalMessages / (stats.totalUsers || 1)) * 10), fill: PRIMARY[500] },
     { name: 'Reviews', value: Math.min(100, (stats.totalReviews / (stats.totalProviders || 1)) * 20), fill: '#10b981' },
     { name: 'Favorites', value: Math.min(100, (stats.totalFavorites / (stats.totalClients || 1)) * 15), fill: '#f59e0b' },
   ]
@@ -190,8 +191,8 @@ export default function AdminAnalyticsPage() {
               <AreaChart data={cumulativeData}>
                 <defs>
                   <linearGradient id="colorCumUsers" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                    <stop offset="5%" stopColor={PRIMARY[500]} stopOpacity={0.3} />
+                    <stop offset="95%" stopColor={PRIMARY[500]} stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -201,7 +202,7 @@ export default function AdminAnalyticsPage() {
                   contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '8px' }}
                   labelStyle={{ color: '#fff' }}
                 />
-                <Area type="monotone" dataKey="cumUsers" name="Total New Users" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorCumUsers)" />
+                <Area type="monotone" dataKey="cumUsers" name="Total New Users" stroke={PRIMARY[500]} fillOpacity={1} fill="url(#colorCumUsers)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -301,7 +302,7 @@ export default function AdminAnalyticsPage() {
                   formatter={(value) => [value as number, 'Searches']}
                   labelFormatter={(label) => getCategoryLabel(String(label), 'en')}
                 />
-                <Bar dataKey="count" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill={PRIMARY[500]} radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

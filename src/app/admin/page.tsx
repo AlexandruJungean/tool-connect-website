@@ -40,8 +40,9 @@ import { getAdminStats, getDailyStats, getCategoryDistribution, getCityDistribut
 import { LoadingSpinner } from '@/components/ui'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
+import { PRIMARY } from '@/constants/colors'
 
-const COLORS = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#84cc16', '#f97316']
+const COLORS = [PRIMARY[500], '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6', '#84cc16', '#f97316']
 
 interface StatCardProps {
   label: string
@@ -290,8 +291,8 @@ export default function AdminDashboardPage() {
                 <AreaChart data={dailyStats}>
                   <defs>
                     <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                      <stop offset="5%" stopColor={PRIMARY[500]} stopOpacity={0.3} />
+                      <stop offset="95%" stopColor={PRIMARY[500]} stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="colorProviders" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} />
@@ -306,7 +307,7 @@ export default function AdminDashboardPage() {
                     labelStyle={{ color: '#fff' }}
                   />
                   <Legend />
-                  <Area type="monotone" dataKey="users" name="New Users" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorUsers)" />
+                  <Area type="monotone" dataKey="users" name="New Users" stroke={PRIMARY[500]} fillOpacity={1} fill="url(#colorUsers)" />
                   <Area type="monotone" dataKey="providers" name="New Providers" stroke="#06b6d4" fillOpacity={1} fill="url(#colorProviders)" />
                 </AreaChart>
               ) : activeChart === 'messages' ? (
@@ -340,7 +341,7 @@ export default function AdminDashboardPage() {
                   <Legend />
                   <Line type="monotone" dataKey="workRequests" name="Work Requests" stroke="#f59e0b" strokeWidth={2} dot={false} />
                   <Line type="monotone" dataKey="applications" name="Applications" stroke="#ef4444" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="reviews" name="Reviews" stroke="#8b5cf6" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="reviews" name="Reviews" stroke={PRIMARY[500]} strokeWidth={2} dot={false} />
                 </LineChart>
               )}
             </ResponsiveContainer>
@@ -392,7 +393,7 @@ export default function AdminDashboardPage() {
                   contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '8px' }}
                   labelStyle={{ color: '#fff' }}
                 />
-                <Bar dataKey="count" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="count" fill={PRIMARY[500]} radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { SEMANTIC } from '@/constants/colors'
 import Script from 'next/script'
 import './globals.css'
 import { AuthProvider } from '@/contexts/AuthContext'
@@ -15,8 +16,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#5B21B6' },
+    { media: '(prefers-color-scheme: light)', color: SEMANTIC.background },
+    { media: '(prefers-color-scheme: dark)', color: SEMANTIC.themeColor },
   ],
 }
 
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
       { url: '/icons/apple-touch-icon.png', sizes: '180x180' },
     ],
     other: [
-      { rel: 'mask-icon', url: '/icons/safari-pinned-tab.svg', color: '#5B21B6' },
+      { rel: 'mask-icon', url: '/icons/safari-pinned-tab.svg', color: SEMANTIC.themeColor },
     ],
   },
   manifest: '/manifest.webmanifest',

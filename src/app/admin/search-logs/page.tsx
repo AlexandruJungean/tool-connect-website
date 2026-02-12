@@ -27,8 +27,9 @@ import { getSearchLogs, getPopularSearchCategories, SearchLogEntry, CategoryStat
 import { LoadingSpinner } from '@/components/ui'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
+import { PRIMARY } from '@/constants/colors'
 
-const COLORS = ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6']
+const COLORS = [PRIMARY[500], '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6']
 
 export default function AdminSearchLogsPage() {
   const { getCategoryLabel } = useCategories()
@@ -126,7 +127,7 @@ export default function AdminSearchLogsPage() {
                   formatter={(value) => [value as number, 'Searches']}
                   labelFormatter={(label) => getCategoryLabel(String(label), 'en')}
                 />
-                <Bar dataKey="count" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill={PRIMARY[500]} radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
