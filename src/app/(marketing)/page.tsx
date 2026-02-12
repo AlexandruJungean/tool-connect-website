@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
-  MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield
+  MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield,
+  Sparkles, Handshake, MessageCircle, Rocket
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -82,6 +83,25 @@ export default function LandingPage() {
             'Real-time notification system',
           ],
       tryWebApp: language === 'cs' ? 'Vyzkoušet webovou aplikaci' : 'Try Web App Now',
+    },
+    goodToKnow: {
+      title: language === 'cs' ? 'Dobré vědět' : 'Good to Know',
+      subtitle: language === 'cs'
+        ? 'Transparentnost je základem naší komunity. Zde je pár věcí, které je dobré mít na paměti:'
+        : 'Transparency is at the heart of our community. Here are a few things to keep in mind:',
+      items: language === 'cs'
+        ? [
+            { title: 'Zdarma', description: 'Tool je aktuálně zdarma pro všechny. Později můžeme přidat prémiové funkce pro poskytovatele služeb, ale vždy vás předem upozorníme. ✨' },
+            { title: 'Přímé platby', description: 'Platby si domlouváte přímo mezi sebou, ne přes aplikaci. Tool nezpracovává transakce, takže můžete platit jakýmkoli způsobem, který vám vyhovuje. 🤝' },
+            { title: 'Jasná komunikace', description: 'Doporučujeme potvrdit si všechny detaily práce a ceny před osobním setkáním, aby byl zážitek hladký pro obě strany. 💬' },
+            { title: 'Pomozte nám růst', description: 'Všimli jste si něčeho, co bychom mohli udělat lépe? Rádi slyšíme od našich uživatelů, jak můžeme aplikaci vylepšit. 🚀' },
+          ]
+        : [
+            { title: 'Free to Join', description: 'Tool is currently free for everyone. We may add premium features for Service Providers later, but we\'ll always give you a heads-up first. ✨' },
+            { title: 'Direct Payments', description: 'Payments are arranged directly between each other, not through the app. Tool doesn\'t process transactions, so you can pay however suits you best. 🤝' },
+            { title: 'Clear Communication', description: 'We recommend confirming all job details and prices before meeting in person to ensure a smooth experience for both sides. 💬' },
+            { title: 'Help Us Grow', description: 'Notice something we could do better? We love hearing from our users as we continue to improve the app. 🚀' },
+          ],
     },
     about: {
       title: language === 'cs' ? 'O nás' : 'About us',
@@ -331,7 +351,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent" />
       </section>
 
       {/* Features Section */}
@@ -366,6 +386,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Good to Know Section */}
+      <section id="good-to-know" className="py-20 bg-primary-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+            {t.goodToKnow.title}
+          </h2>
+          <p className="text-lg text-primary-200 text-center max-w-3xl mx-auto mb-12">
+            {t.goodToKnow.subtitle}
+          </p>
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              { icon: <Sparkles className="w-6 h-6 text-yellow-300" />, bg: 'bg-yellow-400/15', ...t.goodToKnow.items[0] },
+              { icon: <Handshake className="w-6 h-6 text-green-300" />, bg: 'bg-green-400/15', ...t.goodToKnow.items[1] },
+              { icon: <MessageCircle className="w-6 h-6 text-blue-300" />, bg: 'bg-blue-400/15', ...t.goodToKnow.items[2] },
+              { icon: <Rocket className="w-6 h-6 text-orange-300" />, bg: 'bg-orange-400/15', ...t.goodToKnow.items[3] },
+            ].map((item, index) => (
+              <div key={index} className="bg-white/10 border border-white/10 rounded-2xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0", item.bg)}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-lg mb-2">{item.title}</h3>
+                    <p className="text-primary-200 leading-relaxed text-sm">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -396,7 +448,7 @@ export default function LandingPage() {
       </section>
 
       {/* Legal Section */}
-      <section id="legal" className="py-20 bg-white">
+      <section id="legal" className="py-20 bg-primary-600/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
             {t.legal.title}
@@ -436,7 +488,7 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50">
+      <section id="contact" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
             {t.contact.title}
