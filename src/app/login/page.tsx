@@ -54,7 +54,7 @@ function LoginContent() {
   // Show loading while checking auth
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50">
+      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     )
@@ -63,7 +63,7 @@ function LoginContent() {
   // Don't render login form if already authenticated
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50">
+      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     )
@@ -151,37 +151,42 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4 pb-12">
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/background.webp')" }}
+    >
+      <div className="min-h-screen flex items-center justify-center px-4 pb-12">
       <div className="w-full max-w-md">
         {/* Continue exploring link */}
         <button
           onClick={handleBrowseAsGuest}
-          className="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-primary-700 transition-colors mb-6"
+          className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-700 transition-colors mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           {language === 'cs' ? 'Pokračovat v procházení' : 'Continue exploring'}
         </button>
 
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <img
-            src="/icons/icon-192.png"
-            alt="Tool Connect"
-            className="w-24 h-24 rounded-2xl mx-auto mb-4"
-          />
-          <h1 className="text-2xl font-bold text-gray-900">Tool Connect</h1>
-          <p className="text-gray-600 mt-2">
-            {step === 'role' 
-              ? (language === 'cs' ? 'Jak chcete používat Tool Connect?' : 'How would you like to use Tool Connect?')
-              : userRole 
-                ? roleContent[userRole].subtitle
-                : (language === 'cs' ? 'Přihlaste se ke svému účtu' : 'Sign in to your account')
-            }
-          </p>
-        </div>
+        {/* Card */}
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-card p-8">
+          {/* Logo & Title */}
+          <div className="text-center mb-6">
+            <img
+              src="/icons/icon-192.png"
+              alt="Tool Connect"
+              className="w-20 h-20 rounded-2xl mx-auto mb-4"
+            />
+            <h1 className="text-2xl font-bold text-gray-900">Tool Connect</h1>
+            <p className="text-gray-500 mt-1.5 text-sm">
+              {step === 'role' 
+                ? (language === 'cs' ? 'Jak chcete používat Tool Connect?' : 'How would you like to use Tool Connect?')
+                : userRole 
+                  ? roleContent[userRole].subtitle
+                  : (language === 'cs' ? 'Přihlaste se ke svému účtu' : 'Sign in to your account')
+              }
+            </p>
+          </div>
 
-        {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-card p-8">
+          <div className="border-t border-gray-100 pt-6">
           {step === 'role' ? (
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-gray-900 mb-6 text-center">
@@ -350,6 +355,7 @@ function LoginContent() {
               </button>
             </form>
           )}
+          </div>
         </div>
 
         {/* Footer links */}
@@ -360,15 +366,16 @@ function LoginContent() {
               : 'By continuing, you agree to our'
             }
             {' '}
-            <a href="/terms-conditions.html" className="text-primary-700 hover:underline">
+            <a href="/terms-conditions.html" className="text-primary-700 hover:text-primary-800 hover:underline">
               {language === 'cs' ? 'podmínkami' : 'Terms'}
             </a>
             {' '}&{' '}
-            <a href="/privacy-policy.html" className="text-primary-700 hover:underline">
+            <a href="/privacy-policy.html" className="text-primary-700 hover:text-primary-800 hover:underline">
               {language === 'cs' ? 'zásadami ochrany osobních údajů' : 'Privacy Policy'}
             </a>
           </p>
         </div>
+      </div>
       </div>
     </div>
   )
@@ -377,7 +384,7 @@ function LoginContent() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50">
+      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     }>
