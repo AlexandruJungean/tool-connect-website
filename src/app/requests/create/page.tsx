@@ -137,7 +137,7 @@ export default function CreateRequestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Login Prompt Modal */}
       <LoginPromptModal
         isOpen={showLoginPrompt}

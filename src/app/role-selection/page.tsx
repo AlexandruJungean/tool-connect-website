@@ -49,7 +49,7 @@ export default function RoleSelectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         {/* Header */}
         <div className="text-center mb-10">

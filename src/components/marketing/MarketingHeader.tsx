@@ -42,7 +42,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled || !transparent
-          ? 'bg-primary-700 shadow-md'
+          ? 'bg-white/80 backdrop-blur-sm shadow-md'
           : 'bg-transparent'
       )}
     >
@@ -51,7 +51,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
           {/* Logo - swap between light/dark versions based on scroll */}
           <Link href="/">
             <Image
-              src="/logo.webp"
+              src={isScrolled || !transparent ? '/assets/logo-header.png' : '/logo.webp'}
               alt="Tool Connect"
               width={160}
               height={40}
@@ -74,13 +74,13 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
                         // Dynamic sizing/visibility: larger at top, tighter after scroll
                         isScrolled || !transparent ? 'text-base' : 'text-lg',
                         isScrolled || !transparent
-                          ? 'text-white bg-white/15 hover:bg-white/25 ring-1 ring-white/20 shadow-sm'
+                          ? 'text-primary-700 bg-primary-50 hover:bg-primary-100 ring-1 ring-primary-100 shadow-sm'
                           : 'text-white bg-white/15 hover:bg-white/25 border border-white/25 backdrop-blur-sm shadow-md drop-shadow'
                       )
                     : cn(
                         'text-sm font-medium transition-colors px-4 py-2 rounded-lg',
                         isScrolled || !transparent
-                          ? 'text-white/90 hover:text-white hover:bg-white/10'
+                          ? 'text-gray-700 hover:bg-gray-100 hover:text-primary-600'
                           : 'text-white/90 hover:text-white hover:bg-white/10'
                       )
                 )}
@@ -98,7 +98,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
                 className={cn(
                   'flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
                   isScrolled || !transparent
-                    ? 'text-white/90 hover:bg-white/10'
+                    ? 'text-gray-700 hover:bg-gray-100'
                     : 'text-white/90 hover:bg-white/10'
                 )}
               >
@@ -137,7 +137,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
             className={cn(
               'lg:hidden p-2 rounded-lg transition-colors',
               isScrolled || !transparent
-                ? 'text-white hover:bg-white/10'
+                ? 'text-gray-700 hover:bg-gray-100'
                 : 'text-white hover:bg-white/10'
             )}
           >
@@ -147,14 +147,14 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden bg-primary-700 border-t border-primary-800">
+          <div className="lg:hidden bg-white/80 backdrop-blur-sm border-t">
             <div className="py-4 space-y-2">
               {items.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-2 text-white/90 hover:bg-white/10 rounded-lg"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                 >
                   {item.label}
                 </Link>
@@ -162,7 +162,7 @@ export function MarketingHeader({ navItems, transparent = false }: MarketingHead
               <div className="border-t pt-2 mt-2 px-4">
                 <button
                   onClick={() => setLanguage(language === 'cs' ? 'en' : 'cs')}
-                  className="flex items-center gap-2 py-2 text-white/90"
+                  className="flex items-center gap-2 py-2 text-gray-700"
                 >
                   <Globe className="w-4 h-4" />
                   {language === 'cs' ? 'English' : 'Čeština'}

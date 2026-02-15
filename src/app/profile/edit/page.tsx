@@ -38,10 +38,9 @@ export default function EditProfilePage() {
   const [aboutMe, setAboutMe] = useState('')
   const [availability, setAvailability] = useState('')
   const [priceMin, setPriceMin] = useState('')
-  const [priceMax, setPriceMax] = useState('')
   // Currency is now fixed to CZK
   const currency = 'CZK'
-  const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'week' | 'project'>('hour')
+  const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'week' | 'month'>('hour')
   const [priceInfo, setPriceInfo] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const [selectedServices, setSelectedServices] = useState<string[]>([])
@@ -74,9 +73,12 @@ export default function EditProfilePage() {
         setAboutMe(serviceProviderProfile.about_me || serviceProviderProfile.bio || '')
         setAvailability((serviceProviderProfile as any).availability || '')
         setPriceMin(serviceProviderProfile.hourly_rate_min?.toString() || '')
-        setPriceMax(serviceProviderProfile.hourly_rate_max?.toString() || '')
         // Currency is fixed to CZK
-        setPricePeriod(serviceProviderProfile.price_period || 'hour')
+        const dbPeriod = serviceProviderProfile.price_period as string | null | undefined
+        setPricePeriod(
+          dbPeriod === 'hour' || dbPeriod === 'day' || dbPeriod === 'week' || dbPeriod === 'month'
+            ? dbPeriod : 'hour'
+        )
         setPriceInfo(serviceProviderProfile.price_info || '')
         setSelectedLanguages(serviceProviderProfile.languages || [])
         setSelectedServices(serviceProviderProfile.services || [])
@@ -115,7 +117,6 @@ export default function EditProfilePage() {
             about_me: aboutMe,
             availability: availability.trim() || null,
             hourly_rate_min: priceMin ? parseFloat(priceMin) : null,
-            hourly_rate_max: priceMax ? parseFloat(priceMax) : null,
             price_currency: currency,
             price_period: pricePeriod,
             price_info: priceInfo || null,
@@ -190,14 +191,14 @@ export default function EditProfilePage() {
   // Currency is fixed to CZK, no options needed
 
   const periodOptions = [
-    { value: 'hour', label: language === 'cs' ? 'Za hodinu' : 'Per hour' },
-    { value: 'day', label: language === 'cs' ? 'Za den' : 'Per day' },
-    { value: 'week', label: language === 'cs' ? 'Za týden' : 'Per week' },
-    { value: 'project', label: language === 'cs' ? 'Za projekt' : 'Per project' },
+    { value: 'hour', label: language === 'cs' ? 'Hodina' : 'Hour' },
+    { value: 'day', label: language === 'cs' ? 'Den' : 'Day' },
+    { value: 'week', label: language === 'cs' ? 'Týden' : 'Week' },
+    { value: 'month', label: language === 'cs' ? 'Měsíc' : 'Month' },
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <button
@@ -371,26 +372,20 @@ export default function EditProfilePage() {
                   <label className="block text-sm font-medium text-gray-700">
                     {t('provider.pricing')}
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
                     <Input
-                      label={language === 'cs' ? 'Cena od' : 'Price from'}
+                      label={language === 'cs' ? 'Cena' : 'Price'}
                       placeholder="0"
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
                       value={priceMin}
-                      onChange={(e) => setPriceMin(e.target.value)}
-                    />
-                    <Input
-                      label={language === 'cs' ? 'Cena do' : 'Price to'}
-                      placeholder={language === 'cs' ? 'Volitelné' : 'Optional'}
-                      type="number"
-                      value={priceMax}
-                      onChange={(e) => setPriceMax(e.target.value)}
+                      onChange={(e) => setPriceMin(e.target.value.replace(/\D/g, ''))}
                     />
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
                         {language === 'cs' ? 'Měna' : 'Currency'}
                       </label>
-                      <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600">
+                      <div className="px-4 py-2.5 border border-gray-200 rounded-xl text-gray-600">
                         CZK (Kč)
                       </div>
                     </div>
@@ -398,7 +393,7 @@ export default function EditProfilePage() {
                       label={language === 'cs' ? 'Za' : 'Per'}
                       options={periodOptions}
                       value={pricePeriod}
-                      onChange={(val) => setPricePeriod(val as 'hour' | 'day' | 'week' | 'project')}
+                      onChange={(val) => setPricePeriod(val as 'hour' | 'day' | 'week' | 'month')}
                     />
                   </div>
                   <div>

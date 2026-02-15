@@ -370,7 +370,7 @@ export default function ProviderProfileSetupPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t.currency}
               </label>
-              <div className="px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-600">
+              <div className="px-4 py-2 border border-gray-300 rounded-xl text-gray-600">
                 Kč CZK
               </div>
             </div>
@@ -382,9 +382,9 @@ export default function ProviderProfileSetupPage() {
   const stepLabels = [t.step1, t.step2, t.step3, t.step4]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-10">
+      <div className="bg-white/80 backdrop-blur-sm border-b sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
           <button
             onClick={() => router.back()}
@@ -397,7 +397,7 @@ export default function ProviderProfileSetupPage() {
       </div>
 
       {/* Progress */}
-      <div className="bg-white border-b">
+      <div className="bg-white/80 backdrop-blur-sm border-b">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-2">
             {STEPS.map((step, index) => (

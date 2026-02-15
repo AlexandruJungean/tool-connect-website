@@ -167,7 +167,7 @@ export default function RequestsPage() {
   // Show loading while checking auth
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner />
       </div>
     )
@@ -176,7 +176,7 @@ export default function RequestsPage() {
   // Public browse mode (guest or SP)
   if (!isMyRequestsMode) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         <LoginPromptModal
           isOpen={showLoginPrompt}
           onClose={() => setShowLoginPrompt(false)}
@@ -282,7 +282,7 @@ export default function RequestsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -398,7 +398,7 @@ export default function RequestsPage() {
                 </Link>
 
                 {/* Actions */}
-                <div className="px-5 py-3 bg-gray-50 border-t border-gray-100 flex justify-end gap-2">
+                <div className="px-5 py-3 border-t border-gray-100 flex justify-end gap-2">
                   <Link href={`/requests/${request.id}/edit`} prefetch={false}>
                     <Button variant="ghost" size="sm">
                       {language === 'cs' ? 'Upravit' : 'Edit'}

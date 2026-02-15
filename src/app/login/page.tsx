@@ -54,7 +54,7 @@ function LoginContent() {
   // Show loading while checking auth
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
+      <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     )
@@ -63,7 +63,7 @@ function LoginContent() {
   // Don't render login form if already authenticated
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
+      <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     )
@@ -151,11 +151,7 @@ function LoginContent() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/background.webp')" }}
-    >
-      <div className="min-h-screen flex items-center justify-center px-4 pb-12">
+    <div className="min-h-screen flex items-center justify-center px-4 pb-12">
       <div className="w-full max-w-md">
         {/* Continue exploring link */}
         <button
@@ -189,10 +185,6 @@ function LoginContent() {
           <div className="border-t border-gray-100 pt-6">
           {step === 'role' ? (
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6 text-center">
-                {language === 'cs' ? 'Přihlásit se jako' : 'Sign in as'}
-              </h2>
-
               {/* Sign in as Client */}
               <button
                 type="button"
@@ -376,7 +368,6 @@ function LoginContent() {
           </p>
         </div>
       </div>
-      </div>
     </div>
   )
 }
@@ -384,7 +375,7 @@ function LoginContent() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.webp')" }}>
+      <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     }>

@@ -77,7 +77,7 @@ export default function ServiceProviderProfileSetupPage() {
   const [priceFrom, setPriceFrom] = useState('')
   // Currency is now fixed to CZK
   const priceCurrency = 'CZK'
-  const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'project'>('hour')
+  const [pricePeriod, setPricePeriod] = useState<'hour' | 'day' | 'week' | 'month'>('hour')
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
   // New media state
@@ -133,9 +133,10 @@ export default function ServiceProviderProfileSetupPage() {
     step8: {
       title: language === 'cs' ? 'Jaké jsou vaše ceny?' : 'What are your rates?',
       startingFrom: language === 'cs' ? 'Cena od' : 'Starting from',
-      perHour: language === 'cs' ? 'Za hodinu' : 'Per hour',
-      perDay: language === 'cs' ? 'Za den' : 'Per day',
-      perProject: language === 'cs' ? 'Za projekt' : 'Per project',
+      perHour: language === 'cs' ? 'Hodina' : 'Hour',
+      perDay: language === 'cs' ? 'Den' : 'Day',
+      perWeek: language === 'cs' ? 'Týden' : 'Week',
+      perMonth: language === 'cs' ? 'Měsíc' : 'Month',
     },
     step9: {
       title: language === 'cs' ? 'Přidejte své fotky' : 'Add your photos',
@@ -408,7 +409,7 @@ export default function ServiceProviderProfileSetupPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
@@ -417,7 +418,7 @@ export default function ServiceProviderProfileSetupPage() {
   // Don't render if not authenticated or if user already has a completed service provider profile
   if (!isAuthenticated || hasCompletedProviderProfile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
@@ -428,7 +429,7 @@ export default function ServiceProviderProfileSetupPage() {
   const selectedCategoryData = getSelectedCategoryData()
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-lg mx-auto px-4 py-8">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -824,25 +825,26 @@ export default function ServiceProviderProfileSetupPage() {
                   </label>
                   <div className="flex gap-3">
                     <Input
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
                       placeholder="0"
                       value={priceFrom}
-                      onChange={(e) => setPriceFrom(e.target.value)}
+                      onChange={(e) => setPriceFrom(e.target.value.replace(/\D/g, ''))}
                       className="flex-1"
                     />
-                    <div className="px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-600">
+                    <div className="px-4 py-2 border border-gray-300 rounded-xl text-gray-600">
                       CZK
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex gap-2">
-                  {(['hour', 'day', 'project'] as const).map((period) => (
+                <div className="grid grid-cols-2 gap-2">
+                  {(['hour', 'day', 'week', 'month'] as const).map((period) => (
                     <button
                       key={period}
                       onClick={() => setPricePeriod(period)}
                       className={cn(
-                        "flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all",
+                        "py-3 px-4 rounded-xl text-sm font-medium transition-all",
                         pricePeriod === period
                           ? "bg-primary-700 text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -850,7 +852,8 @@ export default function ServiceProviderProfileSetupPage() {
                     >
                       {period === 'hour' ? t.step8.perHour : 
                        period === 'day' ? t.step8.perDay : 
-                       t.step8.perProject}
+                       period === 'week' ? t.step8.perWeek :
+                       t.step8.perMonth}
                     </button>
                   ))}
                 </div>

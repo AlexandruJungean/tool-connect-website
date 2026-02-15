@@ -240,7 +240,7 @@ export default function ProviderDetailPage() {
   const isPhoneVisible = provider.phone_visible === true || provider.phone_visible === undefined
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header Image */}
       <div className="relative h-48 md:h-64 lg:h-80 bg-gradient-to-br from-primary-200 to-primary-100">
         {provider.background_image_url && (

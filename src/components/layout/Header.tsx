@@ -74,7 +74,7 @@ export function Header() {
   const navLinks = currentUserType === 'service_provider' ? providerNavLinks : clientNavLinks
 
   return (
-    <header className="sticky top-0 z-50 bg-primary-700 border-b border-primary-800 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -89,7 +89,7 @@ export function Header() {
             />
             {/* Desktop: Full logo */}
             <img
-              src="/logo.webp"
+              src="/assets/logo-header.png"
               alt="Tool Connect"
               className="hidden sm:block h-10 w-auto"
             />
@@ -110,8 +110,8 @@ export function Header() {
                   className={cn(
                     "relative flex items-center gap-2 px-4 py-2 rounded-lg transition-colors",
                     active
-                      ? "text-white bg-white/15 font-semibold"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      ? "text-primary-700 bg-primary-50 font-semibold"
+                      : "text-gray-600 hover:text-primary-700 hover:bg-primary-50"
                   )}
                 >
                   <link.icon className="w-5 h-5" />
@@ -132,7 +132,7 @@ export function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-1 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                className="flex items-center gap-1 px-3 py-2 text-gray-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors"
               >
                 <Globe className="w-5 h-5" />
                 <span className="text-sm font-medium uppercase">{language}</span>
@@ -171,7 +171,7 @@ export function Header() {
                 <Link
                   href="/notifications"
                   prefetch={false}
-                  className="relative p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors hidden sm:flex"
+                  className="relative p-2 text-gray-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors hidden sm:flex"
                 >
                   <Bell className="w-5 h-5" />
                   {unreadNotificationsCount > 0 && (
@@ -185,7 +185,7 @@ export function Header() {
                 <div className="relative">
                   <button
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="flex items-center gap-2 p-1 hover:bg-white/10 rounded-lg transition-colors"
+                    className="flex items-center gap-2 p-1 hover:bg-primary-50 rounded-lg transition-colors"
                   >
                     {profileAvatar ? (
                       <img
@@ -194,11 +194,11 @@ export function Header() {
                         className="w-8 h-8 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                        <User className="w-5 h-5 text-white" />
+                      <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+                        <User className="w-5 h-5 text-primary-700" />
                       </div>
                     )}
-                    <ChevronDown className="w-4 h-4 text-white/70 hidden sm:block" />
+                    <ChevronDown className="w-4 h-4 text-gray-500 hidden sm:block" />
                   </button>
                   
                   {isProfileOpen && (
@@ -223,7 +223,7 @@ export function Header() {
                           }
                           prefetch={false}
                           onClick={() => setIsProfileOpen(false)}
-                          className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                          className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-primary-50"
                         >
                           <User className="w-5 h-5" />
                           {t('nav.profile')}
@@ -232,7 +232,7 @@ export function Header() {
                           href="/settings"
                           prefetch={false}
                           onClick={() => setIsProfileOpen(false)}
-                          className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                          className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-primary-50"
                         >
                           <Settings className="w-5 h-5" />
                           {t('nav.settings')}
@@ -256,7 +256,7 @@ export function Header() {
                               switchUserType(currentUserType === 'service_provider' ? 'client' : 'service_provider')
                               setIsProfileOpen(false)
                             }}
-                            className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 w-full"
+                            className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-primary-50 w-full"
                           >
                             <ArrowLeftRight className="w-5 h-5" />
                             {currentUserType === 'service_provider'
@@ -283,7 +283,7 @@ export function Header() {
               <Link
                 href="/login"
                 prefetch={false}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white text-primary-700 rounded-lg hover:bg-white/90 transition-colors font-medium"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-primary-700 text-white rounded-lg hover:bg-primary-800 transition-colors"
               >
                 {t('nav.signIn')}
               </Link>
@@ -292,7 +292,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+              className="md:hidden p-2 text-gray-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -302,7 +302,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-primary-800 bg-primary-700">
+        <div className="md:hidden border-t border-gray-100 bg-white/80 backdrop-blur-sm">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => {
               if (link.auth && !isAuthenticated) return null
@@ -318,8 +318,8 @@ export function Header() {
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 rounded-lg",
                     active
-                      ? "text-white bg-white/15 font-semibold"
-                      : "text-white/80 hover:bg-white/10"
+                      ? "text-primary-700 bg-primary-50 font-semibold"
+                      : "text-gray-700 hover:bg-primary-50"
                   )}
                 >
                   <link.icon className="w-5 h-5" />
@@ -338,7 +338,7 @@ export function Header() {
                 href="/notifications"
                 prefetch={false}
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-white/80 hover:bg-white/10 rounded-lg"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg"
               >
                 <Bell className="w-5 h-5" />
                 <span className="flex-1">{language === 'cs' ? 'Oznámení' : 'Notifications'}</span>
@@ -354,7 +354,7 @@ export function Header() {
                 href="/login"
                 prefetch={false}
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center justify-center gap-2 px-4 py-3 mt-4 bg-white text-primary-700 rounded-lg font-medium"
+                className="flex items-center justify-center gap-2 px-4 py-3 mt-4 bg-primary-700 text-white rounded-lg"
               >
                 {t('nav.signIn')}
               </Link>

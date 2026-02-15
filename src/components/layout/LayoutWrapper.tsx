@@ -42,6 +42,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <>
       <Header />
+      <div className="h-16" />
       <main className="flex-1">
         {children}
       </main>

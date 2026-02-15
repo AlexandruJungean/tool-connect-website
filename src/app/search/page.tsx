@@ -47,6 +47,9 @@ function SearchContent() {
   const [providerType, setProviderType] = useState(searchParams.get('type') || '')
   const [location, setLocation] = useState(searchParams.get('location') || '')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [priceMin, setPriceMin] = useState('')
+  const [priceMax, setPriceMax] = useState('')
+  const [pricePeriod, setPricePeriod] = useState('')
 
   const selectedCategory = categories.find(cat => cat.value === category)
   const subcategoriesForCategory = selectedCategory?.subcategories || []
@@ -189,6 +192,15 @@ function SearchContent() {
       if (selectedLanguages.length > 0) {
         query = query.overlaps('languages', selectedLanguages)
       }
+      if (priceMin) {
+        query = query.gte('hourly_rate_min', parseFloat(priceMin))
+      }
+      if (priceMax) {
+        query = query.lte('hourly_rate_min', parseFloat(priceMax))
+      }
+      if (pricePeriod) {
+        query = query.eq('price_period', pricePeriod)
+      }
 
       query = query
         .order('average_rating', { ascending: false, nullsFirst: false })
@@ -209,7 +221,7 @@ function SearchContent() {
 
   useEffect(() => {
     fetchProviders()
-  }, [category, selectedSubcategories, providerType, location, keywords, selectedLanguages])
+  }, [category, selectedSubcategories, providerType, location, keywords, selectedLanguages, priceMin, priceMax, pricePeriod])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -223,10 +235,13 @@ function SearchContent() {
     setProviderType('')
     setLocation('')
     setSelectedLanguages([])
+    setPriceMin('')
+    setPriceMax('')
+    setPricePeriod('')
     router.push('/search')
   }
 
-  const hasActiveFilters = category || selectedSubcategories.length > 0 || providerType || location || selectedLanguages.length > 0
+  const hasActiveFilters = category || selectedSubcategories.length > 0 || providerType || location || selectedLanguages.length > 0 || priceMin || priceMax || pricePeriod
 
   // Only show categories that have at least one provider
   const categoryOptions = [
@@ -256,9 +271,9 @@ function SearchContent() {
   // Show category picker view
   if (showCategoryPicker) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         {/* Search Header */}
-        <div className="bg-white border-b border-gray-100 sticky top-16 z-40">
+        <div className="backdrop-blur-sm sticky top-16 z-40">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <form onSubmit={(e) => { e.preventDefault(); if (keywords.trim()) { setShowCategoryPicker(false) } }} className="flex gap-3">
               <Input
@@ -372,9 +387,9 @@ function SearchContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Search Header */}
-      <div className="bg-white border-b border-gray-100 sticky top-16 z-40">
+      <div className="backdrop-blur-sm sticky top-16 z-40">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <form onSubmit={handleSearch} className="flex gap-3">
             <Input
@@ -492,6 +507,49 @@ function SearchContent() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {language === 'cs' ? 'Cenový rozsah (Kč)' : 'Price Range (CZK)'}
+                  </label>
+                  <div className="flex gap-2 mb-3">
+                    <Input
+                      placeholder={language === 'cs' ? 'Od' : 'Min'}
+                      type="text"
+                      inputMode="numeric"
+                      value={priceMin}
+                      onChange={(e) => setPriceMin(e.target.value.replace(/\D/g, ''))}
+                    />
+                    <Input
+                      placeholder={language === 'cs' ? 'Do' : 'Max'}
+                      type="text"
+                      inputMode="numeric"
+                      value={priceMax}
+                      onChange={(e) => setPriceMax(e.target.value.replace(/\D/g, ''))}
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { value: 'hour', label: language === 'cs' ? 'Hodina' : 'Hour' },
+                      { value: 'day', label: language === 'cs' ? 'Den' : 'Day' },
+                      { value: 'week', label: language === 'cs' ? 'Týden' : 'Week' },
+                      { value: 'month', label: language === 'cs' ? 'Měsíc' : 'Month' },
+                    ].map((period) => (
+                      <button
+                        key={period.value}
+                        onClick={() => setPricePeriod(pricePeriod === period.value ? '' : period.value)}
+                        className={cn(
+                          "px-3 py-1.5 text-sm rounded-lg border transition-colors",
+                          pricePeriod === period.value
+                            ? "bg-primary-700 text-white border-primary-700"
+                            : "bg-white text-gray-700 border-gray-200 hover:border-primary-300"
+                        )}
+                      >
+                        {period.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t('search.languages')}
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -577,7 +635,7 @@ function SearchContent() {
 export default function SearchPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
       </div>
     }>

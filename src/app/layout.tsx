@@ -168,7 +168,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased">
+      <body
+        className="min-h-screen flex flex-col antialiased bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: "url('/background.webp')" }}
+      >
         <LanguageProvider>
           <AuthProvider>
             <NotificationProvider>

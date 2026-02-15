@@ -451,7 +451,7 @@ export default function ClientProfileSetupPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
@@ -460,7 +460,7 @@ export default function ClientProfileSetupPage() {
   // Don't render if not authenticated or if user already has a completed client profile
   if (!isAuthenticated || hasCompletedClientProfile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
@@ -471,7 +471,7 @@ export default function ClientProfileSetupPage() {
   const progress = (progressStepForBar / PROGRESS_STEPS) * 100
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-lg mx-auto px-4 py-8">
         {/* Progress Bar - only show for steps up to Save */}
         {!isPastProgressSteps && (
@@ -844,7 +844,7 @@ export default function ClientProfileSetupPage() {
 
                   {/* Request description input - only shown when "Post request" is selected */}
                   {wantsToPostRequest === true && (
-                    <div className="space-y-2 mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                    <div className="space-y-2 mt-4 p-4 rounded-xl border border-gray-200">
                       <label className="block text-sm font-medium text-gray-700">
                         {t.step7.describeNeed}
                       </label>

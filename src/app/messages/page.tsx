@@ -401,7 +401,7 @@ function MessagesContent() {
   // Show loading while checking auth
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner />
       </div>
     )
@@ -412,7 +412,7 @@ function MessagesContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto h-[calc(100vh-4rem)]">
         <div className="flex h-full bg-white shadow-card rounded-none md:rounded-2xl md:my-4 overflow-hidden">
           {/* Conversations List */}
@@ -636,7 +636,7 @@ function MessagesContent() {
                         }
                       </p>
 
-                      <div className="mt-6 max-w-md rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-left">
+                      <div className="mt-6 max-w-md rounded-xl border border-gray-200 px-4 py-3 text-left">
                         <p className="text-sm text-gray-700">
                           <span className="font-semibold text-gray-900">
                             {language === 'cs' ? 'Tip:' : 'Tip:'}
@@ -725,7 +725,7 @@ function MessagesContent() {
 
                 {/* File Preview */}
                 {selectedFile && (
-                  <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
+                  <div className="px-4 py-2 border-t border-gray-100">
                     <div className="flex items-center gap-3">
                       {filePreview ? (
                         <img src={filePreview} alt="Preview" className="w-16 h-16 object-cover rounded-lg" />
@@ -814,7 +814,7 @@ function MessagesContent() {
 export default function MessagesPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     }>

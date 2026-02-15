@@ -198,7 +198,7 @@ export default function RequestDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <button
@@ -362,9 +362,11 @@ export default function RequestDetailPage() {
               </div>
               <Input
                 label={language === 'cs' ? 'Navrhovaná cena (volitelné)' : 'Proposed Price (optional)'}
+                type="text"
+                inputMode="numeric"
                 value={proposedPrice}
-                onChange={(e) => setProposedPrice(e.target.value)}
-                placeholder="e.g. 500 CZK"
+                onChange={(e) => setProposedPrice(e.target.value.replace(/\D/g, ''))}
+                placeholder="e.g. 500"
               />
               <div className="flex gap-3">
                 <Button type="submit" isLoading={isSubmitting} className="flex-1">

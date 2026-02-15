@@ -153,9 +153,9 @@ export default function ClientProfileSetupPage() {
   const stepLabels = [t.step1, t.step2]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-10">
+      <div className="bg-white/80 backdrop-blur-sm border-b sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
           <button
             onClick={() => router.back()}
@@ -168,7 +168,7 @@ export default function ClientProfileSetupPage() {
       </div>
 
       {/* Progress */}
-      <div className="bg-white border-b">
+      <div className="bg-white/80 backdrop-blur-sm border-b">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center mb-2">
             {STEPS.map((step, index) => (
