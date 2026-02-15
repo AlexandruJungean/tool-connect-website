@@ -211,7 +211,7 @@ function LoginContent() {
               <button
                 type="button"
                 onClick={() => handleSelectRole('service-provider')}
-                className="w-full flex items-center gap-4 p-4 bg-gradient-to-r from-violet-600 to-purple-700 text-white rounded-xl hover:from-violet-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl"
+                className="w-full flex items-center gap-4 p-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl"
               >
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <Briefcase className="w-6 h-6" />
