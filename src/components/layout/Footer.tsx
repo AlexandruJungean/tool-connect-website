@@ -16,7 +16,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img
-                src="/logo-footer.webp"
+                src="/logo.webp"
                 alt="Tool Connect"
                 className="h-10 w-auto"
               />

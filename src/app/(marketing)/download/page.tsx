@@ -83,13 +83,15 @@ export default function DownloadPage() {
       <div className="bg-white rounded-3xl p-8 md:p-10 max-w-md w-full shadow-2xl animate-fade-in">
         {/* Logo */}
         <div className="flex justify-center mb-6">
-          <Image
-            src="/logo-header.webp"
-            alt="Tool Connect"
-            width={80}
-            height={80}
-            className="rounded-2xl shadow-lg"
-          />
+          <div className="bg-primary-700 rounded-2xl p-4 shadow-lg">
+            <Image
+              src="/logo.webp"
+              alt="Tool Connect"
+              width={120}
+              height={40}
+              className="h-10 w-auto"
+            />
+          </div>
         </div>
 
         {/* Title */}

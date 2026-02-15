@@ -36,7 +36,7 @@ export function MarketingFooter() {
           <div>
             <div className="mb-4">
               <Image
-                src="/logo-footer.webp"
+                src="/logo.webp"
                 alt="Tool Connect"
                 width={160}
                 height={40}
