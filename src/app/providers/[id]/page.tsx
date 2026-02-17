@@ -66,6 +66,8 @@ export default function ProviderDetailPage() {
   const [showShareToast, setShowShareToast] = useState(false)
   const [imageViewerOpen, setImageViewerOpen] = useState(false)
   const [imageViewerIndex, setImageViewerIndex] = useState(0)
+  const [profileImageViewerOpen, setProfileImageViewerOpen] = useState(false)
+  const [profileImageViewerIndex, setProfileImageViewerIndex] = useState(0)
   const [showLoginPrompt, setShowLoginPrompt] = useState(false)
 
   // Dynamic translation hooks - must be called unconditionally before any early returns
@@ -242,31 +244,37 @@ export default function ProviderDetailPage() {
   return (
     <div className="min-h-screen">
       {/* Header Image */}
-      <div className="relative h-48 md:h-64 lg:h-80 bg-gradient-to-br from-primary-200 to-primary-100">
-        {provider.background_image_url && (
-          <img
-            src={provider.background_image_url}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        
-        {/* Back button */}
-        <button
-          onClick={() => router.back()}
-          className="absolute top-4 left-4 p-2 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-white transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
-        </button>
+      <div className="max-w-5xl mx-auto px-0 lg:px-8 lg:pt-6">
+        <div className="relative h-56 md:h-72 lg:h-80 bg-gradient-to-br from-primary-200 to-primary-100 lg:rounded-2xl overflow-hidden">
+          {provider.background_image_url && (
+            <img
+              src={provider.background_image_url}
+              alt=""
+              className="w-full h-full object-cover object-center cursor-pointer"
+              onClick={() => {
+                setProfileImageViewerIndex(0)
+                setProfileImageViewerOpen(true)
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+          
+          {/* Back button */}
+          <button
+            onClick={() => router.back()}
+            className="absolute top-4 left-4 p-2 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-white transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 text-gray-700" />
+          </button>
 
-        {/* Share button */}
-        <button
-          onClick={handleShare}
-          className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-white transition-colors"
-        >
-          <Share2 className="w-5 h-5 text-gray-700" />
-        </button>
+          {/* Share button */}
+          <button
+            onClick={handleShare}
+            className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-white transition-colors"
+          >
+            <Share2 className="w-5 h-5 text-gray-700" />
+          </button>
+        </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 pb-24">
@@ -274,7 +282,16 @@ export default function ProviderDetailPage() {
         <div className="bg-white rounded-2xl shadow-card p-6 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Avatar */}
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-xl border-4 border-white shadow-lg overflow-hidden flex-shrink-0 -mt-16 sm:-mt-20 bg-white">
+            <div
+              className={`w-24 h-24 sm:w-32 sm:h-32 rounded-xl border-4 border-white shadow-lg overflow-hidden flex-shrink-0 -mt-16 sm:-mt-20 bg-white ${provider.avatar_url ? 'cursor-pointer' : ''}`}
+              onClick={() => {
+                if (provider.avatar_url) {
+                  const bgIndex = provider.background_image_url ? 1 : 0
+                  setProfileImageViewerIndex(bgIndex)
+                  setProfileImageViewerOpen(true)
+                }
+              }}
+            >
               {provider.avatar_url ? (
                 <img
                   src={provider.avatar_url}
@@ -526,13 +543,25 @@ export default function ProviderDetailPage() {
               </div>
             )}
 
-            {/* Image Viewer Modal */}
+            {/* Image Viewer Modal - Work Photos */}
             <ImageViewer
               images={provider.additional_images || []}
               initialIndex={imageViewerIndex}
               isOpen={imageViewerOpen}
               onClose={() => setImageViewerOpen(false)}
               alt={`${provider.name}'s work`}
+            />
+
+            {/* Image Viewer Modal - Profile & Background */}
+            <ImageViewer
+              images={[
+                ...(provider.background_image_url ? [provider.background_image_url] : []),
+                ...(provider.avatar_url ? [provider.avatar_url] : []),
+              ]}
+              initialIndex={profileImageViewerIndex}
+              isOpen={profileImageViewerOpen}
+              onClose={() => setProfileImageViewerOpen(false)}
+              alt={provider.name || 'Profile'}
             />
 
             {/* Languages */}

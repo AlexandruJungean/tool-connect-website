@@ -101,9 +101,9 @@ export function ImageViewer({
   if (!isOpen || images.length === 0) return null
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/95 flex flex-col">
+    <div className="fixed inset-0 z-40 bg-black/95 flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 text-white">
+      <div className="flex items-center justify-between p-4 pt-20 text-white">
         <span className="text-sm">
           {currentIndex + 1} / {images.length}
         </span>
