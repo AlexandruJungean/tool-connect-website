@@ -15,14 +15,18 @@ import { Select } from '@/components/ui/Select'
 import { LocationInput } from '@/components/forms'
 import { Search, Filter, X, Loader2, SlidersHorizontal, ArrowLeft, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/contexts/AuthContext'
+import { LoginPromptModal } from '@/components/ui/LoginPromptModal'
 
 function SearchContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { language, t } = useLanguage()
   const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
+  const { isAuthenticated } = useAuth()
   
   const [providers, setProviders] = useState<ServiceProviderProfile[]>([])
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
   const [showFilters, setShowFilters] = useState(true) // Show filters by default
@@ -59,8 +63,15 @@ function SearchContent() {
     return categories.find(cat => cat.value === pickerCategory)
   }
   
+  // Temporary gate: require login before browsing categories
+  const requireAuth = !isAuthenticated
+
   // Category picker handlers
   const handlePickerCategorySelect = (categoryValue: string) => {
+    if (requireAuth) {
+      setShowLoginPrompt(true)
+      return
+    }
     if (pickerCategory === categoryValue) {
       setPickerCategory(null)
       setPickerSubcategories([])
@@ -89,6 +100,10 @@ function SearchContent() {
   }
   
   const handleShowAllProviders = () => {
+    if (requireAuth) {
+      setShowLoginPrompt(true)
+      return
+    }
     setCategory('')
     setSelectedSubcategories([])
     setShowCategoryPicker(false)
@@ -382,6 +397,12 @@ function SearchContent() {
             </div>
           )}
         </div>
+
+        <LoginPromptModal
+          isOpen={showLoginPrompt}
+          onClose={() => setShowLoginPrompt(false)}
+          redirectTo="/search"
+        />
       </div>
     )
   }
@@ -628,6 +649,12 @@ function SearchContent() {
           </main>
         </div>
       </div>
+
+      <LoginPromptModal
+        isOpen={showLoginPrompt}
+        onClose={() => setShowLoginPrompt(false)}
+        redirectTo="/search"
+      />
     </div>
   )
 }
