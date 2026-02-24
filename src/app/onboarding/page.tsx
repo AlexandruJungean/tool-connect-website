@@ -81,7 +81,7 @@ export default function OnboardingPage() {
 
   // Translations
   const t = {
-    welcome: language === 'cs' ? 'Vítejte v Tool Connect!' : 'Welcome to Tool Connect!',
+    welcome: language === 'cs' ? 'Pojďme vás zaregistrovat!' : "Let's get you onboarded!",
     howToUse: language === 'cs' ? 'Jak chcete používat aplikaci?' : 'How would you like to use the app?',
     lookingForServices: language === 'cs' ? 'Hledám služby' : 'Looking for services',
     lookingForServicesDesc: language === 'cs' 
