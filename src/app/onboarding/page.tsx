@@ -71,6 +71,7 @@ export default function OnboardingPage() {
     isLoading, 
     clientProfile, 
     serviceProviderProfile, 
+    pendingProfileType,
     setPendingProfileType,
     needsProfileSetup,
     signOut
@@ -78,6 +79,17 @@ export default function OnboardingPage() {
   
   const [selectedType, setSelectedType] = useState<UserTypeOption | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  // If the user already chose a role at login, skip this screen
+  useEffect(() => {
+    if (!isLoading && isAuthenticated && pendingProfileType) {
+      if (pendingProfileType === 'client') {
+        router.push('/onboarding/client')
+      } else if (pendingProfileType === 'service_provider') {
+        router.push('/onboarding/service-provider')
+      }
+    }
+  }, [isLoading, isAuthenticated, pendingProfileType, router])
 
   // Translations
   const t = {
@@ -140,16 +152,12 @@ export default function OnboardingPage() {
     }
   }
 
-  if (isLoading) {
+  if (isLoading || !isAuthenticated || pendingProfileType) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
-  }
-
-  if (!isAuthenticated) {
-    return null
   }
 
   return (

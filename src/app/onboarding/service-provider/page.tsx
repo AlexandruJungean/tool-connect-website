@@ -12,7 +12,8 @@ import { LocationInput, ImageUpload, VideoUpload } from '@/components/forms'
 import { LANGUAGES } from '@/constants/categories'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { 
-  ArrowLeft, 
+  ArrowLeft,
+  LogOut, 
   ArrowRight, 
   Check, 
   MapPin, 
@@ -46,7 +47,8 @@ export default function ServiceProviderProfileSetupPage() {
     refreshProfiles,
     clearPendingProfileType,
     updateServiceProviderProfileLocal,
-    switchUserType
+    switchUserType,
+    signOut
   } = useAuth()
   
   // Check if this is the first profile setup (no other profile exists)
@@ -986,7 +988,7 @@ export default function ServiceProviderProfileSetupPage() {
 
         {/* Navigation Buttons */}
         <div className="flex gap-3">
-          {stepContent !== 'complete' && (
+          {stepContent !== 'complete' && currentStep > 1 && (
             <Button
               variant="outline"
               onClick={handleBack}
@@ -1049,6 +1051,15 @@ export default function ServiceProviderProfileSetupPage() {
             </Button>
           ) : null}
         </div>
+
+        {/* Sign Out */}
+        <button
+          onClick={signOut}
+          className="w-full flex items-center justify-center gap-2 mt-6 py-3 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          {language === 'cs' ? 'Odhlásit se' : 'Sign out'}
+        </button>
       </div>
     </div>
   )

@@ -11,7 +11,8 @@ import { Input } from '@/components/ui/Input'
 import { LocationInput } from '@/components/forms'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { 
-  ArrowLeft, 
+  ArrowLeft,
+  LogOut, 
   ArrowRight, 
   Check, 
   MapPin, 
@@ -40,7 +41,8 @@ export default function ClientProfileSetupPage() {
     refreshProfiles,
     clearPendingProfileType,
     updateClientProfileLocal,
-    switchUserType
+    switchUserType,
+    signOut
   } = useAuth()
   
   // Check if this is the first profile setup (no other profile exists)
@@ -865,8 +867,8 @@ export default function ClientProfileSetupPage() {
 
         {/* Navigation Buttons */}
         <div className="flex gap-3">
-          {/* Back button - hide on save, categories and help options steps (they have their own buttons) */}
-          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'helpOptions' && (
+          {/* Back button - hide on first step, save, categories and help options steps */}
+          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'helpOptions' && currentStep > 1 && (
             <Button
               variant="outline"
               onClick={handleBack}
@@ -977,6 +979,15 @@ export default function ClientProfileSetupPage() {
             </>
           )}
         </div>
+
+        {/* Sign Out */}
+        <button
+          onClick={signOut}
+          className="w-full flex items-center justify-center gap-2 mt-6 py-3 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          {language === 'cs' ? 'Odhlásit se' : 'Sign out'}
+        </button>
       </div>
     </div>
   )

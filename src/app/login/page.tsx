@@ -17,7 +17,7 @@ function LoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { language, t } = useLanguage()
-  const { isAuthenticated, isLoading: authLoading } = useAuth()
+  const { isAuthenticated, isLoading: authLoading, setPendingProfileType } = useAuth()
   
   const [step, setStep] = useState<'role' | 'phone' | 'verify'>('role')
   const [userRole, setUserRole] = useState<UserRole>(null)
@@ -130,6 +130,11 @@ function LoginContent() {
       })
 
       if (error) throw error
+      if (userRole === 'client') {
+        setPendingProfileType('client')
+      } else if (userRole === 'service-provider') {
+        setPendingProfileType('service_provider')
+      }
       const redirectTo = searchParams.get('redirect') || '/search'
       window.location.href = redirectTo
     } catch (error: any) {
