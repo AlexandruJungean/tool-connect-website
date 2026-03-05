@@ -24,23 +24,24 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Tool Connect - Trusted Professionals',
+    default: 'Tool Connect - Czech Professional Services Marketplace',
     template: '%s | Tool Connect',
   },
-  description: 'Tool Connect links people with trusted professionals in any field – from repairs to translations. Find specialists by location and language in Czech Republic.',
+  description: 'Tool Connect is a Czech professional services marketplace linking clients with trusted local service providers for repairs, translations, tutoring, and more. Find verified specialists by location and language across Czech Republic.',
   keywords: [
-    'professionals',
-    'services',
+    'professional services marketplace',
+    'Czech Republic services',
+    'find professionals Czech Republic',
+    'service providers marketplace',
     'repairs',
     'translations',
     'specialists',
-    'trusted',
-    'Czech Republic',
-    'Prague',
-    'service providers',
-    'handyman',
+    'trusted professionals',
+    'Prague services',
+    'handyman Czech',
     'freelancers',
-    'experts',
+    'local experts',
+    'tool connect marketplace',
   ],
   authors: [{ name: 'Tool Connect' }],
   creator: 'Tool Connect',
@@ -58,8 +59,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Tool Connect - Find Trusted Professionals',
-    description: 'Connect with verified professionals for any service. From home repairs to language lessons – find the right expert near you.',
+    title: 'Tool Connect - Czech Professional Services Marketplace',
+    description: 'Czech marketplace connecting clients with trusted local service providers. From home repairs to translations – find verified professionals near you in Czech Republic.',
     url: baseUrl,
     siteName: 'Tool Connect',
     images: [
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
         url: '/og-image.webp',
         width: 1200,
         height: 630,
-        alt: 'Tool Connect - Find Trusted Professionals',
+        alt: 'Tool Connect - Czech Professional Services Marketplace',
       },
     ],
     locale: 'en_US',
@@ -75,8 +76,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tool Connect - Find Trusted Professionals',
-    description: 'Connect with verified professionals for any service. Find the right expert near you.',
+    title: 'Tool Connect - Czech Professional Services Marketplace',
+    description: 'Czech marketplace connecting clients with trusted local service providers. Find verified professionals near you.',
     images: ['/og-image.webp'],
     creator: '@toolconnect',
   },
@@ -108,15 +109,56 @@ export const metadata: Metadata = {
   category: 'business',
 }
 
-// JSON-LD Structured Data
-const jsonLd = {
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${baseUrl}/#organization`,
+  name: 'Tool Connect',
+  legalName: 'Tool Connect',
+  description: 'Tool Connect is a Czech professional services marketplace that connects clients with trusted local service providers for repairs, translations, tutoring, and more. Tool Connect is not affiliated with, endorsed by, or related to DeWalt, Stanley Black & Decker, or any power tool manufacturer.',
+  url: baseUrl,
+  logo: `${baseUrl}/logo.webp`,
+  image: `${baseUrl}/og-image.webp`,
+  email: 'info@tool-connect.com',
+  foundingDate: '2024',
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'Czech Republic',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Czech Republic',
+  },
+  knowsAbout: [
+    'Professional services marketplace',
+    'Service provider matching',
+    'Home repairs',
+    'Translations',
+    'Freelance services',
+    'Local services',
+  ],
+  sameAs: [
+    'https://facebook.com/toolconnect',
+    'https://instagram.com/toolconnect',
+    'https://twitter.com/toolconnect',
+    'https://linkedin.com/company/toolconnect',
+    'https://apps.apple.com/us/app/tool/id6739626276',
+    'https://play.google.com/store/apps/details?id=com.tool.toolappconnect',
+  ],
+}
+
+const webAppJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
+  '@id': `${baseUrl}/#webapp`,
   name: 'Tool Connect',
-  description: 'Find trusted professionals in any field – from repairs to translations.',
+  description: 'A professional services marketplace connecting clients with trusted local service providers in Czech Republic. Find specialists for repairs, translations, tutoring, and more.',
+  disambiguatingDescription: 'Tool Connect is an independent Czech service marketplace platform for finding local professionals. It is not related to DeWalt Tool Connect or any power tool management system.',
   url: baseUrl,
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
+  applicationSubCategory: 'Professional Services Marketplace',
+  operatingSystem: 'Web, iOS, Android',
+  inLanguage: ['en', 'cs'],
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -127,10 +169,27 @@ const jsonLd = {
     ratingValue: '4.8',
     ratingCount: '1250',
   },
-  author: {
-    '@type': 'Organization',
-    name: 'Tool Connect',
-    url: baseUrl,
+  author: organizationJsonLd,
+  provider: {
+    '@id': `${baseUrl}/#organization`,
+  },
+  countryOfOrigin: {
+    '@type': 'Country',
+    name: 'Czech Republic',
+  },
+}
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${baseUrl}/#website`,
+  name: 'Tool Connect',
+  alternateName: 'Tool Connect Czech Republic',
+  description: 'Czech professional services marketplace for finding trusted local service providers.',
+  url: baseUrl,
+  inLanguage: ['en', 'cs'],
+  publisher: {
+    '@id': `${baseUrl}/#organization`,
   },
 }
 
@@ -165,7 +224,15 @@ export default function RootLayout({
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body

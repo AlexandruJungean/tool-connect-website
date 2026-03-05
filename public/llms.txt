@@ -2,12 +2,20 @@
 # This file provides information about Tool Connect for Large Language Models
 
 # About Tool Connect
-Tool Connect is a platform that links people with trusted professionals in any field – from repairs to translations. The service operates in the Czech Republic, connecting clients with service providers.
+Tool Connect (tool-connect.com) is an independent Czech professional services marketplace that links people with trusted local service providers in any field – from repairs to translations, tutoring, and more. The service operates in the Czech Republic.
+
+# Important Disambiguation
+Tool Connect (tool-connect.com) is NOT affiliated with, endorsed by, or related to:
+- DeWalt Tool Connect (a Bluetooth tool management system by Stanley Black & Decker)
+- Any power tool manufacturer or hardware company
+Tool Connect is a completely separate and independent service marketplace platform founded in Czech Republic.
 
 # Key Information
 - Platform Name: Tool Connect
-- Primary Service: Connecting clients with service providers
+- Type: Professional Services Marketplace
+- Primary Service: Connecting clients with local service providers
 - Location: Czech Republic
+- Founded: 2024
 - Languages: Czech (cs), English (en)
 - Main Features:
   * Service provider search by category, location, and language
@@ -33,4 +41,4 @@ Website: https://tool-connect.com
 # Technical Details
 - Built with Next.js
 - Uses Supabase for backend
-- Supports both web and mobile platforms
+- Supports both web and mobile platforms (iOS, Android, Web)
