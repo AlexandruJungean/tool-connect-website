@@ -397,18 +397,27 @@ export default function LandingPage() {
               ) : (
                 <button
                   onClick={() => setShowVideo(true)}
-                  className="w-full h-full bg-gradient-to-br from-primary-600 via-primary-800 to-primary-900 flex flex-col items-center justify-center gap-4 group cursor-pointer transition-all hover:from-primary-500 hover:via-primary-700 hover:to-primary-800"
+                  className="w-full h-full relative group cursor-pointer"
                 >
-                  <div className="w-20 h-20 bg-white/15 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/25 group-hover:scale-110 transition-all duration-300">
-                    <Play className="w-9 h-9 text-white ml-1" />
-                  </div>
-                  <div className="text-center px-4">
-                    <p className="text-white font-semibold text-lg mb-1">
-                      {t.features.videoTitle}
-                    </p>
-                    <p className="text-white/60 text-sm">
-                      {t.features.videoSubtitle}
-                    </p>
+                  <Image
+                    src="/assets/pictures/video-thumbnail.webp"
+                    alt={t.features.videoTitle}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                    <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
+                      <Play className="w-9 h-9 text-white ml-1" />
+                    </div>
+                    <div className="text-center px-4">
+                      <p className="text-white font-semibold text-lg mb-1 drop-shadow-lg">
+                        {t.features.videoTitle}
+                      </p>
+                      <p className="text-white/80 text-sm drop-shadow-lg">
+                        {t.features.videoSubtitle}
+                      </p>
+                    </div>
                   </div>
                 </button>
               )}
