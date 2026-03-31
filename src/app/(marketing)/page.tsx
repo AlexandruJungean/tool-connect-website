@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { 
   MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield,
-  Sparkles, Handshake, MessageCircle, Rocket
+  Sparkles, Handshake, MessageCircle, Rocket, Play
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic'
 const MarketingHeader = dynamic(() => import('@/components/marketing').then(mod => ({ default: mod.MarketingHeader })), { ssr: true })
 const MarketingFooter = dynamic(() => import('@/components/marketing').then(mod => ({ default: mod.MarketingFooter })), { ssr: true })
 import { Button } from '@/components/ui'
+import { VideoPlayer } from '@/components/ui/VideoPlayer'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 
@@ -21,6 +22,7 @@ export default function LandingPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
 
   // Typewriter effect for hero title
   useEffect(() => {
@@ -83,6 +85,9 @@ export default function LandingPage() {
             'Real-time notification system',
           ],
       tryWebApp: language === 'cs' ? 'Vyzkoušet webovou aplikaci' : 'Try Web App Now',
+      videoTitle: language === 'cs' ? 'Podívejte se, jak Tool funguje' : 'See how Tool works',
+      videoSubtitle: language === 'cs' ? 'Krátké představení za 47 sekund' : 'A quick intro in 47 seconds',
+      videoPlay: language === 'cs' ? 'Přehrát video' : 'Watch video',
     },
     goodToKnow: {
       title: language === 'cs' ? 'Dobré vědět' : 'Good to Know',
@@ -356,7 +361,7 @@ export default function LandingPage() {
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -381,6 +386,32 @@ export default function LandingPage() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
+            </div>
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-xl relative">
+              {showVideo ? (
+                <VideoPlayer
+                  src="/videos/jana-intro.mp4"
+                  autoPlay
+                  className="w-full h-full"
+                />
+              ) : (
+                <button
+                  onClick={() => setShowVideo(true)}
+                  className="w-full h-full bg-gradient-to-br from-primary-600 via-primary-800 to-primary-900 flex flex-col items-center justify-center gap-4 group cursor-pointer transition-all hover:from-primary-500 hover:via-primary-700 hover:to-primary-800"
+                >
+                  <div className="w-20 h-20 bg-white/15 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/25 group-hover:scale-110 transition-all duration-300">
+                    <Play className="w-9 h-9 text-white ml-1" />
+                  </div>
+                  <div className="text-center px-4">
+                    <p className="text-white font-semibold text-lg mb-1">
+                      {t.features.videoTitle}
+                    </p>
+                    <p className="text-white/60 text-sm">
+                      {t.features.videoSubtitle}
+                    </p>
+                  </div>
+                </button>
+              )}
             </div>
           </div>
         </div>
