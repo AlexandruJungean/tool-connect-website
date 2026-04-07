@@ -18,7 +18,14 @@ export default function WriteReviewPage({ params }: Props) {
   const { id: providerId } = use(params)
   const router = useRouter()
   const { language } = useLanguage()
-  const { user, clientProfile } = useAuth()
+  const {
+    user,
+    clientProfile,
+    currentUserType,
+    serviceProviderProfile,
+    appUser,
+    isLoading: authLoading,
+  } = useAuth()
 
   const [rating, setRating] = useState(0)
   const [reviewText, setReviewText] = useState('')
@@ -29,6 +36,9 @@ export default function WriteReviewPage({ params }: Props) {
   const [existingReview, setExistingReview] = useState<Review | null>(null)
   const [editTimeRemaining, setEditTimeRemaining] = useState({ days: 0, hours: 0 })
   const [providerName, setProviderName] = useState('')
+  const [providerAccessible, setProviderAccessible] = useState(true)
+  const isOwnProfile = currentUserType === 'service_provider' && serviceProviderProfile?.id === providerId
+  const canViewRestrictedProvider = isOwnProfile || appUser?.is_admin === true
 
   const t = {
     title: language === 'cs' ? 'Napsat recenzi' : 'Write Review',
@@ -61,17 +71,32 @@ export default function WriteReviewPage({ params }: Props) {
   }
 
   useEffect(() => {
+    if (authLoading) return
+
     const loadData = async () => {
+      setIsLoading(true)
       try {
         // Fetch provider name
-        const { data: provider } = await supabase
+        let providerQuery = supabase
           .from('service_provider_profiles')
-          .select('name, surname')
+          .select('name, surname, is_visible, is_active')
           .eq('id', providerId)
-          .single()
+        
+        if (!canViewRestrictedProvider) {
+          providerQuery = providerQuery.eq('is_visible', true).eq('is_active', true)
+        }
+
+        const { data: provider, error: providerError } = await providerQuery.single()
+
+        if (providerError) throw providerError
 
         if (provider) {
+          setProviderAccessible(true)
           setProviderName(`${provider.name || ''} ${provider.surname || ''}`.trim())
+        } else {
+          setProviderAccessible(false)
+          setProviderName('')
+          return
         }
 
         // Check for existing review
@@ -88,13 +113,15 @@ export default function WriteReviewPage({ params }: Props) {
         }
       } catch (err) {
         console.error('Failed to load data:', err)
+        setProviderAccessible(false)
+        setProviderName('')
       } finally {
         setIsLoading(false)
       }
     }
 
     loadData()
-  }, [providerId, clientProfile?.id])
+  }, [authLoading, canViewRestrictedProvider, providerId, clientProfile?.id])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -142,6 +169,17 @@ export default function WriteReviewPage({ params }: Props) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
+      </div>
+    )
+  }
+
+  if (!providerAccessible) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <AlertCard
+          variant="error"
+          message={language === 'cs' ? 'Profil poskytovatele nebyl nalezen.' : 'Provider profile not found.'}
+        />
       </div>
     )
   }

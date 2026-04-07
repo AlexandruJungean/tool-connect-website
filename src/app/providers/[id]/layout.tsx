@@ -14,6 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .from('service_provider_profiles')
       .select('name, surname, headline, service_category, location, average_rating, review_count, avatar_url')
       .eq('id', id)
+      .eq('is_visible', true)
+      .eq('is_active', true)
       .single()
 
     if (!provider) {

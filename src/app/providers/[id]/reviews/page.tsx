@@ -17,7 +17,13 @@ export default function ProviderReviewsPage() {
   const router = useRouter()
   const providerId = params.id as string
   const { language, t } = useLanguage()
-  const { clientProfile, currentUserType } = useAuth()
+  const {
+    clientProfile,
+    currentUserType,
+    serviceProviderProfile,
+    appUser,
+    isLoading: authLoading,
+  } = useAuth()
 
   const [provider, setProvider] = useState<ServiceProviderProfile | null>(null)
   const [reviews, setReviews] = useState<Review[]>([])
@@ -27,6 +33,8 @@ export default function ProviderReviewsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const isOwnProfile = currentUserType === 'service_provider' && serviceProviderProfile?.id === providerId
+  const canViewRestrictedProvider = isOwnProfile || appUser?.is_admin === true
 
   const translations = {
     yourReview: language === 'cs' ? 'Vaše recenze' : 'Your Review',
@@ -44,17 +52,32 @@ export default function ProviderReviewsPage() {
   }
 
   useEffect(() => {
+    if (authLoading) return
+
     const fetchData = async () => {
+      setIsLoading(true)
       try {
         // Fetch provider
-        const { data: providerData } = await supabase
+        let providerQuery = supabase
           .from('service_provider_profiles')
-          .select('id, name, surname, average_rating, total_reviews')
+          .select('id, name, surname, average_rating, total_reviews, is_visible, is_active')
           .eq('id', providerId)
-          .single()
+        
+        if (!canViewRestrictedProvider) {
+          providerQuery = providerQuery.eq('is_visible', true).eq('is_active', true)
+        }
+
+        const { data: providerData, error: providerError } = await providerQuery.single()
+
+        if (providerError) throw providerError
 
         if (providerData) {
           setProvider(providerData as ServiceProviderProfile)
+        } else {
+          setProvider(null)
+          setReviews([])
+          setMyReview(null)
+          return
         }
 
         // Fetch all reviews
@@ -81,13 +104,16 @@ export default function ProviderReviewsPage() {
         }
       } catch (error) {
         console.error('Error fetching reviews:', error)
+        setProvider(null)
+        setReviews([])
+        setMyReview(null)
       } finally {
         setIsLoading(false)
       }
     }
 
     fetchData()
-  }, [providerId, clientProfile?.id, currentUserType])
+  }, [authLoading, canViewRestrictedProvider, providerId, clientProfile?.id, currentUserType])
 
   const handleDeleteReview = async () => {
     if (!myReview) return
@@ -109,6 +135,22 @@ export default function ProviderReviewsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary-700" />
+      </div>
+    )
+  }
+
+  if (!provider) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4 text-center">
+        <h1 className="text-2xl font-bold text-gray-900">
+          {language === 'cs' ? 'Profil poskytovatele nebyl nalezen' : 'Provider profile not found'}
+        </h1>
+        <button
+          onClick={() => router.push('/search')}
+          className="rounded-xl bg-primary-700 px-4 py-2 text-white transition-colors hover:bg-primary-800"
+        >
+          {language === 'cs' ? 'Zpět na hledání' : 'Back to Search'}
+        </button>
       </div>
     )
   }

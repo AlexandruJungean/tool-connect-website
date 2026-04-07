@@ -35,6 +35,7 @@ export default function AdminProvidersPage() {
   const [status, setStatus] = useState<'all' | 'active' | 'inactive' | 'hidden'>('all')
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [actionLoading, setActionLoading] = useState(false)
+  const [actionError, setActionError] = useState<string | null>(null)
 
   const limit = 20
   const totalPages = Math.ceil(total / limit)
@@ -66,11 +67,18 @@ export default function AdminProvidersPage() {
 
   const handleToggleVisibility = async (providerId: string, currentVisible: boolean) => {
     setActionLoading(true)
+    setActionError(null)
     try {
-      await toggleProviderVisibility(providerId, !currentVisible)
-      fetchProviders()
+      const updatedProvider = await toggleProviderVisibility(providerId, !currentVisible)
+      setProviders(prev => prev.map(provider => (
+        provider.id === providerId
+          ? { ...provider, ...updatedProvider }
+          : provider
+      )))
+      await fetchProviders()
     } catch (error) {
       console.error('Error toggling visibility:', error)
+      setActionError(error instanceof Error ? error.message : 'Failed to update provider visibility.')
     } finally {
       setActionLoading(false)
       setOpenDropdown(null)
@@ -79,11 +87,18 @@ export default function AdminProvidersPage() {
 
   const handleToggleActive = async (providerId: string, currentActive: boolean) => {
     setActionLoading(true)
+    setActionError(null)
     try {
-      await toggleProviderActive(providerId, !currentActive)
-      fetchProviders()
+      const updatedProvider = await toggleProviderActive(providerId, !currentActive)
+      setProviders(prev => prev.map(provider => (
+        provider.id === providerId
+          ? { ...provider, ...updatedProvider }
+          : provider
+      )))
+      await fetchProviders()
     } catch (error) {
       console.error('Error toggling active:', error)
+      setActionError(error instanceof Error ? error.message : 'Failed to update provider status.')
     } finally {
       setActionLoading(false)
       setOpenDropdown(null)
@@ -92,11 +107,18 @@ export default function AdminProvidersPage() {
 
   const handleScamWarning = async (providerId: string, currentWarning: boolean) => {
     setActionLoading(true)
+    setActionError(null)
     try {
-      await setScamWarning(providerId, !currentWarning)
-      fetchProviders()
+      const updatedProvider = await setScamWarning(providerId, !currentWarning)
+      setProviders(prev => prev.map(provider => (
+        provider.id === providerId
+          ? { ...provider, ...updatedProvider }
+          : provider
+      )))
+      await fetchProviders()
     } catch (error) {
       console.error('Error setting scam warning:', error)
+      setActionError(error instanceof Error ? error.message : 'Failed to update provider warning.')
     } finally {
       setActionLoading(false)
       setOpenDropdown(null)
@@ -110,6 +132,13 @@ export default function AdminProvidersPage() {
         <h1 className="text-2xl font-bold text-white">Service Providers</h1>
         <p className="text-gray-400">Manage service provider profiles and visibility</p>
       </div>
+
+      {actionError && (
+        <div className="flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-red-300">
+          <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0" />
+          <p className="text-sm">{actionError}</p>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="flex flex-col lg:flex-row gap-4">

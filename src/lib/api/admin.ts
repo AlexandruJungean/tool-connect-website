@@ -156,6 +156,21 @@ export interface CityStats {
   count: number
 }
 
+export interface ProviderAdminStatus {
+  id: string
+  is_visible: boolean
+  is_active: boolean
+  scam_warning: boolean | null
+}
+
+interface AdminServiceProvidersResult {
+  providers: Array<Record<string, unknown>>
+  total: number
+}
+
+const ADMIN_PROVIDER_RLS_ERROR =
+  'Admin provider update is blocked until the admin moderation RPC is installed in Supabase. Re-run the updated SQL file and try again.'
+
 // ============================================
 // DASHBOARD STATS
 // ============================================
@@ -342,63 +357,57 @@ export async function getServiceProviders(
   category: string = '',
   status: 'all' | 'active' | 'inactive' | 'hidden' = 'all'
 ): Promise<{ providers: any[]; total: number }> {
-  let query = supabase
-    .from('service_provider_profiles')
-    .select('*, users!inner(phone_number, email, is_banned, is_admin)', { count: 'exact' })
-
-  if (search) {
-    query = query.or(`name.ilike.%${search}%,category.ilike.%${search}%,city.ilike.%${search}%`)
-  }
-
-  if (category) {
-    query = query.eq('category', category)
-  }
-
-  if (status === 'active') {
-    query = query.eq('is_active', true).eq('is_visible', true)
-  } else if (status === 'inactive') {
-    query = query.eq('is_active', false)
-  } else if (status === 'hidden') {
-    query = query.eq('is_visible', false)
-  }
-
-  const from = (page - 1) * limit
-  const to = from + limit - 1
-
-  const { data, count, error } = await query
-    .order('created_at', { ascending: false })
-    .range(from, to)
+  const { data, error } = await supabase.rpc('admin_list_service_providers', {
+    p_page: page,
+    p_limit: limit,
+    p_search: search,
+    p_category: category,
+    p_status: status,
+  })
 
   if (error) throw error
 
-  return { providers: data || [], total: count || 0 }
+  const result = (data || { providers: [], total: 0 }) as AdminServiceProvidersResult
+
+  return {
+    providers: Array.isArray(result.providers) ? result.providers : [],
+    total: Number(result.total || 0),
+  }
 }
 
-export async function toggleProviderVisibility(providerId: string, isVisible: boolean): Promise<void> {
-  const { error } = await supabase
-    .from('service_provider_profiles')
-    .update({ is_visible: isVisible })
-    .eq('id', providerId)
+async function adminUpdateProvider(
+  providerId: string,
+  updates: {
+    isVisible?: boolean | null
+    isActive?: boolean | null
+    scamWarning?: boolean | null
+  }
+): Promise<ProviderAdminStatus> {
+  const { data, error } = await supabase.rpc('admin_update_service_provider_profile', {
+    p_provider_id: providerId,
+    p_is_visible: updates.isVisible ?? null,
+    p_is_active: updates.isActive ?? null,
+    p_scam_warning: updates.scamWarning ?? null,
+  })
 
   if (error) throw error
+  if (!data) {
+    throw new Error(ADMIN_PROVIDER_RLS_ERROR)
+  }
+
+  return data as ProviderAdminStatus
 }
 
-export async function toggleProviderActive(providerId: string, isActive: boolean): Promise<void> {
-  const { error } = await supabase
-    .from('service_provider_profiles')
-    .update({ is_active: isActive })
-    .eq('id', providerId)
-
-  if (error) throw error
+export async function toggleProviderVisibility(providerId: string, isVisible: boolean): Promise<ProviderAdminStatus> {
+  return adminUpdateProvider(providerId, { isVisible })
 }
 
-export async function setScamWarning(providerId: string, hasWarning: boolean): Promise<void> {
-  const { error } = await supabase
-    .from('service_provider_profiles')
-    .update({ scam_warning: hasWarning })
-    .eq('id', providerId)
+export async function toggleProviderActive(providerId: string, isActive: boolean): Promise<ProviderAdminStatus> {
+  return adminUpdateProvider(providerId, { isActive })
+}
 
-  if (error) throw error
+export async function setScamWarning(providerId: string, hasWarning: boolean): Promise<ProviderAdminStatus> {
+  return adminUpdateProvider(providerId, { scamWarning: hasWarning })
 }
 
 // ============================================

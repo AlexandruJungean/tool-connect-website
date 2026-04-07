@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { ArrowLeft, Calendar, User, Share2, ExternalLink, ImageIcon } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { LoadingSpinner, ImageViewer, Avatar } from '@/components/ui'
 import { AlertCard } from '@/components/cards'
 import { supabase } from '@/lib/supabase'
@@ -25,6 +26,8 @@ interface PortfolioProject {
     surname: string
     avatar_url?: string
     category?: string | null
+    is_visible?: boolean
+    is_active?: boolean
   }
 }
 
@@ -37,6 +40,12 @@ export default function PortfolioDetailPage({ params }: Props) {
   const router = useRouter()
   const { language } = useLanguage()
   const { getCategoryLabel } = useCategories()
+  const {
+    appUser,
+    currentUserType,
+    serviceProviderProfile,
+    isLoading: authLoading,
+  } = useAuth()
 
   const [project, setProject] = useState<PortfolioProject | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -54,7 +63,10 @@ export default function PortfolioDetailPage({ params }: Props) {
   }
 
   useEffect(() => {
+    if (authLoading) return
+
     const fetchProject = async () => {
+      setIsLoading(true)
       try {
         const { data, error } = await supabase
           .from('portfolio_projects')
@@ -65,7 +77,9 @@ export default function PortfolioDetailPage({ params }: Props) {
               name,
               surname,
               avatar_url,
-              category
+              category,
+              is_visible,
+              is_active
             )
           `)
           .eq('id', projectId)
@@ -74,9 +88,20 @@ export default function PortfolioDetailPage({ params }: Props) {
         if (error) throw error
 
         if (data) {
+          const providerData = data.service_provider_profiles as PortfolioProject['service_provider'] | null
+          const canViewRestrictedProvider =
+            appUser?.is_admin === true ||
+            (currentUserType === 'service_provider' && serviceProviderProfile?.id === providerData?.id)
+
+          if (!providerData || (!canViewRestrictedProvider && (!providerData.is_visible || !providerData.is_active))) {
+            setProject(null)
+            setError(t.notFound)
+            return
+          }
+
           setProject({
             ...data,
-            service_provider: data.service_provider_profiles as PortfolioProject['service_provider'],
+            service_provider: providerData,
           })
         }
       } catch (err) {
@@ -88,7 +113,7 @@ export default function PortfolioDetailPage({ params }: Props) {
     }
 
     fetchProject()
-  }, [projectId, t.notFound])
+  }, [appUser?.is_admin, authLoading, currentUserType, projectId, serviceProviderProfile?.id, t.notFound])
 
   const handleShare = async () => {
     if (navigator.share) {

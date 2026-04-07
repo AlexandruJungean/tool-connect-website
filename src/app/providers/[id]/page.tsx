@@ -49,10 +49,18 @@ export default function ProviderDetailPage() {
   const providerId = params.id as string
   const { language, t } = useLanguage()
   const { getCategoryLabel, getSubcategoryLabel } = useCategories()
-  const { isAuthenticated, clientProfile, serviceProviderProfile, currentUserType } = useAuth()
+  const {
+    isAuthenticated,
+    clientProfile,
+    serviceProviderProfile,
+    currentUserType,
+    appUser,
+    isLoading: authLoading,
+  } = useAuth()
 
   // Check if viewing own profile
   const isOwnProfile = currentUserType === 'service_provider' && serviceProviderProfile?.id === providerId
+  const canViewRestrictedProvider = isOwnProfile || appUser?.is_admin === true
 
   const [provider, setProvider] = useState<ServiceProviderProfile | null>(null)
   const [reviews, setReviews] = useState<Review[]>([])
@@ -76,14 +84,22 @@ export default function ProviderDetailPage() {
   const categoryLabel = provider?.category ? getCategoryLabel(provider.category, language) : null
 
   useEffect(() => {
+    if (authLoading) return
+
     const fetchProvider = async () => {
+      setIsLoading(true)
       try {
         // Fetch provider with user's phone number
-        const { data, error } = await supabase
+        let query = supabase
           .from('service_provider_profiles')
           .select('*, user:user_id(phone_number)')
           .eq('id', providerId)
-          .single()
+
+        if (!canViewRestrictedProvider) {
+          query = query.eq('is_visible', true).eq('is_active', true)
+        }
+
+        const { data, error } = await query.single()
 
         if (error) throw error
         
@@ -135,16 +151,23 @@ export default function ProviderDetailPage() {
             .single()
           
           setIsFavorite(!!favData)
+        } else {
+          setIsFavorite(false)
         }
       } catch (error) {
         console.error('Error fetching provider:', error)
+        setProvider(null)
+        setReviews([])
+        setMyReview(null)
+        setCanEditMyReview(false)
+        setIsFavorite(false)
       } finally {
         setIsLoading(false)
       }
     }
 
     fetchProvider()
-  }, [providerId, clientProfile])
+  }, [authLoading, canViewRestrictedProvider, providerId, clientProfile, currentUserType])
 
   const handleFavorite = async () => {
     if (!isAuthenticated || !clientProfile) {
