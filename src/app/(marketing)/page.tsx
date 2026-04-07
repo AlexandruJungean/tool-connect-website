@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
-  MapPin, Users, Check, ArrowRight, Mail, FileText, Shield,
+  MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield,
   Sparkles, Handshake, MessageCircle, Rocket, Play, ChevronDown
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
@@ -581,38 +581,48 @@ export default function LandingPage() {
                 <p className="text-xs text-gray-500 mb-4">{t.download.scanQR}</p>
                 
                 {/* Store badges */}
-                <div className="flex justify-center gap-2">
+                <div className="flex flex-col gap-2">
                   <a
                     href="https://apps.apple.com/us/app/tool/id6739626276"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 bg-black text-white rounded-lg px-3 py-1.5 hover:bg-gray-800 transition-colors"
+                    className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors"
                   >
-                    <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                     </svg>
                     <div className="text-left leading-tight">
-                      <div className="text-[7px] font-normal">Download on the</div>
-                      <div className="text-[13px] font-semibold -mt-0.5">App Store</div>
+                      <div className="text-[8px] font-normal">Download on the</div>
+                      <div className="text-sm font-semibold -mt-0.5">App Store</div>
                     </div>
                   </a>
                   <a
                     href="https://play.google.com/store/apps/details?id=com.tool.toolappconnect"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 bg-black text-white rounded-lg px-3 py-1.5 hover:bg-gray-800 transition-colors"
+                    className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors"
                   >
-                    <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
                       <path d="M3.609 1.814L13.445 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z" fill="#4285F4"/>
                       <path d="M17.556 8.297L5.363.697a1.002 1.002 0 0 0-.523-.148c-.066 0-.13.009-.194.024L14.68 10.765l2.876-2.468z" fill="#EA4335"/>
                       <path d="M17.556 15.703L14.68 13.235 4.646 23.427c.064.015.128.024.194.024a1 1 0 0 0 .523-.148l12.193-7.6z" fill="#34A853"/>
                       <path d="M21.197 10.672l-3.641-2.375L14.68 10.765 14.68 13.235l2.876 2.468 3.641-2.375a1.318 1.318 0 0 0 0-2.656z" fill="#FBBC05"/>
                     </svg>
                     <div className="text-left leading-tight">
-                      <div className="text-[7px] font-normal tracking-wider uppercase">Get it on</div>
-                      <div className="text-[13px] font-semibold -mt-0.5">Google Play</div>
+                      <div className="text-[8px] font-normal tracking-wider uppercase">Get it on</div>
+                      <div className="text-sm font-semibold -mt-0.5">Google Play</div>
                     </div>
                   </a>
+                  <Link
+                    href="/search"
+                    className="flex items-center gap-2 bg-primary-600 text-white rounded-lg px-4 py-2 hover:bg-primary-700 transition-colors"
+                  >
+                    <Globe className="w-6 h-6 flex-shrink-0" />
+                    <div className="text-left leading-tight">
+                      <div className="text-[8px] font-normal">Open in</div>
+                      <div className="text-sm font-semibold -mt-0.5">{t.download.webBrowser}</div>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -649,38 +659,48 @@ export default function LandingPage() {
               <p className="text-xs text-gray-500 mb-4">{t.download.scanQR}</p>
               
               {/* Store badges */}
-              <div className="flex justify-center gap-2">
+              <div className="flex flex-col gap-2">
                 <a
                   href="https://apps.apple.com/us/app/tool/id6739626276"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-black text-white rounded-lg px-3 py-1.5 hover:bg-gray-800 transition-colors"
+                  className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors"
                 >
-                  <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                   </svg>
                   <div className="text-left leading-tight">
-                    <div className="text-[7px] font-normal">Download on the</div>
-                    <div className="text-[13px] font-semibold -mt-0.5">App Store</div>
+                    <div className="text-[8px] font-normal">Download on the</div>
+                    <div className="text-sm font-semibold -mt-0.5">App Store</div>
                   </div>
                 </a>
                 <a
                   href="https://play.google.com/store/apps/details?id=com.tool.toolappconnect"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-black text-white rounded-lg px-3 py-1.5 hover:bg-gray-800 transition-colors"
+                  className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors"
                 >
-                  <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
                     <path d="M3.609 1.814L13.445 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z" fill="#4285F4"/>
                     <path d="M17.556 8.297L5.363.697a1.002 1.002 0 0 0-.523-.148c-.066 0-.13.009-.194.024L14.68 10.765l2.876-2.468z" fill="#EA4335"/>
                     <path d="M17.556 15.703L14.68 13.235 4.646 23.427c.064.015.128.024.194.024a1 1 0 0 0 .523-.148l12.193-7.6z" fill="#34A853"/>
                     <path d="M21.197 10.672l-3.641-2.375L14.68 10.765 14.68 13.235l2.876 2.468 3.641-2.375a1.318 1.318 0 0 0 0-2.656z" fill="#FBBC05"/>
                   </svg>
                   <div className="text-left leading-tight">
-                    <div className="text-[7px] font-normal tracking-wider uppercase">Get it on</div>
-                    <div className="text-[13px] font-semibold -mt-0.5">Google Play</div>
+                    <div className="text-[8px] font-normal tracking-wider uppercase">Get it on</div>
+                    <div className="text-sm font-semibold -mt-0.5">Google Play</div>
                   </div>
                 </a>
+                <Link
+                  href="/search"
+                  className="flex items-center gap-2 bg-primary-600 text-white rounded-lg px-4 py-2 hover:bg-primary-700 transition-colors"
+                >
+                  <Globe className="w-6 h-6 flex-shrink-0" />
+                  <div className="text-left leading-tight">
+                    <div className="text-[8px] font-normal">Open in</div>
+                    <div className="text-sm font-semibold -mt-0.5">{t.download.webBrowser}</div>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
