@@ -17,6 +17,7 @@ import {
   ExternalLink,
   Briefcase,
   XCircle,
+  Globe,
 } from 'lucide-react'
 import { getServiceProviders, toggleProviderVisibility, toggleProviderActive, setScamWarning } from '@/lib/api/admin'
 import { LoadingSpinner } from '@/components/ui'
@@ -171,6 +172,7 @@ export default function AdminProvidersPage() {
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Rating</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Status</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Views</th>
+                  <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Referral</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Actions</th>
                 </tr>
               </thead>
@@ -200,6 +202,17 @@ export default function AdminProvidersPage() {
                           )}
                           {provider.type && (
                             <span className="text-xs text-gray-500 capitalize">{provider.type}</span>
+                          )}
+                          {provider.website_url && (
+                            <a
+                              href={provider.website_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-1 text-xs text-primary-400 hover:text-primary-300 mt-0.5"
+                            >
+                              <Globe className="w-3 h-3" />
+                              Website
+                            </a>
                           )}
                         </div>
                       </div>
@@ -250,6 +263,15 @@ export default function AdminProvidersPage() {
                     </td>
                     <td className="px-4 py-3">
                       <span className="text-white">{provider.profile_views_count || 0}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      {provider.referral_source ? (
+                        <span className="px-2 py-0.5 bg-gray-700 text-gray-300 rounded text-xs capitalize">
+                          {provider.referral_source.replace(/_/g, ' ')}
+                        </span>
+                      ) : (
+                        <span className="text-gray-600 text-xs">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="relative flex items-center gap-2">

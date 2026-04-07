@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { LocationInput, ImageUpload, VideoUpload } from '@/components/forms'
-import { ArrowLeft, Save, Loader2, Camera, X, Plus } from 'lucide-react'
+import { ArrowLeft, Save, Loader2, Camera, X, Plus, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export default function EditProfilePage() {
@@ -50,6 +50,7 @@ export default function EditProfilePage() {
   const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null)
   const [profileVideoUrl, setProfileVideoUrl] = useState<string | null>(null)
   const [workPhotoUrls, setWorkPhotoUrls] = useState<string[]>([])
+  const [websiteUrl, setWebsiteUrl] = useState('')
 
   const { categories, getCategoryLabel } = useCategories()
   const isProvider = currentUserType === 'service_provider'
@@ -87,6 +88,7 @@ export default function EditProfilePage() {
         setBackgroundUrl(serviceProviderProfile.background_image_url || null)
         setProfileVideoUrl(serviceProviderProfile.profile_video_url || null)
         setWorkPhotoUrls(serviceProviderProfile.additional_images || [])
+        setWebsiteUrl((serviceProviderProfile as any).website_url || '')
       } else if (clientProfile) {
         setLocation(clientProfile.location || '')
         setSelectedLanguages(clientProfile.languages || [])
@@ -126,6 +128,7 @@ export default function EditProfilePage() {
             background_image_url: backgroundUrl,
             profile_video_url: profileVideoUrl,
             additional_images: workPhotoUrls.length > 0 ? workPhotoUrls : null,
+            website_url: websiteUrl.trim() || null,
             updated_at: new Date().toISOString(),
           })
           .eq('id', serviceProviderProfile.id)
@@ -409,6 +412,23 @@ export default function EditProfilePage() {
                       placeholder={language === 'cs' ? 'např. Cena závisí na složitosti projektu...' : 'e.g. Price depends on project complexity...'}
                     />
                     <p className="text-xs text-gray-500 text-right mt-1">{priceInfo.length}/100</p>
+                  </div>
+                </div>
+
+                {/* Website URL */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {language === 'cs' ? 'Webová stránka' : 'Website'}
+                  </label>
+                  <div className="relative">
+                    <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="url"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                      placeholder="https://www.example.com"
+                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
                   </div>
                 </div>
               </>

@@ -54,7 +54,7 @@ export default function ClientProfileSetupPage() {
   // Without email: Name, Phone, Location, Photo, Save = 5 steps for progress
   const PROGRESS_STEPS = isFirstSetup ? 6 : 5
   // Actual total steps including Categories and Help Options
-  const TOTAL_STEPS = isFirstSetup ? 8 : 7
+  const TOTAL_STEPS = isFirstSetup ? 9 : 8
   
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
@@ -76,6 +76,7 @@ export default function ClientProfileSetupPage() {
   const [wantsToPostRequest, setWantsToPostRequest] = useState<boolean | null>(null)
   const [requestDescription, setRequestDescription] = useState('')
   const [requestSubmitted, setRequestSubmitted] = useState(false)
+  const [referralSource, setReferralSource] = useState<string | null>(null)
 
   // Translations
   const t = {
@@ -205,7 +206,8 @@ export default function ClientProfileSetupPage() {
         case 5: return 'photo'
         case 6: return 'save'
         case 7: return 'categories'
-        case 8: return 'helpOptions'
+        case 8: return 'referral'
+        case 9: return 'helpOptions'
         default: return 'name'
       }
     } else {
@@ -216,7 +218,8 @@ export default function ClientProfileSetupPage() {
         case 4: return 'photo'
         case 5: return 'save'
         case 6: return 'categories'
-        case 7: return 'helpOptions'
+        case 7: return 'referral'
+        case 8: return 'helpOptions'
         default: return 'name'
       }
     }
@@ -422,6 +425,18 @@ export default function ClientProfileSetupPage() {
       // 3. Update local state immediately
       updateClientProfileLocal({ profile_completed: true, id: currentProfileId })
       
+      // Save referral source
+      if (referralSource) {
+        try {
+          await supabase
+            .from('client_profiles')
+            .update({ referral_source: referralSource })
+            .eq('id', currentProfileId)
+        } catch {
+          // Non-critical
+        }
+      }
+
       // 4. Clear pending profile type
       clearPendingProfileType()
       
@@ -756,6 +771,48 @@ export default function ClientProfileSetupPage() {
             </div>
           )}
 
+          {/* Referral Source */}
+          {stepContent === 'referral' && (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {language === 'cs' ? 'Odkud jste se o nás dozvěděli?' : 'Where did you hear about us?'}
+                </h2>
+                <p className="text-gray-600 mt-2">
+                  {language === 'cs' ? 'Pomozte nám pochopit, jak jste našli Tool' : 'Help us understand how you found Tool'}
+                </p>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { value: 'facebook', label: 'Facebook', icon: '📘' },
+                  { value: 'instagram', label: 'Instagram', icon: '📷' },
+                  { value: 'linkedin', label: 'LinkedIn', icon: '💼' },
+                  { value: 'email', label: 'Email', icon: '📧' },
+                  { value: 'other', label: language === 'cs' ? 'Jiné' : 'Other', icon: '💬' },
+                ].map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => setReferralSource(option.value)}
+                    className={cn(
+                      'w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left',
+                      referralSource === option.value
+                        ? 'border-primary-500 bg-primary-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    )}
+                  >
+                    <span className="text-2xl">{option.icon}</span>
+                    <span className={cn(
+                      'font-semibold',
+                      referralSource === option.value ? 'text-primary-700' : 'text-gray-900'
+                    )}>
+                      {option.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Help Options */}
           {stepContent === 'helpOptions' && (
             <>
@@ -867,8 +924,8 @@ export default function ClientProfileSetupPage() {
 
         {/* Navigation Buttons */}
         <div className="flex gap-3">
-          {/* Back button - hide on first step, save, categories and help options steps */}
-          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'helpOptions' && currentStep > 1 && (
+          {/* Back button - hide on first step, save, categories, referral and help options steps */}
+          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'referral' && stepContent !== 'helpOptions' && currentStep > 1 && (
             <Button
               variant="outline"
               onClick={handleBack}
@@ -881,7 +938,7 @@ export default function ClientProfileSetupPage() {
           )}
           
           {/* Next button for steps before Save */}
-          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'helpOptions' && (
+          {stepContent !== 'save' && stepContent !== 'categories' && stepContent !== 'referral' && stepContent !== 'helpOptions' && (
             <Button
               onClick={handleNext}
               disabled={
@@ -922,6 +979,17 @@ export default function ClientProfileSetupPage() {
                 <Check className="w-4 h-4 ml-2" />
               </Button>
             </>
+          )}
+
+          {/* Referral step - skippable */}
+          {stepContent === 'referral' && (
+            <Button
+              onClick={handleNext}
+              className="flex-1"
+            >
+              {referralSource ? t.common.next : (language === 'cs' ? 'Přeskočit' : 'Skip')}
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
           )}
 
           {/* Categories step - Next button when subcategories selected */}

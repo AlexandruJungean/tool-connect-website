@@ -596,6 +596,23 @@ export default function ProviderDetailPage() {
               </div>
             )}
 
+              {/* Website */}
+              {provider.website_url && (
+                <div className="bg-white rounded-2xl p-6 shadow-card border border-gray-100">
+                  <h3 className="font-semibold text-gray-900 mb-3">{t('profile.website')}</h3>
+                  <a
+                    href={provider.website_url.startsWith('http') ? provider.website_url : `https://${provider.website_url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors"
+                  >
+                    <Globe className="w-5 h-5 flex-shrink-0" />
+                    <span className="truncate">{provider.website_url.replace(/^https?:\/\//, '')}</span>
+                    <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                  </a>
+                </div>
+              )}
+
             {/* Reviews */}
             <div className="bg-white rounded-2xl shadow-card p-6">
               <div className="flex items-center justify-between mb-4">

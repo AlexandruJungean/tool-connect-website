@@ -42,6 +42,7 @@ export interface ClientProfile {
   preferred_languages?: string[];
   has_active_request?: boolean;
   request_description?: string;
+  referral_source?: string | null;
 }
 
 export interface ServiceProviderProfile {
@@ -89,6 +90,7 @@ export interface ServiceProviderProfile {
   updated_at: string;
   profile_completed: boolean;
   profile_views_count: number;
+  referral_source?: string | null;
   average_rating?: number | null;
   total_reviews?: number | null;
   availability?: string | null; // Free text for availability information

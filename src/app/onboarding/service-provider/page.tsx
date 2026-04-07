@@ -55,9 +55,9 @@ export default function ServiceProviderProfileSetupPage() {
   // Email step should only appear for the first setup
   const isFirstSetup = !clientProfile
   
-  // Total steps: 12 if first setup (with email step), 11 otherwise
-  // Steps: Type, Name, Email?, IČO, Location, Categories, Languages, About, Pricing, Photos, WorkPhotos, Complete
-  const TOTAL_STEPS = isFirstSetup ? 12 : 11
+  // Total steps: 13 if first setup (with email step), 12 otherwise
+  // Steps: Type, Name, Email?, IČO, Location, Categories, Languages, About, Pricing, Photos, WorkPhotos, Referral, Complete
+  const TOTAL_STEPS = isFirstSetup ? 13 : 12
   
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
@@ -87,6 +87,8 @@ export default function ServiceProviderProfileSetupPage() {
   const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null)
   const [profileVideoUrl, setProfileVideoUrl] = useState<string | null>(null)
   const [workPhotoUrls, setWorkPhotoUrls] = useState<string[]>([])
+  const [websiteUrl, setWebsiteUrl] = useState('')
+  const [referralSource, setReferralSource] = useState<string | null>(null)
 
   // Translations
   const t = {
@@ -244,8 +246,8 @@ export default function ServiceProviderProfileSetupPage() {
   }
 
   // Helper to get step content based on whether email step is included
-  // If isFirstSetup: 1=Type, 2=Name, 3=Email, 4=IČO, 5=Location, 6=Categories, 7=Languages, 8=About, 9=Pricing, 10=Photos, 11=WorkPhotos, 12=Complete
-  // Otherwise: 1=Type, 2=Name, 3=IČO, 4=Location, 5=Categories, 6=Languages, 7=About, 8=Pricing, 9=Photos, 10=WorkPhotos, 11=Complete
+  // If isFirstSetup: 1=Type, 2=Name, 3=Email, 4=IČO, 5=Location, 6=Categories, 7=Languages, 8=About, 9=Pricing, 10=Photos, 11=WorkPhotos, 12=Referral, 13=Complete
+  // Otherwise: 1=Type, 2=Name, 3=IČO, 4=Location, 5=Categories, 6=Languages, 7=About, 8=Pricing, 9=Photos, 10=WorkPhotos, 11=Referral, 12=Complete
   const getStepContent = () => {
     if (isFirstSetup) {
       switch (currentStep) {
@@ -260,7 +262,8 @@ export default function ServiceProviderProfileSetupPage() {
         case 9: return 'pricing'
         case 10: return 'photos'
         case 11: return 'workPhotos'
-        case 12: return 'complete'
+        case 12: return 'referral'
+        case 13: return 'complete'
         default: return 'accountType'
       }
     } else {
@@ -275,7 +278,8 @@ export default function ServiceProviderProfileSetupPage() {
         case 8: return 'pricing'
         case 9: return 'photos'
         case 10: return 'workPhotos'
-        case 11: return 'complete'
+        case 11: return 'referral'
+        case 12: return 'complete'
         default: return 'accountType'
       }
     }
@@ -343,6 +347,8 @@ export default function ServiceProviderProfileSetupPage() {
             background_image_url: backgroundUrl || null,
             profile_video_url: profileVideoUrl || null,
             additional_images: workPhotoUrls.length > 0 ? workPhotoUrls : null,
+            website_url: websiteUrl.trim() || null,
+            referral_source: referralSource,
             is_visible: true,
             is_active: true,
             profile_completed: true,
@@ -375,6 +381,8 @@ export default function ServiceProviderProfileSetupPage() {
             background_image_url: backgroundUrl || null,
             profile_video_url: profileVideoUrl || null,
             additional_images: workPhotoUrls.length > 0 ? workPhotoUrls : null,
+            website_url: websiteUrl.trim() || null,
+            referral_source: referralSource,
             is_visible: true,
             is_active: true,
             profile_completed: true,
@@ -859,6 +867,19 @@ export default function ServiceProviderProfileSetupPage() {
                     </button>
                   ))}
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {language === 'cs' ? 'Web' : 'Website URL'}
+                  </label>
+                  <input
+                    type="url"
+                    value={websiteUrl}
+                    onChange={(e) => setWebsiteUrl(e.target.value)}
+                    placeholder="https://www.example.com"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -972,6 +993,48 @@ export default function ServiceProviderProfileSetupPage() {
             </div>
           )}
 
+          {/* Referral Source */}
+          {stepContent === 'referral' && (
+            <div className="space-y-6">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {language === 'cs' ? 'Odkud jste se o nás dozvěděli?' : 'Where did you hear about us?'}
+                </h2>
+                <p className="text-gray-600 mt-2">
+                  {language === 'cs' ? 'Pomozte nám pochopit, jak jste našli Tool' : 'Help us understand how you found Tool'}
+                </p>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { value: 'facebook', label: 'Facebook', icon: '📘' },
+                  { value: 'instagram', label: 'Instagram', icon: '📷' },
+                  { value: 'linkedin', label: 'LinkedIn', icon: '💼' },
+                  { value: 'email', label: 'Email', icon: '📧' },
+                  { value: 'other', label: language === 'cs' ? 'Jiné' : 'Other', icon: '💬' },
+                ].map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => setReferralSource(option.value)}
+                    className={cn(
+                      'w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left',
+                      referralSource === option.value
+                        ? 'border-primary-500 bg-primary-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    )}
+                  >
+                    <span className="text-2xl">{option.icon}</span>
+                    <span className={cn(
+                      'font-semibold',
+                      referralSource === option.value ? 'text-primary-700' : 'text-gray-900'
+                    )}>
+                      {option.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Complete / Success */}
           {stepContent === 'complete' && (
             <div className="space-y-6">
@@ -1000,14 +1063,14 @@ export default function ServiceProviderProfileSetupPage() {
             </Button>
           )}
           
-          {stepContent === 'workPhotos' ? (
+          {stepContent === 'referral' ? (
             <Button
               onClick={handleSaveProfile}
               isLoading={isLoading}
               disabled={isLoading}
               className="flex-1"
             >
-              {isLoading ? t.common.saving : (language === 'cs' ? 'Dokončit' : 'Complete')}
+              {isLoading ? t.common.saving : referralSource ? (language === 'cs' ? 'Dokončit' : 'Complete') : (language === 'cs' ? 'Přeskočit' : 'Skip')}
               <Check className="w-4 h-4 ml-2" />
             </Button>
           ) : currentStep < TOTAL_STEPS ? (
@@ -1028,7 +1091,8 @@ export default function ServiceProviderProfileSetupPage() {
                (stepContent === 'location' && !location) || 
                (stepContent === 'about' && !aboutMe) ||
                (stepContent === 'pricing' && !priceFrom) ||
-               (stepContent === 'photos' && !avatarUrl && !backgroundUrl)
+               (stepContent === 'photos' && !avatarUrl && !backgroundUrl) ||
+               (stepContent === 'workPhotos' && workPhotoUrls.length === 0 && !profileVideoUrl)
                 ? t.common.skip 
                 : t.common.next}
               <ArrowRight className="w-4 h-4 ml-2" />
@@ -1036,7 +1100,7 @@ export default function ServiceProviderProfileSetupPage() {
           ) : stepContent === 'complete' ? (
             <Button
               onClick={() => {
-                // Profile already saved at workPhotos step
+                // Profile already saved at referral step
                 // Just navigate to the profile
                 if (serviceProviderProfile?.id) {
                   router.push(`/providers/${serviceProviderProfile.id}`)

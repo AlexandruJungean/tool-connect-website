@@ -31,6 +31,7 @@ interface ClientProfile {
   languages: string[]
   profile_completed: boolean
   is_active: boolean
+  referral_source: string | null
   created_at: string
   users?: {
     phone_number: string
@@ -201,6 +202,7 @@ export default function AdminClientsPage() {
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Languages</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Activity</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Status</th>
+                  <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Referral</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Joined</th>
                 </tr>
               </thead>
@@ -261,6 +263,15 @@ export default function AdminClientsPage() {
                           <span className="px-2 py-0.5 bg-red-500/20 text-red-400 rounded text-xs">Banned</span>
                         )}
                       </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      {client.referral_source ? (
+                        <span className="px-2 py-0.5 bg-gray-700 text-gray-300 rounded text-xs capitalize">
+                          {client.referral_source.replace(/_/g, ' ')}
+                        </span>
+                      ) : (
+                        <span className="text-gray-600 text-xs">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2 text-gray-400 text-sm">
