@@ -815,6 +815,19 @@ export default function ServiceProviderProfileSetupPage() {
                   {aboutMe.length}/1000
                 </p>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {language === 'cs' ? 'Web' : 'Website URL'}
+                </label>
+                <input
+                  type="url"
+                  value={websiteUrl}
+                  onChange={(e) => setWebsiteUrl(e.target.value)}
+                  placeholder="https://www.example.com"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
             </div>
           )}
 
@@ -866,19 +879,6 @@ export default function ServiceProviderProfileSetupPage() {
                        t.step8.perMonth}
                     </button>
                   ))}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {language === 'cs' ? 'Web' : 'Website URL'}
-                  </label>
-                  <input
-                    type="url"
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                    placeholder="https://www.example.com"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                  />
                 </div>
               </div>
             </div>
