@@ -111,6 +111,15 @@ button {
   50% { opacity: 0.5; }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out;
 }
@@ -121,5 +130,30 @@ button {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.category-marquee {
+  overflow: hidden;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.category-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+  padding: 0 0.5rem;
+}
+
+.category-marquee:hover .category-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-marquee-track {
+    animation: none;
+  }
 }
 
