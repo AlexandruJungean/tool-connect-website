@@ -205,8 +205,8 @@ export default function ClientProfileSetupPage() {
         case 4: return 'location'
         case 5: return 'photo'
         case 6: return 'save'
-        case 7: return 'categories'
-        case 8: return 'referral'
+        case 7: return 'referral'
+        case 8: return 'categories'
         case 9: return 'helpOptions'
         default: return 'name'
       }
@@ -217,8 +217,8 @@ export default function ClientProfileSetupPage() {
         case 3: return 'location'
         case 4: return 'photo'
         case 5: return 'save'
-        case 6: return 'categories'
-        case 7: return 'referral'
+        case 6: return 'referral'
+        case 7: return 'categories'
         case 8: return 'helpOptions'
         default: return 'name'
       }
