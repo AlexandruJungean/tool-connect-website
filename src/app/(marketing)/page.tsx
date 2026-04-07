@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { 
   MapPin, Users, Globe, Check, ArrowRight, Mail, FileText, Shield,
-  Sparkles, Handshake, MessageCircle, Rocket, Play
+  Sparkles, Handshake, MessageCircle, Rocket, Play, ChevronDown
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -23,6 +23,7 @@ export default function LandingPage() {
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [showVideo, setShowVideo] = useState(false)
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
 
   // Typewriter effect for hero title
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function LandingPage() {
       installApp: language === 'cs' ? 'Nainstalujte si Tool na telefon' : 'Install Tool on your phone',
       findSpecialist: language === 'cs' ? 'Najít specialistu' : 'Find a Specialist',
       becomeProvider: language === 'cs' ? 'Nabídnout služby' : 'Offer Your Services',
+      faqCta: language === 'cs' ? 'Přejít na FAQ' : 'Go to FAQ',
     },
     features: {
       title: language === 'cs' ? 'Výkonné funkce pro každého' : 'Powerful Features for Everyone',
@@ -126,6 +128,317 @@ export default function LandingPage() {
       teamTitle: language === 'cs' ? 'Náš tým' : 'Our Team',
       teamMembers: 'Laura & Adela',
       location: language === 'cs' ? 'Vytvořeno v České republice' : 'Made in Czech Republic',
+    },
+    faq: {
+      eyebrow: language === 'cs' ? 'Rychlé odpovědi' : 'Quick answers',
+      title: language === 'cs' ? 'Často kladené otázky' : 'Frequently Asked Questions',
+      subtitle: language === 'cs'
+        ? 'Shrnuli jsme nejdůležitější informace o tom, jak Tool Connect funguje pro klienty i poskytovatele služeb.'
+        : 'We collected the key information about how Tool Connect works for clients and service providers in one place.',
+      stillNeedHelp: language === 'cs' ? 'Nenašli jste odpověď?' : 'Still need help?',
+      items: language === 'cs'
+        ? [
+            {
+              question: 'Co je Tool a čím se liší od jiných podobných platforem?',
+              answer: [
+                'Tool Connect je platforma vyvinutá v České republice, dostupná v češtině i angličtině, která propojuje lidi hledající službu s místními profesionály, kteří ji mohou poskytnout.',
+                'Místo dlouhých seznamů firem s minimem informací, statických webů nebo nekonečného scrollování ve facebookových skupinách je Tool navržen tak, aby hledání i nabízení služeb bylo rychlejší, přehlednější a transparentnější díky okamžité komunikaci.',
+              ],
+              points: [
+                'Všechny služby na jednom místě, takže je snadné jakoukoli službu najít nebo nabídnout.',
+                'Vyhledávání podle lokality, abyste našli poskytovatele ve svém okolí.',
+                'Dva způsoby hledání služeb: procházet profily nebo zveřejnit poptávku.',
+                'Vizuální portfolia s fotkami a videi, která ukazují reálnou práci.',
+                'Vestavěné zprávy s možností zviditelnit telefonní číslo.',
+                'Automatický překlad zpráv mezi češtinou a angličtinou.',
+                'Přístup k expat komunitě, díky kterému poskytovatelé osloví i mezinárodní klientelu.',
+                'Flexibilní profily: uživatel může v jedné aplikaci přepínat mezi klientem a poskytovatelem služeb.',
+              ],
+            },
+            {
+              question: 'Proč je Tool Connect zdarma?',
+              answer: [
+                'Pro klienty je Tool zdarma a vždy zdarma zůstane.',
+                'Pro poskytovatele služeb je současná verze aplikace základní verzí a je zdarma. V bezplatné verzi se poskytovatelé mohou zobrazovat ve výsledcích vyhledávání, když klient prochází profily.',
+                'Později v tomto roce plánujeme zavést placenou prémiovou verzi pro poskytovatele služeb. Monetizace bude zaváděna postupně a s dostatečným předstihem jasně komunikována uživatelům.',
+              ],
+              points: [
+                'Prioritní notifikace, když klienti zveřejní poptávku.',
+                'Vyšší viditelnost ve výsledcích vyhledávání.',
+                'Další profesionální funkce, které právě vyvíjíme.',
+              ],
+            },
+            {
+              question: 'Jaké typy služeb zde najdu?',
+              answer: [
+                'Tool Connect je navržen pro širokou škálu služeb, od chův a uklízeček po elektrikáře, lektory nebo účetní.',
+                'Platforma aktuálně obsahuje více než 100 podkategorií služeb a tento seznam bude dále růst podle poptávky.',
+                'Profil si může vytvořit kdokoli, kdo nabízí legitimní službu, ať už jako nezávislý profesionál nebo firma.',
+                'Pokud služba, kterou poskytujete, není v žádné kategorii uvedena, napište nám na info@tool-connect.com a můžeme ji doplnit.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Proč jako klient potřebuji účet?',
+              answer: [
+                'Vytvoření klientského účtu nám pomáhá ověřit, že zprávy a poptávky přicházejí od skutečných uživatelů, a zároveň lépe porozumět tomu, jak je platforma používána.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Jak platforma funguje pro klienty?',
+              answer: [
+                'Klienti se registrují pomocí telefonního čísla a SMS ověření. Vytvoření detailního profilu je volitelné.',
+                'Po registraci mohou klienti hledat poskytovatele, kontaktovat je přímo nebo zveřejnit poptávku a počkat na reakce poskytovatelů. Po dokončení práce mohou poskytovatele ohodnotit a napsat recenzi.',
+              ],
+              points: [
+                'Vyhledávat poskytovatele služeb.',
+                'Filtrovat podle typu služby, lokality, jazyka a ceny.',
+                'Kontaktovat poskytovatele přímo.',
+                'Zveřejnit pracovní poptávku a počkat na odpovědi.',
+              ],
+            },
+            {
+              question: 'Jak platforma funguje pro poskytovatele služeb?',
+              answer: [
+                'Poskytovatelé služeb se registrují pomocí telefonního čísla a SMS ověření a následně si vytvářejí profil.',
+                'Jakmile je profil hotový, mohou být kontaktováni klienty, reagovat na poptávky, ukazovat svou práci a nastavit svou dostupnost.',
+              ],
+              points: [
+                'Popis služeb.',
+                'Kategorie služeb.',
+                'Oblast, kde služby poskytují.',
+                'Portfolio s fotografiemi nebo videi.',
+                'Ceník, pokud ho chtějí zveřejnit.',
+              ],
+            },
+            {
+              question: 'Co mi Tool Connect přinese jako poskytovateli služeb?',
+              answer: [
+                'Tool Connect pomáhá poskytovatelům oslovit více klientů, prezentovat svou práci profesionálně a jednodušeji spravovat dostupnost.',
+              ],
+              points: [
+                'Vyšší viditelnost u lidí, kteří aktivně hledají vaše služby.',
+                'Lepší objevitelnost pro klienty ve vašem okolí díky filtrům podle lokality.',
+                'Více pracovních příležitostí od klientů, kteří hledají právě váš typ služby.',
+                'Profesionální profil, který buduje důvěru.',
+                'Možnost nastavit dostupnost.',
+                'Přímé zprávy s klienty přes vestavěný chat.',
+                'Jednoduché a intuitivní prostředí pro rychlé navázání kontaktu.',
+                'Úsporu času na marketingu, protože nemusíte své služby nabízet na více místech.',
+                'Přístup z mobilu i webu pro správu profilu a zpráv.',
+              ],
+            },
+            {
+              question: 'Mohou se na Tool Connect registrovat i firmy?',
+              answer: [
+                'Ano. Profil a nabídku služeb si mohou na platformě vytvořit jak nezávislí profesionálové, tak firmy.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Řeší Tool platby mezi klienty a poskytovateli?',
+              answer: [
+                'Ne. Platby si domlouvají přímo mezi sebou klienti a poskytovatelé služeb.',
+                'Tool Connect platby nezpracovává a nenese odpovědnost za případné platební spory.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Jsou telefonní čísla viditelná pro ostatní uživatele?',
+              answer: [
+                'Telefonní číslo je viditelné pouze tehdy, pokud se ho uživatel rozhodne zobrazit ve svém nastavení profilu.',
+                'V opačném případě komunikace probíhá přes interní zprávy v aplikaci.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Jsou moje osobní údaje chráněné?',
+              answer: [
+                'Ano. Tool Connect je v souladu s GDPR a českými zákony o ochraně osobních údajů.',
+                'Uživatelská data jsou ukládána bezpečně pomocí šifrované infrastruktury a chráněných spojení. Přístup k osobním údajům mají pouze oprávněné osoby.',
+                'V závislosti na typu účtu můžeme shromažďovat následující údaje. Tyto informace používáme k provozu a zlepšování platformy. Uživatelská data neprodáváme.',
+              ],
+              points: [
+                'Telefonní číslo pro SMS ověření.',
+                'Jméno a volitelnou profilovou fotografii.',
+                'Jazykové preference.',
+                'Lokalizační údaje.',
+                'Zprávy a přílohy.',
+                'Portfolio a profilové informace.',
+                'Pracovní poptávky a recenze.',
+              ],
+            },
+            {
+              question: 'Proč je Tool Connect obzvlášť užitečný pro expaty?',
+              answer: [
+                'Aplikace podporuje češtinu i angličtinu a zprávy mezi uživateli mohou být automaticky překládány, což usnadňuje komunikaci mezi lidmi, kteří mluví různými jazyky.',
+                'Díky tomu mohou místní obyvatelé rychle najít profesionály v okolí a expati se mohou spojit s poskytovateli služeb i bez znalosti češtiny.',
+                'Další výhodou je cenová transparentnost. Expati, kteří neznají místní trh, mohou porovnat více poskytovatelů, projít si profily a získat různé nabídky na stejnou zakázku.',
+                'Současně tak místní profesionálové získávají přístup k širší klientské základně včetně mezinárodní komunity.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Mohu smazat svůj účet a osobní údaje?',
+              answer: [
+                'Ano. Svůj účet můžete deaktivovat v nastavení účtu.',
+                'Osobní údaje jsou odstraňovány podle našich zásad ochrany osobních údajů a požadavků GDPR, i když některé technické záznamy mohou být dočasně uchovány z bezpečnostních nebo právních důvodů.',
+              ],
+              points: [],
+            },
+          ]
+        : [
+            {
+              question: 'What is Tool and why is it different from other similar platforms?',
+              answer: [
+                'Tool Connect is a platform developed in Czech Republic, available in both Czech and English, that connects people who need a service with local professionals who can provide it.',
+                'Instead of long lists of businesses with little information, static websites, or endless scrolling through Facebook groups, Tool is designed to make finding and offering services faster, clearer, and more transparent through instant communication.',
+              ],
+              points: [
+                'All services in one place, making it easy to find or offer any type of service.',
+                'Location-based discovery to help clients find service providers nearby.',
+                'Two ways to find services: browse providers or post a request.',
+                'Visual portfolios with photos and videos that showcase real work.',
+                'Built-in messaging with optional phone contact.',
+                'Automatic message translation between Czech and English.',
+                'Access to the expat community, helping service providers reach international clients.',
+                'Flexible profiles that let users switch between client and service provider inside the same app.',
+              ],
+            },
+            {
+              question: 'Why is Tool Connect free to use?',
+              answer: [
+                'For clients, Tool is and will always be free.',
+                'For service providers, the current version of the app is the basic version, and it is free and will remain free. With the free version, providers can appear in search results when clients browse profiles.',
+                'Later this year we plan to introduce a paid premium version for service providers. Monetization will be introduced gradually and clearly communicated to users well in advance.',
+              ],
+              points: [
+                'Priority notifications when clients post requests.',
+                'Higher visibility in search results.',
+                'Additional professional features that are currently in development.',
+              ],
+            },
+            {
+              question: 'What kinds of services can I find here?',
+              answer: [
+                'Tool Connect is designed to cover a wide range of services, from babysitters and cleaners to electricians, tutors, and accountants.',
+                'The platform currently includes more than 100 service subcategories, and this list will continue to grow as demand evolves.',
+                'Anyone offering a legitimate service, whether an independent professional or a company, can create a profile and showcase their work.',
+                'If the service you provide is not listed in any category, write to us at info@tool-connect.com and we can add it.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Why do I need an account as a client?',
+              answer: [
+                'Creating a client account helps us ensure that messages and requests come from real users and allows us to better understand how the platform is used.',
+              ],
+              points: [],
+            },
+            {
+              question: 'How does the platform work for clients?',
+              answer: [
+                'Clients register using their phone number with SMS verification, while creating a detailed profile is optional.',
+                'After registering, clients can search for providers, contact them directly, or post a work request and wait for providers to respond. Once a job is completed, clients can rate and review service providers.',
+              ],
+              points: [
+                'Search for service providers.',
+                'Filter by service type, location, language, and price.',
+                'Contact providers directly.',
+                'Post a work request and wait for providers to respond.',
+              ],
+            },
+            {
+              question: 'How does the platform work for service providers?',
+              answer: [
+                'Service providers register using their phone number with SMS verification and then create their profile.',
+                'Once the profile is ready, providers can be contacted by clients, respond to work requests, showcase their work, and set their availability.',
+              ],
+              points: [
+                'A description of services.',
+                'Service categories.',
+                'A service area.',
+                'Portfolio photos or videos.',
+                'Pricing information, if they want to include it.',
+              ],
+            },
+            {
+              question: 'What’s in it for me as a service provider?',
+              answer: [
+                'As a service provider, Tool Connect helps you reach more clients, present your work professionally, and manage your availability more easily.',
+              ],
+              points: [
+                'Increased visibility among people who are actively looking for what you offer.',
+                'Better local discovery through location filters.',
+                'More job opportunities from clients searching for your type of service.',
+                'A professional profile that builds trust.',
+                'A simple way to set your availability.',
+                'Direct messaging with clients through built-in chat.',
+                'A simple and intuitive interface that makes connections faster.',
+                'Less time spent on marketing across multiple places.',
+                'Access from both mobile and web to manage your profile and messages.',
+              ],
+            },
+            {
+              question: 'Can companies register on Tool Connect?',
+              answer: [
+                'Yes. Both independent professionals and companies can create profiles and offer services on the platform.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Does Tool handle payments between clients and providers?',
+              answer: [
+                'No. Payments are arranged directly between clients and service providers.',
+                'Tool Connect does not process payments and is not responsible for payment disputes.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Are phone numbers visible to other users?',
+              answer: [
+                'Phone numbers are only visible if a user chooses to make them visible in profile settings.',
+                'Otherwise, communication happens through the platform messaging system.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Is my personal data protected?',
+              answer: [
+                'Yes. Tool Connect complies with GDPR and Czech data protection laws.',
+                'User data is stored securely using encrypted infrastructure and protected connections. Access to personal data is restricted to authorized personnel only.',
+                'Depending on the account type, we may collect the following information. This data is used to operate and improve the platform, and we do not sell user data.',
+              ],
+              points: [
+                'Phone number for SMS verification.',
+                'Name and optional profile photo.',
+                'Language preferences.',
+                'Location data.',
+                'Messages and attachments.',
+                'Portfolio and profile information.',
+                'Work requests and reviews.',
+              ],
+            },
+            {
+              question: 'Why is Tool Connect especially useful for expats?',
+              answer: [
+                'The app supports both Czech and English, and messages between users can be automatically translated, which makes communication easier for people who speak different languages.',
+                'This helps locals find nearby professionals quickly, while expats can connect with service providers even if they do not speak Czech.',
+                'Another advantage is price transparency. Expats who are unfamiliar with the local market can compare multiple service providers, review profiles, and receive different proposals for the same job.',
+                'At the same time, local professionals gain access to a wider client base, including the international community.',
+              ],
+              points: [],
+            },
+            {
+              question: 'Can I delete my account and personal data?',
+              answer: [
+                'Yes. You can deactivate your account through your account settings.',
+                'Personal data is removed according to our Privacy Policy and GDPR requirements, although some technical records may be temporarily retained for security or legal reasons.',
+              ],
+              points: [],
+            },
+          ],
     },
     download: {
       title: language === 'cs' ? 'Stáhněte si Tool Connect' : 'Download Tool Connect',
@@ -216,6 +529,18 @@ export default function LandingPage() {
                 <Link href="/service-providers">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                     {t.hero.becomeProvider}
+                  </Button>
+                </Link>
+              </div>
+              <div className="mt-4 flex justify-center lg:justify-start">
+                <Link href="#faq">
+                  <Button
+                    size="lg"
+                    variant="ghost"
+                    className="w-full sm:w-auto text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    {t.hero.faqCta}
+                    <ChevronDown className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
               </div>
@@ -484,6 +809,95 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="scroll-mt-24 py-20 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 mb-4">
+              <MessageCircle className="w-4 h-4" />
+              <span>{t.faq.eyebrow}</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t.faq.title}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              {t.faq.subtitle}
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {t.faq.items.map((item, index) => {
+              const isOpen = openFaqIndex === index
+
+              return (
+                <div
+                  key={item.question}
+                  className={cn(
+                    'overflow-hidden rounded-2xl border bg-white transition-all duration-200',
+                    isOpen
+                      ? 'border-primary-200 shadow-lg shadow-primary-100/50'
+                      : 'border-gray-200 shadow-sm hover:border-gray-300'
+                  )}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
+                  >
+                    <span className="text-lg font-semibold text-gray-900">
+                      {item.question}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        'mt-1 h-5 w-5 flex-shrink-0 text-primary-700 transition-transform duration-200',
+                        isOpen && 'rotate-180'
+                      )}
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <div id={`faq-answer-${index}`} className="px-6 pb-6 animate-slide-up">
+                      <div className="border-t border-gray-100 pt-5 space-y-4">
+                        {item.answer.map((paragraph, paragraphIndex) => (
+                          <p key={paragraphIndex} className="leading-relaxed text-gray-600">
+                            {paragraph}
+                          </p>
+                        ))}
+
+                        {item.points.length > 0 && (
+                          <ul className="space-y-3">
+                            {item.points.map((point, pointIndex) => (
+                              <li key={pointIndex} className="flex items-start gap-3">
+                                <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary-100">
+                                  <Check className="h-4 w-4 text-primary-700" />
+                                </div>
+                                <span className="leading-relaxed text-gray-600">{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          <p className="mt-8 text-center text-sm text-gray-500">
+            {t.faq.stillNeedHelp}{' '}
+            <a
+              href={`mailto:${t.contact.email}`}
+              className="font-medium text-primary-700 transition-colors hover:text-primary-800"
+            >
+              {t.contact.email}
+            </a>
+          </p>
         </div>
       </section>
 
