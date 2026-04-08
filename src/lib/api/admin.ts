@@ -163,8 +163,40 @@ export interface ProviderAdminStatus {
   scam_warning: boolean | null
 }
 
+export interface AdminServiceProvider {
+  id: string
+  name: string
+  surname: string | null
+  avatar_url: string | null
+  category: string | null
+  services: string[] | null
+  city: string | null
+  location: string | null
+  average_rating: number | null
+  total_reviews: number | null
+  is_active: boolean
+  is_visible: boolean
+  scam_warning: boolean | null
+  profile_views_count: number | null
+  referral_source: string | null
+  website_url: string | null
+  type: string | null
+  users?: {
+    phone_number?: string | null
+    email?: string | null
+    is_banned?: boolean
+    is_admin?: boolean
+  } | null
+}
+
+export interface ProviderAdminTaxonomy {
+  id: string
+  category: string | null
+  services: string[] | null
+}
+
 interface AdminServiceProvidersResult {
-  providers: Array<Record<string, unknown>>
+  providers: AdminServiceProvider[]
   total: number
 }
 
@@ -356,7 +388,7 @@ export async function getServiceProviders(
   search: string = '',
   category: string = '',
   status: 'all' | 'active' | 'inactive' | 'hidden' = 'all'
-): Promise<{ providers: any[]; total: number }> {
+): Promise<{ providers: AdminServiceProvider[]; total: number }> {
   const { data, error } = await supabase.rpc('admin_list_service_providers', {
     p_page: page,
     p_limit: limit,
@@ -408,6 +440,25 @@ export async function toggleProviderActive(providerId: string, isActive: boolean
 
 export async function setScamWarning(providerId: string, hasWarning: boolean): Promise<ProviderAdminStatus> {
   return adminUpdateProvider(providerId, { scamWarning: hasWarning })
+}
+
+export async function updateProviderTaxonomy(
+  providerId: string,
+  category: string,
+  services: string[]
+): Promise<ProviderAdminTaxonomy> {
+  const { data, error } = await supabase.rpc('admin_update_service_provider_taxonomy', {
+    p_provider_id: providerId,
+    p_category: category,
+    p_services: services,
+  })
+
+  if (error) throw error
+  if (!data) {
+    throw new Error(ADMIN_PROVIDER_RLS_ERROR)
+  }
+
+  return data as ProviderAdminTaxonomy
 }
 
 // ============================================

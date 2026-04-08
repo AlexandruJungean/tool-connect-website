@@ -7,6 +7,7 @@ import {
   Eye,
   EyeOff,
   AlertTriangle,
+  Check,
   CheckCircle,
   Star,
   MapPin,
@@ -18,15 +19,25 @@ import {
   Briefcase,
   XCircle,
   Globe,
+  Pencil,
 } from 'lucide-react'
-import { getServiceProviders, toggleProviderVisibility, toggleProviderActive, setScamWarning } from '@/lib/api/admin'
-import { LoadingSpinner } from '@/components/ui'
+import {
+  getServiceProviders,
+  toggleProviderVisibility,
+  toggleProviderActive,
+  setScamWarning,
+  updateProviderTaxonomy,
+  AdminServiceProvider,
+} from '@/lib/api/admin'
+import { Button, LoadingSpinner, Modal, Select } from '@/components/ui'
 import { useCategories } from '@/contexts/CategoriesContext'
 import { cn } from '@/lib/utils'
 
+const MAX_SUBCATEGORIES = 5
+
 export default function AdminProvidersPage() {
-  const { categories, getCategoryLabel } = useCategories()
-  const [providers, setProviders] = useState<any[]>([])
+  const { categories, getCategoryLabel, getSubcategoryLabel } = useCategories()
+  const [providers, setProviders] = useState<AdminServiceProvider[]>([])
   const [total, setTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -36,9 +47,17 @@ export default function AdminProvidersPage() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [actionLoading, setActionLoading] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
+  const [editingProvider, setEditingProvider] = useState<AdminServiceProvider | null>(null)
+  const [editCategory, setEditCategory] = useState('')
+  const [editServices, setEditServices] = useState<string[]>([])
+  const [editError, setEditError] = useState<string | null>(null)
+  const [editLoading, setEditLoading] = useState(false)
 
   const limit = 20
   const totalPages = Math.ceil(total / limit)
+  const categoryOptions = categories.map((cat) => ({ value: cat.value, label: cat.label }))
+  const selectedEditCategory = categories.find((cat) => cat.value === editCategory)
+  const editSubcategoryOptions = selectedEditCategory?.subcategories || []
 
   const fetchProviders = async () => {
     setIsLoading(true)
@@ -122,6 +141,82 @@ export default function AdminProvidersPage() {
     } finally {
       setActionLoading(false)
       setOpenDropdown(null)
+    }
+  }
+
+  const openEditModal = (provider: AdminServiceProvider) => {
+    const matchingCategory = categories.find((categoryItem) => categoryItem.value === provider.category)
+    const validSubcategories = new Set(matchingCategory?.subcategories.map((subcategory) => subcategory.value) || [])
+
+    setEditingProvider(provider)
+    setEditCategory(provider.category || '')
+    setEditServices(
+      Array.isArray(provider.services)
+        ? provider.services.filter((service) => validSubcategories.has(service))
+        : []
+    )
+    setEditError(null)
+    setOpenDropdown(null)
+  }
+
+  const closeEditModal = () => {
+    setEditingProvider(null)
+    setEditCategory('')
+    setEditServices([])
+    setEditError(null)
+    setEditLoading(false)
+  }
+
+  const handleEditCategoryChange = (value: string) => {
+    setEditCategory(value)
+    setEditServices([])
+    setEditError(null)
+  }
+
+  const toggleEditSubcategory = (subcategoryValue: string) => {
+    setEditServices((prev) => {
+      if (prev.includes(subcategoryValue)) {
+        return prev.filter((value) => value !== subcategoryValue)
+      }
+
+      if (prev.length >= MAX_SUBCATEGORIES) {
+        return prev
+      }
+
+      return [...prev, subcategoryValue]
+    })
+    setEditError(null)
+  }
+
+  const handleSaveTaxonomy = async () => {
+    if (!editingProvider) return
+
+    if (!editCategory) {
+      setEditError('Please select a category.')
+      return
+    }
+
+    if (editServices.length === 0) {
+      setEditError('Please select at least one subcategory.')
+      return
+    }
+
+    setEditLoading(true)
+    setEditError(null)
+
+    try {
+      const updatedTaxonomy = await updateProviderTaxonomy(editingProvider.id, editCategory, editServices)
+      setProviders((prev) => prev.map((provider) => (
+        provider.id === editingProvider.id
+          ? { ...provider, ...updatedTaxonomy }
+          : provider
+      )))
+      closeEditModal()
+      await fetchProviders()
+    } catch (error) {
+      console.error('Error updating provider taxonomy:', error)
+      setEditError(error instanceof Error ? error.message : 'Failed to update category and subcategories.')
+      setEditLoading(false)
     }
   }
 
@@ -227,7 +322,7 @@ export default function AdminProvidersPage() {
                             )}
                           </div>
                           {provider.category && (
-                            <p className="text-gray-400 text-sm">{provider.category}</p>
+                            <p className="text-gray-400 text-sm">{getCategoryLabel(provider.category, 'en')}</p>
                           )}
                           {provider.type && (
                             <span className="text-xs text-gray-500 capitalize">{provider.type}</span>
@@ -247,9 +342,28 @@ export default function AdminProvidersPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="px-2 py-1 bg-primary-500/20 text-primary-400 rounded text-xs">
-                        {getCategoryLabel(provider.category || '', 'en')}
-                      </span>
+                      <div className="space-y-2">
+                        <span className="inline-flex px-2 py-1 bg-primary-500/20 text-primary-400 rounded text-xs">
+                          {getCategoryLabel(provider.category || '', 'en')}
+                        </span>
+                        {Array.isArray(provider.services) && provider.services.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {provider.services.slice(0, 2).map((service) => (
+                              <span
+                                key={service}
+                                className="px-2 py-0.5 bg-gray-700 text-gray-300 rounded text-[11px]"
+                              >
+                                {getSubcategoryLabel(provider.category || '', service, 'en')}
+                              </span>
+                            ))}
+                            {provider.services.length > 2 && (
+                              <span className="px-2 py-0.5 bg-gray-700 text-gray-400 rounded text-[11px]">
+                                +{provider.services.length - 2} more
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2 text-gray-300 text-sm">
@@ -356,9 +470,17 @@ export default function AdminProvidersPage() {
                                   </>
                                 )}
                               </button>
+                              <button
+                                onClick={() => openEditModal(provider)}
+                                disabled={actionLoading}
+                                className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-800 flex items-center gap-2"
+                              >
+                                <Pencil className="w-4 h-4" />
+                                Edit Category
+                              </button>
                               <div className="border-t border-gray-700 my-1" />
                               <button
-                                onClick={() => handleScamWarning(provider.id, provider.scam_warning)}
+                                onClick={() => handleScamWarning(provider.id, provider.scam_warning ?? false)}
                                 disabled={actionLoading}
                                 className={cn(
                                   'w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center gap-2',
@@ -406,6 +528,97 @@ export default function AdminProvidersPage() {
           </div>
         )}
       </div>
+
+      <Modal
+        isOpen={!!editingProvider}
+        onClose={closeEditModal}
+        title="Edit Provider Category"
+        size="lg"
+      >
+        <div className="space-y-5">
+          <div>
+            <p className="text-sm font-medium text-gray-900">
+              {editingProvider?.name} {editingProvider?.surname}
+            </p>
+            <p className="text-sm text-gray-500">
+              Update the provider&apos;s main category and visible subcategories.
+            </p>
+          </div>
+
+          {editError && (
+            <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0" />
+              <p className="text-sm">{editError}</p>
+            </div>
+          )}
+
+          <Select
+            label="Category"
+            value={editCategory}
+            onChange={handleEditCategoryChange}
+            options={categoryOptions}
+            placeholder="Select a category"
+          />
+
+          <div>
+            <div className="flex items-center justify-between gap-4 mb-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Subcategories
+              </label>
+              <span className="text-xs text-gray-500">
+                {editServices.length}/{MAX_SUBCATEGORIES} selected
+              </span>
+            </div>
+
+            {!editCategory ? (
+              <div className="rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 py-6 text-sm text-gray-500">
+                Select a category first.
+              </div>
+            ) : editSubcategoryOptions.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 py-6 text-sm text-gray-500">
+                No subcategories are available for this category.
+              </div>
+            ) : (
+              <div className="max-h-72 overflow-y-auto rounded-xl border border-gray-200 bg-gray-50 p-3">
+                <div className="flex flex-wrap gap-2">
+                  {editSubcategoryOptions.map((subcategory) => {
+                    const isSelected = editServices.includes(subcategory.value)
+                    const isDisabled = !isSelected && editServices.length >= MAX_SUBCATEGORIES
+
+                    return (
+                      <button
+                        key={subcategory.value}
+                        type="button"
+                        onClick={() => toggleEditSubcategory(subcategory.value)}
+                        disabled={isDisabled || editLoading}
+                        className={cn(
+                          'inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors',
+                          isSelected
+                            ? 'border-primary-500 bg-primary-100 text-primary-700'
+                            : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-100',
+                          isDisabled && 'cursor-not-allowed opacity-50'
+                        )}
+                      >
+                        <span>{getSubcategoryLabel(editCategory, subcategory.value, 'en')}</span>
+                        {isSelected && <Check className="h-4 w-4" />}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <Button variant="outline" onClick={closeEditModal} disabled={editLoading}>
+              Cancel
+            </Button>
+            <Button onClick={handleSaveTaxonomy} isLoading={editLoading}>
+              Save Changes
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
