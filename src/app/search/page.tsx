@@ -327,16 +327,14 @@ function SearchContent() {
                   <button
                     key={cat.value}
                     onClick={() => handlePickerCategorySelect(cat.value)}
-                    className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group overflow-hidden"
+                    className="relative rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group overflow-hidden aspect-[3/4]"
                   >
-                    <div className="w-full aspect-square rounded-lg overflow-hidden mb-2">
-                      <img
-                        src={getCategoryImageUrl(cat.value, cat.imageUrl)}
-                        alt={language === 'cs' ? cat.labelCS : cat.label}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <span className="text-xs sm:text-sm font-medium text-gray-900 text-center leading-tight">
+                    <img
+                      src={getCategoryImageUrl(cat.value, cat.imageUrl)}
+                      alt={language === 'cs' ? cat.labelCS : cat.label}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <span className="absolute bottom-0 inset-x-0 py-2 px-1 text-xs sm:text-sm font-semibold text-white text-center drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
                       {language === 'cs' ? cat.labelCS : cat.label}
                     </span>
                   </button>

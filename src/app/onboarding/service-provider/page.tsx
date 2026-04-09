@@ -625,16 +625,14 @@ export default function ServiceProviderProfileSetupPage() {
                     <button
                       key={category.value}
                       onClick={() => handleCategorySelect(category.value)}
-                      className="group flex flex-col items-center rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-md transition-all overflow-hidden"
+                      className="group relative rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-md transition-all overflow-hidden aspect-[3/4]"
                     >
-                      <div className="w-full aspect-[4/3] overflow-hidden">
-                        <img
-                          src={getCategoryImageUrl(category.value, category.imageUrl)}
-                          alt={language === 'cs' ? category.labelCS : category.label}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <span className="text-xs sm:text-sm font-medium text-gray-900 p-2 text-center leading-tight">
+                      <img
+                        src={getCategoryImageUrl(category.value, category.imageUrl)}
+                        alt={language === 'cs' ? category.labelCS : category.label}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <span className="absolute bottom-0 inset-x-0 py-2 px-1 text-xs sm:text-sm font-semibold text-white text-center drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
                         {language === 'cs' ? category.labelCS : category.label}
                       </span>
                     </button>
