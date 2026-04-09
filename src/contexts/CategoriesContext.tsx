@@ -14,6 +14,7 @@ export interface CategoryRow {
   label: string
   label_cs: string
   icon: string
+  image_url?: string
   display_order: number
   is_active: boolean
 }
@@ -80,6 +81,7 @@ export function CategoriesProvider({ children }: { children: React.ReactNode }) 
         label: cat.label,
         labelCS: cat.label_cs,
         icon: cat.icon,
+        imageUrl: cat.image_url || undefined,
         subcategories: (subData || [])
           .filter((sub: SubcategoryRow) => sub.category_id === cat.id)
           .map((sub: SubcategoryRow) => ({

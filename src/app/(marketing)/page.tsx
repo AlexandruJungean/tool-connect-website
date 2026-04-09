@@ -16,7 +16,7 @@ import { Button } from '@/components/ui'
 import { VideoPlayer } from '@/components/ui/VideoPlayer'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useCategories } from '@/contexts/CategoriesContext'
-import { renderCategoryIcon } from '@/lib/icons'
+import { renderCategoryIcon, getCategoryImageUrl } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
@@ -814,8 +814,12 @@ export default function LandingPage() {
                       href={`/search?category=${encodeURIComponent(category.value)}`}
                       className="group inline-flex min-w-max items-center gap-3 rounded-full border border-primary-100 bg-primary-50/70 px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-md"
                     >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary-600 shadow-sm transition-colors group-hover:bg-primary-600 group-hover:text-white">
-                        {renderCategoryIcon(category.icon, 'w-5 h-5')}
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden shadow-sm">
+                        <img
+                          src={getCategoryImageUrl(category.value, category.imageUrl)}
+                          alt={categoryLabel}
+                          className="w-full h-full object-cover"
+                        />
                       </span>
                       <span>{categoryLabel}</span>
                     </Link>

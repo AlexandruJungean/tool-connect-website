@@ -78,3 +78,7 @@ export const AVAILABLE_ICONS = Object.entries(ICON_MAP).map(([name, component]) 
   name,
   component,
 }))
+
+export function getCategoryImageUrl(categorySlug: string, dbImageUrl?: string): string {
+  return dbImageUrl || `/categories/${categorySlug}.webp`
+}

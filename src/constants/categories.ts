@@ -22,6 +22,7 @@ export interface ServiceCategory {
   label: string
   labelCS: string
   icon: string
+  imageUrl?: string
   subcategories: OptionSet[]
 }
 

@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase'
 import { ServiceProviderProfile } from '@/types/database'
 import { LANGUAGES } from '@/constants/categories'
 import { useCategories } from '@/contexts/CategoriesContext'
-import { renderCategoryIcon } from '@/lib/icons'
+import { renderCategoryIcon, getCategoryImageUrl } from '@/lib/icons'
 import { ProviderCard } from '@/components/cards/ProviderCard'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -327,12 +327,16 @@ function SearchContent() {
                   <button
                     key={cat.value}
                     onClick={() => handlePickerCategorySelect(cat.value)}
-                    className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group"
+                    className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-lg transition-all group overflow-hidden"
                   >
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary-100 flex items-center justify-center mb-3 text-primary-700 group-hover:bg-primary-200 transition-colors">
-                      {renderCategoryIcon(cat.icon, 'w-7 h-7 text-primary-700 group-hover:text-primary-800')}
+                    <div className="w-full aspect-square rounded-lg overflow-hidden mb-2">
+                      <img
+                        src={getCategoryImageUrl(cat.value, cat.imageUrl)}
+                        alt={language === 'cs' ? cat.labelCS : cat.label}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                    <span className="text-sm sm:text-base font-medium text-gray-900 text-center">
+                    <span className="text-xs sm:text-sm font-medium text-gray-900 text-center leading-tight">
                       {language === 'cs' ? cat.labelCS : cat.label}
                     </span>
                   </button>

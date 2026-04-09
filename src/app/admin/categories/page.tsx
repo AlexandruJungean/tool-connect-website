@@ -19,6 +19,8 @@ import {
   AlertTriangle,
   ToggleLeft,
   ToggleRight,
+  Upload,
+  ImageIcon,
 } from 'lucide-react'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -39,6 +41,7 @@ interface Category {
   label: string
   label_cs: string
   icon: string
+  image_url?: string
   is_active: boolean
   display_order: number
   subcategories: Subcategory[]
@@ -58,6 +61,7 @@ interface CategoryFormData {
   label: string
   label_cs: string
   icon: string
+  image_url: string
   is_active: boolean
 }
 
@@ -173,8 +177,10 @@ export default function AdminCategoriesPage() {
     label: '',
     label_cs: '',
     icon: 'circle',
+    image_url: '',
     is_active: true,
   })
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [subcategoryForm, setSubcategoryForm] = useState<SubcategoryFormData>({
     value: '',
     label: '',
@@ -287,7 +293,7 @@ export default function AdminCategoriesPage() {
 
   const openAddCategory = () => {
     setEditingCategory(null)
-    setCategoryForm({ value: '', label: '', label_cs: '', icon: 'circle', is_active: true })
+    setCategoryForm({ value: '', label: '', label_cs: '', icon: 'circle', image_url: '', is_active: true })
     setCascadeWarning(null)
     setShowIconPicker(false)
     setIconSearch('')
@@ -301,6 +307,7 @@ export default function AdminCategoriesPage() {
       label: cat.label || '',
       label_cs: cat.label_cs || '',
       icon: cat.icon,
+      image_url: cat.image_url || '',
       is_active: cat.is_active,
     })
     setCascadeWarning(null)
@@ -350,6 +357,7 @@ export default function AdminCategoriesPage() {
             label: categoryForm.label,
             label_cs: categoryForm.label_cs,
             icon: categoryForm.icon,
+            image_url: categoryForm.image_url || null,
             is_active: categoryForm.is_active,
           })
           .eq('id', editingCategory.id)
@@ -362,6 +370,7 @@ export default function AdminCategoriesPage() {
           label: categoryForm.label,
           label_cs: categoryForm.label_cs,
           icon: categoryForm.icon,
+          image_url: categoryForm.image_url || null,
           is_active: categoryForm.is_active,
           display_order: maxOrder + 1,
         })
@@ -501,6 +510,35 @@ export default function AdminCategoriesPage() {
 
   // ─── Filtered Icons ──────────────────────────────────────────────────────
 
+  const handleCategoryImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (!file.type.startsWith('image/')) return
+
+    setUploadingImage(true)
+    try {
+      const fileExt = file.name.split('.').pop()
+      const fileName = `category-${Date.now()}.${fileExt}`
+      const filePath = `categories/${fileName}`
+
+      const { error: uploadErr } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file)
+      if (uploadErr) throw uploadErr
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(filePath)
+
+      setCategoryForm((prev) => ({ ...prev, image_url: publicUrl }))
+    } catch (err: any) {
+      console.error('Image upload error:', err)
+      setError(err.message || 'Failed to upload image')
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
   const filteredIcons = AVAILABLE_ICONS.filter((i) => i.name.toLowerCase().includes(iconSearch.toLowerCase()))
 
   // ─── Render ──────────────────────────────────────────────────────────────
@@ -550,6 +588,7 @@ export default function AdminCategoriesPage() {
                 <tr>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium w-24">Order</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium w-16">Icon</th>
+                  <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium w-20">Image</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Name (EN)</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Name (CS)</th>
                   <th className="text-left px-4 py-3 text-gray-400 text-sm font-medium">Value</th>
@@ -586,6 +625,15 @@ export default function AdminCategoriesPage() {
                       </td>
                       <td className="px-4 py-3">
                         <div className="text-primary-400">{renderCategoryIcon(cat.icon, 'w-6 h-6')}</div>
+                      </td>
+                      <td className="px-4 py-3">
+                        {cat.image_url ? (
+                          <img src={cat.image_url} alt="" className="w-10 h-10 rounded-lg object-cover" />
+                        ) : (
+                          <div className="w-10 h-10 rounded-lg bg-gray-700 flex items-center justify-center">
+                            <ImageIcon className="w-4 h-4 text-gray-500" />
+                          </div>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         <button
@@ -673,6 +721,7 @@ export default function AdminCategoriesPage() {
                             <td className="px-4 py-2.5">
                               {/* No icon for subcategories */}
                             </td>
+                            <td className="px-4 py-2.5">{/* No image for subcategories */}</td>
                             <td className="px-4 py-2.5 text-gray-300 text-sm pl-10">{sub.label}</td>
                             <td className="px-4 py-2.5 text-gray-400 text-sm">{sub.label_cs}</td>
                             <td className="px-4 py-2.5">
@@ -859,6 +908,43 @@ export default function AdminCategoriesPage() {
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Category Image */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1.5">Category Image</label>
+                <div className="flex items-center gap-4">
+                  {categoryForm.image_url ? (
+                    <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                      <img src={categoryForm.image_url} alt="" className="w-full h-full object-cover" />
+                      <button
+                        onClick={() => setCategoryForm((prev) => ({ ...prev, image_url: '' }))}
+                        className="absolute top-1 right-1 p-0.5 bg-red-600 rounded-full text-white hover:bg-red-700"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 rounded-lg bg-gray-900 border border-gray-700 border-dashed flex items-center justify-center flex-shrink-0">
+                      <ImageIcon className="w-6 h-6 text-gray-600" />
+                    </div>
+                  )}
+                  <label className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg cursor-pointer transition-colors ${uploadingImage ? 'bg-gray-700 text-gray-500' : 'bg-gray-700 hover:bg-gray-600 text-gray-300'}`}>
+                    {uploadingImage ? (
+                      <LoadingSpinner size="sm" />
+                    ) : (
+                      <Upload className="w-4 h-4" />
+                    )}
+                    {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleCategoryImageUpload}
+                      className="hidden"
+                      disabled={uploadingImage}
+                    />
+                  </label>
+                </div>
               </div>
 
               {/* Active */}

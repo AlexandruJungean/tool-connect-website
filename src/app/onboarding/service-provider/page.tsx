@@ -33,6 +33,7 @@ import {
   X
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getCategoryImageUrl } from '@/lib/icons'
 
 export default function ServiceProviderProfileSetupPage() {
   const router = useRouter()
@@ -619,14 +620,21 @@ export default function ServiceProviderProfileSetupPage() {
               </div>
               
               {!selectedCategory ? (
-                <div className="grid grid-cols-2 gap-3 max-h-[400px] overflow-y-auto">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[500px] overflow-y-auto">
                   {categories.map((category) => (
                     <button
                       key={category.value}
                       onClick={() => handleCategorySelect(category.value)}
-                      className="p-4 rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-all text-center"
+                      className="group flex flex-col items-center rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-md transition-all overflow-hidden"
                     >
-                      <span className="text-sm font-medium text-gray-900">
+                      <div className="w-full aspect-[4/3] overflow-hidden">
+                        <img
+                          src={getCategoryImageUrl(category.value, category.imageUrl)}
+                          alt={language === 'cs' ? category.labelCS : category.label}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-gray-900 p-2 text-center leading-tight">
                         {language === 'cs' ? category.labelCS : category.label}
                       </span>
                     </button>
