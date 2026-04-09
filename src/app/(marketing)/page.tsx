@@ -863,35 +863,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            {t.about.title}
-          </h2>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              {t.about.paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-gray-600 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="flex justify-center">
-              <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 text-center">
-                <div className="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-10 h-10 text-white" />
-                </div>
-                <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 text-gray-600">
-                  <MapPin className="w-4 h-4 text-primary-600" />
-                  <span>{t.about.location}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section id="faq" className="scroll-mt-24 py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -978,6 +949,35 @@ export default function LandingPage() {
               {t.contact.email}
             </a>
           </p>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-primary-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
+            {t.about.title}
+          </h2>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              {t.about.paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-primary-100 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <div className="bg-white/10 border border-white/10 rounded-2xl p-8 text-center backdrop-blur-sm">
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="w-10 h-10 text-primary-700" />
+                </div>
+                <div className="inline-flex items-center gap-2 bg-white/90 rounded-full px-4 py-2 text-gray-700">
+                  <MapPin className="w-4 h-4 text-primary-700" />
+                  <span>{t.about.location}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
