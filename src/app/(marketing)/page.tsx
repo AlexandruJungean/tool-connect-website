@@ -16,7 +16,7 @@ import { Button } from '@/components/ui'
 import { VideoPlayer } from '@/components/ui/VideoPlayer'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useCategories } from '@/contexts/CategoriesContext'
-import { renderCategoryIcon, getCategoryImageUrl } from '@/lib/icons'
+import { getCategoryImageUrl } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
@@ -513,7 +513,34 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+          <div className="mb-8 md:mb-10">
+            <div className="category-marquee">
+              <div className="category-marquee-track">
+                {marqueeCategories.map((category, index) => {
+                  const categoryLabel = language === 'cs' ? category.labelCS : category.label
+
+                  return (
+                    <Link
+                      key={`${category.value}-${index}`}
+                      href={`/search?category=${encodeURIComponent(category.value)}`}
+                      className="group inline-flex min-w-max items-center gap-3 rounded-full border border-white/15 bg-white/95 px-5 py-3 text-sm font-medium text-gray-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-md"
+                    >
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden bg-primary-50 shadow-sm">
+                        <img
+                          src={getCategoryImageUrl(category.value, category.imageUrl)}
+                          alt={categoryLabel}
+                          className="w-full h-full object-cover"
+                        />
+                      </span>
+                      <span>{categoryLabel}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-3 gap-8 items-center">
             {/* Left - Text Content */}
             <div className="text-center lg:text-left">
@@ -779,53 +806,6 @@ export default function LandingPage() {
                   </div>
                 </button>
               )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Marquee */}
-      <section className="bg-white py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-600 mb-2">
-              {t.hero.categoriesEyebrow}
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-              {t.hero.categoriesTitle}
-            </h2>
-            <p className="text-sm md:text-base text-gray-600">
-              {t.hero.categoriesSubtitle}
-            </p>
-          </div>
-
-          <div className="relative py-2">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden md:block w-16 bg-gradient-to-r from-white via-white/90 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden md:block w-16 bg-gradient-to-l from-white via-white/90 to-transparent" />
-
-            <div className="category-marquee">
-              <div className="category-marquee-track">
-                {marqueeCategories.map((category, index) => {
-                  const categoryLabel = language === 'cs' ? category.labelCS : category.label
-
-                  return (
-                    <Link
-                      key={`${category.value}-${index}`}
-                      href={`/search?category=${encodeURIComponent(category.value)}`}
-                      className="group inline-flex min-w-max items-center gap-3 rounded-full border border-primary-100 bg-primary-50/70 px-5 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-md"
-                    >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden shadow-sm">
-                        <img
-                          src={getCategoryImageUrl(category.value, category.imageUrl)}
-                          alt={categoryLabel}
-                          className="w-full h-full object-cover"
-                        />
-                      </span>
-                      <span>{categoryLabel}</span>
-                    </Link>
-                  )
-                })}
-              </div>
             </div>
           </div>
         </div>

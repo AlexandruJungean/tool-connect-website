@@ -145,15 +145,12 @@ button {
   width: max-content;
   animation: marquee 42s linear infinite;
   padding: 0 0.5rem;
-}
-
-.category-marquee:hover .category-marquee-track {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .category-marquee-track {
-    animation: none;
+    animation-duration: 60s;
   }
 }
 
