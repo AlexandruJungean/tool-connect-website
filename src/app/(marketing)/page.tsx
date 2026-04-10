@@ -524,9 +524,9 @@ export default function LandingPage() {
                     <Link
                       key={`${category.value}-${index}`}
                       href={`/search?category=${encodeURIComponent(category.value)}`}
-                      className="group inline-flex min-w-max items-center gap-3 rounded-full border border-white/15 bg-white/95 px-5 py-3 text-sm font-medium text-gray-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-md"
+                      className="group inline-flex min-w-max items-center gap-2 rounded-full border border-white/15 bg-white/95 px-3 py-1.5 text-sm font-medium text-gray-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-md"
                     >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden bg-primary-50 shadow-sm">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full overflow-hidden bg-primary-50 shadow-sm">
                         <img
                           src={getCategoryImageUrl(category.value, category.imageUrl)}
                           alt={categoryLabel}
