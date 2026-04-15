@@ -484,16 +484,16 @@ function SearchContent() {
 
                 {category && subcategoriesForCategory.length > 0 && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                       {t('search.subcategory')}
                     </label>
-                    <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
+                    <div className="flex flex-col gap-2 max-h-48 overflow-y-auto">
                       {subcategoriesForCategory.map((sub) => (
                         <button
                           key={sub.value}
                           onClick={() => toggleSubcategory(sub.value)}
                           className={cn(
-                            "px-3 py-1.5 text-sm rounded-lg border transition-colors",
+                            "px-3 py-1.5 text-sm rounded-lg border transition-colors text-left w-fit",
                             selectedSubcategories.includes(sub.value)
                               ? "bg-primary-700 text-white border-primary-700"
                               : "bg-white text-gray-700 border-gray-200 hover:border-primary-300"
@@ -529,7 +529,7 @@ function SearchContent() {
                 />
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                     {language === 'cs' ? 'Cenový rozsah (Kč)' : 'Price Range (CZK)'}
                   </label>
                   <div className="flex gap-2 mb-3">
@@ -572,11 +572,15 @@ function SearchContent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                     {t('search.languages')}
                   </label>
-                  <div className="flex flex-wrap gap-2">
-                    {LANGUAGES.slice(0, 6).map((lang) => (
+                  <div className="flex flex-col gap-2 max-h-48 overflow-y-auto">
+                    {[
+                      LANGUAGES.find(l => l.value === 'czech')!,
+                      LANGUAGES.find(l => l.value === 'english')!,
+                      ...LANGUAGES.filter(l => l.value !== 'czech' && l.value !== 'english'),
+                    ].map((lang) => (
                       <button
                         key={lang.value}
                         onClick={() => {
@@ -587,7 +591,7 @@ function SearchContent() {
                           }
                         }}
                         className={cn(
-                          "px-3 py-1.5 text-sm rounded-lg border transition-colors",
+                          "px-4 py-2 text-sm rounded-lg border transition-colors text-left w-fit",
                           selectedLanguages.includes(lang.value)
                             ? "bg-primary-700 text-white border-primary-700"
                             : "bg-white text-gray-700 border-gray-200 hover:border-primary-300"

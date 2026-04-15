@@ -95,7 +95,7 @@ export function LocationInput({
   return (
     <div className="w-full" ref={wrapperRef}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
           {label}
         </label>
       )}
