@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { 
   Users, Star, Smartphone, Handshake, Camera, Clock, Medal, Heart,
-  Mail, Download, ArrowRight, Apple, Globe
+  Mail, Apple, Globe
 } from 'lucide-react'
 import { MarketingHeader, MarketingFooter } from '@/components/marketing'
 import { Button } from '@/components/ui'
@@ -17,9 +17,6 @@ export default function ServiceProvidersPage() {
   const t = {
     hero: {
       title: language === 'cs' ? 'Rozviňte své podnikání s Tool' : 'Grow Your Business with Tool',
-      subtitle: language === 'cs'
-        ? 'Připojte se k tisícům profesionálů, kteří věří Tool při rozšiřování svého dosahu, spojování s novými klienty a budování své reputace.'
-        : 'Join thousands of professionals who trust Tool to expand their reach, connect with new clients, and build their reputation.',
     },
     benefits: {
       title: language === 'cs' ? 'Proč si poskytovatelé služeb vybírají Tool' : 'Why Service Providers Choose Tool',
@@ -136,14 +133,6 @@ export default function ServiceProvidersPage() {
         : 'Feel free to contact us if you need help with setting up your service provider profile or have any questions/suggestions.',
       contactButton: language === 'cs' ? 'Kontaktovat podporu' : 'Contact Support',
     },
-    documentation: {
-      title: language === 'cs' ? 'Kompletní průvodce pro poskytovatele služeb' : 'Complete Service Provider Guide',
-      description: language === 'cs'
-        ? 'Stáhněte si náš komplexní průvodce, který pokrývá vše, co potřebujete vědět o úspěchu jako poskytovatel služeb na Tool.'
-        : 'Download our comprehensive guide that covers everything you need to know about succeeding as a service provider on Tool. This detailed documentation includes best practices, policies, and advanced strategies.',
-      downloadButton: language === 'cs' ? 'Stáhnout dokumentaci poskytovatele služeb' : 'Download Service Provider Documentation',
-      note: language === 'cs' ? 'PDF formát • Pravidelně aktualizováno' : 'PDF format • Updated regularly with latest information',
-    },
     download: {
       appStore: 'App Store',
       googlePlay: 'Google Play',
@@ -158,16 +147,7 @@ export default function ServiceProvidersPage() {
     { label: language === 'cs' ? 'Začínáme' : 'Getting Started', href: '#getting-started' },
     { label: language === 'cs' ? 'Tipy pro úspěch' : 'Success Tips', href: '#success-tips' },
     { label: language === 'cs' ? 'Podpora' : 'Support', href: '#support' },
-    { label: language === 'cs' ? 'Dokumentace' : 'Documentation', href: '#documentation' },
   ]
-
-  const handleDownloadDoc = () => {
-    const urls = {
-      en: 'https://drive.google.com/file/d/19GJHyPuhPu_x-UDfr1F7ezf4aw1L6Dhf/view?usp=drive_link',
-      cs: 'https://drive.google.com/file/d/11SzgmHWf4myiFwO6m6rxFLwz6Ku82UIr/view?usp=drive_link',
-    }
-    window.open(urls[language] || urls.en, '_blank', 'noopener,noreferrer')
-  }
 
   return (
     <div className="min-h-screen">
@@ -179,10 +159,6 @@ export default function ServiceProvidersPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t.hero.title}
           </h1>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-10">
-            {t.hero.subtitle}
-          </p>
-          
           {/* Download Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <a
@@ -348,27 +324,6 @@ export default function ServiceProvidersPage() {
               </Button>
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Documentation Section */}
-      <section id="documentation" className="py-20 bg-gradient-to-br from-primary-600 to-primary-800">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t.documentation.title}
-          </h2>
-          <p className="text-lg text-white/80 mb-8">
-            {t.documentation.description}
-          </p>
-          <Button
-            size="lg"
-            onClick={handleDownloadDoc}
-            className="bg-white text-primary-700 hover:bg-gray-100"
-          >
-            <Download className="w-5 h-5 mr-2" />
-            {t.documentation.downloadButton}
-          </Button>
-          <p className="text-white/60 text-sm mt-4">{t.documentation.note}</p>
         </div>
       </section>
 
