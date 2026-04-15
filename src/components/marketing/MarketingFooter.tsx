@@ -11,8 +11,8 @@ export function MarketingFooter() {
 
   const t = {
     tagline: language === 'cs' 
-      ? 'Spojujeme lidi se spolehlivými profesionály.' 
-      : 'Connecting people with trusted professionals worldwide.',
+      ? 'Spojujeme lidi s profesionály v České republice.'
+      : 'Connecting people with professionals in Czech Republic.',
     quickLinks: language === 'cs' ? 'Rychlé odkazy' : 'Quick Links',
     home: language === 'cs' ? 'Domů' : 'Home',
     benefits: language === 'cs' ? 'Výhody' : 'Benefits',

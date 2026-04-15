@@ -20,8 +20,8 @@ export default function DownloadPage() {
   const t = {
     title: 'Tool Connect',
     subtitle: language === 'cs'
-      ? 'Spojujeme lidi se spolehlivými profesionály'
-      : 'Connecting people with trusted professionals worldwide',
+      ? 'Spojujeme lidi s profesionály v České republice'
+      : 'Connecting people with professionals in Czech Republic',
     redirecting: language === 'cs'
       ? 'Přesměrováváme vás...'
       : 'Redirecting you...',

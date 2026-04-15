@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { Apple, PlayCircle, Globe, Facebook, Instagram, Linkedin } from 'lucide-react'
 
 export function Footer() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -22,7 +22,7 @@ export function Footer() {
               />
             </div>
             <p className="text-sm text-gray-400 mb-4">
-              Connecting people with trusted professionals worldwide.
+              {language === 'cs' ? 'Spojujeme lidi s profesionály v České republice.' : 'Connecting people with professionals in Czech Republic.'}
             </p>
             <div className="flex gap-3">
               <a
@@ -54,7 +54,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-white mb-4">{language === 'cs' ? 'Rychlé odkazy' : 'Quick Links'}</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/search" prefetch={false} className="text-sm hover:text-primary-400 transition-colors">
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Support</h4>
+            <h4 className="font-semibold text-white mb-4">{language === 'cs' ? 'Podpora' : 'Support'}</h4>
             <ul className="space-y-2">
               <li>
                 <a href="/privacy-policy.html" className="text-sm hover:text-primary-400 transition-colors">
@@ -108,7 +108,7 @@ export function Footer() {
               >
                 <Apple className="w-6 h-6" />
                 <div className="text-sm">
-                  <div className="text-xs text-gray-400">Download on the</div>
+                  <div className="text-xs text-gray-400">{language === 'cs' ? 'Stáhnout na' : 'Download on the'}</div>
                   <div className="font-medium text-white">App Store</div>
                 </div>
               </a>
@@ -120,7 +120,7 @@ export function Footer() {
               >
                 <PlayCircle className="w-6 h-6" />
                 <div className="text-sm">
-                  <div className="text-xs text-gray-400">Get it on</div>
+                  <div className="text-xs text-gray-400">{language === 'cs' ? 'Získejte na' : 'Get it on'}</div>
                   <div className="font-medium text-white">Google Play</div>
                 </div>
               </a>
@@ -129,7 +129,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Tool Connect. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Tool Connect. {language === 'cs' ? 'Všechna práva vyhrazena.' : 'All rights reserved.'}</p>
         </div>
       </div>
     </footer>
